@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v3/xarf-v3-legacy.json",
+  "title": "XARF v3 Legacy Schema",
+  "description": "Schema for XARF v3 format for backwards compatibility and conversion to v4. This schema represents the legacy XARF format that predates the class-based approach.",
+  "type": "object",
+  "required": ["Version", "ReporterInfo", "Report"],
+  "properties": {
+    "Version": {
+      "type": "string",
+      "enum": ["3", "3.0"],
+      "description": "XARF version - always '3' or '3.0' for v3 reports"
+    },
+    "ReporterInfo": {
+      "type": "object",
+      "required": ["ReporterOrg", "ReporterOrgEmail"],
+      "properties": {
+        "ReporterOrg": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Name of the reporting organization"
+        },
+        "ReporterOrgEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email for the reporting organization"
+        },
+        "ReporterOrgDomain": {
+          "type": "string",
+          "format": "hostname",
+          "description": "Domain of the reporting organization"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Report": {
+      "type": "object",
+      "required": ["ReportClass", "ReportType", "Date"],
+      "properties": {
+        "ReportClass": {
+          "type": "string",
+          "enum": ["Activity"],
+          "description": "Report classification - typically 'Activity' in v3"
+        },
+        "ReportType": {
+          "type": "string",
+          "enum": [
+            "Spam",
+            "Login-Attack", 
+            "Port-Scan",
+            "DDoS",
+            "Phishing",
+            "Malware",
+            "Botnet",
+            "Copyright"
+          ],
+          "description": "Specific type of abuse being reported"
+        },
+        "Date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when abuse occurred (ISO 8601 format)"
+        },
+        "SourceIp": {
+          "type": "string",
+          "description": "Source IP address of the abuse"
+        },
+        "SourcePort": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Source port number"
+        },
+        "DestinationIp": {
+          "type": "string", 
+          "description": "Destination IP address (for network attacks)"
+        },
+        "DestinationPort": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Destination port number"
+        },
+        "Protocol": {
+          "type": "string",
+          "enum": ["tcp", "udp", "icmp", "smtp"],
+          "description": "Network protocol used"
+        },
+        "SmtpMailFromAddress": {
+          "type": "string",
+          "format": "email",
+          "description": "SMTP envelope sender address (for email abuse)"
+        },
+        "SmtpRcptToAddress": {
+          "type": "string",
+          "format": "email", 
+          "description": "SMTP recipient address"
+        },
+        "SmtpMessageSubject": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Email subject line"
+        },
+        "Url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of malicious content (for web-based abuse)"
+        },
+        "UserAgent": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "HTTP User-Agent string"
+        },
+        "AttackDescription": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Human-readable description of the attack"
+        },
+        "AttackCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of attack attempts"
+        },
+        "Samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ContentType", "Payload"],
+            "properties": {
+              "ContentType": {
+                "type": "string",
+                "description": "MIME type of the sample content"
+              },
+              "Payload": {
+                "type": "string",
+                "description": "Base64-encoded sample data"
+              },
+              "Description": {
+                "type": "string",
+                "maxLength": 200,
+                "description": "Description of the sample"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Evidence samples supporting the abuse report",
+          "maxItems": 10
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v3_to_v4_mapping": {
+      "description": "Documentation of how v3 fields map to v4 structure",
+      "type": "object", 
+      "properties": {
+        "field_mappings": {
+          "type": "object",
+          "properties": {
+            "Version": "xarf_version (converted to '4.0.0', legacy_version added)",
+            "ReporterInfo.ReporterOrg": "reporter.org",
+            "ReporterInfo.ReporterOrgEmail": "reporter.contact", 
+            "Report.Date": "timestamp",
+            "Report.SourceIp": "source_identifier",
+            "Report.SourcePort": "source_port",
+            "Report.ReportType": "class + type (mapping required)",
+            "Report.Samples": "evidence (structure converted)"
+          }
+        },
+        "type_mappings": {
+          "type": "object",
+          "properties": {
+            "Spam": {"class": "messaging", "type": "spam"},
+            "Login-Attack": {"class": "connection", "type": "login_attack"},
+            "Port-Scan": {"class": "connection", "type": "port_scan"},
+            "DDoS": {"class": "connection", "type": "ddos"},
+            "Phishing": {"class": "content", "type": "phishing"},
+            "Malware": {"class": "content", "type": "malware"},
+            "Botnet": {"class": "infrastructure", "type": "bot"},
+            "Copyright": {"class": "copyright", "type": "copyright"}
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "title": "XARF v3 Spam Report Example",
+      "data": {
+        "Version": "3",
+        "ReporterInfo": {
+          "ReporterOrg": "Example Security",
+          "ReporterOrgEmail": "abuse@example.com"
+        },
+        "Report": {
+          "ReportClass": "Activity",
+          "ReportType": "Spam",
+          "Date": "2024-01-01T12:00:00Z",
+          "SourceIp": "192.0.2.1",
+          "SourcePort": 25,
+          "Protocol": "smtp",
+          "SmtpMailFromAddress": "spam@example.com",
+          "SmtpMessageSubject": "Buy now!",
+          "Samples": [
+            {
+              "ContentType": "message/rfc822",
+              "Payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21d...",
+              "Description": "Original spam email"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "XARF v3 Login Attack Example", 
+      "data": {
+        "Version": "3",
+        "ReporterInfo": {
+          "ReporterOrg": "Honeypot Network",
+          "ReporterOrgEmail": "reports@honeypot.net"
+        },
+        "Report": {
+          "ReportClass": "Activity",
+          "ReportType": "Login-Attack",
+          "Date": "2024-01-01T15:30:00Z",
+          "SourceIp": "198.51.100.50",
+          "DestinationIp": "203.0.113.10",
+          "DestinationPort": 22,
+          "Protocol": "tcp",
+          "AttackDescription": "SSH brute force attack",
+          "AttackCount": 150,
+          "Samples": [
+            {
+              "ContentType": "text/plain",
+              "Payload": "U1NIOiBhdXRoZW50aWNhdGlvbiBmYWlsdXJlIGxvZ3M=",
+              "Description": "Failed SSH authentication attempts"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

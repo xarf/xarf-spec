@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/messaging-class.json",
+  "title": "XARF v4 Messaging Class Schema",
+  "description": "Schema for communication-based abuse including spam, bulk messaging, and unwanted communications",
+  "allOf": [
+    {
+      "$ref": "xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "messaging"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["spam", "bulk_messaging"],
+          "description": "Specific type of messaging abuse"
+        },
+        "evidence_source": {
+          "type": "string",
+          "enum": [
+            "spamtrap",
+            "user_complaint", 
+            "automated_filter",
+            "honeypot",
+            "content_analysis",
+            "reputation_feed"
+          ],
+          "description": "Source of evidence for messaging abuse"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "smtp",
+            "sms", 
+            "whatsapp",
+            "telegram",
+            "signal",
+            "chat",
+            "social_media",
+            "push_notification",
+            "other"
+          ],
+          "description": "Communication protocol or platform used for the abuse"
+        },
+        "smtp_from": {
+          "type": "string",
+          "format": "email",
+          "description": "SMTP envelope sender address (required when protocol=smtp)",
+          "examples": ["spam@example.com", "noreply@malicious-domain.org"]
+        },
+        "smtp_to": {
+          "type": "string", 
+          "format": "email",
+          "description": "SMTP envelope recipient address",
+          "examples": ["victim@example.org", "spamtrap@security-org.net"]
+        },
+        "subject": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Message subject line or equivalent",
+          "examples": [
+            "Urgent: Account Verification Required",
+            "Your package is ready for delivery",
+            "Re: Invoice #12345"
+          ]
+        },
+        "sender_name": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Display name of the sender",
+          "examples": ["Bank Security Team", "Customer Support", "No Reply"]
+        },
+        "message_id": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Message ID from headers (for email) or platform identifier",
+          "examples": ["<abc123@example.com>", "msg_1234567890"]
+        },
+        "user_agent": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "User agent string from message headers",
+          "examples": ["Outlook 16.0", "Thunderbird 115.0", "bulk_mailer_v2.1"]
+        },
+        "recipient_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of recipients for bulk messaging campaigns"
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "description": "Primary language of message content (ISO 639-1 with optional country code)",
+          "examples": ["en", "es", "de", "ja", "en-US", "es-MX"]
+        },
+        "urgency_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "urgent",
+              "immediate_action",
+              "time_limited",
+              "deadline",
+              "account_suspension",
+              "security_alert",
+              "limited_offer",
+              "act_now"
+            ]
+          },
+          "description": "Urgency tactics used in the message",
+          "maxItems": 10
+        },
+        "impersonation_target": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Organization, brand, or person being impersonated",
+          "examples": ["PayPal", "Amazon", "Microsoft", "IRS", "Local Bank"]
+        },
+        "phishing_indicators": {
+          "type": "object",
+          "properties": {
+            "suspicious_links": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": "Suspicious URLs found in the message"
+            },
+            "credential_harvesting": {
+              "type": "boolean",
+              "description": "Whether message attempts to harvest credentials"
+            },
+            "social_engineering": {
+              "type": "boolean",
+              "description": "Whether message uses social engineering tactics"
+            },
+            "lookalike_domain": {
+              "type": "boolean",
+              "description": "Whether sender domain is similar to legitimate organization"
+            }
+          },
+          "description": "Indicators suggesting phishing attempt",
+          "additionalProperties": false
+        }
+      },
+      "required": ["protocol"],
+      "if": {
+        "properties": {
+          "protocol": {
+            "const": "smtp"
+          }
+        }
+      },
+      "then": {
+        "required": ["smtp_from", "subject"]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "xarf_version": "4.0.0",
+      "report_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "timestamp": "2024-01-15T14:30:25Z",
+      "reporter": {
+        "org": "SpamCop",
+        "contact": "reports@spamcop.net",
+        "type": "automated"
+      },
+      "source_identifier": "192.0.2.123",
+      "source_port": 25,
+      "class": "messaging",
+      "type": "spam",
+      "protocol": "smtp",
+      "smtp_from": "fake@example.com",
+      "subject": "Urgent: Verify Your Account",
+      "evidence_source": "spamtrap",
+      "evidence": [
+        {
+          "content_type": "message/rfc822",
+          "description": "Complete spam email with headers",
+          "payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21d..."
+        }
+      ],
+      "tags": ["phishing:financial", "campaign:fake_bank_2024"],
+      "confidence": 0.92
+    }
+  ]
+}

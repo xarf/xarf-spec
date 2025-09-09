@@ -7,6 +7,7 @@ The eXtended Abuse Reporting Format (XARF) is a standard for reporting abuse inc
 - **[Introduction & Overview](docs/introduction.md)** - High-level overview and use cases
 - **[Technical Specification](docs/specification.md)** - Complete technical reference
 - **[Implementation Guide](docs/implementation-guide.md)** - Deployment and project management
+- **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 classes
 
 ## 🗂️ Seven Abuse Classes
 
@@ -47,8 +48,8 @@ samples/
 # View a sample report
 cat samples/v4/messaging/spam_spamtrap_phishing_sample.json
 
-# Validate against schema (coming soon)
-xarf validate samples/v4/messaging/spam_spamtrap_phishing_sample.json
+# Validate against schema
+ajv validate -s schemas/v4/xarf-v4-master.json -d samples/v4/messaging/spam_spamtrap_phishing_sample.json
 ```
 
 ## 🔧 Parser Libraries

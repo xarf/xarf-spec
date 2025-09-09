@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/xarf-v4-master.json",
+  "title": "XARF v4 Master Schema",
+  "description": "Complete XARF v4 schema with conditional validation for all classes and types. This is the authoritative schema for validating XARF v4 reports.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "xarf-core.json"
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "messaging"
+          }
+        }
+      },
+      "then": {
+        "$ref": "messaging-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "connection"
+          }
+        }
+      },
+      "then": {
+        "$ref": "connection-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "content"
+          }
+        }
+      },
+      "then": {
+        "$ref": "content-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "infrastructure"
+          }
+        }
+      },
+      "then": {
+        "$ref": "infrastructure-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "copyright"
+          }
+        }
+      },
+      "then": {
+        "$ref": "copyright-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "vulnerability"
+          }
+        }
+      },
+      "then": {
+        "$ref": "vulnerability-class.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class": {
+            "const": "reputation"
+          }
+        }
+      },
+      "then": {
+        "$ref": "reputation-class.json"
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "examples": [
+    {
+      "title": "Messaging Class - Spam Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "timestamp": "2024-01-15T14:30:25Z",
+        "reporter": {
+          "org": "SpamCop",
+          "contact": "reports@spamcop.net",
+          "type": "automated"
+        },
+        "source_identifier": "192.0.2.123",
+        "source_port": 25,
+        "class": "messaging",
+        "type": "spam",
+        "protocol": "smtp",
+        "smtp_from": "fake@example.com",
+        "subject": "Urgent: Verify Your Account",
+        "evidence_source": "spamtrap",
+        "evidence": [
+          {
+            "content_type": "message/rfc822",
+            "description": "Complete spam email with headers",
+            "payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21d..."
+          }
+        ],
+        "tags": ["phishing:financial", "campaign:fake_bank_2024"],
+        "confidence": 0.92
+      }
+    },
+    {
+      "title": "Connection Class - DDoS Report", 
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "x4y5z6a7-b8c9-0123-xy45-67890wx12345",
+        "timestamp": "2024-01-15T16:55:42Z",
+        "reporter": {
+          "org": "DDoS Protection Service",
+          "contact": "ddos@protectionservice.net",
+          "type": "automated"
+        },
+        "source_identifier": "192.0.2.155",
+        "class": "connection",
+        "type": "ddos",
+        "destination_ip": "203.0.113.100",
+        "destination_port": 80,
+        "protocol": "tcp",
+        "attack_vector": "syn_flood",
+        "peak_pps": 250000,
+        "peak_bps": 1200000000,
+        "duration_seconds": 2700,
+        "evidence_source": "flow_analysis",
+        "tags": ["attack:syn_flood", "volume:high"]
+      }
+    },
+    {
+      "title": "Content Class - Phishing Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "h8i9j0k1-l2m3-4567-hi89-01234gh56789",
+        "timestamp": "2024-01-15T13:45:30Z",
+        "reporter": {
+          "org": "PhishTank",
+          "contact": "admin@phishtank.com",
+          "type": "automated"
+        },
+        "source_identifier": "192.0.2.75",
+        "class": "content",
+        "type": "phishing",
+        "url": "http://fake-bank.example.com/login.php",
+        "target_brand": "Example Bank",
+        "target_category": "financial",
+        "evidence_source": "crawler",
+        "tags": ["phishing:banking", "target:example_bank"]
+      }
+    },
+    {
+      "title": "Infrastructure Class - Bot Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "456789ab-cdef-1234-5678-90abcdef1234",
+        "timestamp": "2024-01-15T08:15:45Z",
+        "reporter": {
+          "org": "Botnet Research Group",
+          "contact": "research@botnetwatch.org",
+          "type": "automated"
+        },
+        "source_identifier": "192.0.2.200",
+        "class": "infrastructure",
+        "type": "bot",
+        "malware_family": "conficker",
+        "c2_server": "evil-c2.example.com",
+        "evidence_source": "traffic_analysis",
+        "tags": ["botnet:conficker", "infection:active"]
+      }
+    },
+    {
+      "title": "Copyright Class - DMCA Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "copy1234-5678-9abc-def0-123456789abc",
+        "timestamp": "2024-01-15T10:30:15Z",
+        "reporter": {
+          "org": "Content Protection Agency",
+          "contact": "dmca@contentprotection.org",
+          "type": "automated"
+        },
+        "source_identifier": "192.0.2.150",
+        "class": "copyright",
+        "type": "copyright",
+        "work_title": "Avengers: Endgame",
+        "rights_holder": "Disney Enterprises, Inc.",
+        "infringing_url": "http://piracy-site.example.com/movies/avengers-endgame-2019.mp4",
+        "evidence_source": "automated_scan",
+        "tags": ["copyright:movie", "rights_holder:disney"]
+      }
+    },
+    {
+      "title": "Vulnerability Class - CVE Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "vuln5678-90ab-cdef-1234-567890abcdef",
+        "timestamp": "2024-01-15T09:20:30Z",
+        "reporter": {
+          "org": "Vulnerability Scanner Service",
+          "contact": "security@vulnscan.org",
+          "type": "automated"
+        },
+        "source_identifier": "203.0.113.75",
+        "class": "vulnerability",
+        "type": "cve",
+        "service": "Apache HTTP Server",
+        "service_version": "2.4.41",
+        "cve_id": "CVE-2021-41773",
+        "cvss_score": 7.5,
+        "risk_level": "high",
+        "evidence_source": "vulnerability_scan",
+        "tags": ["cve:CVE-2021-41773", "severity:high"]
+      }
+    },
+    {
+      "title": "Reputation Class - Blocklist Report",
+      "data": {
+        "xarf_version": "4.0.0",
+        "report_id": "rep12345-6789-abcd-ef01-234567890abc",
+        "timestamp": "2024-01-15T12:00:00Z",
+        "reporter": {
+          "org": "Threat Intelligence Platform",
+          "contact": "intel@threatfeed.org",
+          "type": "automated"
+        },
+        "source_identifier": "198.51.100.25",
+        "class": "reputation",
+        "type": "blocklist",
+        "threat_type": "spam_source",
+        "reputation_score": 15.0,
+        "confidence_score": 92.0,
+        "evidence_source": "threat_intelligence",
+        "tags": ["reputation:spam", "confidence:high"]
+      }
+    }
+  ],
+  "properties": {
+    "xarf_version": {
+      "description": "This schema validates XARF v4 reports. Supported versions match pattern ^4\\.[0-9]+\\.[0-9]+$"
+    }
+  }
+}
