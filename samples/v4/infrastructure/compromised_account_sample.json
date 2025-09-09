@@ -1,0 +1,62 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "n4o5p6q7-r8s9-0123-no45-67890mn12345",
+  "timestamp": "2024-01-15T11:45:22Z",
+  "reporter": {
+    "org": "Account Security Monitor",
+    "contact": "breaches@accountsec.net",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.88",
+  "class": "infrastructure",
+  "type": "compromised_account",
+  "evidence_source": "traffic_analysis",
+  "account_type": "email",
+  "service_provider": "popular-email-provider.com",
+  "compromise_indicators": [
+    "unusual_login_locations",
+    "bulk_email_sending",
+    "password_change_without_notification"
+  ],
+  "suspicious_activities": [
+    "Login from IP in different country",
+    "Sending 500+ emails per hour",
+    "Accessing contacts of other users"
+  ],
+  "geographic_anomaly": "Login from CN when user typically in US",
+  "first_suspicious_activity": "2024-01-15T08:30:00Z",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Authentication logs showing suspicious login patterns",
+      "payload": "MjAyNC0wMS0xNSAxMTo0NToyMiBDb21wcm9taXNlZCBhY2NvdW50IGRldGVjdGVk"
+    }
+  ],
+  "tags": [
+    "compromise:credential_theft",
+    "service:email",
+    "indicator:geo_anomaly"
+  ],
+  "_internal": {
+    "source_system": "account_security_monitor_v7.1",
+    "transmission_id": "account_compromise_20240115_n4o5p6q7",
+    "parser_confidence": 0.88,
+    "validation_score": 0.83,
+    "data_quality_flags": [
+      "geo_verified",
+      "behavior_anomaly",
+      "bulk_activity"
+    ],
+    "response_time_ms": 980,
+    "false_positive_probability": 0.08,
+    "review_required": true,
+    "custom": {
+      "account_recovery_status": "suspended",
+      "spam_emails_sent": 1250,
+      "contacts_harvested": 850,
+      "password_complexity": "weak",
+      "mfa_enabled": false,
+      "user_notification_sent": true
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "s9t0u1v2-w3x4-5678-st90-12345rs67890",
+  "timestamp": "2024-01-15T15:18:25Z",
+  "reporter": {
+    "org": "Website Defacement Monitor",
+    "contact": "defacements@webmonitor.sec",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.88",
+  "class": "content",
+  "type": "defacement",
+  "evidence_source": "automated_scan",
+  "url": "http://government-agency.example.gov",
+  "original_content_hash": "sha256:abc123def456789012345678901234567890abcdef1234567890abcdef123456",
+  "defacement_type": "political_message",
+  "attacker_signature": "H4CK3D BY ANONYMOUS",
+  "defacement_message": "Government corruption exposed",
+  "attack_vector": "cms_vulnerability",
+  "affected_pages": [
+    "/index.html",
+    "/about.html",
+    "/contact.html"
+  ],
+  "discovery_time": "2024-01-15T15:10:00Z",
+  "evidence": [
+    {
+      "content_type": "image/png",
+      "description": "Screenshot of defaced government website homepage",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+    },
+    {
+      "content_type": "text/html",
+      "description": "Source code of defaced page",
+      "payload": "PGgxPkg0Q0szRCBCWSBBTk9OWU1PVVM8L2gxPjxwPkdvdmVybm1lbnQgY29ycnVwdGlvbiBleHBvc2VkPC9wPg=="
+    }
+  ],
+  "tags": [
+    "defacement:political",
+    "target:government",
+    "method:cms_exploit"
+  ],
+  "_internal": {
+    "source_system": "web_defacement_monitor_v6.0",
+    "transmission_id": "defacement_alert_20240115_s9t0u1v2",
+    "parser_confidence": 0.91,
+    "validation_score": 0.86,
+    "data_quality_flags": [
+      "visual_confirmed",
+      "hash_verified",
+      "timing_validated"
+    ],
+    "response_time_ms": 750,
+    "false_positive_probability": 0.05,
+    "review_required": true,
+    "custom": {
+      "defacement_severity": "high",
+      "government_tier": "federal",
+      "restoration_time_estimate": "4_hours",
+      "attacker_group": "hacktivist",
+      "law_enforcement_notified": true,
+      "media_attention_risk": "high"
+    }
+  }
+}

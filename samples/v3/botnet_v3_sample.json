@@ -1,0 +1,35 @@
+{
+  "Version": "3.0.0", 
+  "ReporterInfo": {
+    "ReporterOrg": "Example CERT Organization",
+    "ReporterOrgDomain": "cert-org.example",
+    "ReporterOrgEmail": "cert@cert-org.example",
+    "ReporterContactEmail": "botnet@cert-org.example", 
+    "ReporterContactName": "Malware Analysis Team",
+    "ReporterContactPhone": "+1-555-0321"
+  },
+  "Disclosure": true,
+  "Report": {
+    "ReportClass": "System",
+    "ReportType": "botnet",
+    "Date": "2024-01-15T11:30:15Z",
+    "Source": {
+      "IP": "198.51.100.25",
+      "Type": "ip"
+    },
+    "Attachment": [
+      {
+        "ContentType": "text/plain",
+        "Description": "Network traffic patterns indicating bot communication",
+        "Data": "Qm90bmV0IGNvbW11bmljYXRpb24gZGV0ZWN0ZWQ6IENvbmZpY2tlciBDMiBjaGFubmVs"
+      }
+    ],
+    "AdditionalInfo": {
+      "MalwareFamily": "Conficker",
+      "C2Server": "malicious-command.example.com",
+      "InfectionVector": "network_worm",
+      "FirstSeen": "2024-01-14T18:45:00Z",
+      "LastSeen": "2024-01-15T11:25:00Z"
+    }
+  }
+}

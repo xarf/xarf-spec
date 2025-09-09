@@ -1,0 +1,41 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "b2c3d4e5-f6g7-8901-bcde-f2345678901a",
+  "timestamp": "2024-01-15T16:45:12Z",
+  "reporter": {
+    "org": "YBrandProtection",
+    "contact": "takedown@ybrandprotection.com",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.45",
+  "class": "content",
+  "type": "phishing",
+  "evidence_source": "automated_scan",
+  "url": "http://secure-banking-login.example.com/auth",
+  "target_brand": "Major Bank Corp",
+  "file_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "evidence": [
+    {
+      "content_type": "image/png",
+      "description": "Screenshot of phishing page mimicking bank login",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+    },
+    {
+      "content_type": "text/html",
+      "description": "Source code of phishing page",
+      "payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPlNlY3VyZSBCYW5raW5nIExvZ2luPC90aXRsZT48L2hlYWQ+"
+    }
+  ],
+  "tags": [
+    "target:banking",
+    "technique:credential_harvesting",
+    "severity:high"
+  ],
+  "_internal": {
+    "case_ref": "BP-2024-5678",
+    "brand_client": "Major Bank Corp",
+    "takedown_sent": true,
+    "response_deadline": "2024-01-17T16:45:12Z",
+    "escalation": "legal_team"
+  }
+}

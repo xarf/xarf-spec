@@ -1,0 +1,49 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "k1l2m3n4-o5p6-7890-kl12-34567jk89012",
+  "legacy_version": "3",
+  "timestamp": "2024-01-15T12:15:30Z",
+  "reporter": {
+    "org": "Legacy Spam Reporter",
+    "contact": "abuse@legacy-reporter.com",
+    "type": "unknown"
+  },
+  "source_identifier": "203.0.113.75",
+  "source_port": 25,
+  "class": "messaging",
+  "type": "spam",
+  "evidence_source": "unknown",
+  "protocol": "smtp",
+  "smtp_from": "noreply@spammer.example.com",
+  "subject": "Amazing Deal - Don't Miss Out!",
+  "evidence": [
+    {
+      "content_type": "message/rfc822",
+      "description": "Original spam message (converted from v3 samples)",
+      "payload": "UmVjZWl2ZWQ6IGZyb20gc3BhbW1lci5leGFtcGxlLmNvbSAoWzIwMy4wLjExMy43NV0pCkZyb206IG5vcmVwbHlAc3BhbW1lci5leGFtcGxlLmNvbQpTdWJqZWN0OiBBbWF6aW5nIERlYWwgLSBEb24ndCBNaXNzIE91dCE="
+    }
+  ],
+  "tags": [
+    "converted:v3",
+    "spam:commercial"
+  ],
+  "_internal": {
+    "source_system": "xarf_v3_converter_v1.0",
+    "transmission_id": "v3_migration_batch_001",
+    "parser_confidence": 0.75,
+    "validation_score": 0.8,
+    "data_quality_flags": [
+      "v3_converted",
+      "evidence_preserved",
+      "metadata_estimated"
+    ],
+    "response_time_ms": 75,
+    "false_positive_probability": 0.15,
+    "review_required": false,
+    "custom": {
+      "legacy_report_id": "xarf_v3_12345",
+      "conversion_timestamp": "2024-01-15T12:00:00Z",
+      "original_format": "xarf_v3"
+    }
+  }
+}

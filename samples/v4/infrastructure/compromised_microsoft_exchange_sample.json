@@ -1,0 +1,62 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "o5p6q7r8-s9t0-1234-op56-78901no23456",
+  "timestamp": "2024-01-15T13:20:15Z",
+  "reporter": {
+    "org": "Microsoft Exchange Security Team",
+    "contact": "exchange-security@enterprise-vendor.example",
+    "type": "automated"
+  },
+  "source_identifier": "172.16.10.50",
+  "source_port": 443,
+  "class": "infrastructure",
+  "type": "compromised_microsoft_exchange",
+  "evidence_source": "automated_discovery",
+  "exchange_version": "Microsoft Exchange Server 2019",
+  "vulnerability_exploited": "ProxyShell",
+  "cve_references": [
+    "CVE-2021-34473",
+    "CVE-2021-34523",
+    "CVE-2021-31207"
+  ],
+  "webshell_paths": [
+    "/aspnet_client/system_web/4_0_30319/aspnet_wp.aspx",
+    "/owa/auth/error.aspx"
+  ],
+  "exfiltrated_mailboxes": 12,
+  "persistent_access": true,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Exchange server logs showing ProxyShell exploitation",
+      "payload": "RXhjaGFuZ2UgUHJveHlTaGVsbCBleHBsb2l0YXRpb24gZGV0ZWN0ZWQ="
+    }
+  ],
+  "tags": [
+    "cve:proxyshell",
+    "platform:exchange",
+    "impact:data_exfiltration"
+  ],
+  "_internal": {
+    "source_system": "microsoft_exchange_security_v16.2",
+    "transmission_id": "exchange_compromise_20240115_o5p6q7r8",
+    "parser_confidence": 0.98,
+    "validation_score": 0.96,
+    "data_quality_flags": [
+      "cve_confirmed",
+      "webshell_detected",
+      "data_exfiltration"
+    ],
+    "response_time_ms": 3100,
+    "false_positive_probability": 0.01,
+    "review_required": true,
+    "custom": {
+      "proxyshell_variant": "multiple_cve_chain",
+      "webshell_persistence": "high",
+      "mailbox_access_scope": "global_admin",
+      "forensic_artifacts": "extensive",
+      "microsoft_notified": true,
+      "emergency_patching_required": true
+    }
+  }
+}

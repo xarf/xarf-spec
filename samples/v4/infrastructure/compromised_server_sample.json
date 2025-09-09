@@ -1,0 +1,60 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "l2m3n4o5-p6q7-8901-lm23-45678kl90123",
+  "timestamp": "2024-01-15T14:22:18Z",
+  "reporter": {
+    "org": "Server Security Monitor",
+    "contact": "incidents@serversec.org",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.150",
+  "source_port": 80,
+  "class": "infrastructure",
+  "type": "compromised_server",
+  "evidence_source": "automated_discovery",
+  "service": "apache_web_server",
+  "service_version": "Apache/2.4.29",
+  "compromise_type": "webshell",
+  "malicious_files": [
+    "/var/www/html/admin/shell.php",
+    "/tmp/.hidden_backdoor"
+  ],
+  "c2_communications": [
+    "malicious-control.example.com:8080"
+  ],
+  "first_seen": "2024-01-14T20:15:30Z",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Web server access logs showing suspicious activity",
+      "payload": "MjAyNC0wMS0xNSAxNDoyMjoxOCBDb21wcm9taXNlZCBzZXJ2ZXIgZGV0ZWN0ZWQ6IHdlYnNoZWxsIGFjdGl2aXR5"
+    }
+  ],
+  "tags": [
+    "compromise:webshell",
+    "service:apache",
+    "severity:high"
+  ],
+  "_internal": {
+    "source_system": "server_security_monitor_v13.7",
+    "transmission_id": "compromise_alert_20240115_l2m3n4o5",
+    "parser_confidence": 0.93,
+    "validation_score": 0.89,
+    "data_quality_flags": [
+      "file_confirmed",
+      "c2_verified",
+      "webshell_analyzed"
+    ],
+    "response_time_ms": 2400,
+    "false_positive_probability": 0.04,
+    "review_required": true,
+    "custom": {
+      "webshell_type": "php_generic",
+      "backdoor_persistence": "high",
+      "lateral_movement_risk": "moderate",
+      "data_exposure_risk": "high",
+      "incident_classification": "security_breach",
+      "containment_required": true
+    }
+  }
+}

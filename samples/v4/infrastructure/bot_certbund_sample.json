@@ -1,0 +1,41 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "f6g7h8i9-j0k1-2345-fg67-89012ef34567",
+  "timestamp": "2024-01-15T11:30:15Z",
+  "reporter": {
+    "org": "Example CERT Organization",
+    "contact": "cert@cert-org.example",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.25",
+  "class": "infrastructure",
+  "type": "bot",
+  "evidence_source": "traffic_analysis",
+  "malware_family": "Conficker",
+  "c2_server": "malicious-command.example.com",
+  "first_seen": "2024-01-14T18:45:00Z",
+  "last_seen": "2024-01-15T11:25:00Z",
+  "infection_vector": "network_worm",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Network traffic patterns indicating bot communication",
+      "payload": "Qm90bmV0IGNvbW11bmljYXRpb24gZGV0ZWN0ZWQ6IENvbmZpY2tlciBDMiBjaGFubmVs"
+    }
+  ],
+  "tags": [
+    "malware:conficker",
+    "botnet:active",
+    "infection:worm"
+  ],
+  "_internal": {
+    "incident_id": "CERT-2024-001234",
+    "classification": "confidential",
+    "affected_sectors": [
+      "banking",
+      "finance"
+    ],
+    "analyst": "team_alpha",
+    "publication_approved": false
+  }
+}

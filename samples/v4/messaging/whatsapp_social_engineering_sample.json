@@ -1,0 +1,48 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "w1x2y3z4-a5b6-7890-wx12-34567ab89012",
+  "timestamp": "2024-08-12T20:58:00Z",
+  "reporter": {
+    "org": "Mobile Security Research",
+    "contact": "whatsapp-abuse@mobile-security.org",
+    "type": "manual"
+  },
+  "source_identifier": "+447955527026",
+  "class": "messaging",
+  "type": "social_engineering",
+  "evidence_source": "user_report",
+  "protocol": "whatsapp",
+  "message_content": "Good evening, Tobias. I hope all is well on your end it feels like it's been ages since I last heard from you. How's work going these days? Hopefully it's been treating you well and not keeping you buried under too much stress.",
+  "sender_display_name": "Independent Fuel Distributor",
+  "target_victim": "Tobias",
+  "social_engineering_type": "relationship_building",
+  "impersonation_attempt": true,
+  "business_account_abuse": true,
+  "country_code": "GB",
+  "message_timestamp": "2024-08-12T20:58:00Z",
+  "evidence": [
+    {
+      "content_type": "image/jpeg",
+      "description": "WhatsApp screenshot showing social engineering message from unknown business account",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChAGA6VP6XAAAAABJRU5ErkJggg=="
+    }
+  ],
+  "tags": [
+    "social_engineering:relationship_building",
+    "impersonation:business",
+    "platform:whatsapp",
+    "target:individual",
+    "language:english"
+  ],
+  "_internal": {
+    "report_source": "user_complaint_tobias",
+    "victim_contacted_us": true,
+    "business_verification": "fake_business_account",
+    "threat_level": "medium",
+    "investigation_status": "active",
+    "similar_reports": 3,
+    "phone_verification": "unverified_uk_number",
+    "social_graph_analysis": "no_mutual_contacts",
+    "response_action": "blocked_and_reported_to_whatsapp"
+  }
+}

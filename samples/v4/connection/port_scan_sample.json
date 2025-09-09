@@ -1,0 +1,76 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "i9j0k1l2-m3n4-5678-ij90-12345hi67890",
+  "timestamp": "2024-01-15T07:22:18Z",
+  "reporter": {
+    "org": "Network Security Monitoring",
+    "contact": "alerts@netsec-mon.com",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.150",
+  "class": "connection",
+  "type": "port_scan",
+  "evidence_source": "ids_detection",
+  "destination_ip": "203.0.113.50",
+  "protocol": "tcp",
+  "scan_type": "syn_scan",
+  "ports_scanned": [
+    21,
+    22,
+    23,
+    25,
+    53,
+    80,
+    110,
+    143,
+    443,
+    993,
+    995
+  ],
+  "scan_duration": 45,
+  "packets_sent": 150,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "IDS log entries showing systematic port scanning activity",
+      "payload": "MjAyNC0wMS0xNSAwNzoyMjoxOCBQb3J0IHNjYW4gZGV0ZWN0ZWQ6IFNZTiBzY2FuIGZyb20gMTk4LjUxLjEwMC4xNTA="
+    }
+  ],
+  "tags": [
+    "scan_type:syn",
+    "target:multi_port",
+    "pattern:systematic"
+  ],
+  "_internal": {
+    "source_system": "network_security_monitoring_v4.9",
+    "transmission_id": "portscan_detection_20240115_i9j0k1l2",
+    "parser_confidence": 0.93,
+    "validation_score": 0.88,
+    "data_quality_flags": [
+      "ids_validated",
+      "pattern_matched",
+      "threshold_exceeded"
+    ],
+    "response_time_ms": 650,
+    "false_positive_probability": 0.04,
+    "review_required": false,
+    "custom": {
+      "scan_pattern": "sequential",
+      "stealth_indicators": [
+        "fin_scan",
+        "null_scan"
+      ],
+      "target_services": [
+        "ftp",
+        "ssh",
+        "telnet",
+        "smtp",
+        "dns",
+        "http"
+      ],
+      "reconnaissance_phase": "enumeration",
+      "threat_level": "medium",
+      "automated_blocking": true
+    }
+  }
+}

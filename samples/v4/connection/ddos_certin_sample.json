@@ -1,0 +1,47 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "d4e5f6g7-h8i9-0123-def4-56789012cdef",
+  "timestamp": "2024-01-15T08:15:45Z",
+  "reporter": {
+    "org": "Example CERT",
+    "contact": "incident@cert-example.org",
+    "type": "automated"
+  },
+  "source_identifier": "172.16.254.10",
+  "source_port": 53,
+  "class": "connection",
+  "type": "ddos_amplification",
+  "evidence_source": "flow_analysis",
+  "destination_ip": "203.0.113.100",
+  "destination_port": 80,
+  "protocol": "udp",
+  "attack_vector": "dns_amplification",
+  "packet_count": 15000,
+  "byte_count": 7500000,
+  "duration_seconds": 300,
+  "amplification_factor": 50.5,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Network flow analysis showing DNS amplification pattern",
+      "payload": "MjAyNC0wMS0xNSAwODoxNTo0NSBETlMgYW1wbGlmaWNhdGlvbiBhdHRhY2sgZGV0ZWN0ZWQ="
+    }
+  ],
+  "tags": [
+    "attack_type:amplification",
+    "protocol:dns",
+    "severity:high"
+  ],
+  "_internal": {
+    "incident_number": "INC-2024-0156",
+    "priority": "P1",
+    "response_team": "network_ops",
+    "mitigation_status": "active",
+    "isp_contacted": [
+      "example-isp-1",
+      "example-isp-2"
+    ],
+    "traffic_volume_gbps": 15.7,
+    "coordinator": "duty_officer_3"
+  }
+}

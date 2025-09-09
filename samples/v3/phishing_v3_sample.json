@@ -1,0 +1,34 @@
+{
+  "Version": "3.0.0",
+  "ReporterInfo": {
+    "ReporterOrg": "Example Security Vendor",
+    "ReporterOrgDomain": "security-vendor.example",
+    "ReporterOrgEmail": "abuse@security-vendor.example", 
+    "ReporterContactEmail": "phishing@security-vendor.example",
+    "ReporterContactName": "Phishing Response Team",
+    "ReporterContactPhone": "+1-555-0789"
+  },
+  "Disclosure": true,
+  "Report": {
+    "ReportClass": "Content",
+    "ReportType": "phishing",
+    "Date": "2024-01-15T16:45:30Z",
+    "Source": {
+      "URL": "https://malicious-example.net/banking-login/",
+      "Type": "uri"
+    },
+    "Attachment": [
+      {
+        "ContentType": "image/png",
+        "Description": "Screenshot of fake banking login page",
+        "Data": "iVBORw0KGgoAAAANSUhEUgAAASgAAADICAMAAABfOIepAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAADAFBMVEUAAAD////8/Pz5+fn39/f09PTy8vLw8PDu7u7s7Ozq6urm5ubj4+Pg4ODd3d3a2trc3Nzg4ODi4uLk5OTl5eXn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7////////////////////////////////////////////////////////////////////////////////////="
+      }
+    ],
+    "AdditionalInfo": {
+      "TargetBrand": "Example Bank",
+      "PhishingType": "credential_theft",
+      "DetectionMethod": "crawler",
+      "ContentLanguage": "en"
+    }
+  }
+}

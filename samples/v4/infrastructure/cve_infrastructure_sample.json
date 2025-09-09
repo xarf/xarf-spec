@@ -1,0 +1,65 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "p6q7r8s9-t0u1-2345-pq67-89012op34567",
+  "timestamp": "2024-01-15T09:55:30Z",
+  "reporter": {
+    "org": "Infrastructure CVE Monitor",
+    "contact": "cve-reports@infrasec.org",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.99",
+  "source_port": 8080,
+  "class": "infrastructure",
+  "type": "cve",
+  "evidence_source": "researcher_analysis",
+  "cve_id": "CVE-2023-46604",
+  "cvss_score": 10.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+  "affected_service": "Apache ActiveMQ",
+  "service_version": "5.18.2",
+  "exploit_available": true,
+  "exploitation_detected": true,
+  "attack_payloads": [
+    "Reverse shell deployment",
+    "System command execution"
+  ],
+  "remediation_status": "patch_available",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Network traffic showing CVE-2023-46604 exploitation attempt",
+      "payload": "Q1ZFLTIwMjMtNDY2MDQgZXhwbG9pdGF0aW9uIGF0dGVtcHQgZGV0ZWN0ZWQ="
+    }
+  ],
+  "tags": [
+    "cve:2023-46604",
+    "service:activemq",
+    "severity:critical",
+    "status:exploited"
+  ],
+  "_internal": {
+    "source_system": "infrastructure_cve_monitor_v12.5",
+    "transmission_id": "cve_exploit_20240115_p6q7r8s9",
+    "parser_confidence": 0.99,
+    "validation_score": 0.97,
+    "data_quality_flags": [
+      "exploit_confirmed",
+      "payload_analyzed",
+      "cve_verified"
+    ],
+    "response_time_ms": 1950,
+    "false_positive_probability": 0.01,
+    "review_required": true,
+    "custom": {
+      "exploit_sophistication": "weaponized",
+      "active_exploitation": true,
+      "reverse_shell_deployed": true,
+      "persistence_mechanisms": [
+        "scheduled_task",
+        "registry_modification"
+      ],
+      "threat_actor_attribution": "unknown",
+      "incident_response_activated": true
+    }
+  }
+}

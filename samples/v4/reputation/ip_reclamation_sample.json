@@ -1,0 +1,74 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "c9d0e1f2-g3h4-5678-cd90-12345bc67890",
+  "timestamp": "2024-01-15T12:25:30Z",
+  "reporter": {
+    "org": "IP Reputation Service",
+    "contact": "reclamation@ipreputation.org",
+    "type": "manual"
+  },
+  "source_identifier": "203.0.113.175",
+  "class": "reputation",
+  "type": "ip_reclamation",
+  "evidence_source": "researcher_analysis",
+  "threat_type": "former_botnet_ip",
+  "reclamation_request": true,
+  "previous_reputation": "botnet_member",
+  "cleanup_date": "2024-01-10T00:00:00Z",
+  "verification_period_days": 14,
+  "clean_traffic_verified": true,
+  "new_owner": "Legitimate Hosting Provider Inc",
+  "previous_malicious_activity": [
+    "botnet_participation",
+    "spam_sending",
+    "malware_hosting"
+  ],
+  "remediation_actions": [
+    "full_server_reinstall",
+    "security_hardening",
+    "monitoring_implementation"
+  ],
+  "verification_sources": [
+    "traffic_analysis",
+    "manual_inspection",
+    "customer_verification"
+  ],
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Documentation of IP cleanup and verification process",
+      "payload": "SVAgcmVjbGFtYXRpb24gdmVyaWZpZWQ6IDIwMy4wLjExMy4xNzUgY2xlYW5lZCBhbmQgdmVyaWZpZWQ="
+    }
+  ],
+  "tags": [
+    "reclamation:verified",
+    "cleanup:complete",
+    "status:clean"
+  ],
+  "_internal": {
+    "source_system": "ip_reputation_service_v11.9",
+    "transmission_id": "reclamation_request_20240115_c9d0e1f2",
+    "parser_confidence": 0.87,
+    "validation_score": 0.85,
+    "data_quality_flags": [
+      "manual_verified",
+      "traffic_analyzed",
+      "owner_validated"
+    ],
+    "response_time_ms": 4200,
+    "false_positive_probability": 0.06,
+    "review_required": true,
+    "custom": {
+      "verification_analyst": "senior_researcher_001",
+      "cleanup_verification_methods": [
+        "traffic_analysis",
+        "port_scanning",
+        "behavioral_monitoring"
+      ],
+      "remediation_confidence": 0.89,
+      "monitoring_duration_days": 14,
+      "reputation_restoration_status": "approved",
+      "blocklist_removal_requests": 12
+    }
+  }
+}

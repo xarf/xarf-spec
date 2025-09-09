@@ -1,0 +1,66 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "v2w3x4y5-z6a7-8901-vw23-45678uv90123",
+  "timestamp": "2024-01-15T14:15:30Z",
+  "reporter": {
+    "org": "Authentication Monitor",
+    "contact": "auth-failures@secmonitor.net",
+    "type": "automated"
+  },
+  "source_identifier": "172.16.0.99",
+  "source_port": 3389,
+  "class": "connection",
+  "type": "auth_failure",
+  "evidence_source": "firewall_logs",
+  "destination_ip": "192.0.2.44",
+  "destination_port": 3389,
+  "protocol": "tcp",
+  "service": "rdp",
+  "failure_type": "repeated_invalid_credentials",
+  "failure_count": 156,
+  "time_window_minutes": 60,
+  "attempted_usernames": [
+    "Administrator",
+    "admin",
+    "user",
+    "guest",
+    "backup"
+  ],
+  "geographic_source": "CN",
+  "lockout_triggered": true,
+  "account_disabled": false,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "RDP authentication failure logs",
+      "payload": "UkRQIGF1dGhlbnRpY2F0aW9uIGZhaWx1cmVzOiAxNTYgYXR0ZW1wdHMgaW4gMSBob3Vy"
+    }
+  ],
+  "tags": [
+    "auth:failed_rdp",
+    "geo:china",
+    "lockout:triggered"
+  ],
+  "_internal": {
+    "source_system": "authentication_monitor_v7.8",
+    "transmission_id": "auth_failure_20240115_v2w3x4y5",
+    "parser_confidence": 0.94,
+    "validation_score": 0.9,
+    "data_quality_flags": [
+      "firewall_verified",
+      "geo_confirmed",
+      "lockout_triggered"
+    ],
+    "response_time_ms": 720,
+    "false_positive_probability": 0.03,
+    "review_required": false,
+    "custom": {
+      "rdp_version": "10.0",
+      "attack_vector": "credential_stuffing",
+      "account_lockout_duration": "30_minutes",
+      "security_policy_violation": true,
+      "incident_escalated": false,
+      "remediation_applied": "ip_block"
+    }
+  }
+}

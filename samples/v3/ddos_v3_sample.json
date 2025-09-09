@@ -1,0 +1,38 @@
+{
+  "Version": "3.0.0",
+  "ReporterInfo": {
+    "ReporterOrg": "Example CERT",
+    "ReporterOrgDomain": "cert-example.org", 
+    "ReporterOrgEmail": "incident@cert-example.org",
+    "ReporterContactEmail": "incident@cert-example.org",
+    "ReporterContactName": "Incident Response Team",
+    "ReporterContactPhone": "+1-555-0456"
+  },
+  "Disclosure": true,
+  "Report": {
+    "ReportClass": "Network", 
+    "ReportType": "ddos",
+    "Date": "2024-01-15T08:15:45Z",
+    "Source": {
+      "IP": "172.16.254.10",
+      "Port": 53,
+      "Type": "ip"
+    },
+    "Attachment": [
+      {
+        "ContentType": "text/plain",
+        "Description": "Network flow analysis showing DNS amplification attack",
+        "Data": "MjAyNC0wMS0xNSAwODoxNTo0NSBETlMgYW1wbGlmaWNhdGlvbiBhdHRhY2sgZGV0ZWN0ZWQ="
+      }
+    ],
+    "AdditionalInfo": {
+      "Protocol": "udp",
+      "DestinationIP": "203.0.113.100", 
+      "DestinationPort": 80,
+      "AttackType": "dns_amplification",
+      "PacketCount": 15000,
+      "ByteCount": 7500000,
+      "DurationSeconds": 300
+    }
+  }
+}

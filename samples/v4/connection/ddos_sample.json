@@ -1,0 +1,60 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "x4y5z6a7-b8c9-0123-xy45-67890wx12345",
+  "timestamp": "2024-01-15T16:55:42Z",
+  "reporter": {
+    "org": "DDoS Protection Service",
+    "contact": "ddos@protectionservice.net",
+    "type": "automated"
+  },
+  "source_identifier": "192.0.2.155",
+  "source_port": 0,
+  "class": "connection",
+  "type": "ddos",
+  "evidence_source": "flow_analysis",
+  "destination_ip": "203.0.113.100",
+  "destination_port": 80,
+  "protocol": "tcp",
+  "attack_type": "syn_flood",
+  "peak_pps": 250000,
+  "peak_mbps": 1200,
+  "duration_minutes": 45,
+  "total_packets": 11250000,
+  "total_bytes": 3240000000,
+  "botnet_participation": true,
+  "mitigation_applied": true,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "DDoS attack flow analysis and statistics",
+      "payload": "RERvUyBhdHRhY2sgZGV0ZWN0ZWQ6IDI1MEsgcHBzLCAxLjJHYnBzLCA0NSBtaW51dGVz"
+    }
+  ],
+  "tags": [
+    "attack:syn_flood",
+    "volume:high",
+    "mitigation:applied"
+  ],
+  "_internal": {
+    "source_system": "ddos_protection_service_v9.4",
+    "transmission_id": "ddos_incident_20240115_x4y5z6a7",
+    "parser_confidence": 0.98,
+    "validation_score": 0.95,
+    "data_quality_flags": [
+      "volume_confirmed",
+      "mitigation_verified",
+      "botnet_identified"
+    ],
+    "response_time_ms": 1750,
+    "false_positive_probability": 0.01,
+    "review_required": false,
+    "custom": {
+      "attack_sophistication": "moderate",
+      "botnet_size_estimate": 15000,
+      "mitigation_effectiveness": 0.92,
+      "business_impact": "service_degradation",
+      "attack_vector_diversity": 3,
+      "customer_sla_breach": false
+    }
+  }
+}

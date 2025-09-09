@@ -1,0 +1,67 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "q7r8s9t0-u1v2-3456-qr78-90123pq45678",
+  "timestamp": "2024-01-15T12:40:18Z",
+  "reporter": {
+    "org": "Anti-Fraud Coalition",
+    "contact": "fraud@antifraud.org",
+    "type": "automated"
+  },
+  "source_identifier": "192.0.2.211",
+  "class": "content",
+  "type": "fraud",
+  "evidence_source": "user_report",
+  "url": "http://fake-crypto-exchange.example.com/invest",
+  "fraud_type": "investment_scam",
+  "target_demographic": "cryptocurrency_investors",
+  "claimed_returns": "300% in 30 days",
+  "fake_testimonials": true,
+  "registration_country": "offshore",
+  "social_engineering_tactics": [
+    "urgency_pressure",
+    "fake_celebrity_endorsements",
+    "limited_time_offers"
+  ],
+  "evidence": [
+    {
+      "content_type": "image/png",
+      "description": "Screenshot of fraudulent investment website",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+    },
+    {
+      "content_type": "text/html",
+      "description": "HTML source of fake investment page",
+      "payload": "PGgxPkludmVzdCBOb3cgZm9yIDMwMCUgUmV0dXJucyE8L2gxPg=="
+    }
+  ],
+  "tags": [
+    "fraud:investment",
+    "target:crypto_investors",
+    "method:fake_testimonials"
+  ],
+  "_internal": {
+    "source_system": "anti_fraud_coalition_v4.1",
+    "transmission_id": "fraud_report_20240115_q7r8s9t0",
+    "parser_confidence": 0.87,
+    "validation_score": 0.82,
+    "data_quality_flags": [
+      "user_verified",
+      "pattern_match",
+      "social_signals"
+    ],
+    "response_time_ms": 950,
+    "false_positive_probability": 0.08,
+    "review_required": true,
+    "custom": {
+      "fraud_pattern_score": 0.85,
+      "social_engineering_indicators": 8,
+      "victim_reports": 23,
+      "financial_risk_level": "critical",
+      "regulatory_flags": [
+        "unlicensed",
+        "offshore_entity"
+      ],
+      "investigation_priority": "urgent"
+    }
+  }
+}

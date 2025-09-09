@@ -1,0 +1,58 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "g7h8i9j0-k1l2-3456-gh78-90123fg45678",
+  "timestamp": "2024-01-15T09:00:00Z",
+  "reporter": {
+    "org": "Threat Intelligence Consortium",
+    "contact": "intel@threatconsortium.org",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.200",
+  "class": "reputation",
+  "type": "blocklist",
+  "evidence_source": "threat_intelligence",
+  "threat_type": "command_and_control",
+  "confidence_score": 95,
+  "first_reported": "2024-01-10T14:20:00Z",
+  "sources": [
+    "malware_sandbox",
+    "honeypot_network",
+    "researcher_analysis"
+  ],
+  "geographic_location": "CN",
+  "asn": 4134,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Aggregated threat intelligence indicating C2 activity",
+      "payload": "VGhyZWF0IGludGVsbGlnZW5jZSBhZ2dyZWdhdGlvbjogQzIgc2VydmVyIGFjdGl2aXR5"
+    }
+  ],
+  "tags": [
+    "threat_type:c2",
+    "geo:china",
+    "confidence:high"
+  ],
+  "_internal": {
+    "source_system": "threat_intelligence_consortium_v14.6",
+    "transmission_id": "blocklist_aggregation_20240115_g7h8i9j0",
+    "parser_confidence": 0.95,
+    "validation_score": 0.93,
+    "data_quality_flags": [
+      "multi_source",
+      "high_confidence",
+      "geo_verified"
+    ],
+    "response_time_ms": 600,
+    "false_positive_probability": 0.02,
+    "review_required": false,
+    "custom": {
+      "intelligence_sources": 3,
+      "correlation_score": 0.91,
+      "threat_attribution": "apt_group",
+      "blocklist_duration_days": 30,
+      "automated_sharing": true,
+      "intel_classification": "tlp_amber"
+    }
+  }
+}

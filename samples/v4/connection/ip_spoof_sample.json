@@ -1,0 +1,58 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "w3x4y5z6-a7b8-9012-wx34-56789vw01234",
+  "timestamp": "2024-01-15T11:22:18Z",
+  "reporter": {
+    "org": "Network Spoofing Detection",
+    "contact": "spoofing@netdetect.org",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.66",
+  "class": "connection",
+  "type": "ip_spoof",
+  "evidence_source": "flow_analysis",
+  "spoofed_source_ip": "192.0.2.1",
+  "actual_source_ip": "203.0.113.66",
+  "destination_ip": "198.51.100.200",
+  "destination_port": 53,
+  "protocol": "udp",
+  "spoofing_technique": "source_address_modification",
+  "attack_purpose": "amplification_preparation",
+  "packet_count": 5000,
+  "spoofing_detection_method": "reverse_path_check",
+  "legitimate_owner": "example-legitimate-org.com",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Network flow analysis showing IP address spoofing",
+      "payload": "SVAgc3Bvb2ZpbmcgZGV0ZWN0ZWQ6IGZha2Ugc291cmNlIDE5Mi4wLjIuMSBmcm9tIDIwMy4wLjExMy42Ng=="
+    }
+  ],
+  "tags": [
+    "spoof:source_ip",
+    "purpose:amplification",
+    "detection:reverse_path"
+  ],
+  "_internal": {
+    "source_system": "network_spoofing_detection_v5.1",
+    "transmission_id": "spoof_detection_20240115_w3x4y5z6",
+    "parser_confidence": 0.91,
+    "validation_score": 0.87,
+    "data_quality_flags": [
+      "flow_analysis",
+      "reverse_path_verified",
+      "amplification_prep"
+    ],
+    "response_time_ms": 1100,
+    "false_positive_probability": 0.05,
+    "review_required": false,
+    "custom": {
+      "spoofing_confidence": 0.94,
+      "bgp_path_analysis": "anomalous",
+      "legitimate_owner_contacted": false,
+      "amplification_target": "dns_resolver",
+      "packet_analysis_depth": "headers_only",
+      "mitigation_status": "upstream_notified"
+    }
+  }
+}

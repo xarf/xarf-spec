@@ -1,0 +1,35 @@
+{
+  "Version": "3.0.0",
+  "ReporterInfo": {
+    "ReporterOrg": "Example Anti-Spam Service",
+    "ReporterOrgDomain": "antispam-service.example",
+    "ReporterOrgEmail": "reports@antispam-service.example",
+    "ReporterContactEmail": "abuse@antispam-service.example",
+    "ReporterContactName": "Abuse Team",
+    "ReporterContactPhone": "+1-555-0123"
+  },
+  "Disclosure": true,
+  "Report": {
+    "ReportClass": "Messaging",
+    "ReportType": "spam",
+    "Date": "2024-01-15T14:30:25Z",
+    "Source": {
+      "IP": "192.168.1.100",
+      "Port": 25,
+      "Type": "ip"
+    },
+    "Attachment": [
+      {
+        "ContentType": "message/rfc822",
+        "Description": "Original spam message with headers",
+        "Data": "UmVjZWl2ZWQ6IGZyb20gZXhhbXBsZS5jb20gKGV4YW1wbGUuY29tIFsxOTIuMTY4LjEuMTAwXSkKCVN1YmplY3Q6IFVyZ2VudDogQ2xhaW0gWW91ciBQcml6ZSBOb3chCglGcm9tOiBtYXJrZXRpbmdAZXhhbXBsZS5jb20="
+      }
+    ],
+    "AdditionalInfo": {
+      "Protocol": "smtp",
+      "SMTPFrom": "marketing@example.com",
+      "Subject": "Urgent: Claim Your Prize Now!",
+      "DetectionMethod": "spamtrap"
+    }
+  }
+}

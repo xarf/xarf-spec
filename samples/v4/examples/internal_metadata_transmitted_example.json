@@ -1,0 +1,30 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "f2g3h4i5-j6k7-8901-fg23-45678ef90123",
+  "timestamp": "2024-01-15T14:30:25Z",
+  "reporter": {
+    "org": "Example Anti-Spam Service",
+    "contact": "reports@antispam-service.example",
+    "type": "automated"
+  },
+  "source_identifier": "203.0.113.88",
+  "source_port": 25,
+  "class": "messaging",
+  "type": "spam",
+  "evidence_source": "spamtrap",
+  "protocol": "smtp",
+  "smtp_from": "scammer@fake-bank.com",
+  "subject": "Urgent: Verify Your Account",
+  "evidence": [
+    {
+      "content_type": "message/rfc822",
+      "description": "Phishing email pretending to be from bank",
+      "payload": "UmVjZWl2ZWQ6IGZyb20gZmFrZS1iYW5rLmNvbQpTdWJqZWN0OiBVcmdlbnQ6IFZlcmlmeSBZb3VyIEFjY291bnQ="
+    }
+  ],
+  "tags": [
+    "spam:phishing",
+    "target:banking",
+    "language:english"
+  ]
+}

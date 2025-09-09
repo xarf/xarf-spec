@@ -1,0 +1,70 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "u1v2w3x4-y5z6-7890-uv12-34567tu89012",
+  "timestamp": "2024-01-15T06:30:45Z",
+  "reporter": {
+    "org": "SSH Honeypot Network",
+    "contact": "honeypot@sshsecurity.org",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.77",
+  "source_port": 45621,
+  "class": "connection",
+  "type": "login_attack",
+  "evidence_source": "honeypot",
+  "destination_ip": "203.0.113.22",
+  "destination_port": 22,
+  "protocol": "tcp",
+  "service": "ssh",
+  "attempt_count": 2847,
+  "successful_logins": 0,
+  "duration_minutes": 180,
+  "username_patterns": [
+    "admin",
+    "root",
+    "user",
+    "test",
+    "guest"
+  ],
+  "password_patterns": [
+    "dictionary_attack",
+    "common_passwords",
+    "numeric_sequences"
+  ],
+  "attack_pattern": "brute_force",
+  "threshold_exceeded": "2024-01-15T06:15:30Z",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "SSH authentication failure logs showing brute force pattern",
+      "payload": "U1NIIGJydXRlIGZvcmNlIGF0dGFjayBkZXRlY3RlZDogMjg0NyBhdHRlbXB0cyBpbiAzIGhvdXJz"
+    }
+  ],
+  "tags": [
+    "attack:brute_force",
+    "service:ssh",
+    "pattern:dictionary"
+  ],
+  "_internal": {
+    "source_system": "ssh_honeypot_network_v3.4",
+    "transmission_id": "honeypot_alert_20240115_u1v2w3x4",
+    "parser_confidence": 0.96,
+    "validation_score": 0.92,
+    "data_quality_flags": [
+      "honeypot_verified",
+      "brute_force_pattern",
+      "credential_analysis"
+    ],
+    "response_time_ms": 1350,
+    "false_positive_probability": 0.02,
+    "review_required": false,
+    "custom": {
+      "attack_sophistication": "basic",
+      "credential_dictionary": "rockyou",
+      "geographic_origin": "automated_botnet",
+      "session_duration_minutes": 180,
+      "compromise_attempts": "unsuccessful",
+      "honeypot_engagement_level": "high"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "d0e1f2g3-h4i5-6789-de01-23456cd78901",
+  "timestamp": "2024-01-15T14:55:18Z",
+  "reporter": {
+    "org": "Honeypot Research Network",
+    "contact": "traps@honeypot-research.org",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.199",
+  "class": "reputation",
+  "type": "trap",
+  "evidence_source": "automated_analysis",
+  "threat_type": "scanning_source",
+  "trap_type": "honeypot_interaction",
+  "honeypot_services": [
+    "ssh:22",
+    "telnet:23",
+    "http:80",
+    "ftp:21"
+  ],
+  "interaction_count": 45,
+  "attack_patterns": [
+    "credential_brute_force",
+    "service_enumeration",
+    "vulnerability_probing"
+  ],
+  "automated_behavior": true,
+  "geographic_location": "RU",
+  "asn": 12345,
+  "first_interaction": "2024-01-15T10:30:00Z",
+  "persistence_duration_hours": 4.5,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "Honeypot interaction logs showing systematic scanning behavior",
+      "payload": "SG9uZXlwb3QgaW50ZXJhY3Rpb246IDQ1IGF0dGFjayBhdHRlbXB0cyBpbiA0LjUgaG91cnM="
+    }
+  ],
+  "tags": [
+    "trap:honeypot",
+    "behavior:automated",
+    "pattern:scanning"
+  ],
+  "_internal": {
+    "source_system": "honeypot_research_network_v8.2",
+    "transmission_id": "honeypot_interaction_20240115_d0e1f2g3",
+    "parser_confidence": 0.94,
+    "validation_score": 0.91,
+    "data_quality_flags": [
+      "interaction_logged",
+      "pattern_confirmed",
+      "geo_validated"
+    ],
+    "response_time_ms": 750,
+    "false_positive_probability": 0.03,
+    "review_required": false,
+    "custom": {
+      "honeypot_deployment": "distributed_sensors",
+      "attack_sophistication": "basic_automated",
+      "credential_attempts": 127,
+      "exploit_attempts": 18,
+      "threat_intelligence_value": "medium",
+      "ioc_extraction_success": true
+    }
+  }
+}

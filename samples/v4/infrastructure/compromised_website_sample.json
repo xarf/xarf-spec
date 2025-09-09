@@ -1,0 +1,59 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "m3n4o5p6-q7r8-9012-mn34-56789lm01234",
+  "timestamp": "2024-01-15T16:30:45Z",
+  "reporter": {
+    "org": "Web Security Scanner",
+    "contact": "alerts@webscan.security",
+    "type": "automated"
+  },
+  "source_identifier": "192.0.2.180",
+  "class": "infrastructure",
+  "type": "compromised_website",
+  "evidence_source": "automated_discovery",
+  "url": "http://legitimate-business.example.com",
+  "compromise_indicators": [
+    "iframe_injection",
+    "malicious_redirect",
+    "crypto_mining_script"
+  ],
+  "injected_content": "Cryptocurrency mining JavaScript",
+  "redirect_target": "http://malicious-ads.example.com/exploit",
+  "cms_platform": "WordPress",
+  "cms_version": "5.8.0",
+  "vulnerability_exploited": "outdated_plugin",
+  "evidence": [
+    {
+      "content_type": "text/html",
+      "description": "Website source showing malicious iframe injection",
+      "payload": "PGlmcmFtZSBzcmM9Imh0dHA6Ly9tYWxpY2lvdXMtYWRzLmV4YW1wbGUuY29tL2V4cGxvaXQi"
+    }
+  ],
+  "tags": [
+    "compromise:injection",
+    "platform:wordpress",
+    "attack:cryptomining"
+  ],
+  "_internal": {
+    "source_system": "web_security_scanner_v9.8",
+    "transmission_id": "website_compromise_20240115_m3n4o5p6",
+    "parser_confidence": 0.91,
+    "validation_score": 0.87,
+    "data_quality_flags": [
+      "injection_confirmed",
+      "malicious_content_verified",
+      "cms_analyzed"
+    ],
+    "response_time_ms": 1850,
+    "false_positive_probability": 0.05,
+    "review_required": true,
+    "custom": {
+      "wordpress_version": "5.8.0",
+      "vulnerable_plugin": "outdated_contact_form",
+      "injection_type": "iframe_cryptominer",
+      "visitor_impact": "resource_consumption",
+      "cleanup_complexity": "moderate",
+      "site_owner_notified": false
+    }
+  }
+}

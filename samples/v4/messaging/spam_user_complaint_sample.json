@@ -1,0 +1,53 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "timestamp": "2025-08-31T07:38:01Z",
+  "reporter": {
+    "org": "Example Security",
+    "contact": "abuse@example.com",
+    "type": "manual"
+  },
+  "source_identifier": "209.85.220.65",
+  "source_port": 25,
+  "class": "messaging",
+  "type": "spam",
+  "evidence_source": "user_complaint",
+  "protocol": "smtp",
+  "smtp_from": "uspisoffice0@gmail.com",
+  "subject": "Hello",
+  "evidence": [
+    {
+      "content_type": "message/rfc822",
+      "description": "Complete spam email reported by user",
+      "payload": "RGVsaXZlcmVkLVRvOiBrbnV0QGtudXRpeC5kZQpSZWNlaXZlZDogYnkgMjAwMjphMDU6NjEyYzo0YzFiOjEwYjA6NGYwOmEyNDU6ZWVhOCB3aXRoIFNNVFAgaWQgbW8yNy1uMWNzcDUxNzQ5MnZxYjsKICAgICAgICBTdW4sIDMxIEF1ZyAyMDI1IDAwOjM4OjAyIC0wNzAwIChQRFQpCkRLSU0tU2lnbmF0dXJlOiB2PTE7IGE9cnNhLXNoYTI1NjsgYz1yZWxheGVkL3JlbGF4ZWQ7CiAgICAgICAgZD1nbWFpbC5jb207IHM9MjAyMzA2MDE7IHQ9MTc1NjYyNTg4MTsgeDoxNzU3MjMwNjgxOyBkYXJuPWtudXRpeC5kZTsKICAgICAgICBoKnRvOnN1YmplY3Q6bWVzc2FnZS1pZDpkYXRlOmZyb206cmVwbHktdG86bWltZS12ZXJzaW9uOmZyb206dG86Y2MKICAgICAgICAgOnN1YmplY3Q6ZGF0ZTptZXNzYWdlLWlkOnJlcGx5LXRvOwpNSU1FLVZlcnNpb246IDEuMApSZXBseS1UbzogcmV2ZXJlbmRzaXN0ZXJwdXJpdHltYXJ0aW5AZ21haWwuY29tCkZyb206ICJSZXYuIFNpc3RlciBQdXJpdHkgTWFydGluIiA8dXNwaXNvZmZpY2UwQGdtYWlsLmNvbT4KRGF0ZTogU3VuLCAzMSBBdWcgMjAyNSAwODozNzo0MyArMDEwMApTdWJqZWN0OiBIZWxsbwpUbzogdW5kaXNjbG9zZWQtcmVjaXBpZW50czo7CkNvbnRlbnQtVHlwZTogbXVsdGlwYXJ0L2FsdGVybmF0aXZlOyBib3VuZGFyeT0iMDAwMDAwMDAwMDAwYTNjODljMDYzZGE0NTUxZSIKQmNjOiBrbnV0QGtudXRpeC5kZQoKLS0wMDAwMDAwMDAwMDBhM2M4OWMwNjNkYTQ1NTFlCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD0iVVRGLTgiCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IHF1b3RlZC1wcmludGFibGUKCkhlbGxvLCBNeSBSZXNwZWN0ZWQgRnJpZW5kLApJIGV4dGVuZCBteSBoZWFydGZlbHQgd2lzaGVzIGZvciB5b3VyIGNvbnRpbnVlZCB3ZWxsbmVzcyBhbmQgaW5uZXIgcGVhY2UgYXMKeW91IHJlY2VpdmUgdGhpcyBtZXNzYWdlLgpNeSBuYW1lIGlzIFJldmVyZW5kIFNpc3RlciBQdXJpdHkgTWFydGluLCBhIGRldm90ZWQgbWVtYmVyIG9mIHRoZSBTaXN0ZXJzCm9mIENoYXJpdHksIHN0ZWFkZmFzdCBpbiBhIGxpZmUgb2Ygc2VydmljZSBhbmQgY29tcGFzc2lvbi4gSSBoYXZlIHRoZQpkaXN0aW5jdCBob25vciBvZiBzZXJ2aW5nIGFzIFByZXNpZGVudCBhbmQgQ2hpZWYgRXhlY3V0aXZlIE9mZmljZXIgb2YgdGhlCk9yZ2FuaXphdGlvbiBmb3IgSHVtYW5raW5kIEdsb2JhbCBJbml0aWF0aXZlPUUyPTgwPTk0YW4gaW5zdGl0dXRpb24gcmVzb2x1dD0KZWx5CmNvbW1pdHRlZCB0byB1cGxpZnRpbmcgdnVsbmVyYWJsZSBjb21tdW5pdGllcyBhbmQgYWR2YW5jaW5nIHRoZSBpbmhlcmVudApkaWduaXR5IG9mIGV2ZXJ5IGh1bWFuIGxpZmUuCgpJdCBpcyB3aXRoIHByb2ZvdW5kIHNvcnJvdyB0aGF0IHdlIGFubm91bmNlIHRoZSBwYXNzaW5nIG9mIFJldmVyZW5kIEZhdGhlcgpKdXN0aWNlIFdpbGxpYW1zLCB0aGUgdmVuZXJhYmxlIGZvdW5kZXIgb2Ygb3VyIG9yZ2FuaXphdGlvbi4gUmV2ZXJlbmQKRmF0aGVyIFdpbGxpYW1zIGRlcGFydGVkIHRoaXMgbGlmZSBvbiB0aGUgMjZ0aCBvZiBEZWNlbWJlciwgMjAyNCwgbGVhdmluZwpiZWhpbmQgYW4gZW5kdXJpbmcgbGVnYWN5IG9mIHVud2F2ZXJpbmcgY29tcGFzc2lvbiwgdmlzaW9uYXJ5IGxlYWRlcnNoaXAsCmFuZCB0aXJlbGVzcyBkZXZvdGlvbiB0byB0aGUgc2VydmljZSBvZiBodW1hbml0eS4gVGhvdWdoIGhpcyBhYnNlbmNlIGlzCmRlZXBseSBmZWx0LCBoaXMgZ3VpZGluZyBzcGlyaXQgcmVtYWlucyBldmVyLXByZXNlbnQsIGNvbnRpbnVpbmcgdG8gdXBob2xkCm91ciBtaXNzaW9uIGFuZCBpbnNwaXJlIG91ciBjb21taXRtZW50IHRvIHRoZSBub2JsZSB3b3JrIGhlIGJlZ2FuLgoKWW91IGFyZSBoZXJlYnkgb2ZmaWNpYWxseSBub3RpZmllZCB0aGF0IHRoZSBsYXRlIFJldmVyZW5kIEZhdGhlciBKdXN0aWNlCldpbGxpYW1zLCBpbiBoaXMgZHVseSBleGVjdXRlZCBMYXN0IFdpbGwgYW5kIFRlc3RhbWVudCwgZGVzaWduYXRlZCB5b3UgYXMgYQpiZW5lZmljaWFyeS4gSW4gYWNjb3JkYW5jZSB3aXRoIHRoZSB0ZXJtcyBvdXRsaW5lZCB0aGVyZWluLCB5b3UgYXJlCmVudGl0bGVkIHRvIHJlY2VpdmUgdGhlIHN1bSBvZiBUd2VudHkgTWlsbGlvbiBGaXZlIEh1bmRyZWQgVGhvdXNhbmQgVW5pdGVkClN0YXRlcyBEb2xsYXJzIChVU0QgJDIwLDUwMCwwMDApLiBGb2xsb3dpbmcgaGlzIGluc3RydWN0aW9ucywgSSBhbSByZWFjaGluZwpvdXQgdG8geW91IHRvIGluaXRpYXRlIHRoZSBwcm9jZXNzIGZvciB0aGUgZGlzYnVyc2VtZW50IG9mIHRoZQphZm9yZW1lbnRpb25lZCBmdW5kcywgYXMgc3RpcHVsYXRlZCBpbiB0aGUgV2lsbC4gRnVydGhlciBpbmZvcm1hdGlvbiBhbmQKcHJvY2VkdXJhbCBndWlkYW5jZSB3aWxsIGJlIHByb3ZpZGVkIHRvIGVuc3VyZSB0aGUgc2VjdXJlLCBsYXdmdWwsIGFuZCB0aQptZWx5IHRyYW5zZmVyIG9mIHlvdXIgZW50aXRsZW1lbnQuCgpQbGVhc2Ugbm90ZTogVGhlIGxhdGUgUmV2ZXJlbmQgRmF0aGVyIEp1c3RpY2UgV2lsbGlhbXMgY29uZHVjdGVkIGEgcmFuZG9tCnNlbGVjdGlvbiBmcm9tIGEgY29tcHJlaGVuc2l2ZSBkYXRhYmFzZSBvZiBlbWFpbCBhZGRyZXNzZXMsIHRocm91Z2ggd2hpY2gKeW91IHdlcmUgaWRlbnRpZmllZCBhcyBvbmUgb2YgdGhlIGZvcnR1bmF0ZSBpbmRpdmlkdWFscyBjaG9zZW4gdG8gYmUgYQpiZW5lZmljaWFyeS4gQ29uc2VxdWVudGx5LCB5b3VyIG5hbWUgd2FzIGluY2x1ZGVkIGluIGhpcyBMYXN0IFdpbGwgYW5kClRlc3RhbWVudC4gSW4gYWNjb3JkYW5jZSB3aXRoIGhpcyB3aXNoZXMsIHRoaXMgaW5mb3JtYXRpb24gd2FzIHRvIGJlCmRpc2Nsb3NlZCBvbmx5IGZvbGxvd2luZyBoaXMgcGFzc2luZyBhbmQgYWZ0ZXIgdGhlIGNvbmNsdXNpb24gb2YgaGlzCm1lbW9yaWFsIHNlcnZpY2UuCgpZb3UgYXJlIHJlcXVlc3RlZCB0byBtYWtlIGNvbnRhY3QgYXQgeW91ciBlYXJsaWVzdCBjb252ZW5pZW5jZSB0bwpmYWNpbGl0YXRlIHRoZSBjb21tZW5jZW1lbnQgb2YgdGhlIGRpc2J1cnNlbWVudCBwcm9jZXNzLCBhcyBwcmVzY3JpYmVkIGJ5CnRoZSB0ZXJtcyBvZiB0aGUgV2lsbC4KClNpbmNlcmVseSwKUmV2ZXJlbmQgU2lzdGVyIFB1cml0eSBNYXJ0aW4uClByZXNpZGVudCBhbmQgQ2hpZWYgRXhlY3V0aXZlIE9mZmljZXIKT3JnYW5pemF0aW9uIGZvciBIdW1hbmtpbmQgR2xvYmFsIEluaXRpYXRpdmUu",
+      "size": 12485
+    }
+  ],
+  "tags": [
+    "scam:advance_fee_fraud",
+    "scam:419",
+    "impersonation:religious",
+    "solicitation:financial",
+    "severity:medium"
+  ],
+  "description": "Advance fee fraud email (419 scam) impersonating religious figure, claiming inheritance offer of $20.5M USD",
+  "_internal": {
+    "source_system": "user_complaint_processor_v2.5",
+    "transmission_id": "manual_report_20240115_001",
+    "parser_confidence": 0.89,
+    "validation_score": 0.91,
+    "data_quality_flags": [
+      "user_verified",
+      "evidence_complete",
+      "manual_review_passed"
+    ],
+    "response_time_ms": 450,
+    "false_positive_probability": 0.08,
+    "review_required": true,
+    "custom": {
+      "complaint_id": "USER-2024-007891",
+      "user_report_method": "web_form",
+      "complaint_category": "419_advance_fee"
+    }
+  }
+}

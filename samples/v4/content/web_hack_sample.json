@@ -1,0 +1,66 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "t0u1v2w3-x4y5-6789-tu01-23456st78901",
+  "timestamp": "2024-01-15T08:45:12Z",
+  "reporter": {
+    "org": "Web Application Security Scanner",
+    "contact": "webhacks@appsec.monitor",
+    "type": "automated"
+  },
+  "source_identifier": "192.0.2.133",
+  "class": "content",
+  "type": "web_hack",
+  "evidence_source": "automated_scan",
+  "url": "http://e-commerce-site.example.com/admin",
+  "attack_type": "sql_injection",
+  "vulnerability_type": "input_validation_bypass",
+  "affected_parameters": [
+    "username",
+    "search_query"
+  ],
+  "payload_detected": "' UNION SELECT password FROM users--",
+  "data_exposed": [
+    "customer_credentials",
+    "payment_information",
+    "administrative_accounts"
+  ],
+  "database_type": "mysql",
+  "records_potentially_affected": 15000,
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "SQL injection attack logs and responses",
+      "payload": "U1FMIGluamVjdGlvbiBhdHRhY2sgZGV0ZWN0ZWQ6ICcgVU5JT04gU0VMRUNUIHBhc3N3b3Jk"
+    }
+  ],
+  "tags": [
+    "attack:sql_injection",
+    "target:ecommerce",
+    "exposure:customer_data"
+  ],
+  "_internal": {
+    "source_system": "web_app_security_scanner_v7.2",
+    "transmission_id": "web_hack_detection_20240115_t0u1v2w3",
+    "parser_confidence": 0.96,
+    "validation_score": 0.93,
+    "data_quality_flags": [
+      "payload_validated",
+      "exploit_confirmed",
+      "data_exposure"
+    ],
+    "response_time_ms": 2100,
+    "false_positive_probability": 0.02,
+    "review_required": true,
+    "custom": {
+      "vulnerability_cve": "CVE-2024-0001",
+      "impact_score": 9.1,
+      "data_breach_severity": "critical",
+      "customer_records_affected": 15000,
+      "compliance_violations": [
+        "PCI-DSS",
+        "GDPR"
+      ],
+      "incident_response_required": true
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "e1f2g3h4-i5j6-7890-ef12-34567de89012",
+  "timestamp": "2024-01-15T13:40:25Z",
+  "reporter": {
+    "org": "Brand Protection Agency",
+    "contact": "trademark@brandprotection.legal",
+    "type": "manual"
+  },
+  "source_identifier": "192.0.2.220",
+  "class": "copyright",
+  "type": "trademark",
+  "evidence_source": "rights_holder_report",
+  "work_title": "Famous Brand Logo and Name",
+  "trademark_registration": "USPTO Registration #6789012",
+  "rights_holder": "Famous Brand Corporation",
+  "infringing_url": "http://fake-famous-brand.example.com",
+  "trademark_usage": "unauthorized_logo_display",
+  "counterfeit_products": true,
+  "customer_confusion_likely": true,
+  "commercial_use": true,
+  "infringement_type": [
+    "logo_misuse",
+    "name_similarity",
+    "product_counterfeiting"
+  ],
+  "legal_basis": "Lanham Act Section 32(1)",
+  "cease_desist_sent": true,
+  "evidence": [
+    {
+      "content_type": "image/png",
+      "description": "Screenshot showing unauthorized trademark usage",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+    },
+    {
+      "content_type": "application/pdf",
+      "description": "Cease and desist letter with trademark documentation",
+      "payload": "JVBERi0xLjQKJcfsj6IKNSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK"
+    }
+  ],
+  "tags": [
+    "trademark:infringement",
+    "type:counterfeiting",
+    "action:cease_desist"
+  ],
+  "_internal": {
+    "source_system": "brand_protection_agency_v5.7",
+    "transmission_id": "trademark_case_20240115_e1f2g3h4",
+    "parser_confidence": 0.89,
+    "validation_score": 0.84,
+    "data_quality_flags": [
+      "legal_verified",
+      "manual_review",
+      "trademark_confirmed"
+    ],
+    "response_time_ms": 2800,
+    "false_positive_probability": 0.06,
+    "review_required": true,
+    "custom": {
+      "trademark_class": "25",
+      "infringement_severity": "high",
+      "consumer_confusion_score": 0.87,
+      "counterfeit_products_count": 47,
+      "legal_action_status": "cease_desist_sent",
+      "brand_damage_assessment": "moderate"
+    }
+  }
+}

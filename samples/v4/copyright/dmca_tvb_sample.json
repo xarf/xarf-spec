@@ -1,0 +1,43 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "c3d4e5f6-g7h8-9012-cdef-3456789012bc",
+  "timestamp": "2024-01-15T10:20:30Z",
+  "reporter": {
+    "org": "TVB Copyright Department",
+    "contact": "copyright@tvb.com",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.75",
+  "class": "copyright",
+  "type": "copyright",
+  "evidence_source": "automated_scan",
+  "work_title": "Popular TV Show S01E05",
+  "work_identifier": "IMDB:tt1234567",
+  "rights_holder": "Television Broadcasting Limited",
+  "infringing_url": "http://pirate-streams.example.com/show/episode5.mp4",
+  "file_size": 1073741824,
+  "file_hash": "sha256:d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2d2",
+  "evidence": [
+    {
+      "content_type": "text/plain",
+      "description": "DMCA takedown notice with legal references",
+      "payload": "RE1DQSBUYWtlZG93biBOb3RpY2U6IFVuYXV0aG9yaXplZCBkaXN0cmlidXRpb24gb2YgY29weXJpZ2h0ZWQgY29udGVudA=="
+    }
+  ],
+  "tags": [
+    "content_type:video",
+    "infringement:streaming",
+    "jurisdiction:us"
+  ],
+  "_internal": {
+    "dmca_tracking": "TVB-DMCA-240115-089",
+    "copyright_agent": "legal_dept",
+    "notice_sent_date": "2024-01-15T10:20:30Z",
+    "compliance_deadline": "2024-01-22T10:20:30Z",
+    "takedown_method": "automated_email",
+    "follow_up_required": true,
+    "revenue_impact": "medium",
+    "legal_review": "not_required",
+    "content_type": "premium_episode"
+  }
+}

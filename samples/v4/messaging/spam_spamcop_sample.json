@@ -1,0 +1,34 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "timestamp": "2024-01-15T14:30:25Z",
+  "reporter": {
+    "org": "Example Anti-Spam Service",
+    "contact": "reports@antispam-service.example",
+    "type": "automated"
+  },
+  "source_identifier": "192.168.1.100",
+  "source_port": 25,
+  "class": "messaging",
+  "type": "spam",
+  "evidence_source": "spamtrap",
+  "protocol": "smtp",
+  "smtp_from": "marketing@example.com",
+  "subject": "Urgent: Claim Your Prize Now!",
+  "evidence": [
+    {
+      "content_type": "message/rfc822",
+      "description": "Complete spam email with headers",
+      "payload": "UmVjZWl2ZWQ6IGZyb20gZXhhbXBsZS5jb20gKGV4YW1wbGUuY29tIFsxOTIuMTY4LjEuMTAwXSkKCVN1YmplY3Q6IFVyZ2VudDogQ2xhaW0gWW91ciBQcml6ZSBOb3chCglGcm9tOiBtYXJrZXRpbmdAZXhhbXBsZS5jb20="
+    }
+  ],
+  "tags": [
+    "spam:commercial",
+    "detection:automated",
+    "language:english"
+  ],
+  "_internal": {
+    "batch_id": "20240115_001",
+    "processed": "2024-01-15T14:30:25Z"
+  }
+}

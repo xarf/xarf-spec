@@ -1,0 +1,55 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "b5c6d7e8-f9a0-1b2c-3d4e-56789abcdef0",
+  "timestamp": "2025-09-07T14:30:15Z",
+  "reporter": {
+    "org": "Example Security Vendor",
+    "contact": "abuse@security-vendor.example",
+    "type": "manual"
+  },
+  "source_identifier": "malicious-example.net",
+  "class": "content",
+  "type": "phishing_site",
+  "evidence_source": "crawler",
+  "url": "https://malicious-example.net/de-DE?referral=AZG3167JVKA",
+  "content_type": "text/html",
+  "evidence": [
+    {
+      "content_type": "image/png",
+      "description": "Screenshot of German-language fake cashback/discount website",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAASgAAADICAMAAABfOIepAAADAFBMVEUAAAD////8/Pz5+fn39/f09PTy8vLw8PDu7u7s7Ozq6urm5ubj4+Pg4ODd3d3a2trc3Nzg4ODi4uLk5OTl5eXn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8=",
+      "size": 2048
+    }
+  ],
+  "tags": [
+    "scam:fake_cashback",
+    "language:german",
+    "tinyurl:shortened_link",
+    "suspicious_popup",
+    "fake_promotion",
+    "severity:medium"
+  ],
+  "description": "German-language fake cashback/discount website with suspicious promotional popups and referral tracking, accessible via shortened URL",
+  "_internal": {
+    "source_system": "example_security_crawler_v1.0",
+    "transmission_id": "phishing_crawl_20250907_b5c6d7e8",
+    "parser_confidence": 0.83,
+    "validation_score": 0.78,
+    "data_quality_flags": [
+      "manual_verified",
+      "language_specific",
+      "screenshot_captured"
+    ],
+    "response_time_ms": 3500,
+    "false_positive_probability": 0.12,
+    "review_required": true,
+    "custom": {
+      "language_region": "de_DE",
+      "referral_tracking": true,
+      "popup_behavior_score": 0.85,
+      "domain_age_days": 23,
+      "ssl_certificate_suspicious": false,
+      "geolocation": "unknown"
+    }
+  }
+}

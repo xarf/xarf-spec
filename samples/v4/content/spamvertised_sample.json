@@ -1,0 +1,67 @@
+{
+  "xarf_version": "4.0.0",
+  "report_id": "r8s9t0u1-v2w3-4567-rs89-01234qr56789",
+  "timestamp": "2024-01-15T10:25:40Z",
+  "reporter": {
+    "org": "Spam Analysis Center",
+    "contact": "spamvertised@spamanalysis.org",
+    "type": "automated"
+  },
+  "source_identifier": "198.51.100.222",
+  "class": "content",
+  "type": "spamvertised",
+  "evidence_source": "spam_analysis",
+  "url": "http://discount-pharmacy.example.com/order",
+  "advertised_in_spam": true,
+  "spam_campaign": "pharmacy_bulk_2024",
+  "product_category": "prescription_drugs",
+  "illegal_claims": [
+    "no_prescription_required",
+    "fda_approved_generics",
+    "90%_discount_guaranteed"
+  ],
+  "originating_spam_ips": [
+    "203.0.113.10",
+    "198.51.100.5"
+  ],
+  "spam_volume": 50000,
+  "evidence": [
+    {
+      "content_type": "message/rfc822",
+      "description": "Original spam email advertising the website",
+      "payload": "UmVjZWl2ZWQ6IGZyb20gc3BhbW1lci5leGFtcGxlLmNvbQpTdWJqZWN0OiA5MCUgRGlzY291bnQgUHJlc2NyaXB0aW9uIE1lZHMh"
+    },
+    {
+      "content_type": "image/png",
+      "description": "Screenshot of spamvertised pharmacy website",
+      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+    }
+  ],
+  "tags": [
+    "spam:pharmacy",
+    "illegal:prescription_drugs",
+    "volume:high"
+  ],
+  "_internal": {
+    "source_system": "spam_analysis_center_v5.3",
+    "transmission_id": "spamvertised_batch_20240115_r8s9t0u1",
+    "parser_confidence": 0.92,
+    "validation_score": 0.88,
+    "data_quality_flags": [
+      "bulk_verified",
+      "campaign_tracked",
+      "volume_threshold"
+    ],
+    "response_time_ms": 1800,
+    "false_positive_probability": 0.04,
+    "review_required": false,
+    "custom": {
+      "spam_campaign_id": "pharmacy_bulk_2024",
+      "email_volume": 50000,
+      "unique_senders": 127,
+      "content_hash_matches": 42000,
+      "regulatory_violation_score": 0.96,
+      "takedown_urgency": "high_priority"
+    }
+  }
+}
