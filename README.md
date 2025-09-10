@@ -7,7 +7,7 @@ The eXtended Abuse Reporting Format (XARF) is a standard for reporting abuse inc
 - **[Introduction & Overview](docs/introduction.md)** - High-level overview and use cases
 - **[Technical Specification](docs/specification.md)** - Complete technical reference
 - **[Implementation Guide](docs/implementation-guide.md)** - Deployment and project management
-- **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 classes
+- **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 classes and event types
 
 ## 🗂️ Seven Abuse Classes
 
@@ -20,6 +20,20 @@ XARF v4 organizes all abuse reports into seven main classes:
 5. **copyright** - IP infringement (DMCA, trademark violations)
 6. **vulnerability** - Security vulnerabilities (CVE reports, misconfigurations)
 7. **reputation** - Threat intelligence (blocklist entries, IOC data)
+
+### Event Types by Class
+
+Each class contains multiple specific event types with dedicated schemas:
+
+| Class | Event Types | Schema Location |
+|-------|-------------|-----------------|
+| **messaging** | `spam`, `bulk_messaging` | [`schemas/v4/types/messaging-*.json`](schemas/v4/types/) |
+| **connection** | `ddos`, `port_scan`, `login_attack`, `auth_failure`, `ddos_amplification` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
+| **vulnerability** | `cve`, `open`, `misconfiguration` | [`schemas/v4/types/vulnerability-*.json`](schemas/v4/types/) |
+| **content** | `phishing`, `malware` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
+| **infrastructure** | `bot`, `compromised_server` | [`schemas/v4/types/infrastructure-*.json`](schemas/v4/types/) |
+| **reputation** | `blocklist`, `threat_intelligence` | [`schemas/v4/types/reputation-*.json`](schemas/v4/types/) |
+| **copyright** | `copyright` | [`schemas/v4/types/copyright-*.json`](schemas/v4/types/) |
 
 ## 📄 Sample Reports
 
@@ -48,8 +62,11 @@ samples/
 # View a sample report
 cat samples/v4/messaging/spam_spamtrap_phishing_sample.json
 
-# Validate against schema
-ajv validate -s schemas/v4/xarf-v4-master.json -d samples/v4/messaging/spam_spamtrap_phishing_sample.json
+# Validate against type-specific schema (recommended)
+ajv validate -s schemas/v4/types/messaging-spam.json -d samples/v4/messaging/spam_sample.json
+
+# Or validate against master schema (validates all types)
+ajv validate -s schemas/v4/xarf-v4-master-types.json -d samples/v4/messaging/spam_sample.json
 ```
 
 ## 🔧 Parser Libraries
