@@ -15,10 +15,52 @@
         },
         "type": {
           "const": "bot"
+        },
+        "malware_family": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Malware family classification (optional metadata)",
+          "examples": ["conficker", "mirai", "emotet", "zeus"]
+        },
+        "c2_server": {
+          "type": "string",
+          "description": "Command and control server domain or IP",
+          "examples": ["evil-c2.example.com", "192.0.2.100"]
+        },
+        "c2_protocol": {
+          "type": "string",
+          "enum": ["http", "https", "tcp", "udp", "dns", "irc", "p2p", "custom"],
+          "description": "Protocol used for C2 communications"
+        },
+        "bot_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ddos",
+              "spam",
+              "proxy",
+              "keylogger", 
+              "file_download",
+              "remote_shell",
+              "cryptocurrency_mining",
+              "data_theft"
+            ]
+          },
+          "description": "Capabilities observed in the bot"
+        },
+        "compromise_evidence": {
+          "type": "string",
+          "description": "Evidence of how compromise was detected (REQUIRED)",
+          "examples": [
+            "C2 communication observed",
+            "Malicious process running", 
+            "Suspicious network traffic patterns"
+          ]
         }
       },
       "required": [
-        "malware_family"
+        "compromise_evidence"
       ]
     }
   ]

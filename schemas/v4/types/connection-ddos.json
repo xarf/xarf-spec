@@ -33,7 +33,7 @@
             {"format": "ipv4"},
             {"format": "ipv6"}
           ],
-          "description": "Target IP address of the DDoS attack (REQUIRED)"
+          "description": "Target IP address of the DDoS attack (optional victim context)"
         },
         "destination_port": {
           "type": "integer",
@@ -105,7 +105,20 @@
           "description": "Impact on target service availability"
         }
       },
-      "required": ["destination_ip", "protocol"]
+      "required": ["protocol", "first_seen"],
+      "if": {
+        "properties": {
+          "source_identifier": {
+            "anyOf": [
+              {"format": "ipv4"},
+              {"format": "ipv6"}
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": ["source_port"]
+      }
     }
   ],
   "examples": [

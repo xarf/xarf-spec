@@ -93,7 +93,7 @@
         }
       },
       "then": {
-        "required": ["smtp_from"]
+        "required": ["smtp_from", "source_port"]
       }
     }
   ],

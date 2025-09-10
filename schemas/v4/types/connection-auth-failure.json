@@ -15,12 +15,69 @@
         },
         "type": {
           "const": "auth_failure"
+        },
+        "destination_ip": {
+          "type": "string",
+          "anyOf": [
+            {
+              "format": "ipv4"
+            },
+            {
+              "format": "ipv6"
+            }
+          ],
+          "description": "Target IP address (optional victim context)"
+        },
+        "destination_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Target port number"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "tcp",
+            "udp",
+            "icmp",
+            "sctp"
+          ],
+          "description": "Network protocol used in the attack"
+        },
+        "first_seen": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When attack activity was first observed"
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When attack activity was last observed"
         }
       },
       "required": [
-        "destination_ip",
-        "protocol"
-      ]
+        "protocol",
+        "first_seen"
+      ],
+      "if": {
+        "properties": {
+          "source_identifier": {
+            "anyOf": [
+              {
+                "format": "ipv4"
+              },
+              {
+                "format": "ipv6"
+              }
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_port"
+        ]
+      }
     }
   ]
 }

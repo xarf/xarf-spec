@@ -15,11 +15,42 @@
         },
         "type": {
           "const": "copyright"
+        },
+        "infringing_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the infringing content (REQUIRED - this is what's being reported)",
+          "examples": [
+            "http://piracy-site.example.com/movies/copyrighted-movie.mp4",
+            "https://file-sharing.example.org/download/12345"
+          ]
+        },
+        "work_title": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Title of the copyrighted work",
+          "examples": ["Avengers: Endgame", "Beatles - Abbey Road", "Adobe Photoshop"]
+        },
+        "rights_holder": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Organization or person holding the copyright",
+          "examples": ["Disney Enterprises, Inc.", "Sony Music", "Adobe Systems"]
+        },
+        "original_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the legitimate/original content",
+          "examples": ["https://www.disney.com/movies/avengers-endgame"]
+        },
+        "infringement_type": {
+          "type": "string",
+          "enum": ["direct_copy", "modified_copy", "streaming", "download", "distribution"],
+          "description": "Type of copyright infringement"
         }
       },
       "required": [
-        "work_title",
-        "rights_holder"
+        "infringing_url"
       ]
     }
   ]
