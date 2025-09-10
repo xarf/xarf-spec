@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/connection-ddos.json",
+  "title": "XARF v4 Connection - DDoS Type Schema", 
+  "description": "Schema for Distributed Denial of Service attack reports",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "connection"
+        },
+        "type": {
+          "const": "ddos"
+        },
+        "evidence_source": {
+          "type": "string",
+          "enum": [
+            "firewall_logs",
+            "ids_detection",
+            "flow_analysis",
+            "traffic_monitoring",
+            "honeypot"
+          ],
+          "description": "Source of DDoS attack evidence"
+        },
+        "destination_ip": {
+          "type": "string",
+          "anyOf": [
+            {"format": "ipv4"},
+            {"format": "ipv6"}
+          ],
+          "description": "Target IP address of the DDoS attack (REQUIRED)"
+        },
+        "destination_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Target port number",
+          "examples": [80, 443, 53, 25]
+        },
+        "protocol": {
+          "type": "string",
+          "enum": ["tcp", "udp", "icmp", "sctp"],
+          "description": "Network protocol used in the attack (REQUIRED)"
+        },
+        "attack_vector": {
+          "type": "string",
+          "description": "Specific DDoS attack method",
+          "examples": [
+            "syn_flood",
+            "udp_flood", 
+            "icmp_flood",
+            "http_flood",
+            "dns_amplification",
+            "ntp_amplification",
+            "memcached_amplification"
+          ]
+        },
+        "peak_pps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Peak packets per second during attack"
+        },
+        "peak_bps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Peak bits per second during attack"
+        },
+        "duration_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Duration of the DDoS attack in seconds"
+        },
+        "amplification_factor": {
+          "type": "number",
+          "minimum": 1.0,
+          "description": "Amplification factor for reflection attacks"
+        },
+        "first_seen": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When DDoS attack was first observed"
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "date-time", 
+          "description": "When DDoS attack was last observed"
+        },
+        "threshold_exceeded": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When detection threshold was exceeded"
+        },
+        "mitigation_applied": {
+          "type": "boolean",
+          "description": "Whether mitigation measures were applied"
+        },
+        "service_impact": {
+          "type": "string",
+          "enum": ["none", "degraded", "unavailable"],
+          "description": "Impact on target service availability"
+        }
+      },
+      "required": ["destination_ip", "protocol"]
+    }
+  ],
+  "examples": [
+    {
+      "xarf_version": "4.0.0",
+      "report_id": "ddos-789a0123-b456-78c9-d012-345678901234",
+      "timestamp": "2024-01-15T16:55:42Z",
+      "reporter": {
+        "org": "DDoS Protection Service",
+        "contact": "ddos@protectionservice.net",
+        "type": "automated"
+      },
+      "source_identifier": "192.0.2.155",
+      "class": "connection",
+      "type": "ddos",
+      "destination_ip": "203.0.113.100",
+      "destination_port": 80,
+      "protocol": "tcp",
+      "attack_vector": "syn_flood",
+      "peak_pps": 250000,
+      "peak_bps": 1200000000,
+      "duration_seconds": 2700,
+      "evidence_source": "flow_analysis",
+      "service_impact": "degraded",
+      "tags": ["attack:syn_flood", "volume:high"]
+    }
+  ]
+}

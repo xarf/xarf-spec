@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/reputation-threat-intelligence.json",
+  "title": "XARF v4 Reputation - Threat Intelligence Type Schema",
+  "description": "Schema for Threat intelligence and IOC reports",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "reputation"
+        },
+        "type": {
+          "const": "threat_intelligence"
+        }
+      },
+      "required": [
+        "threat_type"
+      ]
+    }
+  ]
+}

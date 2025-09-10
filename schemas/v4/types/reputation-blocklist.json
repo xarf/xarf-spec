@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/reputation-blocklist.json",
+  "title": "XARF v4 Reputation - Blocklist Type Schema",
+  "description": "Schema for IP/domain blocklist inclusion reports",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "reputation"
+        },
+        "type": {
+          "const": "blocklist"
+        }
+      },
+      "required": [
+        "threat_type"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/connection-login-attack.json",
+  "title": "XARF v4 Connection - Login Attack Type Schema",
+  "description": "Schema for Brute force login attempts and authentication attacks",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "connection"
+        },
+        "type": {
+          "const": "login_attack"
+        }
+      },
+      "required": [
+        "destination_ip",
+        "protocol"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/connection-auth-failure.json",
+  "title": "XARF v4 Connection - Auth Failure Type Schema",
+  "description": "Schema for Authentication failure incidents",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "connection"
+        },
+        "type": {
+          "const": "auth_failure"
+        }
+      },
+      "required": [
+        "destination_ip",
+        "protocol"
+      ]
+    }
+  ]
+}

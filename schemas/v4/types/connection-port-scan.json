@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/connection-port-scan.json",
+  "title": "XARF v4 Connection - Port Scan Type Schema",
+  "description": "Schema for Network port scanning and reconnaissance activities",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "connection"
+        },
+        "type": {
+          "const": "port_scan"
+        }
+      },
+      "required": [
+        "destination_ip",
+        "protocol"
+      ]
+    }
+  ]
+}

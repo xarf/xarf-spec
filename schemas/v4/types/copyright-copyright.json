@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xarf.org/schemas/v4/types/copyright-copyright.json",
+  "title": "XARF v4 Copyright - Copyright Type Schema",
+  "description": "Schema for Copyright infringement and DMCA violations",
+  "allOf": [
+    {
+      "$ref": "../xarf-core.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "class": {
+          "const": "copyright"
+        },
+        "type": {
+          "const": "copyright"
+        }
+      },
+      "required": [
+        "work_title",
+        "rights_holder"
+      ]
+    }
+  ]
+}
