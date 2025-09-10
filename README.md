@@ -66,7 +66,7 @@ cat samples/v4/messaging/spam_spamtrap_phishing_sample.json
 ajv validate -s schemas/v4/types/messaging-spam.json -d samples/v4/messaging/spam_sample.json
 
 # Or validate against master schema (validates all types)
-ajv validate -s schemas/v4/xarf-v4-master-types.json -d samples/v4/messaging/spam_sample.json
+ajv validate -s schemas/v4/xarf-v4-master.json -d samples/v4/messaging/spam_sample.json
 ```
 
 ## 🔧 Parser Libraries
