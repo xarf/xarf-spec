@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://xarf.org/schemas/v4/messaging-class.json",
   "title": "XARF v4 Messaging Class Schema",
-  "description": "Schema for communication-based abuse including spam, bulk messaging, and unwanted communications",
+  "description": "⚠️ DEPRECATED: Use type-specific schemas in types/ directory instead. Schema for communication-based abuse including spam, bulk messaging, and unwanted communications",
   "allOf": [
     {
       "$ref": "xarf-core.json"

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://xarf.org/schemas/v4/xarf-v4-master.json",
-  "title": "XARF v4 Master Schema",
-  "description": "Complete XARF v4 schema with conditional validation for all classes and types. This is the authoritative schema for validating XARF v4 reports.",
+  "title": "XARF v4 Master Schema (Class-Based)",
+  "description": "⚠️ DEPRECATED: Use xarf-v4-master-types.json for better type-specific validation. Complete XARF v4 schema with conditional validation for all classes and types.",
   "type": "object",
   "allOf": [
     {
