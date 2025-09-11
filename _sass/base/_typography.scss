@@ -1,0 +1,108 @@
+// Typography base
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  margin-top: var(--space-8);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+  margin-top: var(--space-6);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  margin-top: var(--space-5);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+  margin-top: var(--space-4);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--space-4);
+}
+
+// Paragraphs and text
+p {
+  margin-bottom: var(--space-4);
+}
+
+.lead {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+// Links
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Lists
+ul, ol {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+
+li {
+  margin-bottom: var(--space-2);
+}
+
+// Code
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.875em;
+  background-color: var(--color-bg-tertiary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-primary);
+}
+
+pre {
+  font-family: var(--font-family-mono);
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+  
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+  }
+}

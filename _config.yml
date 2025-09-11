@@ -1,0 +1,91 @@
+# Site settings
+title: "XARF - eXtended Abuse Reporting Format"
+description: "The modern standard for real-time abuse reporting"
+url: "https://xarf.github.io"
+baseurl: "/xarf-spec"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /docs/:name/
+  tools:
+    output: true
+    permalink: /tools/:name/
+  samples:
+    output: true
+    permalink: /samples/:name/
+
+# Navigation
+nav_links:
+  - title: "Home"
+    url: "/"
+  - title: "Documentation"
+    url: "/docs/"
+  - title: "Tools"
+    url: "/tools/"
+  - title: "Samples"
+    url: "/samples/"
+  - title: "GitHub"
+    url: "https://github.com/xarf/xarf-spec"
+
+# Footer links
+footer_links:
+  - title: "GitHub"
+    url: "https://github.com/xarf/xarf-spec"
+  - title: "Issues"
+    url: "https://github.com/xarf/xarf-spec/issues"
+  - title: "Discussions"
+    url: "https://github.com/xarf/xarf-spec/discussions"
+
+# Defaults
+defaults:
+  - scope:
+      path: "_docs"
+    values:
+      layout: "docs"
+  - scope:
+      path: "_tools"
+    values:
+      layout: "tool"
+  - scope:
+      path: "_samples"
+    values:
+      layout: "docs"
+
+# SEO
+twitter:
+  username: xarf_org
+  card: summary_large_image
+
+social:
+  name: XARF Project
+  links:
+    - https://github.com/xarf/xarf-spec
+
+# GitHub Pages
+github_username: xarf
+repository: xarf/xarf-spec
+
+# Exclude files
+exclude:
+  - scripts/
+  - node_modules/
+  - vendor/
+  - .github/
+  - Gemfile
+  - Gemfile.lock
+  - README.md

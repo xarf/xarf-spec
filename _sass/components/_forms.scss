@@ -1,0 +1,52 @@
+// Form component styles
+
+.form-group {
+    margin-bottom: var(--space-6);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-3);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-colors);
+    
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+    
+    &::placeholder {
+        color: var(--color-text-lighter);
+    }
+}
+
+textarea.form-control {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+.form-help {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-top: var(--space-1);
+}
+
+.form-error {
+    font-size: var(--font-size-sm);
+    color: var(--color-danger);
+    margin-top: var(--space-1);
+}

@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="tool-layout">
+  <div class="tool-header">
+    <div class="container">
+      <div class="tool-breadcrumb">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="{{ '/tools/' | relative_url }}">Tools</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>{{ page.title }}</span>
+      </div>
+      
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+        <p class="tool-description">{{ page.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="tool-content">
+    <div class="container">
+      {{ content }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+// Syntax highlighting styles
+
+.highlight {
+    background-color: var(--color-background-code);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin: var(--space-6) 0;
+    overflow-x: auto;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    
+    pre {
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        overflow: visible;
+    }
+    
+    code {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: inherit;
+    }
+}
+
+// Code block with language label
+.code-block {
+    position: relative;
+    
+    &::before {
+        content: attr(data-lang);
+        position: absolute;
+        top: var(--space-2);
+        right: var(--space-4);
+        font-size: var(--font-size-xs);
+        color: var(--color-text-lighter);
+        text-transform: uppercase;
+        font-weight: var(--font-weight-medium);
+        letter-spacing: var(--letter-spacing-wide);
+    }
+    
+    .highlight {
+        padding-top: var(--space-8);
+    }
+}
+
+// Copy button for code blocks
+.code-copy {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    padding: var(--space-1);
+    background: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-light);
+    cursor: pointer;
+    opacity: 0;
+    transition: var(--transition-normal);
+    
+    &:hover {
+        background: var(--color-background);
+        color: var(--color-text);
+    }
+    
+    .highlight:hover & {
+        opacity: 1;
+    }
+}

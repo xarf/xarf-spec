@@ -1,0 +1,223 @@
+// Tools layout styles
+
+.tool-layout {
+    .container {
+        max-width: var(--container-2xl);
+    }
+}
+
+.tool-header {
+    margin-bottom: var(--space-12);
+    
+    .tool-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        margin-bottom: var(--space-4);
+    }
+    
+    .tool-status {
+        display: inline-block;
+        padding: var(--space-1) var(--space-3);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-medium);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wide);
+        border-radius: var(--radius-full);
+        
+        &.tool-status-alpha {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        
+        &.tool-status-beta {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        &.tool-status-stable {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+    }
+    
+    .tool-title {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-4);
+    }
+    
+    .tool-description {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-light);
+        margin-bottom: var(--space-6);
+        max-width: 45rem;
+    }
+    
+    .tool-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+        
+        .tool-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-light);
+            
+            .feature-icon {
+                width: 1rem;
+                height: 1rem;
+                color: var(--color-accent);
+            }
+        }
+    }
+}
+
+.tool-interface {
+    display: grid;
+    gap: var(--space-8);
+    
+    @media (min-width: #{$breakpoint-lg}) {
+        grid-template-columns: 1fr 20rem;
+        gap: var(--space-12);
+    }
+}
+
+.tool-content {
+    min-width: 0;
+}
+
+.tool-sidebar {
+    .sidebar-section {
+        background-color: var(--color-background-alt);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        margin-bottom: var(--space-6);
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    .sidebar-title {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--space-4);
+        color: var(--color-text);
+    }
+    
+    .tool-info {
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-sm);
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        
+        .info-label {
+            color: var(--color-text-light);
+        }
+        
+        .info-value {
+            color: var(--color-text);
+            font-weight: var(--font-weight-medium);
+        }
+    }
+    
+    .usage-notes {
+        .notes-title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--space-3);
+            color: var(--color-text);
+        }
+        
+        .notes-list {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-light);
+            padding-left: var(--space-4);
+            
+            li {
+                margin-bottom: var(--space-2);
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    
+    .related-tools {
+        .related-tool {
+            margin-bottom: var(--space-3);
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        
+        .related-tool-link {
+            display: block;
+            padding: var(--space-3);
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: var(--transition-colors);
+            
+            &:hover {
+                border-color: var(--color-primary);
+                background-color: var(--color-background-alt);
+            }
+        }
+        
+        .related-tool-name {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text);
+            margin-bottom: var(--space-1);
+        }
+        
+        .related-tool-description {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-light);
+        }
+    }
+    
+    .help-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        
+        .help-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            color: var(--color-text-light);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            transition: var(--transition-colors);
+            
+            &:hover {
+                background-color: var(--color-background);
+                color: var(--color-primary);
+            }
+            
+            .help-icon {
+                width: 1rem;
+                height: 1rem;
+                flex-shrink: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+// Default layout styles
+
+.main-content {
+    min-height: calc(100vh - var(--header-height));
+    padding-top: var(--space-8);
+}
+
+// Section spacing
+.section {
+    padding: var(--space-16) 0;
+    
+    &.section-sm {
+        padding: var(--space-8) 0;
+    }
+    
+    &.section-lg {
+        padding: var(--space-24) 0;
+    }
+}
