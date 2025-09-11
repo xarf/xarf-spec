@@ -1,122 +1,133 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/types/messaging-bulk.json",
-  "title": "XARF v4 Messaging - Bulk Messaging Type Schema",
-  "description": "Schema for bulk messaging reports - legitimate but unwanted bulk communications",
-  "allOf": [
-    {
-      "$ref": "../xarf-core.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "class": {
-          "const": "messaging"
-        },
-        "type": {
-          "const": "bulk_messaging"
-        },
-        "evidence_source": {
-          "type": "string",
-          "enum": [
-            "user_complaint", 
-            "automated_filter",
-            "reputation_feed",
-            "volume_analysis"
-          ],
-          "description": "Source of bulk messaging evidence"
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "smtp",
-            "sms", 
-            "whatsapp",
-            "telegram",
-            "social_media",
-            "push_notification",
-            "other"
-          ],
-          "description": "Communication protocol used for bulk messaging"
-        },
-        "smtp_from": {
-          "type": "string",
-          "format": "email",
-          "description": "SMTP envelope sender address (required when protocol=smtp)"
-        },
-        "subject": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "Message subject line"
-        },
-        "sender_name": {
-          "type": "string",
-          "maxLength": 200,
-          "description": "Display name of the sender"
-        },
-        "recipient_count": {
-          "type": "integer",
-          "minimum": 100,
-          "description": "Number of recipients (bulk requires minimum 100 recipients)"
-        },
-        "unsubscribe_provided": {
-          "type": "boolean",
-          "description": "Whether message provides unsubscribe mechanism"
-        },
-        "opt_in_evidence": {
-          "type": "boolean",
-          "description": "Whether there is evidence of recipient opt-in"
-        },
-        "bulk_indicators": {
-          "type": "object",
-          "properties": {
-            "high_volume": {
-              "type": "boolean",
-              "description": "High volume sending pattern detected"
-            },
-            "template_based": {
-              "type": "boolean",
-              "description": "Message appears to be template-based"
-            },
-            "commercial_sender": {
-              "type": "boolean",
-              "description": "Sender appears to be commercial entity"
-            }
-          },
-          "additionalProperties": false
-        }
-      },
-      "required": ["protocol", "recipient_count"],
-      "if": {
-        "properties": {
-          "protocol": {"const": "smtp"}
-        }
-      },
-      "then": {
-        "required": ["smtp_from", "source_port"]
-      }
-    }
-  ],
-  "examples": [
-    {
-      "xarf_version": "4.0.0",
-      "report_id": "bulk-456e7890-a12b-34c5-d678-901234567890",
-      "timestamp": "2024-01-15T16:45:10Z",
-      "reporter": {
-        "org": "Email Service Provider",
-        "contact": "abuse@esp-provider.com",
-        "type": "automated"
-      },
-      "source_identifier": "192.0.2.200",
-      "class": "messaging",
-      "type": "bulk_messaging",
-      "protocol": "smtp",
-      "smtp_from": "newsletter@company.example",
-      "subject": "Weekly Newsletter - January Edition",
-      "evidence_source": "user_complaint",
-      "recipient_count": 50000,
-      "unsubscribe_provided": false,
-      "tags": ["bulk:commercial", "complaint:unsubscribe"]
-    }
-  ]
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/messaging-bulk.json",
+	"title": "XARF v4 Messaging - Bulk Messaging Type Schema",
+	"description": "Schema for bulk messaging reports - legitimate but unwanted bulk communications",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "messaging"
+				},
+				"type": {
+					"const": "bulk_messaging"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"user_complaint",
+						"automated_filter",
+						"reputation_feed",
+						"volume_analysis"
+					],
+					"description": "Source of bulk messaging evidence"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"smtp",
+						"sms",
+						"whatsapp",
+						"telegram",
+						"social_media",
+						"push_notification",
+						"other"
+					],
+					"description": "Communication protocol used for bulk messaging"
+				},
+				"smtp_from": {
+					"type": "string",
+					"format": "email",
+					"description": "SMTP envelope sender address (required when protocol=smtp)"
+				},
+				"subject": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Message subject line"
+				},
+				"sender_name": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Display name of the sender"
+				},
+				"recipient_count": {
+					"type": "integer",
+					"minimum": 100,
+					"description": "Number of recipients (bulk requires minimum 100 recipients)"
+				},
+				"unsubscribe_provided": {
+					"type": "boolean",
+					"description": "Whether message provides unsubscribe mechanism"
+				},
+				"opt_in_evidence": {
+					"type": "boolean",
+					"description": "Whether there is evidence of recipient opt-in"
+				},
+				"bulk_indicators": {
+					"type": "object",
+					"properties": {
+						"high_volume": {
+							"type": "boolean",
+							"description": "High volume sending pattern detected"
+						},
+						"template_based": {
+							"type": "boolean",
+							"description": "Message appears to be template-based"
+						},
+						"commercial_sender": {
+							"type": "boolean",
+							"description": "Sender appears to be commercial entity"
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"protocol",
+				"recipient_count"
+			],
+			"if": {
+				"properties": {
+					"protocol": {
+						"const": "smtp"
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"smtp_from",
+					"source_port"
+				]
+			}
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "bulk-456e7890-a12b-34c5-d678-901234567890",
+			"timestamp": "2024-01-15T16:45:10Z",
+			"reporter": {
+				"org": "Email Service Provider",
+				"contact": "abuse@esp-provider.com",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.200",
+			"class": "messaging",
+			"type": "bulk_messaging",
+			"protocol": "smtp",
+			"smtp_from": "newsletter@company.example",
+			"subject": "Weekly Newsletter - January Edition",
+			"evidence_source": "user_complaint",
+			"recipient_count": 50000,
+			"unsubscribe_provided": false,
+			"tags": [
+				"bulk:commercial",
+				"complaint:unsubscribe"
+			]
+		}
+	]
 }

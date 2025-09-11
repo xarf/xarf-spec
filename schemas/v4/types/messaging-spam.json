@@ -1,161 +1,193 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/types/messaging-spam.json",
-  "title": "XARF v4 Messaging - Spam Type Schema",
-  "description": "Schema for spam email reports - unsolicited commercial messages",
-  "allOf": [
-    {
-      "$ref": "../xarf-core.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "class": {
-          "const": "messaging"
-        },
-        "type": {
-          "const": "spam"
-        },
-        "evidence_source": {
-          "type": "string",
-          "enum": [
-            "spamtrap",
-            "user_complaint", 
-            "automated_filter",
-            "honeypot",
-            "content_analysis",
-            "reputation_feed"
-          ],
-          "description": "Source of spam evidence"
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "smtp",
-            "sms", 
-            "whatsapp",
-            "telegram",
-            "signal",
-            "chat",
-            "social_media",
-            "push_notification",
-            "other"
-          ],
-          "description": "Communication protocol used for spam delivery"
-        },
-        "smtp_from": {
-          "type": "string",
-          "format": "email",
-          "description": "SMTP envelope sender address (required when protocol=smtp)",
-          "examples": ["spam@example.com", "noreply@malicious-domain.org"]
-        },
-        "smtp_to": {
-          "type": "string", 
-          "format": "email",
-          "description": "SMTP envelope recipient address",
-          "examples": ["victim@example.org", "spamtrap@security-org.net"]
-        },
-        "subject": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "Message subject line",
-          "examples": [
-            "Urgent: Account Verification Required",
-            "Your package is ready for delivery",
-            "Limited Time Offer - Act Now!"
-          ]
-        },
-        "sender_name": {
-          "type": "string",
-          "maxLength": 200,
-          "description": "Display name of the sender",
-          "examples": ["Customer Support", "No Reply", "Sales Team"]
-        },
-        "message_id": {
-          "type": "string",
-          "maxLength": 200,
-          "description": "Message ID from headers",
-          "examples": ["<abc123@example.com>", "msg_1234567890"]
-        },
-        "user_agent": {
-          "type": "string",
-          "maxLength": 200,
-          "description": "User agent string from message headers",
-          "examples": ["Outlook 16.0", "bulk_mailer_v2.1"]
-        },
-        "recipient_count": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Number of recipients for bulk spam campaigns"
-        },
-        "language": {
-          "type": "string",
-          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
-          "description": "Primary language of message content (ISO 639-1)",
-          "examples": ["en", "es", "de", "ja", "en-US"]
-        },
-        "spam_indicators": {
-          "type": "object",
-          "properties": {
-            "suspicious_links": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uri"
-              },
-              "description": "Suspicious URLs found in the message"
-            },
-            "commercial_content": {
-              "type": "boolean",
-              "description": "Whether message contains commercial offers"
-            },
-            "bulk_characteristics": {
-              "type": "boolean", 
-              "description": "Whether message shows bulk mailing characteristics"
-            }
-          },
-          "description": "Indicators specific to spam detection",
-          "additionalProperties": false
-        }
-      },
-      "required": ["protocol"],
-      "if": {
-        "properties": {
-          "protocol": {"const": "smtp"}
-        }
-      },
-      "then": {
-        "required": ["smtp_from", "source_port"]
-      }
-    }
-  ],
-  "examples": [
-    {
-      "xarf_version": "4.0.0",
-      "report_id": "spam-123e4567-e89b-12d3-a456-426614174000",
-      "timestamp": "2024-01-15T14:30:25Z",
-      "reporter": {
-        "org": "SpamCop",
-        "contact": "reports@spamcop.net",
-        "type": "automated"
-      },
-      "source_identifier": "192.0.2.123",
-      "source_port": 25,
-      "class": "messaging",
-      "type": "spam",
-      "protocol": "smtp",
-      "smtp_from": "fake@example.com",
-      "subject": "Urgent: Verify Your Account",
-      "evidence_source": "spamtrap",
-      "evidence": [
-        {
-          "content_type": "message/rfc822",
-          "description": "Complete spam email with headers",
-          "payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21d..."
-        }
-      ],
-      "tags": ["spam:commercial", "campaign:fake_bank_2024"],
-      "confidence": 0.92
-    }
-  ]
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/messaging-spam.json",
+	"title": "XARF v4 Messaging - Spam Type Schema",
+	"description": "Schema for spam email reports - unsolicited commercial messages",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "messaging"
+				},
+				"type": {
+					"const": "spam"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"spamtrap",
+						"user_complaint",
+						"automated_filter",
+						"honeypot",
+						"content_analysis",
+						"reputation_feed"
+					],
+					"description": "Source of spam evidence"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"smtp",
+						"sms",
+						"whatsapp",
+						"telegram",
+						"signal",
+						"chat",
+						"social_media",
+						"push_notification",
+						"other"
+					],
+					"description": "Communication protocol used for spam delivery"
+				},
+				"smtp_from": {
+					"type": "string",
+					"format": "email",
+					"description": "SMTP envelope sender address (required when protocol=smtp)",
+					"examples": [
+						"spam@example.com",
+						"noreply@malicious-domain.org"
+					]
+				},
+				"smtp_to": {
+					"type": "string",
+					"format": "email",
+					"description": "SMTP envelope recipient address",
+					"examples": [
+						"victim@example.org",
+						"spamtrap@security-org.net"
+					]
+				},
+				"subject": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Message subject line",
+					"examples": [
+						"Urgent: Account Verification Required",
+						"Your package is ready for delivery",
+						"Limited Time Offer - Act Now!"
+					]
+				},
+				"sender_name": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Display name of the sender",
+					"examples": [
+						"Customer Support",
+						"No Reply",
+						"Sales Team"
+					]
+				},
+				"message_id": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Message ID from headers",
+					"examples": [
+						"<abc123@example.com>",
+						"msg_1234567890"
+					]
+				},
+				"user_agent": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "User agent string from message headers",
+					"examples": [
+						"Outlook 16.0",
+						"bulk_mailer_v2.1"
+					]
+				},
+				"recipient_count": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Number of recipients for bulk spam campaigns"
+				},
+				"language": {
+					"type": "string",
+					"pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+					"description": "Primary language of message content (ISO 639-1)",
+					"examples": [
+						"en",
+						"es",
+						"de",
+						"ja",
+						"en-US"
+					]
+				},
+				"spam_indicators": {
+					"type": "object",
+					"properties": {
+						"suspicious_links": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": "uri"
+							},
+							"description": "Suspicious URLs found in the message"
+						},
+						"commercial_content": {
+							"type": "boolean",
+							"description": "Whether message contains commercial offers"
+						},
+						"bulk_characteristics": {
+							"type": "boolean",
+							"description": "Whether message shows bulk mailing characteristics"
+						}
+					},
+					"description": "Indicators specific to spam detection",
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"protocol"
+			],
+			"if": {
+				"properties": {
+					"protocol": {
+						"const": "smtp"
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"smtp_from",
+					"source_port"
+				]
+			}
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "spam-123e4567-e89b-12d3-a456-426614174000",
+			"timestamp": "2024-01-15T14:30:25Z",
+			"reporter": {
+				"org": "SpamCop",
+				"contact": "reports@spamcop.net",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.123",
+			"source_port": 25,
+			"class": "messaging",
+			"type": "spam",
+			"protocol": "smtp",
+			"smtp_from": "fake@example.com",
+			"subject": "Urgent: Verify Your Account",
+			"evidence_source": "spamtrap",
+			"evidence": [
+				{
+					"content_type": "message/rfc822",
+					"description": "Complete spam email with headers",
+					"payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21d..."
+				}
+			],
+			"tags": [
+				"spam:commercial",
+				"campaign:fake_bank_2024"
+			],
+			"confidence": 0.92
+		}
+	]
 }

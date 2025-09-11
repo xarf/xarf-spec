@@ -1,0 +1,209 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/copyright-p2p.json",
+	"title": "XARF v4 Copyright - P2P Type Schema",
+	"description": "Schema for peer-to-peer copyright infringement reports",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "copyright"
+				},
+				"type": {
+					"const": "p2p"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"automated_crawl",
+						"manual_monitoring",
+						"user_report",
+						"rights_holder",
+						"watermark_detection"
+					],
+					"description": "Source of P2P infringement evidence"
+				},
+				"p2p_protocol": {
+					"type": "string",
+					"enum": [
+						"bittorrent",
+						"edonkey",
+						"gnutella",
+						"kademlia",
+						"other"
+					],
+					"description": "P2P protocol used for infringement (REQUIRED)"
+				},
+				"swarm_info": {
+					"type": "object",
+					"properties": {
+						"info_hash": {
+							"type": "string",
+							"pattern": "^[a-fA-F0-9]{40}$",
+							"description": "BitTorrent info hash (SHA-1)"
+						},
+						"magnet_uri": {
+							"type": "string",
+							"pattern": "^magnet:\\?xt=urn:",
+							"description": "Magnet link for the infringing content"
+						},
+						"torrent_name": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Name of the torrent"
+						},
+						"file_count": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of files in the torrent"
+						},
+						"total_size": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Total size in bytes"
+						}
+					},
+					"additionalProperties": false
+				},
+				"peer_info": {
+					"type": "object",
+					"properties": {
+						"peer_id": {
+							"type": "string",
+							"maxLength": 100,
+							"description": "P2P client peer ID"
+						},
+						"client_version": {
+							"type": "string",
+							"maxLength": 100,
+							"description": "P2P client software and version"
+						},
+						"upload_amount": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Amount uploaded in bytes"
+						},
+						"download_amount": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Amount downloaded in bytes"
+						}
+					},
+					"additionalProperties": false
+				},
+				"work_title": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Title of the copyrighted work"
+				},
+				"rights_holder": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Organization or person holding the copyright"
+				},
+				"work_category": {
+					"type": "string",
+					"enum": [
+						"movie",
+						"tv_show",
+						"music",
+						"software",
+						"ebook",
+						"audiobook",
+						"game",
+						"other"
+					],
+					"description": "Category of copyrighted work"
+				},
+				"release_date": {
+					"type": "string",
+					"format": "date",
+					"description": "Official release date of the work"
+				},
+				"detection_method": {
+					"type": "string",
+					"enum": [
+						"automated_crawl",
+						"fingerprinting",
+						"metadata_match",
+						"manual_verification"
+					],
+					"description": "Method used to detect the infringement"
+				}
+			},
+			"required": [
+				"p2p_protocol"
+			],
+			"anyOf": [
+				{
+					"required": [
+						"swarm_info"
+					],
+					"properties": {
+						"swarm_info": {
+							"anyOf": [
+								{
+									"required": [
+										"info_hash"
+									]
+								},
+								{
+									"required": [
+										"magnet_uri"
+									]
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "p2p-789a1234-b567-89c0-d123-456789abcdef",
+			"timestamp": "2024-01-15T18:30:45Z",
+			"reporter": {
+				"org": "Content Protection Agency",
+				"contact": "reports@cpa.org",
+				"type": "automated"
+			},
+			"source_identifier": "203.0.113.150",
+			"source_port": 6881,
+			"class": "copyright",
+			"type": "p2p",
+			"p2p_protocol": "bittorrent",
+			"work_title": "Movie Title 2024",
+			"rights_holder": "Major Studio Inc",
+			"work_category": "movie",
+			"evidence_source": "automated_crawl",
+			"swarm_info": {
+				"info_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+				"torrent_name": "Movie.Title.2024.1080p.BluRay.x264",
+				"file_count": 1,
+				"total_size": 8589934592
+			},
+			"peer_info": {
+				"client_version": "uTorrent/3.5.5",
+				"upload_amount": 1073741824
+			},
+			"evidence": [
+				{
+					"content_type": "application/x-bittorrent",
+					"description": "Torrent file containing copyrighted content",
+					"payload": "ZDg6YW5ub3VuY2UyNzpodHRwOi8vdHJhY2tlci5leGFtcGxlLmNvbS9hbm5vdW5jZQ=="
+				}
+			],
+			"tags": [
+				"copyright:p2p",
+				"protocol:bittorrent",
+				"media:movie"
+			]
+		}
+	]
+}

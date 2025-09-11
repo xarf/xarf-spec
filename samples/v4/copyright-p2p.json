@@ -1,0 +1,33 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "p2p-1234-5678-9012-abcdef123456",
+	"timestamp": "2025-01-11T13:44:41Z",
+	"reporter": {
+		"org": "P2P Monitoring Service",
+		"contact": "p2p-reports@copyright-monitor.example",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.100",
+	"class": "copyright",
+	"type": "p2p",
+	"evidence_source": "automated_monitoring",
+	"p2p_protocol": "bittorrent",
+	"swarm_info": {
+		"info_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+		"magnet_uri": "magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709"
+	},
+	"work_title": "Copyrighted Movie 2024",
+	"rights_holder": "Film Studio Corp",
+	"evidence": [
+		{
+			"content_type": "application/json",
+			"description": "P2P swarm analysis data",
+			"payload": "eyJpbmZvX2hhc2giOiAiZGEzOWEzZWU1ZTZiNGIwZDMyNTViZmVmOTU2MDE4OTBhZmQ4MDcwOSJ9",
+			"hash": "de15e32c2c6a636d3af2aa0ed9403b56bc010859a63e3cdf0c000a557f2bcbab"
+		}
+	],
+	"tags": [
+		"copyright:p2p",
+		"protocol:bittorrent"
+	]
+}

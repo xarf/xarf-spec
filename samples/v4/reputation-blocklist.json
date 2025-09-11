@@ -1,0 +1,37 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "g7h8i9j0-k1l2-3456-gh78-90123fg45678",
+	"timestamp": "2025-01-11T10:51:30Z",
+	"reporter": {
+		"org": "Threat Intelligence Consortium",
+		"contact": "intel@threatconsortium.org",
+		"type": "automated"
+	},
+	"source_identifier": "203.0.113.200",
+	"class": "reputation",
+	"type": "blocklist",
+	"evidence_source": "threat_intelligence",
+	"threat_type": "command_and_control",
+	"confidence_score": 95,
+	"first_reported": "2024-01-10T14:20:00Z",
+	"sources": [
+		"malware_sandbox",
+		"honeypot_network",
+		"researcher_analysis"
+	],
+	"geographic_location": "CN",
+	"asn": 4134,
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Aggregated threat intelligence indicating C2 activity",
+			"payload": "VGhyZWF0IGludGVsbGlnZW5jZSBhZ2dyZWdhdGlvbjogQzIgc2VydmVyIGFjdGl2aXR5",
+			"hash": "139dd8e518a7078686582377d1e0b86faafe7034a701ec78de1ac1c66db3825e"
+		}
+	],
+	"tags": [
+		"threat_type:c2",
+		"geo:china",
+		"confidence:high"
+	]
+}

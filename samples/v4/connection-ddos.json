@@ -1,0 +1,39 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "x4y5z6a7-b8c9-0123-xy45-67890wx12345",
+	"timestamp": "2025-01-11T09:21:23Z",
+	"reporter": {
+		"org": "DDoS Protection Service",
+		"contact": "ddos@protectionservice.net",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.155",
+	"source_port": 0,
+	"class": "connection",
+	"type": "ddos",
+	"evidence_source": "flow_analysis",
+	"destination_ip": "203.0.113.100",
+	"destination_port": 80,
+	"protocol": "tcp",
+	"attack_vector": "syn_flood",
+	"peak_pps": 250000,
+	"peak_bps": 1200000000,
+	"duration_seconds": 2700,
+	"total_packets": 11250000,
+	"total_bytes": 3240000000,
+	"botnet_participation": true,
+	"mitigation_applied": true,
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "DDoS attack flow analysis and statistics",
+			"payload": "RERvUyBhdHRhY2sgZGV0ZWN0ZWQ6IDI1MEsgcHBzLCAxLjJHYnBzLCA0NSBtaW51dGVz",
+			"hash": "4586a6802ae021fbda3f5a8923109d6c4469a0c36d2f46e3face6c297b1f24e8"
+		}
+	],
+	"tags": [
+		"attack:syn_flood",
+		"volume:high",
+		"mitigation:applied"
+	]
+}

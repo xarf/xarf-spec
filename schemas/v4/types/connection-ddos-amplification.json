@@ -1,83 +1,83 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/types/connection-ddos-amplification.json",
-  "title": "XARF v4 Connection - Ddos Amplification Type Schema",
-  "description": "Schema for DDoS attacks using amplification techniques",
-  "allOf": [
-    {
-      "$ref": "../xarf-core.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "class": {
-          "const": "connection"
-        },
-        "type": {
-          "const": "ddos_amplification"
-        },
-        "destination_ip": {
-          "type": "string",
-          "anyOf": [
-            {
-              "format": "ipv4"
-            },
-            {
-              "format": "ipv6"
-            }
-          ],
-          "description": "Target IP address (optional victim context)"
-        },
-        "destination_port": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 65535,
-          "description": "Target port number"
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "tcp",
-            "udp",
-            "icmp",
-            "sctp"
-          ],
-          "description": "Network protocol used in the attack"
-        },
-        "first_seen": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When attack activity was first observed"
-        },
-        "last_seen": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When attack activity was last observed"
-        }
-      },
-      "required": [
-        "protocol",
-        "first_seen"
-      ],
-      "if": {
-        "properties": {
-          "source_identifier": {
-            "anyOf": [
-              {
-                "format": "ipv4"
-              },
-              {
-                "format": "ipv6"
-              }
-            ]
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "source_port"
-        ]
-      }
-    }
-  ]
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-ddos-amplification.json",
+	"title": "XARF v4 Connection - Ddos Amplification Type Schema",
+	"description": "Schema for DDoS attacks using amplification techniques",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "ddos_amplification"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address (optional victim context)"
+				},
+				"destination_port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp",
+						"icmp",
+						"sctp"
+					],
+					"description": "Network protocol used in the attack"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When attack activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When attack activity was last observed"
+				}
+			},
+			"required": [
+				"protocol",
+				"first_seen"
+			],
+			"if": {
+				"properties": {
+					"source_identifier": {
+						"anyOf": [
+							{
+								"format": "ipv4"
+							},
+							{
+								"format": "ipv6"
+							}
+						]
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"source_port"
+				]
+			}
+		}
+	]
 }

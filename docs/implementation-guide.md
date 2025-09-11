@@ -16,7 +16,7 @@
 
 This guide provides comprehensive implementation and project management guidance for XARF v4 deployment, community building, and ecosystem development. It serves project managers, operations teams, community contributors, and organizations planning XARF v4 adoption.
 
-For technical specifications and schema details, see the [Technical Specification](./XARF_v4_Technical_Specification.md). For a high-level introduction, see the [Introduction & Overview](./XARF_v4_Introduction_Overview.md).
+For technical specifications and schema details, see the [Technical Specification](./specification.md). For a high-level introduction, see the [Introduction & Overview](./introduction.md).
 
 ### Target Audiences
 
@@ -770,4 +770,4 @@ Target Performance:
 
 **XARF v4 represents more than a technical upgrade—it's a community-driven transformation of how the cybersecurity industry handles abuse reporting.** This implementation guide provides the foundation for building that community and ensuring successful adoption across the global network security ecosystem.
 
-For technical specifications, see the [Technical Specification](./XARF_v4_Technical_Specification.md). For a high-level overview, see the [Introduction & Overview](./XARF_v4_Introduction_Overview.md).
+For technical specifications, see the [Technical Specification](./specification.md). For a high-level overview, see the [Introduction & Overview](./introduction.md).

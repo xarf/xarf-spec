@@ -1,235 +1,378 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/xarf-v4-master.json",
-  "title": "XARF v4 Master Schema",
-  "description": "Complete XARF v4 schema with type-specific validation for all classes and event types. This provides granular validation for each specific abuse type.",
-  "type": "object",
-  "allOf": [
-    {
-      "$ref": "xarf-core.json"
-    },
-    {
-      "anyOf": [
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "messaging"},
-              "type": {"const": "spam"}
-            }
-          },
-          "then": {
-            "$ref": "types/messaging-spam.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "messaging"},
-              "type": {"const": "bulk_messaging"}
-            }
-          },
-          "then": {
-            "$ref": "types/messaging-bulk-messaging.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "connection"},
-              "type": {"const": "login_attack"}
-            }
-          },
-          "then": {
-            "$ref": "types/connection-login-attack.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "connection"},
-              "type": {"const": "port_scan"}
-            }
-          },
-          "then": {
-            "$ref": "types/connection-port-scan.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "connection"},
-              "type": {"const": "ddos"}
-            }
-          },
-          "then": {
-            "$ref": "types/connection-ddos.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "connection"},
-              "type": {"const": "ddos_amplification"}
-            }
-          },
-          "then": {
-            "$ref": "types/connection-ddos-amplification.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "connection"},
-              "type": {"const": "auth_failure"}
-            }
-          },
-          "then": {
-            "$ref": "types/connection-auth-failure.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "vulnerability"},
-              "type": {"const": "cve"}
-            }
-          },
-          "then": {
-            "$ref": "types/vulnerability-cve.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "vulnerability"},
-              "type": {"const": "open"}
-            }
-          },
-          "then": {
-            "$ref": "types/vulnerability-open.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "vulnerability"},
-              "type": {"const": "misconfiguration"}
-            }
-          },
-          "then": {
-            "$ref": "types/vulnerability-misconfiguration.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "reputation"},
-              "type": {"const": "blocklist"}
-            }
-          },
-          "then": {
-            "$ref": "types/reputation-blocklist.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "reputation"},
-              "type": {"const": "threat_intelligence"}
-            }
-          },
-          "then": {
-            "$ref": "types/reputation-threat-intelligence.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "infrastructure"},
-              "type": {"const": "bot"}
-            }
-          },
-          "then": {
-            "$ref": "types/infrastructure-bot.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "infrastructure"},
-              "type": {"const": "compromised_server"}
-            }
-          },
-          "then": {
-            "$ref": "types/infrastructure-compromised-server.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "content"},
-              "type": {"const": "phishing"}
-            }
-          },
-          "then": {
-            "$ref": "types/content-phishing.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "content"},
-              "type": {"const": "malware"}
-            }
-          },
-          "then": {
-            "$ref": "types/content-malware.json"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "class": {"const": "copyright"},
-              "type": {"const": "copyright"}
-            }
-          },
-          "then": {
-            "$ref": "types/copyright-copyright.json"
-          }
-        }
-      ]
-    }
-  ],
-  "additionalProperties": true,
-  "properties": {
-    "xarf_version": {
-      "description": "This schema validates XARF v4 reports using type-specific validation. Supported versions match pattern ^4\\\\.[0-9]+\\\\.[0-9]+$"
-    }
-  },
-  "examples": [
-    {
-      "title": "Messaging Spam Report",
-      "class": "messaging",
-      "type": "spam",
-      "description": "Spam email detected by spamtrap"
-    },
-    {
-      "title": "Connection DDoS Report", 
-      "class": "connection",
-      "type": "ddos",
-      "description": "DDoS attack with SYN flood technique"
-    },
-    {
-      "title": "Vulnerability CVE Report",
-      "class": "vulnerability", 
-      "type": "cve",
-      "description": "Apache HTTP Server CVE-2021-41773 vulnerability"
-    },
-    {
-      "title": "Content Phishing Report",
-      "class": "content",
-      "type": "phishing", 
-      "description": "Phishing website targeting banking credentials"
-    }
-  ]
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/xarf-v4-master.json",
+	"title": "XARF v4 Master Schema",
+	"description": "Complete XARF v4 schema with type-specific validation for all classes and event types. This provides granular validation for each specific abuse type.",
+	"type": "object",
+	"allOf": [
+		{
+			"$ref": "xarf-core.json"
+		},
+		{
+			"anyOf": [
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "messaging"
+							},
+							"type": {
+								"const": "spam"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/messaging-spam.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "messaging"
+							},
+							"type": {
+								"const": "bulk_messaging"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/messaging-bulk-messaging.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "connection"
+							},
+							"type": {
+								"const": "login_attack"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/connection-login-attack.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "connection"
+							},
+							"type": {
+								"const": "port_scan"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/connection-port-scan.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "connection"
+							},
+							"type": {
+								"const": "ddos"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/connection-ddos.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "connection"
+							},
+							"type": {
+								"const": "ddos_amplification"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/connection-ddos-amplification.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "connection"
+							},
+							"type": {
+								"const": "auth_failure"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/connection-auth-failure.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "vulnerability"
+							},
+							"type": {
+								"const": "cve"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/vulnerability-cve.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "vulnerability"
+							},
+							"type": {
+								"const": "open"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/vulnerability-open.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "vulnerability"
+							},
+							"type": {
+								"const": "misconfiguration"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/vulnerability-misconfiguration.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "reputation"
+							},
+							"type": {
+								"const": "blocklist"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/reputation-blocklist.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "reputation"
+							},
+							"type": {
+								"const": "threat_intelligence"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/reputation-threat-intelligence.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "infrastructure"
+							},
+							"type": {
+								"const": "bot"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/infrastructure-bot.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "infrastructure"
+							},
+							"type": {
+								"const": "compromised_server"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/infrastructure-compromised-server.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "content"
+							},
+							"type": {
+								"const": "phishing"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/content-phishing.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "content"
+							},
+							"type": {
+								"const": "malware"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/content-malware.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "copyright"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-copyright.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "p2p"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-p2p.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "cyberlocker"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-cyberlocker.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "ugc_platform"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-ugc-platform.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "link_site"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-link-site.json"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"class": {
+								"const": "copyright"
+							},
+							"type": {
+								"const": "usenet"
+							}
+						}
+					},
+					"then": {
+						"$ref": "types/copyright-usenet.json"
+					}
+				}
+			]
+		}
+	],
+	"additionalProperties": true,
+	"properties": {
+		"xarf_version": {
+			"description": "This schema validates XARF v4 reports using type-specific validation. Supported versions match pattern ^4\\\\.[0-9]+\\\\.[0-9]+$"
+		}
+	},
+	"examples": [
+		{
+			"title": "Messaging Spam Report",
+			"class": "messaging",
+			"type": "spam",
+			"description": "Spam email detected by spamtrap"
+		},
+		{
+			"title": "Connection DDoS Report",
+			"class": "connection",
+			"type": "ddos",
+			"description": "DDoS attack with SYN flood technique"
+		},
+		{
+			"title": "Vulnerability CVE Report",
+			"class": "vulnerability",
+			"type": "cve",
+			"description": "Apache HTTP Server CVE-2021-41773 vulnerability"
+		},
+		{
+			"title": "Content Phishing Report",
+			"class": "content",
+			"type": "phishing",
+			"description": "Phishing website targeting banking credentials"
+		}
+	]
 }

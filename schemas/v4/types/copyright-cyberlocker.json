@@ -1,0 +1,210 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/copyright-cyberlocker.json",
+	"title": "XARF v4 Copyright - Cyberlocker Type Schema",
+	"description": "Schema for cyberlocker/file hosting service copyright infringement reports",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "copyright"
+				},
+				"type": {
+					"const": "cyberlocker"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"automated_crawl",
+						"manual_discovery",
+						"user_report",
+						"rights_holder",
+						"search_engine"
+					],
+					"description": "Source of cyberlocker infringement evidence"
+				},
+				"infringing_url": {
+					"type": "string",
+					"format": "uri",
+					"description": "URL to the infringing file on the hosting service (REQUIRED)"
+				},
+				"hosting_service": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Name of the file hosting service (REQUIRED)",
+					"examples": [
+						"Rapidshare",
+						"Megaupload",
+						"4shared",
+						"MediaFire",
+						"Zippyshare",
+						"Uploaded.net"
+					]
+				},
+				"file_info": {
+					"type": "object",
+					"properties": {
+						"filename": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Name of the infringing file"
+						},
+						"file_size": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "File size in bytes"
+						},
+						"file_hash": {
+							"type": "string",
+							"pattern": "^(md5|sha1|sha256):[a-fA-F0-9]+$",
+							"description": "File hash with algorithm prefix"
+						},
+						"upload_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "When file was uploaded to service"
+						},
+						"download_count": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Number of downloads if available"
+						}
+					},
+					"additionalProperties": false
+				},
+				"uploader_info": {
+					"type": "object",
+					"properties": {
+						"username": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "Username of the uploader"
+						},
+						"user_id": {
+							"type": "string",
+							"maxLength": 100,
+							"description": "User ID on the hosting service"
+						},
+						"account_type": {
+							"type": "string",
+							"enum": [
+								"free",
+								"premium",
+								"business",
+								"unknown"
+							],
+							"description": "Type of user account"
+						}
+					},
+					"additionalProperties": false
+				},
+				"work_title": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Title of the copyrighted work"
+				},
+				"rights_holder": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Organization or person holding the copyright"
+				},
+				"work_category": {
+					"type": "string",
+					"enum": [
+						"movie",
+						"tv_show",
+						"music",
+						"software",
+						"ebook",
+						"audiobook",
+						"game",
+						"document",
+						"other"
+					],
+					"description": "Category of copyrighted work"
+				},
+				"access_method": {
+					"type": "string",
+					"enum": [
+						"direct_link",
+						"password_protected",
+						"premium_only",
+						"time_limited",
+						"captcha_protected"
+					],
+					"description": "How the file can be accessed"
+				},
+				"takedown_info": {
+					"type": "object",
+					"properties": {
+						"previous_requests": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Number of previous takedown requests for this file"
+						},
+						"service_response_time": {
+							"type": "string",
+							"description": "Expected response time from hosting service"
+						},
+						"automated_removal": {
+							"type": "boolean",
+							"description": "Whether service supports automated removal"
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"infringing_url",
+				"hosting_service"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "cyber-456b7890-c123-45d6-e789-012345678901",
+			"timestamp": "2024-01-15T11:15:20Z",
+			"reporter": {
+				"org": "Anti-Piracy Coalition",
+				"contact": "takedowns@antipiracy.org",
+				"type": "automated"
+			},
+			"source_identifier": "cyberlocker-service.example",
+			"class": "copyright",
+			"type": "cyberlocker",
+			"infringing_url": "https://filehost.example/download/abc123def456",
+			"hosting_service": "FileHost Pro",
+			"work_title": "Popular Movie 2024",
+			"rights_holder": "Entertainment Studios LLC",
+			"work_category": "movie",
+			"evidence_source": "automated_crawl",
+			"file_info": {
+				"filename": "Popular.Movie.2024.1080p.WEBRip.x264.mp4",
+				"file_size": 2147483648,
+				"upload_date": "2024-01-14T20:30:00Z"
+			},
+			"uploader_info": {
+				"username": "movieshare123",
+				"account_type": "premium"
+			},
+			"access_method": "direct_link",
+			"evidence": [
+				{
+					"content_type": "text/html",
+					"description": "Screenshot of download page showing copyrighted content",
+					"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkRvd25sb2FkIFBvcHVsYXIgTW92aWUgMjAyNC4uLjwvdGl0bGU+PC9oZWFkPjwvaHRtbD4="
+				}
+			],
+			"tags": [
+				"copyright:cyberlocker",
+				"service:filehost",
+				"media:movie"
+			]
+		}
+	]
+}

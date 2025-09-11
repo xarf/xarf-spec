@@ -102,14 +102,14 @@ Before submitting a PR:
 - [ ] Examples are accurate
 
 ### Sample Contributions
-- [ ] JSON validates against schema
+- [ ] JSON validates against schema (`./scripts/validate.sh`)
 - [ ] Data is properly anonymized
 - [ ] Comments explain the scenario
 - [ ] Follows naming conventions
 
 ### Schema Changes
 - [ ] Backward compatibility maintained
-- [ ] All samples still validate
+- [ ] All samples still validate (`./scripts/validate.sh`)
 - [ ] Documentation updated
 - [ ] Breaking changes documented
 
@@ -126,9 +126,24 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 ## 🚀 Getting Started
 
-1. **Read** the [XARF v4 specification](2_XARF_v4_Technical_Specification.md)
+### Development Setup
+
+```bash
+# Install dependencies
+./scripts/setup.sh
+
+# Validate all schemas and samples
+./scripts/validate.sh
+
+# Format all JSON files
+./scripts/validate.sh format
+```
+
+### Learning XARF v4
+
+1. **Read** the [specification documentation](docs/)
 2. **Browse** existing [samples](samples/v4/) for examples
-3. **Check** [open issues](https://github.com/xarf/xarf-spec/issues) for contribution opportunities
+3. **Check** [open issues](https://github.com/xarf/xarf-spec/issues) for contribution opportunities  
 4. **Join** [discussions](https://github.com/xarf/xarf-spec/discussions) to ask questions
 
 ## 📞 Getting Help

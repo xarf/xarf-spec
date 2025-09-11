@@ -1,0 +1,45 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "i9j0k1l2-m3n4-5678-ij90-12345hi67890",
+	"timestamp": "2025-01-11T11:26:59Z",
+	"reporter": {
+		"org": "Network Security Monitoring",
+		"contact": "alerts@netsec-mon.com",
+		"type": "automated"
+	},
+	"source_identifier": "198.51.100.150",
+	"class": "connection",
+	"type": "port_scan",
+	"evidence_source": "ids_detection",
+	"destination_ip": "203.0.113.50",
+	"protocol": "tcp",
+	"scan_type": "syn_scan",
+	"ports_scanned": [
+		21,
+		22,
+		23,
+		25,
+		53,
+		80,
+		110,
+		143,
+		443,
+		993,
+		995
+	],
+	"scan_duration": 45,
+	"packets_sent": 150,
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "IDS log entries showing systematic port scanning activity",
+			"payload": "MjAyNC0wMS0xNSAwNzoyMjoxOCBQb3J0IHNjYW4gZGV0ZWN0ZWQ6IFNZTiBzY2FuIGZyb20gMTk4LjUxLjEwMC4xNTA=",
+			"hash": "a4bd02459c084b80d7991ad2b606d2fe75fef7d44598d4f1c002ff7c671ad58d"
+		}
+	],
+	"tags": [
+		"scan_type:syn",
+		"target:multi_port",
+		"pattern:systematic"
+	]
+}

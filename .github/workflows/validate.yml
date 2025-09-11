@@ -1,0 +1,88 @@
+name: XARF Validation
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq python3
+        
+    - name: Validate XARF repository
+      run: ./scripts/validate.sh
+      
+    - name: Check JSON formatting
+      run: |
+        # Check if any JSON files need formatting
+        ./scripts/validate.sh format
+        
+        # Check if any files were changed by formatting
+        if ! git diff --quiet; then
+          echo "❌ JSON files are not properly formatted"
+          echo "Changed files:"
+          git diff --name-only
+          echo "Run './scripts/validate.sh format' to fix formatting"
+          exit 1
+        else
+          echo "✅ All JSON files are properly formatted"
+        fi
+
+  schema-coverage:
+    runs-on: ubuntu-latest
+    needs: validate
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
+      
+    - name: Check schema coverage
+      run: |
+        echo "🔍 Checking that all schema types have corresponding samples..."
+        
+        # Get all schema types from type-specific schemas
+        SCHEMA_TYPES=$(find schemas/v4/types -name "*.json" -exec jq -r 'select(.allOf[1].properties.type.const != null) | .allOf[1].properties.type.const' {} \; | sort -u)
+        
+        # Check each type has at least one sample
+        MISSING_SAMPLES=""
+        TOTAL_TYPES=0
+        COVERED_TYPES=0
+        
+        for TYPE in $SCHEMA_TYPES; do
+          TOTAL_TYPES=$((TOTAL_TYPES + 1))
+          if find samples/v4 -name "*.json" -exec grep -l "\"type\"[[:space:]]*:[[:space:]]*\"$TYPE\"" {} \; | head -1 > /dev/null; then
+            echo "✅ Type '$TYPE' has sample coverage"
+            COVERED_TYPES=$((COVERED_TYPES + 1))
+          else
+            echo "⚠️  Type '$TYPE' is missing sample files"
+            MISSING_SAMPLES="$MISSING_SAMPLES $TYPE"
+          fi
+        done
+        
+        echo ""
+        echo "📊 Coverage Summary:"
+        echo "Total types: $TOTAL_TYPES"
+        echo "Covered types: $COVERED_TYPES"
+        echo "Coverage: $(( (COVERED_TYPES * 100) / TOTAL_TYPES ))%"
+        
+        if [ -n "$MISSING_SAMPLES" ]; then
+          echo ""
+          echo "📝 Missing sample files for types:$MISSING_SAMPLES"
+          echo "Consider adding sample files for better documentation coverage"
+        else
+          echo ""
+          echo "🎉 All schema types have corresponding sample files!"
+        fi

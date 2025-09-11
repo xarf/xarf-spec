@@ -1,0 +1,40 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "usenet-1234-5678-9012-abcdef123456",
+	"timestamp": "2025-01-11T09:12:59Z",
+	"reporter": {
+		"org": "Usenet Copyright Monitor",
+		"contact": "usenet@copyright-watch.example",
+		"type": "automated"
+	},
+	"source_identifier": "news.usenet-provider.example.com",
+	"class": "copyright",
+	"type": "usenet",
+	"evidence_source": "automated_monitoring",
+	"newsgroup": "alt.binaries.movies.divx",
+	"message_info": {
+		"message_id": "<abc123def456@news.provider.example.com>",
+		"subject": "[1/50] Protected.Movie.2024.1080p.BluRay.x264 - File 01 of 50",
+		"from_header": "movieposter@anon.example.com (MoviePoster)",
+		"posting_date": "2024-01-14T05:30:00Z",
+		"part_number": 1,
+		"total_parts": 50,
+		"file_size": 4294967296
+	},
+	"work_title": "Protected Movie 2024",
+	"rights_holder": "Film Distribution Corp",
+	"work_category": "movie",
+	"evidence": [
+		{
+			"content_type": "message/rfc822",
+			"description": "Usenet post headers showing copyrighted movie",
+			"payload": "TWVzc2FnZS1JRDogPGFiYzEyM2RlZjQ1NkBuZXdzLnByb3ZpZGVyLmV4YW1wbGUuY29tPg==",
+			"hash": "42ace7f383180f0d106239aff788c5db2011fc1ef4a51476256489664381a080"
+		}
+	],
+	"tags": [
+		"copyright:usenet",
+		"newsgroup:movies",
+		"media:movie"
+	]
+}

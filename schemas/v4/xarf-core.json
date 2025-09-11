@@ -1,222 +1,302 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/xarf-core.json",
-  "title": "XARF v4 Core Schema",
-  "description": "Base schema defining common fields and structures for all XARF v4 abuse reports",
-  "type": "object",
-  "required": [
-    "xarf_version",
-    "report_id",
-    "timestamp",
-    "reporter",
-    "source_identifier",
-    "class",
-    "type"
-  ],
-  "properties": {
-    "xarf_version": {
-      "type": "string",
-      "pattern": "^4\\.[0-9]+\\.[0-9]+$",
-      "description": "XARF schema version using semantic versioning (e.g., '4.0.0')",
-      "examples": ["4.0.0", "4.1.2", "4.6.1"]
-    },
-    "report_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Unique report identifier using UUID v4 format",
-      "examples": ["550e8400-e29b-41d4-a716-446655440000"]
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time",
-      "description": "ISO 8601 timestamp when the abuse incident occurred",
-      "examples": ["2024-01-15T14:30:25Z", "2024-01-15T14:30:25.123Z"]
-    },
-    "reporter": {
-      "$ref": "#/$defs/reporter",
-      "description": "Information about the organization reporting this abuse incident"
-    },
-    "source_identifier": {
-      "type": "string",
-      "description": "IP address, domain, or other identifier of the abuse source",
-      "examples": ["192.0.2.1", "2001:db8::1", "example.com", "abuse-source.example.org"]
-    },
-    "source_port": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535,
-      "description": "Source port number - critical for identifying sources in CGNAT environments",
-      "examples": [25, 80, 443, 3389]
-    },
-    "class": {
-      "type": "string",
-      "enum": [
-        "messaging",
-        "content", 
-        "copyright",
-        "connection",
-        "vulnerability",
-        "infrastructure",
-        "reputation"
-      ],
-      "description": "Primary abuse classification category"
-    },
-    "type": {
-      "type": "string",
-      "description": "Specific abuse type within the class - validation depends on class value",
-      "examples": ["spam", "phishing", "ddos", "port_scan", "bot", "blocklist"]
-    },
-    "evidence_source": {
-      "type": "string",
-      "description": "Quality and reliability indicator for the evidence provided",
-      "examples": [
-        "spamtrap", "user_complaint", "automated_filter", "honeypot",
-        "crawler", "user_report", "automated_scan", "spam_analysis",
-        "firewall_logs", "ids_detection", "flow_analysis",
-        "vulnerability_scan", "researcher_analysis", "automated_discovery",
-        "traffic_analysis", "threat_intelligence"
-      ]
-    },
-    "evidence": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/evidence_item"
-      },
-      "description": "Array of evidence items supporting this abuse report",
-      "maxItems": 50
-    },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^[a-z0-9_]+:[a-z0-9_]+$",
-        "description": "Namespaced tag in format 'namespace:value'"
-      },
-      "description": "Namespaced tags for categorization, correlation, and automation",
-      "examples": [
-        ["malware:conficker", "campaign:winter2024"],
-        ["phishing:banking", "target:example_bank"],
-        ["attack:syn_flood", "volume:high"]
-      ],
-      "maxItems": 20
-    },
-    "confidence": {
-      "type": "number",
-      "minimum": 0.0,
-      "maximum": 1.0,
-      "description": "Confidence score for this report (0.0 = no confidence, 1.0 = complete confidence)",
-      "examples": [0.85, 0.95, 1.0]
-    },
-    "description": {
-      "type": "string",
-      "maxLength": 1000,
-      "description": "Human-readable description of the abuse incident",
-      "examples": [
-        "Spam email campaign targeting financial institutions",
-        "DDoS attack against web services using SYN flood technique"
-      ]
-    },
-    "legacy_version": {
-      "type": "string",
-      "enum": ["3"],
-      "description": "Original XARF version if this report was converted from v3 format"
-    },
-    "_internal": {
-      "$ref": "#/$defs/internal_metadata",
-      "description": "Internal operational metadata - NEVER transmitted between systems"
-    }
-  },
-  "additionalProperties": true,
-  "$defs": {
-    "reporter": {
-      "type": "object",
-      "required": ["org", "contact", "type"],
-      "properties": {
-        "org": {
-          "type": "string",
-          "maxLength": 200,
-          "description": "Name of the reporting organization",
-          "examples": ["SpamCop", "Abusix", "Security Research Lab"]
-        },
-        "contact": {
-          "type": "string",
-          "format": "email",
-          "description": "Contact email address for follow-up communication",
-          "examples": ["abuse@example.com", "reports@security-org.net"]
-        },
-        "type": {
-          "type": "string",
-          "enum": ["automated", "manual", "unknown"],
-          "description": "How this report was generated",
-          "examples": ["automated", "manual"]
-        }
-      },
-      "additionalProperties": false
-    },
-    "evidence_item": {
-      "type": "object",
-      "required": ["content_type", "payload"],
-      "properties": {
-        "content_type": {
-          "type": "string",
-          "description": "MIME type of the evidence content",
-          "examples": [
-            "text/plain", "text/csv", "application/json",
-            "message/rfc822", "text/email",
-            "image/png", "image/jpeg", "image/gif",
-            "application/pdf", "text/html",
-            "application/octet-stream", "application/zip"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "Human-readable description of this evidence item",
-          "examples": [
-            "Original spam email with headers",
-            "Screenshot of phishing page",
-            "Network flow analysis logs"
-          ]
-        },
-        "payload": {
-          "type": "string",
-          "description": "Base64-encoded evidence data",
-          "contentEncoding": "base64"
-        },
-        "hash": {
-          "type": "string",
-          "pattern": "^(md5|sha1|sha256|sha512):[a-fA-F0-9]+$",
-          "description": "Hash of evidence for integrity verification in format 'algorithm:hexvalue'",
-          "examples": [
-            "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            "md5:d41d8cd98f00b204e9800998ecf8427e"
-          ]
-        },
-        "size": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 5242880,
-          "description": "Size of evidence in bytes (max 5MB per item)"
-        }
-      },
-      "additionalProperties": false
-    },
-    "internal_metadata": {
-      "type": "object",
-      "description": "Internal operational metadata - completely flexible, organization-defined structure. NEVER transmitted between systems.",
-      "additionalProperties": true,
-      "examples": [
-        {
-          "ticket": "ABUSE-1234",
-          "analyst": "john.doe",
-          "priority": "high"
-        },
-        {
-          "threat_id": "THR-2024-001",
-          "ml_confidence": 0.94,
-          "campaign_cluster": "winter_2024_phishing"
-        }
-      ]
-    }
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/xarf-core.json",
+	"title": "XARF v4 Core Schema",
+	"description": "Base schema defining common fields and structures for all XARF v4 abuse reports",
+	"type": "object",
+	"required": [
+		"xarf_version",
+		"report_id",
+		"timestamp",
+		"reporter",
+		"source_identifier",
+		"class",
+		"type"
+	],
+	"properties": {
+		"xarf_version": {
+			"type": "string",
+			"pattern": "^4\\.[0-9]+\\.[0-9]+$",
+			"description": "XARF schema version using semantic versioning (e.g., '4.0.0')",
+			"examples": [
+				"4.0.0",
+				"4.1.2",
+				"4.6.1"
+			]
+		},
+		"report_id": {
+			"type": "string",
+			"format": "uuid",
+			"description": "Unique report identifier using UUID v4 format",
+			"examples": [
+				"550e8400-e29b-41d4-a716-446655440000"
+			]
+		},
+		"timestamp": {
+			"type": "string",
+			"format": "date-time",
+			"description": "ISO 8601 timestamp when the abuse incident occurred",
+			"examples": [
+				"2024-01-15T14:30:25Z",
+				"2024-01-15T14:30:25.123Z"
+			]
+		},
+		"reporter": {
+			"$ref": "#/$defs/reporter",
+			"description": "Information about the organization reporting this abuse incident"
+		},
+		"source_identifier": {
+			"type": "string",
+			"description": "IP address, domain, or other identifier of the abuse source",
+			"examples": [
+				"192.0.2.1",
+				"2001:db8::1",
+				"example.com",
+				"abuse-source.example.org"
+			]
+		},
+		"source_port": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 65535,
+			"description": "Source port number - critical for identifying sources in CGNAT environments",
+			"examples": [
+				25,
+				80,
+				443,
+				3389
+			]
+		},
+		"class": {
+			"type": "string",
+			"enum": [
+				"messaging",
+				"content",
+				"copyright",
+				"connection",
+				"vulnerability",
+				"infrastructure",
+				"reputation"
+			],
+			"description": "Primary abuse classification category"
+		},
+		"type": {
+			"type": "string",
+			"description": "Specific abuse type within the class - validation depends on class value",
+			"examples": [
+				"spam",
+				"phishing",
+				"ddos",
+				"port_scan",
+				"bot",
+				"blocklist"
+			]
+		},
+		"evidence_source": {
+			"type": "string",
+			"description": "Quality and reliability indicator for the evidence provided",
+			"examples": [
+				"spamtrap",
+				"user_complaint",
+				"automated_filter",
+				"honeypot",
+				"crawler",
+				"user_report",
+				"automated_scan",
+				"spam_analysis",
+				"firewall_logs",
+				"ids_detection",
+				"flow_analysis",
+				"vulnerability_scan",
+				"researcher_analysis",
+				"automated_discovery",
+				"traffic_analysis",
+				"threat_intelligence"
+			]
+		},
+		"evidence": {
+			"type": "array",
+			"items": {
+				"$ref": "#/$defs/evidence_item"
+			},
+			"description": "Array of evidence items supporting this abuse report",
+			"maxItems": 50
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-z0-9_]+:[a-z0-9_]+$",
+				"description": "Namespaced tag in format 'namespace:value'"
+			},
+			"description": "Namespaced tags for categorization, correlation, and automation",
+			"examples": [
+				[
+					"malware:conficker",
+					"campaign:winter2024"
+				],
+				[
+					"phishing:banking",
+					"target:example_bank"
+				],
+				[
+					"attack:syn_flood",
+					"volume:high"
+				]
+			],
+			"maxItems": 20
+		},
+		"confidence": {
+			"type": "number",
+			"minimum": 0.0,
+			"maximum": 1.0,
+			"description": "Confidence score for this report (0.0 = no confidence, 1.0 = complete confidence)",
+			"examples": [
+				0.85,
+				0.95,
+				1.0
+			]
+		},
+		"description": {
+			"type": "string",
+			"maxLength": 1000,
+			"description": "Human-readable description of the abuse incident",
+			"examples": [
+				"Spam email campaign targeting financial institutions",
+				"DDoS attack against web services using SYN flood technique"
+			]
+		},
+		"legacy_version": {
+			"type": "string",
+			"enum": [
+				"3"
+			],
+			"description": "Original XARF version if this report was converted from v3 format"
+		},
+		"_internal": {
+			"$ref": "#/$defs/internal_metadata",
+			"description": "Internal operational metadata - NEVER transmitted between systems"
+		}
+	},
+	"additionalProperties": true,
+	"$defs": {
+		"reporter": {
+			"type": "object",
+			"required": [
+				"org",
+				"contact",
+				"type"
+			],
+			"properties": {
+				"org": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Name of the reporting organization",
+					"examples": [
+						"SpamCop",
+						"Abusix",
+						"Security Research Lab"
+					]
+				},
+				"contact": {
+					"type": "string",
+					"format": "email",
+					"description": "Contact email address for follow-up communication",
+					"examples": [
+						"abuse@example.com",
+						"reports@security-org.net"
+					]
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"automated",
+						"manual",
+						"unknown"
+					],
+					"description": "How this report was generated",
+					"examples": [
+						"automated",
+						"manual"
+					]
+				}
+			},
+			"additionalProperties": false
+		},
+		"evidence_item": {
+			"type": "object",
+			"required": [
+				"content_type",
+				"payload"
+			],
+			"properties": {
+				"content_type": {
+					"type": "string",
+					"description": "MIME type of the evidence content",
+					"examples": [
+						"text/plain",
+						"text/csv",
+						"application/json",
+						"message/rfc822",
+						"text/email",
+						"image/png",
+						"image/jpeg",
+						"image/gif",
+						"application/pdf",
+						"text/html",
+						"application/octet-stream",
+						"application/zip"
+					]
+				},
+				"description": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Human-readable description of this evidence item",
+					"examples": [
+						"Original spam email with headers",
+						"Screenshot of phishing page",
+						"Network flow analysis logs"
+					]
+				},
+				"payload": {
+					"type": "string",
+					"description": "Base64-encoded evidence data",
+					"contentEncoding": "base64"
+				},
+				"hash": {
+					"type": "string",
+					"pattern": "^(md5|sha1|sha256|sha512):[a-fA-F0-9]+$",
+					"description": "Hash of evidence for integrity verification in format 'algorithm:hexvalue'",
+					"examples": [
+						"sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+						"md5:d41d8cd98f00b204e9800998ecf8427e"
+					]
+				},
+				"size": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 5242880,
+					"description": "Size of evidence in bytes (max 5MB per item)"
+				}
+			},
+			"additionalProperties": false
+		},
+		"internal_metadata": {
+			"type": "object",
+			"description": "Internal operational metadata - completely flexible, organization-defined structure. NEVER transmitted between systems.",
+			"additionalProperties": true,
+			"examples": [
+				{
+					"ticket": "ABUSE-1234",
+					"analyst": "john.doe",
+					"priority": "high"
+				},
+				{
+					"threat_id": "THR-2024-001",
+					"ml_confidence": 0.94,
+					"campaign_cluster": "winter_2024_phishing"
+				}
+			]
+		}
+	}
 }

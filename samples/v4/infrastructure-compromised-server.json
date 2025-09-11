@@ -1,0 +1,39 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "l2m3n4o5-p6q7-8901-lm23-45678kl90123",
+	"timestamp": "2025-01-11T15:57:57Z",
+	"reporter": {
+		"org": "Server Security Monitor",
+		"contact": "incidents@serversec.org",
+		"type": "automated"
+	},
+	"source_identifier": "203.0.113.150",
+	"source_port": 80,
+	"class": "infrastructure",
+	"type": "compromised_server",
+	"evidence_source": "automated_discovery",
+	"service": "apache_web_server",
+	"service_version": "Apache/2.4.29",
+	"compromise_type": "webshell",
+	"malicious_files": [
+		"/var/www/html/admin/shell.php",
+		"/tmp/.hidden_backdoor"
+	],
+	"c2_communications": [
+		"malicious-control.example.com:8080"
+	],
+	"first_seen": "2024-01-14T20:15:30Z",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Web server access logs showing suspicious activity",
+			"payload": "MjAyNC0wMS0xNSAxNDoyMjoxOCBDb21wcm9taXNlZCBzZXJ2ZXIgZGV0ZWN0ZWQ6IHdlYnNoZWxsIGFjdGl2aXR5",
+			"hash": "c0487a7e87ddd06d38e3ff397ba416ce0c3ba58098adad3c34380934154a07a9"
+		}
+	],
+	"tags": [
+		"compromise:webshell",
+		"service:apache",
+		"severity:high"
+	]
+}

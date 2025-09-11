@@ -1,0 +1,30 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "cyberlocker-1234-5678-9012-abcdef123456",
+	"timestamp": "2025-01-11T14:16:41Z",
+	"reporter": {
+		"org": "Content Protection Agency",
+		"contact": "dmca@content-protection.example",
+		"type": "manual"
+	},
+	"source_identifier": "file-sharing.example.com",
+	"class": "copyright",
+	"type": "cyberlocker",
+	"evidence_source": "crawler",
+	"infringing_url": "https://file-sharing.example.com/download/movie2024.mp4",
+	"file_size": 4294967296,
+	"work_title": "Protected Movie 2024",
+	"rights_holder": "Entertainment Corp",
+	"evidence": [
+		{
+			"content_type": "text/html",
+			"description": "Cyberlocker download page",
+			"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkRvd25sb2FkPC90aXRsZT48L2hlYWQ+PC9odG1sPg==",
+			"hash": "12da1fc31eb254da390b23acd54a9e4a5461426d82622940cde70cb3e1058c54"
+		}
+	],
+	"tags": [
+		"copyright:cyberlocker",
+		"filetype:video"
+	]
+}

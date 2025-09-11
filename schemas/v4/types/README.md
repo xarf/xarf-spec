@@ -55,7 +55,12 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 ### Copyright Class
 | Type | Schema File | Description |
 |------|-------------|-------------|
-| `copyright` | `copyright-copyright.json` | Copyright infringement and DMCA violations |
+| `copyright` | `copyright-copyright.json` | Generic copyright infringement and DMCA violations |
+| `p2p` | `copyright-p2p.json` | Peer-to-peer copyright infringement (BitTorrent, etc.) |
+| `cyberlocker` | `copyright-cyberlocker.json` | File hosting service copyright infringement |
+| `ugc_platform` | `copyright-ugc-platform.json` | User-generated content platform infringement |
+| `link_site` | `copyright-link-site.json` | Link aggregation site infringement |
+| `usenet` | `copyright-usenet.json` | Usenet newsgroup copyright infringement |
 
 ## Schema Structure
 
@@ -101,7 +106,7 @@ ajv validate -s types/connection-ddos.json -d sample-ddos-report.json
 ### Validate Against Master Schema
 ```bash
 # Master schema automatically selects correct type schema
-ajv validate -s xarf-v4-master-types.json -d any-xarf-report.json
+ajv validate -s ../xarf-v4-master.json -d any-xarf-report.json
 ```
 
 ### Parser Implementation
@@ -111,13 +116,13 @@ spam_schema = load_schema("types/messaging-spam.json")
 ddos_schema = load_schema("types/connection-ddos.json")
 
 # Or use master schema for all types
-master_schema = load_schema("xarf-v4-master-types.json")
+master_schema = load_schema("../xarf-v4-master.json")
 ```
 
 ## Adding New Types
 
 1. Create new schema file: `{class}-{new-type}.json`
-2. Add conditional reference in `xarf-v4-master-types.json`
+2. Add conditional reference in `../xarf-v4-master.json`
 3. Update this README with the new type
 4. Add test cases in the test suite
 

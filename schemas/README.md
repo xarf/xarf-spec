@@ -10,13 +10,29 @@ schemas/
 ├── v4/                         # XARF v4 schemas
 │   ├── xarf-core.json          # Base schema with common fields
 │   ├── xarf-v4-master.json     # Master schema with conditional validation
-│   ├── messaging-class.json    # Messaging abuse (spam, bulk messaging)
-│   ├── connection-class.json   # Network attacks (DDoS, login attacks)
-│   ├── content-class.json      # Web content abuse (phishing, malware)
-│   ├── infrastructure-class.json # Compromised systems (bots, C2)
-│   ├── copyright-class.json    # IP infringement (DMCA, copyright)
-│   ├── vulnerability-class.json # Security disclosures (CVEs, misconfigs)
-│   └── reputation-class.json   # Threat intelligence (blocklists, reputation)
+│   └── types/                  # Type-specific schemas (22 total)
+│       ├── messaging-spam.json
+│       ├── messaging-bulk-messaging.json
+│       ├── connection-login-attack.json
+│       ├── connection-port-scan.json
+│       ├── connection-ddos.json
+│       ├── connection-ddos-amplification.json
+│       ├── connection-auth-failure.json
+│       ├── vulnerability-cve.json
+│       ├── vulnerability-open.json
+│       ├── vulnerability-misconfiguration.json
+│       ├── content-phishing.json
+│       ├── content-malware.json
+│       ├── infrastructure-bot.json
+│       ├── infrastructure-compromised-server.json
+│       ├── reputation-blocklist.json
+│       ├── reputation-threat-intelligence.json
+│       ├── copyright-copyright.json
+│       ├── copyright-p2p.json
+│       ├── copyright-cyberlocker.json
+│       ├── copyright-ugc-platform.json
+│       ├── copyright-link-site.json
+│       └── copyright-usenet.json
 └── v3/                         # Legacy XARF v3 schemas
     └── xarf-v3-legacy.json     # XARF v3 format for backwards compatibility
 ```
@@ -25,105 +41,132 @@ schemas/
 
 ### Validating XARF v4 Reports
 
-Use the **master schema** for complete validation with class-specific rules:
+Use the **master schema** for complete validation with type-specific rules:
 
 ```bash
-# Using ajv-cli (Node.js)
-npm install -g ajv-cli
-ajv validate -s schemas/v4/xarf-v4-master.json -d your-report.json
+# Install dependencies
+./scripts/setup.sh
 
-# Using python-jsonschema
-pip install jsonschema
-jsonschema -i your-report.json schemas/v4/xarf-v4-master.json
+# Validate all schemas and samples  
+./scripts/validate.sh
+
+# Using python-jsonschema directly
+python3 -c "
+import json, jsonschema
+with open('samples/v4/messaging-spam.json') as f: data = json.load(f)
+with open('schemas/v4/xarf-v4-master.json') as f: schema = json.load(f)
+jsonschema.validate(data, schema)
+print('✅ Valid!')
+"
 ```
 
-### Validating Legacy XARF v3 Reports
+### Validating Against Specific Type Schemas
 
 ```bash
-ajv validate -s schemas/v3/xarf-v3-legacy.json -d your-v3-report.json
+# Validate messaging spam report
+python3 -c "
+import json, jsonschema
+with open('samples/v4/messaging-spam.json') as f: data = json.load(f)
+with open('schemas/v4/types/messaging-spam.json') as f: schema = json.load(f)
+jsonschema.validate(data, schema)
+print('✅ Valid against type-specific schema!')
+"
 ```
 
-## 📋 Schema Overview
+## 📋 Schema Architecture
 
-### XARF v4 Architecture
+### XARF v4 Type-Specific Architecture
 
-XARF v4 uses a **class-based architecture** with 7 primary abuse classes:
+XARF v4 uses a **type-specific architecture** with 22 dedicated schemas across 7 abuse classes:
 
-| Class | Purpose | Key Fields | Example Types |
-|-------|---------|------------|---------------|
-| **messaging** | Communication abuse | `protocol`, `smtp_from` | spam, bulk_messaging |
-| **connection** | Network attacks | `destination_ip`, `protocol` | ddos, login_attack, port_scan |
-| **content** | Web content abuse | `url`, `target_brand` | phishing, malware, fraud |
-| **infrastructure** | Compromised systems | `malware_family`, `c2_server` | bot, compromised_server |
-| **copyright** | IP infringement | `work_title`, `rights_holder` | copyright, trademark |
-| **vulnerability** | Security disclosures | `service`, `cve_id` | cve, misconfiguration |
-| **reputation** | Threat intelligence | `threat_type`, `confidence_score` | blocklist, ip_reclamation |
+| Class | Type-Specific Schemas | Purpose |
+|-------|----------------------|---------|
+| **messaging** (2) | `messaging-spam`, `messaging-bulk-messaging` | Communication abuse |
+| **connection** (5) | `connection-login-attack`, `connection-port-scan`, `connection-ddos`, `connection-ddos-amplification`, `connection-auth-failure` | Network attacks |
+| **vulnerability** (3) | `vulnerability-cve`, `vulnerability-open`, `vulnerability-misconfiguration` | Security vulnerabilities |
+| **content** (2) | `content-phishing`, `content-malware` | Malicious web content |
+| **infrastructure** (2) | `infrastructure-bot`, `infrastructure-compromised-server` | Compromised systems |
+| **reputation** (2) | `reputation-blocklist`, `reputation-threat-intelligence` | Threat intelligence |
+| **copyright** (6) | `copyright-copyright`, `copyright-p2p`, `copyright-cyberlocker`, `copyright-ugc-platform`, `copyright-link-site`, `copyright-usenet` | Intellectual property infringement |
 
-### Core Required Fields
+### Core Schema Structure
+
+All schemas extend the base `xarf-core.json` schema:
+
+1. **xarf-core.json** - Common fields required by all reports
+2. **Type-specific schemas** - Additional validation for each abuse type
+3. **xarf-v4-master.json** - Conditional validation routing to correct type schema
+
+### Required Fields (from xarf-core.json)
 
 All XARF v4 reports must include:
 
-- `xarf_version` - Version string (e.g., "4.0.0")
+- `xarf_version` - Version string (e.g., "4.0.0") 
 - `report_id` - UUID v4 identifier
 - `timestamp` - ISO 8601 datetime when abuse occurred
 - `reporter` - Organization information (`org`, `contact`, `type`)
 - `source_identifier` - IP, domain, or identifier of abuse source
-- `class` - Primary abuse classification
+- `class` - Primary abuse classification  
 - `type` - Specific abuse type within class
 
 ## 🔧 Schema Usage Guide
 
-### 1. Parser Implementation
+### 1. Master Schema Validation (Recommended)
 
-**Recommended approach for XARF parsers:**
+The master schema automatically validates against the correct type schema:
 
-```javascript
-// 1. Load the master schema for complete validation
-const masterSchema = require('./schemas/v4/xarf-v4-master.json');
+```python
+import json
+import jsonschema
 
-// 2. Validate incoming reports
-function validateXARFReport(report) {
-  const ajv = new Ajv({
-    allErrors: true,
-    verbose: true,
-    loadSchema: loadSchemaFunction // Load referenced schemas
-  });
-  
-  const validate = ajv.compile(masterSchema);
-  const valid = validate(report);
-  
-  if (!valid) {
-    throw new Error(`Invalid XARF report: ${JSON.stringify(validate.errors)}`);
-  }
-  
-  return report;
-}
+def validate_xarf_report(report_data):
+    """Validate XARF report against master schema."""
+    with open('schemas/v4/xarf-v4-master.json') as f:
+        master_schema = json.load(f)
+    
+    try:
+        jsonschema.validate(report_data, master_schema)
+        return True, None
+    except jsonschema.exceptions.ValidationError as e:
+        return False, str(e)
 
-// 3. Handle both v3 and v4 formats
-function parseXARFReport(data) {
-  if (data.Version === "3" || data.Version === "3.0") {
-    return convertV3ToV4(data); // Convert legacy format
-  }
-  
-  if (data.xarf_version && data.xarf_version.startsWith("4.")) {
-    return validateXARFReport(data);
-  }
-  
-  throw new Error("Unknown XARF version");
-}
+# Usage
+with open('samples/v4/messaging-spam.json') as f:
+    report = json.load(f)
+
+is_valid, error = validate_xarf_report(report)
+if not is_valid:
+    print(f"Validation failed: {error}")
 ```
 
-### 2. Generator Implementation
+### 2. Type-Specific Validation
 
-**Creating valid XARF v4 reports:**
+For focused validation or development:
+
+```python
+def validate_specific_type(report_data, class_name, type_name):
+    """Validate against specific type schema."""
+    schema_file = f'schemas/v4/types/{class_name}-{type_name.replace("_", "-")}.json'
+    
+    with open(schema_file) as f:
+        schema = json.load(f)
+    
+    jsonschema.validate(report_data, schema)
+    return True
+
+# Example
+validate_specific_type(report, "messaging", "spam")
+```
+
+### 3. Creating Valid Reports
 
 ```python
 import json
 import uuid
 from datetime import datetime
-import jsonschema
 
-def create_xarf_report(class_name, type_name, source_ip, **kwargs):
+def create_xarf_report(class_name, type_name, source_identifier, **kwargs):
+    """Create a valid XARF v4 report."""
     report = {
         "xarf_version": "4.0.0",
         "report_id": str(uuid.uuid4()),
@@ -133,24 +176,21 @@ def create_xarf_report(class_name, type_name, source_ip, **kwargs):
             "contact": kwargs.get("reporter_contact", "abuse@example.com"),
             "type": kwargs.get("reporter_type", "automated")
         },
-        "source_identifier": source_ip,
+        "source_identifier": source_identifier,
         "class": class_name,
         "type": type_name,
-        **kwargs  # Additional class-specific fields
+        **{k: v for k, v in kwargs.items() if not k.startswith('reporter_')}
     }
     
     # Validate against master schema
-    with open('schemas/v4/xarf-v4-master.json') as f:
-        schema = json.load(f)
-    
-    jsonschema.validate(report, schema)
+    validate_xarf_report(report)
     return report
 
-# Example usage
+# Example: Create spam report
 spam_report = create_xarf_report(
     class_name="messaging",
-    type_name="spam", 
-    source_ip="192.0.2.100",
+    type_name="spam",
+    source_identifier="192.0.2.100", 
     protocol="smtp",
     smtp_from="spam@example.com",
     subject="Buy now!",
@@ -158,107 +198,17 @@ spam_report = create_xarf_report(
 )
 ```
 
-### 3. Class-Specific Validation
+## 🎨 Examples by Type
 
-For specialized use cases, you can validate against individual class schemas:
-
-```bash
-# Validate only messaging class fields
-ajv validate -s schemas/v4/messaging-class.json -d messaging-report.json
-
-# Validate only connection class fields  
-ajv validate -s schemas/v4/connection-class.json -d ddos-report.json
-```
-
-## 📊 Validation Levels
-
-### Strict Mode
-- Fail on any unknown fields
-- Require all optional recommended fields
-- Enforce strict format validation
-
-### Permissive Mode (Recommended)
-- Validate known fields, warn on unknown fields  
-- Allow missing optional fields
-- Forward compatibility for new fields
-
-### Legacy Mode
-- Accept v3 format reports
-- Convert to v4 structure automatically
-- Generate warnings for deprecated patterns
-
-## 🔄 V3 to V4 Migration
-
-### Automatic Conversion
-
-The v3 legacy schema includes mapping documentation for converting old reports:
-
-```javascript
-function convertV3ToV4(v3Report) {
-  const v4Report = {
-    xarf_version: "4.0.0",
-    report_id: generateUUID(),
-    legacy_version: "3",
-    timestamp: v3Report.Report.Date,
-    reporter: {
-      org: v3Report.ReporterInfo.ReporterOrg,
-      contact: v3Report.ReporterInfo.ReporterOrgEmail,
-      type: "unknown"
-    },
-    source_identifier: v3Report.Report.SourceIp,
-    source_port: v3Report.Report.SourcePort,
-    // Map v3 types to v4 class/type combinations
-    ...mapV3TypeToV4(v3Report.Report.ReportType),
-    evidence: convertSamplesToEvidence(v3Report.Report.Samples)
-  };
-  
-  return v4Report;
-}
-
-function mapV3TypeToV4(v3Type) {
-  const mapping = {
-    "Spam": { class: "messaging", type: "spam" },
-    "Login-Attack": { class: "connection", type: "login_attack" },
-    "Port-Scan": { class: "connection", type: "port_scan" },
-    "DDoS": { class: "connection", type: "ddos" },
-    "Phishing": { class: "content", type: "phishing" },
-    "Malware": { class: "content", type: "malware" },
-    "Botnet": { class: "infrastructure", type: "bot" },
-    "Copyright": { class: "copyright", type: "copyright" }
-  };
-  
-  return mapping[v3Type] || { class: "infrastructure", type: "unknown" };
-}
-```
-
-## ⚡ Performance Guidelines
-
-### Schema Loading
-- Cache compiled schemas in production
-- Load schemas asynchronously when possible
-- Use schema references to avoid duplication
-
-### Validation Optimization
-- Validate incrementally (core → class-specific)
-- Batch validate multiple reports when possible
-- Use streaming validation for large evidence payloads
-
-### Memory Management
-- Limit evidence payload size (5MB per item, 15MB total)
-- Use efficient base64 decoding libraries
-- Clean up validation objects after use
-
-## 🎨 Examples by Class
-
-### Messaging Class - Email Spam
+### Messaging - Spam
 ```json
 {
   "xarf_version": "4.0.0",
   "report_id": "550e8400-e29b-41d4-a716-446655440000",
   "timestamp": "2024-01-15T14:30:25Z",
   "reporter": {
-    "org": "SpamCop",
-    "contact": "reports@spamcop.net",
+    "org": "Anti-Spam Service",
+    "contact": "reports@antispam.example",
     "type": "automated"
   },
   "source_identifier": "192.0.2.123",
@@ -268,146 +218,99 @@ function mapV3TypeToV4(v3Type) {
   "protocol": "smtp",
   "smtp_from": "fake@example.com",
   "subject": "Urgent: Verify Your Account",
-  "evidence_source": "spamtrap",
-  "evidence": [{
-    "content_type": "message/rfc822",
-    "description": "Complete spam email with headers",
-    "payload": "base64-encoded-email-content"
-  }],
-  "tags": ["phishing:financial", "campaign:fake_bank_2024"]
+  "evidence_source": "spamtrap"
 }
 ```
 
-### Connection Class - DDoS Attack
+### Connection - DDoS
 ```json
 {
-  "xarf_version": "4.0.0", 
-  "report_id": "987fcdeb-51a2-43d1-9f12-345678901234",
+  "xarf_version": "4.0.0",
+  "report_id": "987fcdeb-51a2-43d1-9f12-345678901234", 
   "timestamp": "2024-01-15T10:20:30Z",
   "reporter": {
     "org": "DDoS Protection Service",
-    "contact": "security@ddosprotect.com",
+    "contact": "security@ddosprotect.example",
     "type": "automated"
   },
   "source_identifier": "198.51.100.75",
   "class": "connection",
   "type": "ddos",
-  "destination_ip": "203.0.113.100",
-  "destination_port": 80,
   "protocol": "tcp",
+  "first_seen": "2024-01-15T10:15:00Z",
   "attack_vector": "syn_flood",
   "peak_pps": 250000,
-  "duration_seconds": 2700,
-  "evidence_source": "flow_analysis",
-  "tags": ["attack:volumetric", "severity:high"]
+  "duration_seconds": 2700
 }
 ```
 
-### Content Class - Phishing Site
+### Copyright - P2P
 ```json
 {
   "xarf_version": "4.0.0",
-  "report_id": "123e4567-e89b-12d3-a456-426614174000", 
-  "timestamp": "2024-01-15T16:45:10Z",
+  "report_id": "p2p-1234-5678-9012-abcdef123456",
+  "timestamp": "2024-01-15T16:00:00Z",
   "reporter": {
-    "org": "PhishTank",
-    "contact": "admin@phishtank.com",
+    "org": "P2P Monitoring Service", 
+    "contact": "p2p-reports@copyright.example",
     "type": "automated"
   },
-  "source_identifier": "203.0.113.45",
-  "class": "content",
-  "type": "phishing",
-  "url": "http://fake-bank.example.com/login.php",
-  "target_brand": "Example Bank",
-  "target_category": "financial",
-  "evidence_source": "crawler",
-  "evidence": [{
-    "content_type": "image/png",
-    "description": "Screenshot of phishing page", 
-    "payload": "base64-encoded-screenshot"
-  }],
-  "tags": ["phishing:banking", "target:example_bank"]
+  "source_identifier": "192.0.2.100",
+  "class": "copyright",
+  "type": "p2p",
+  "p2p_protocol": "bittorrent",
+  "swarm_info": {
+    "info_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "magnet_uri": "magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "work_title": "Copyrighted Movie 2024",
+  "rights_holder": "Film Studio Corp"
 }
 ```
 
-## 🚀 Integration Patterns
-
-### Web Application Integration
-```javascript
-// Express.js endpoint for receiving XARF reports
-app.post('/xarf/reports', async (req, res) => {
-  try {
-    const report = await validateXARFReport(req.body);
-    
-    // Route based on class
-    switch (report.class) {
-      case 'messaging':
-        await handleSpamReport(report);
-        break;
-      case 'connection':
-        await handleNetworkAttack(report);
-        break;
-      case 'content':
-        await handleMaliciousContent(report);
-        break;
-      // ... other cases
-    }
-    
-    res.json({ status: 'processed', report_id: report.report_id });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-```
+## ⚡ Validation Tools
 
 ### Command Line Validation
 ```bash
+# Validate all samples against schemas
+./scripts/validate.sh
+
+# Format all JSON files
+./scripts/validate.sh format
+
+# Manual validation with Python
+python3 -c "
+import json, jsonschema
+with open('your-report.json') as f: data = json.load(f)
+with open('schemas/v4/xarf-v4-master.json') as f: schema = json.load(f)
+jsonschema.validate(data, schema)
+print('✅ Report is valid!')
+"
+```
+
+### Batch Validation Script
+```bash
 #!/bin/bash
-# validate-xarf.sh - Batch validation script
+# validate-reports.sh
 
 for file in reports/*.json; do
   echo "Validating $file..."
-  if ajv validate -s schemas/v4/xarf-v4-master.json -d "$file"; then
+  if python3 -c "
+import json, jsonschema, sys
+try:
+  with open('$file') as f: data = json.load(f)
+  with open('schemas/v4/xarf-v4-master.json') as f: schema = json.load(f)
+  jsonschema.validate(data, schema)
+  print('✅ Valid')
+except Exception as e:
+  print(f'❌ Invalid: {e}')
+  sys.exit(1)
+"; then
     echo "✅ $file is valid"
-  else
+  else 
     echo "❌ $file is invalid"
   fi
 done
-```
-
-### Python Validation Function
-```python
-import json
-import jsonschema
-from pathlib import Path
-
-def validate_xarf_file(report_file, schema_dir="schemas/v4"):
-    """Validate a XARF report file against the appropriate schema."""
-    
-    with open(report_file) as f:
-        report = json.load(f)
-    
-    # Determine schema based on XARF version
-    if report.get('xarf_version', '').startswith('4.'):
-        schema_file = Path(schema_dir) / 'xarf-v4-master.json'
-    elif report.get('Version') in ['3', '3.0']:
-        schema_file = Path(schema_dir).parent / 'v3' / 'xarf-v3-legacy.json'
-    else:
-        raise ValueError(f"Unknown XARF version: {report.get('xarf_version')}")
-    
-    with open(schema_file) as f:
-        schema = json.load(f)
-    
-    try:
-        jsonschema.validate(report, schema)
-        return True, None
-    except jsonschema.exceptions.ValidationError as e:
-        return False, str(e)
-
-# Usage
-is_valid, error = validate_xarf_file('spam-report.json')
-if not is_valid:
-    print(f"Validation failed: {error}")
 ```
 
 ## 🔍 Troubleshooting
@@ -416,55 +319,103 @@ if not is_valid:
 
 **1. Missing Required Fields**
 ```
-Error: Required property 'protocol' missing for messaging class
-Solution: Add protocol field when class is 'messaging'
+Error: 'protocol' is a required property
+Solution: Add required fields per type schema
 ```
 
-**2. Invalid UUID Format**
-```  
-Error: 'report_id' must be valid UUID v4
-Solution: Use proper UUID generation: uuid4() or equivalent
+**2. Invalid Type/Class Combination**
+```
+Error: No schema found for class 'messaging' type 'invalid_type'
+Solution: Use valid type from type-specific schemas
 ```
 
-**3. Invalid Timestamp Format**
+**3. Source Port Requirements**  
 ```
-Error: 'timestamp' must be ISO 8601 date-time
-Solution: Use format like '2024-01-15T14:30:25Z'
-```
-
-**4. Evidence Size Limits**
-```
-Error: Evidence item exceeds 5MB limit
-Solution: Compress or truncate evidence, use external references
+Error: 'source_port' is required when source_identifier is IP
+Solution: Include source_port for IP-based sources (CGNAT environments)
 ```
 
-### Schema Reference Issues
+**4. Evidence Validation**
+```
+Error: Evidence payload exceeds size limits
+Solution: Limit evidence items to 5MB each, 50 items total
+```
 
-If schemas fail to load due to $ref resolution:
+## 🚀 Integration Patterns
 
-```bash
-# Ensure all referenced schemas are accessible
-ls schemas/v4/xarf-core.json  # Should exist
-ls schemas/v4/messaging-class.json  # Should exist
-# etc.
+### Web API Endpoint
+```javascript
+// Express.js XARF report receiver
+app.post('/xarf/reports', async (req, res) => {
+  try {
+    const report = req.body;
+    
+    // Validate against master schema
+    await validateXARFReport(report);
+    
+    // Route based on class and type
+    const handler = getHandlerForType(report.class, report.type);
+    await handler.process(report);
+    
+    res.json({ 
+      status: 'processed', 
+      report_id: report.report_id 
+    });
+  } catch (error) {
+    res.status(400).json({ 
+      error: 'Invalid XARF report',
+      details: error.message 
+    });
+  }
+});
+```
+
+### Stream Processing
+```python
+import json
+import jsonschema
+
+def process_xarf_stream(reports_stream):
+    """Process stream of XARF reports with validation."""
+    
+    # Load master schema once
+    with open('schemas/v4/xarf-v4-master.json') as f:
+        master_schema = json.load(f)
+    
+    validator = jsonschema.Draft202012Validator(master_schema)
+    
+    for report_data in reports_stream:
+        try:
+            # Validate
+            validator.validate(report_data)
+            
+            # Route to appropriate handler
+            handler_key = f"{report_data['class']}:{report_data['type']}"
+            if handler_key in handlers:
+                handlers[handler_key](report_data)
+            else:
+                logger.warning(f"No handler for {handler_key}")
+                
+        except jsonschema.exceptions.ValidationError as e:
+            logger.error(f"Invalid XARF report: {e}")
 ```
 
 ## 📚 Additional Resources
 
-- **XARF v4 Technical Specification**: Complete field definitions and validation rules
-- **XARF v4 Implementation Guide**: Integration patterns and best practices
-- **Sample Reports**: Real-world examples in `/samples/v4/` directory
-- **Parser Libraries**: Multi-language implementations (Python, JavaScript, Go, PHP, Java, Rust)
+- **Complete Sample Set**: Each type schema has a corresponding sample in `samples/v4/`
+- **Master Schema**: `schemas/v4/xarf-v4-master.json` for comprehensive validation
+- **Core Schema**: `schemas/v4/xarf-core.json` for common field definitions
+- **Type Documentation**: Each type schema includes detailed field descriptions
 
 ## 🤝 Contributing
 
 To contribute to XARF schema development:
 
-1. Review existing schemas for consistency
-2. Test changes against sample reports
-3. Update documentation for new fields
-4. Ensure backwards compatibility
-5. Submit pull requests with comprehensive tests
+1. **Test against samples**: Ensure schema changes validate existing samples
+2. **Maintain compatibility**: Avoid breaking changes to core fields  
+3. **Update documentation**: Include field descriptions and examples
+4. **Validate thoroughly**: Use `./scripts/validate.sh` before submitting
+5. **Follow conventions**: Match existing schema patterns and naming
 
 ## 📄 License
 

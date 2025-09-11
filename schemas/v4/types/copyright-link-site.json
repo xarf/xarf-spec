@@ -1,0 +1,254 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/copyright-link-site.json",
+	"title": "XARF v4 Copyright - Link Site Type Schema",
+	"description": "Schema for link aggregation site copyright infringement reports",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "copyright"
+				},
+				"type": {
+					"const": "link_site"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"automated_crawl",
+						"manual_monitoring",
+						"user_report",
+						"rights_holder",
+						"search_monitoring"
+					],
+					"description": "Source of link site infringement evidence"
+				},
+				"infringing_url": {
+					"type": "string",
+					"format": "uri",
+					"description": "URL to the page containing infringing links (REQUIRED)"
+				},
+				"site_name": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Name of the link aggregation site (REQUIRED)",
+					"examples": [
+						"The Pirate Bay",
+						"1337x",
+						"RARBG",
+						"Torrentz2",
+						"ExtraTorrent",
+						"KickassTorrents"
+					]
+				},
+				"site_category": {
+					"type": "string",
+					"enum": [
+						"torrent_index",
+						"direct_download_links",
+						"streaming_links",
+						"usenet_index",
+						"search_engine",
+						"forum_links",
+						"other"
+					],
+					"description": "Category of link aggregation site"
+				},
+				"link_info": {
+					"type": "object",
+					"properties": {
+						"page_title": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Title of the page containing links"
+						},
+						"posting_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "When links were posted"
+						},
+						"uploader": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "Username who posted the links"
+						},
+						"download_count": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Number of downloads/views"
+						},
+						"link_count": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of infringing links on the page"
+						},
+						"comments_count": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Number of user comments"
+						}
+					},
+					"additionalProperties": false
+				},
+				"linked_content": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"target_url": {
+								"type": "string",
+								"format": "uri",
+								"description": "URL that the link points to"
+							},
+							"link_type": {
+								"type": "string",
+								"enum": [
+									"torrent_file",
+									"magnet_link",
+									"direct_download",
+									"streaming_link",
+									"usenet_nzb",
+									"other"
+								]
+							},
+							"hosting_service": {
+								"type": "string",
+								"maxLength": 200,
+								"description": "Service hosting the linked content"
+							},
+							"file_size": {
+								"type": "integer",
+								"minimum": 0,
+								"description": "Size of linked file in bytes"
+							}
+						},
+						"required": [
+							"target_url",
+							"link_type"
+						],
+						"additionalProperties": false
+					},
+					"maxItems": 50,
+					"description": "Details about the linked infringing content"
+				},
+				"work_title": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Title of the copyrighted work"
+				},
+				"rights_holder": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Organization or person holding the copyright"
+				},
+				"work_category": {
+					"type": "string",
+					"enum": [
+						"movie",
+						"tv_show",
+						"music",
+						"software",
+						"ebook",
+						"audiobook",
+						"game",
+						"adult_content",
+						"other"
+					],
+					"description": "Category of copyrighted work"
+				},
+				"search_terms": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"maxLength": 200
+					},
+					"maxItems": 10,
+					"description": "Search terms used to find the infringing links"
+				},
+				"site_ranking": {
+					"type": "object",
+					"properties": {
+						"alexa_rank": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Alexa traffic ranking of the site"
+						},
+						"popularity_score": {
+							"type": "number",
+							"minimum": 0.0,
+							"maximum": 10.0,
+							"description": "Popularity score (0.0-10.0)"
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"infringing_url",
+				"site_name"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "link-012c3456-d789-01e2-f345-678901234567",
+			"timestamp": "2024-01-15T20:10:30Z",
+			"reporter": {
+				"org": "Digital Rights Enforcement",
+				"contact": "enforcement@digitalrights.org",
+				"type": "automated"
+			},
+			"source_identifier": "torrent-indexer.example",
+			"class": "copyright",
+			"type": "link_site",
+			"infringing_url": "https://torrentindex.example/torrent/12345/blockbuster-movie-2024",
+			"site_name": "TorrentIndex",
+			"site_category": "torrent_index",
+			"work_title": "Blockbuster Movie 2024",
+			"rights_holder": "Hollywood Studios",
+			"work_category": "movie",
+			"evidence_source": "automated_crawl",
+			"link_info": {
+				"page_title": "Blockbuster Movie 2024 1080p BluRay x264",
+				"posting_date": "2024-01-14T22:30:00Z",
+				"uploader": "movieuploader123",
+				"download_count": 2500,
+				"link_count": 3
+			},
+			"linked_content": [
+				{
+					"target_url": "magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709",
+					"link_type": "magnet_link",
+					"hosting_service": "BitTorrent DHT"
+				},
+				{
+					"target_url": "https://filehost.example/download/abc123",
+					"link_type": "direct_download",
+					"hosting_service": "FileHost Service",
+					"file_size": 4294967296
+				}
+			],
+			"search_terms": [
+				"Blockbuster Movie 2024",
+				"1080p BluRay"
+			],
+			"evidence": [
+				{
+					"content_type": "text/html",
+					"description": "Screenshot of torrent page showing copyrighted content links",
+					"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkJsb2NrYnVzdGVyIE1vdmllIDIwMjQ8L3RpdGxlPjwvaGVhZD48L2h0bWw+"
+				}
+			],
+			"tags": [
+				"copyright:link_site",
+				"site:torrent_index",
+				"media:movie"
+			]
+		}
+	]
+}

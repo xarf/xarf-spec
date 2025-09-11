@@ -2,7 +2,7 @@
 
 ## What is XARF v4?
 
-XARF (eXtended Abuse Reporting Format) v4 represents a fundamental evolution from simple abuse reporting to comprehensive abuse intelligence. It transforms XARF from a basic JSON schema into a modern, class-based abuse reporting platform that bridges the gap between automated tools and threat intelligence systems.
+XARF (eXtended Abuse Reporting Format) v4 represents a fundamental evolution from simple abuse reporting to comprehensive abuse intelligence. It transforms XARF from a basic JSON schema into a modern, type-specific abuse reporting platform that bridges the gap between automated tools and threat intelligence systems.
 
 XARF v4 is designed for **real-time operational response** - helping ISPs, hosting providers, and network operators quickly understand and act on abuse reports, rather than serving as a research or analysis format.
 
@@ -20,7 +20,7 @@ The cybersecurity industry processes millions of abuse reports daily, but curren
 ### The Solution
 XARF v4 addresses these challenges with:
 
-- **Class-based architecture** that scales with new abuse types
+- **Type-specific architecture** that scales with new abuse types
 - **Automation-first design** for immediate machine processing
 - **Multi-transport support** (email, API, streaming)
 - **Evidence-based reporting** with actionable proof
@@ -32,7 +32,7 @@ XARF v4 addresses these challenges with:
 
 | **v3 Approach** | **v4 Approach** | **Benefit** |
 |-----------------|-----------------|-------------|
-| Simple Types | Class-Based Architecture (7 classes) | Scalable categorization |
+| Simple Types | Type-Specific Architecture (22 types) | Granular categorization |
 | Static Schema | Type-Specific Validation | Flexible yet structured |
 | Basic Fields | Rich Attribution & Tags | Better context and automation |
 | Email-Only | Multi-Transport (email, API, streaming) | Real-time processing |
@@ -161,11 +161,11 @@ XARF v4 Report → Parser → Ticket System → Automated Response
 ### 2. Evaluate with Samples
 
 Review sample reports for your use case:
-- **Spam reports**: `samples/v4/messaging/spam_spamtrap_sample.json`
-- **Phishing reports**: `samples/v4/content/phishing_sample.json` 
-- **DDoS reports**: `samples/v4/connection/ddos_sample.json`
+- **Spam reports**: `samples/v4/messaging-spam.json`
+- **Phishing reports**: `samples/v4/content-phishing.json` 
+- **DDoS reports**: `samples/v4/connection-ddos.json`
 
-All samples available in the [Technical Specification](./XARF_v4_Technical_Specification.md#sample-reports).
+All samples available in the [Technical Specification](./specification.md#sample-reports).
 
 ### 3. Test Integration
 
@@ -183,7 +183,7 @@ All samples available in the [Technical Specification](./XARF_v4_Technical_Speci
 
 ### 4. Production Integration
 
-See the [Implementation Guide](./XARF_v4_Implementation_Guide.md) for:
+See the [Implementation Guide](./implementation-guide.md) for:
 - Complete integration patterns
 - Performance optimization guidelines
 - Error handling best practices
@@ -243,8 +243,8 @@ v5.0.0: Breaking changes (years in future)
 
 ### For Technical Implementation
 
-**→ Read the [Technical Specification](./XARF_v4_Technical_Specification.md)**
-- Complete JSON schemas for all classes
+**→ Read the [Technical Specification](./specification.md)**
+- Complete JSON schemas for all types
 - Field definitions and validation rules
 - Evidence format specifications
 - Sample reports and test cases
@@ -252,7 +252,7 @@ v5.0.0: Breaking changes (years in future)
 
 ### For Project Management & Operations
 
-**→ Read the [Implementation Guide](./XARF_v4_Implementation_Guide.md)**  
+**→ Read the [Implementation Guide](./implementation-guide.md)**  
 - Project roadmap and timelines
 - Community governance and contribution
 - Integration patterns and best practices
@@ -270,4 +270,4 @@ v5.0.0: Breaking changes (years in future)
 
 **XARF v4 transforms abuse reporting from a chore into a competitive advantage.** By providing structured, actionable intelligence in real-time, it enables organizations to respond faster, reduce abuse impact, and build better security operations.
 
-*This document provides the high-level overview. For technical implementation details, see the [Technical Specification](./XARF_v4_Technical_Specification.md). For project management and operational guidance, see the [Implementation Guide](./XARF_v4_Implementation_Guide.md).*
+*This document provides the high-level overview. For technical implementation details, see the [Technical Specification](./specification.md). For project management and operational guidance, see the [Implementation Guide](./implementation-guide.md).*

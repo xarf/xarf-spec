@@ -1,0 +1,32 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "f6g7h8i9-j0k1-2345-fg67-89012ef34567",
+	"timestamp": "2025-01-11T15:00:52Z",
+	"reporter": {
+		"org": "Example CERT Organization",
+		"contact": "cert@cert-org.example",
+		"type": "automated"
+	},
+	"source_identifier": "198.51.100.25",
+	"class": "infrastructure",
+	"type": "bot",
+	"evidence_source": "traffic_analysis",
+	"malware_family": "Conficker",
+	"c2_server": "malicious-command.example.com",
+	"first_seen": "2024-01-14T18:45:00Z",
+	"last_seen": "2025-01-11T12:16:22Z",
+	"infection_vector": "network_worm",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Network traffic patterns indicating bot communication",
+			"payload": "Qm90bmV0IGNvbW11bmljYXRpb24gZGV0ZWN0ZWQ6IENvbmZpY2tlciBDMiBjaGFubmVs",
+			"hash": "751c9ad33534c7835566b26e9ddcba79b43887be12458bccc81f8c8e1b20a874"
+		}
+	],
+	"tags": [
+		"malware:conficker",
+		"botnet:active",
+		"infection:worm"
+	]
+}

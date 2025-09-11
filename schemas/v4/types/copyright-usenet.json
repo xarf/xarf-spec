@@ -1,0 +1,267 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/copyright-usenet.json",
+	"title": "XARF v4 Copyright - Usenet Type Schema",
+	"description": "Schema for Usenet newsgroup copyright infringement reports",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "copyright"
+				},
+				"type": {
+					"const": "usenet"
+				},
+				"evidence_source": {
+					"type": "string",
+					"enum": [
+						"automated_monitoring",
+						"newsgroup_crawl",
+						"user_report",
+						"rights_holder",
+						"nzb_index_monitoring"
+					],
+					"description": "Source of Usenet infringement evidence"
+				},
+				"newsgroup": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Name of the newsgroup containing infringing content (REQUIRED)",
+					"examples": [
+						"alt.binaries.movies.divx",
+						"alt.binaries.tv",
+						"alt.binaries.sounds.mp3",
+						"alt.binaries.games",
+						"alt.binaries.multimedia"
+					]
+				},
+				"message_info": {
+					"type": "object",
+					"properties": {
+						"message_id": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Usenet Message-ID header"
+						},
+						"subject": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Subject line of the post"
+						},
+						"from_header": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "From header of the post"
+						},
+						"posting_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "When message was posted to newsgroup"
+						},
+						"part_number": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Part number if multi-part post"
+						},
+						"total_parts": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Total number of parts in posting"
+						},
+						"file_size": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Size of the posted file in bytes"
+						}
+					},
+					"additionalProperties": false
+				},
+				"nzb_info": {
+					"type": "object",
+					"properties": {
+						"nzb_name": {
+							"type": "string",
+							"maxLength": 500,
+							"description": "Name of the NZB file"
+						},
+						"nzb_url": {
+							"type": "string",
+							"format": "uri",
+							"description": "URL to NZB file on indexing site"
+						},
+						"indexer_site": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "NZB indexing site name"
+						},
+						"completion_percentage": {
+							"type": "number",
+							"minimum": 0.0,
+							"maximum": 100.0,
+							"description": "Completion percentage of the post"
+						}
+					},
+					"additionalProperties": false
+				},
+				"server_info": {
+					"type": "object",
+					"properties": {
+						"nntp_server": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "NNTP server hostname"
+						},
+						"server_group": {
+							"type": "string",
+							"maxLength": 200,
+							"description": "News server provider group"
+						},
+						"retention_days": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Server retention period in days"
+						}
+					},
+					"additionalProperties": false
+				},
+				"work_title": {
+					"type": "string",
+					"maxLength": 500,
+					"description": "Title of the copyrighted work"
+				},
+				"rights_holder": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Organization or person holding the copyright"
+				},
+				"work_category": {
+					"type": "string",
+					"enum": [
+						"movie",
+						"tv_show",
+						"music",
+						"software",
+						"ebook",
+						"audiobook",
+						"magazine",
+						"game",
+						"adult_content",
+						"other"
+					],
+					"description": "Category of copyrighted work"
+				},
+				"encoding_info": {
+					"type": "object",
+					"properties": {
+						"encoding_format": {
+							"type": "string",
+							"enum": [
+								"yenc",
+								"uuencode",
+								"base64",
+								"other"
+							],
+							"description": "Binary encoding format used"
+						},
+						"par2_recovery": {
+							"type": "boolean",
+							"description": "Whether PAR2 recovery files are included"
+						},
+						"rar_compression": {
+							"type": "boolean",
+							"description": "Whether content is RAR compressed"
+						}
+					},
+					"additionalProperties": false
+				},
+				"detection_method": {
+					"type": "string",
+					"enum": [
+						"subject_line_match",
+						"header_analysis",
+						"content_sampling",
+						"nzb_metadata"
+					],
+					"description": "Method used to detect infringement"
+				}
+			},
+			"required": [
+				"newsgroup"
+			],
+			"anyOf": [
+				{
+					"required": [
+						"message_info"
+					],
+					"properties": {
+						"message_info": {
+							"required": [
+								"message_id"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "usenet-345d6789-e012-34f5-g678-901234567890",
+			"timestamp": "2024-01-15T07:20:45Z",
+			"reporter": {
+				"org": "Usenet Monitoring Service",
+				"contact": "reports@usenetmonitor.org",
+				"type": "automated"
+			},
+			"source_identifier": "news.example-provider.com",
+			"class": "copyright",
+			"type": "usenet",
+			"newsgroup": "alt.binaries.movies.divx",
+			"work_title": "Latest Movie 2024",
+			"rights_holder": "Film Distribution Corp",
+			"work_category": "movie",
+			"evidence_source": "automated_monitoring",
+			"message_info": {
+				"message_id": "<abc123def456@news.provider.com>",
+				"subject": "[1/50] Latest.Movie.2024.1080p.BluRay.x264 - File 01 of 50",
+				"from_header": "movieposter@anon.com (MoviePoster)",
+				"posting_date": "2024-01-14T05:30:00Z",
+				"part_number": 1,
+				"total_parts": 50,
+				"file_size": 4294967296
+			},
+			"nzb_info": {
+				"nzb_name": "Latest Movie 2024 1080p BluRay x264.nzb",
+				"indexer_site": "NZB Indexer Pro",
+				"completion_percentage": 100.0
+			},
+			"server_info": {
+				"nntp_server": "news.example-provider.com",
+				"retention_days": 3000
+			},
+			"encoding_info": {
+				"encoding_format": "yenc",
+				"par2_recovery": true,
+				"rar_compression": true
+			},
+			"detection_method": "subject_line_match",
+			"evidence": [
+				{
+					"content_type": "message/rfc822",
+					"description": "Usenet post headers showing copyrighted movie",
+					"payload": "TWVzc2FnZS1JRDogPGFiYzEyM2RlZjQ1NkBuZXdzLnByb3ZpZGVyLmNvbT4="
+				}
+			],
+			"tags": [
+				"copyright:usenet",
+				"newsgroup:movies",
+				"media:movie"
+			]
+		}
+	]
+}

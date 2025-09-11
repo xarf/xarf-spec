@@ -28,12 +28,12 @@ Each class contains multiple specific event types with dedicated schemas:
 | Class | Event Types | Schema Location |
 |-------|-------------|-----------------|
 | **messaging** | `spam`, `bulk_messaging` | [`schemas/v4/types/messaging-*.json`](schemas/v4/types/) |
-| **connection** | `ddos`, `port_scan`, `login_attack`, `auth_failure`, `ddos_amplification` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
+| **connection** | `login_attack`, `port_scan`, `ddos`, `ddos_amplification`, `auth_failure` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
 | **vulnerability** | `cve`, `open`, `misconfiguration` | [`schemas/v4/types/vulnerability-*.json`](schemas/v4/types/) |
 | **content** | `phishing`, `malware` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
 | **infrastructure** | `bot`, `compromised_server` | [`schemas/v4/types/infrastructure-*.json`](schemas/v4/types/) |
 | **reputation** | `blocklist`, `threat_intelligence` | [`schemas/v4/types/reputation-*.json`](schemas/v4/types/) |
-| **copyright** | `copyright` | [`schemas/v4/types/copyright-*.json`](schemas/v4/types/) |
+| **copyright** | `copyright`, `p2p`, `cyberlocker`, `ugc_platform`, `link_site`, `usenet` | [`schemas/v4/types/copyright-*.json`](schemas/v4/types/) |
 
 ## 📄 Sample Reports
 
@@ -41,14 +41,29 @@ Sample reports are organized by version for reference and migration purposes:
 
 ```
 samples/
-├── v4/               # XARF v4 samples (current specification)
-│   ├── messaging/    # Email spam, phishing, social engineering
-│   ├── connection/   # DDoS, port scans, login attacks
-│   ├── content/      # Phishing sites, malware distribution, defacement
-│   ├── infrastructure/ # Compromised servers, botnets, CVE exploitation
-│   ├── copyright/    # DMCA violations, trademark infringement
-│   ├── vulnerability/ # CVE reports, open services, misconfigurations
-│   └── reputation/   # Blocklist entries, threat intelligence
+├── v4/               # XARF v4 samples - one per schema type (22 total)
+│   ├── messaging-spam.json
+│   ├── messaging-bulk-messaging.json
+│   ├── connection-login-attack.json
+│   ├── connection-port-scan.json
+│   ├── connection-ddos.json
+│   ├── connection-ddos-amplification.json
+│   ├── connection-auth-failure.json
+│   ├── vulnerability-cve.json
+│   ├── vulnerability-open.json
+│   ├── vulnerability-misconfiguration.json
+│   ├── content-phishing.json
+│   ├── content-malware.json
+│   ├── infrastructure-bot.json
+│   ├── infrastructure-compromised-server.json
+│   ├── reputation-blocklist.json
+│   ├── reputation-threat-intelligence.json
+│   ├── copyright-copyright.json
+│   ├── copyright-p2p.json
+│   ├── copyright-cyberlocker.json
+│   ├── copyright-ugc-platform.json
+│   ├── copyright-link-site.json
+│   └── copyright-usenet.json
 └── v3/               # XARF v3 samples (legacy format, migration reference)
     ├── spam_v3_sample.json
     ├── ddos_v3_sample.json
@@ -59,14 +74,26 @@ samples/
 ## 🚀 Quick Start
 
 ```bash
+# Install dependencies (jq and python3)
+./scripts/setup.sh
+
 # View a sample report
-cat samples/v4/messaging/spam_spamtrap_phishing_sample.json
+cat samples/v4/messaging-spam.json
 
-# Validate against type-specific schema (recommended)
-ajv validate -s schemas/v4/types/messaging-spam.json -d samples/v4/messaging/spam_sample.json
+# Validate all schemas and samples
+./scripts/validate.sh
 
-# Or validate against master schema (validates all types)
-ajv validate -s schemas/v4/xarf-v4-master.json -d samples/v4/messaging/spam_sample.json
+# Format all JSON files
+./scripts/validate.sh format
+
+# Validate specific sample against its schema
+python3 -c "
+import json, jsonschema
+with open('samples/v4/messaging-spam.json') as f: data = json.load(f)
+with open('schemas/v4/types/messaging-spam.json') as f: schema = json.load(f)
+jsonschema.validate(data, schema)
+print('✅ Valid!')
+"
 ```
 
 ## 🔧 Parser Libraries

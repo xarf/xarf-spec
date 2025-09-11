@@ -1,0 +1,31 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "threat-1234-5678-9012-abcdef123456",
+	"timestamp": "2025-01-11T10:38:41Z",
+	"reporter": {
+		"org": "Threat Intelligence Provider",
+		"contact": "intel@threat-research.example",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.50",
+	"class": "reputation",
+	"type": "threat_intelligence",
+	"evidence_source": "threat_intelligence",
+	"threat_type": "command_and_control",
+	"confidence_score": 0.95,
+	"ioc_type": "ip",
+	"first_seen": "2024-01-10T08:00:00Z",
+	"last_seen": "2025-01-11T09:06:14Z",
+	"evidence": [
+		{
+			"content_type": "application/json",
+			"description": "Threat intelligence indicators",
+			"payload": "eyJ0aHJlYXRfdHlwZSI6ICJjMmMiLCAiaW9jX3R5cGUiOiAiaXAifQ==",
+			"hash": "b6ab202a404ef8e8dbf27df78c46a33b5042bd80ce1b8b88baeffd8d8298e5df"
+		}
+	],
+	"tags": [
+		"threat:c2",
+		"confidence:high"
+	]
+}

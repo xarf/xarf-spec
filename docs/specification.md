@@ -16,7 +16,7 @@
 
 This document provides the complete technical specification for XARF v4 schema validation, field definitions, and format requirements. It serves as the authoritative reference for implementing XARF v4 parsers, validators, and generators.
 
-For a high-level introduction to XARF v4, see the [Introduction & Overview](./XARF_v4_Introduction_Overview.md). For implementation guidance and project management, see the [Implementation Guide](./XARF_v4_Implementation_Guide.md).
+For a high-level introduction to XARF v4, see the [Introduction & Overview](./introduction.md). For implementation guidance and project management, see the [Implementation Guide](./implementation-guide.md).
 
 ### Design Principles
 
@@ -1074,7 +1074,7 @@ XARF v4 parsers MUST implement:
 
 2. **Schema Validation**
    - Validate against complete JSON schema
-   - Support all 7 classes and their specific requirements
+   - Support all 22 types and their specific requirements
    - Implement conditional validation based on class/type
    - Handle unknown fields according to validation mode
 
@@ -1140,4 +1140,4 @@ XARF v4 generators MUST implement:
 
 ---
 
-This technical specification provides the complete reference for XARF v4 implementation. For project management and operational guidance, see the [Implementation Guide](./XARF_v4_Implementation_Guide.md). For a high-level overview, see the [Introduction & Overview](./XARF_v4_Introduction_Overview.md).
+This technical specification provides the complete reference for XARF v4 implementation. For project management and operational guidance, see the [Implementation Guide](./implementation-guide.md). For a high-level overview, see the [Introduction & Overview](./introduction.md).
