@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://xarf.org/schemas/v4/types/content-csem.json",
 	"title": "XARF v4 Content - CSEM Type Schema",
-	"description": "Schema for Child Sexual Exploitation Material (baseline/A1/A2/B1/B2 illegal content)",
+	"description": "Schema for Child Sexual Exploitation Material (grooming, solicitation, and other exploitation activities)",
 	"allOf": [
 		{
 			"$ref": "./content-base.json"
@@ -13,68 +13,88 @@
 				"type": {
 					"const": "csem"
 				},
-				"classification": {
+				"exploitation_type": {
 					"type": "string",
 					"enum": [
-						"baseline",
-						"A1",
-						"A2",
-						"B1",
-						"B2"
+						"grooming",
+						"solicitation",
+						"sextortion",
+						"trafficking",
+						"distribution",
+						"production",
+						"possession"
 					],
-					"description": "CSAM classification category"
+					"description": "Type of exploitation activity"
 				},
-				"ncmec_report_id": {
+				"victim_age_range": {
 					"type": "string",
-					"description": "NCMEC CyberTipline Report ID if available"
+					"enum": [
+						"infant",
+						"toddler",
+						"prepubescent",
+						"pubescent",
+						"unknown"
+					],
+					"description": "Estimated age range of victim"
 				},
-				"iwf_hash": {
+				"platform": {
 					"type": "string",
-					"description": "IWF hash value if available"
-				},
-				"photodna_hash": {
-					"type": "string",
-					"description": "PhotoDNA hash value if available"
+					"enum": [
+						"social_media",
+						"messaging_app",
+						"gaming_platform",
+						"forum",
+						"email",
+						"darkweb",
+						"other"
+					],
+					"description": "Platform where exploitation occurred"
 				},
 				"detection_method": {
 					"type": "string",
 					"enum": [
-						"hash_match",
+						"behavioral_analysis",
+						"keyword_detection",
+						"user_report",
 						"ai_detection",
 						"manual_review",
-						"user_report",
-						"automated_scan"
+						"law_enforcement_referral"
 					],
-					"description": "Method used to detect the CSAM"
+					"description": "Method used to detect the exploitation"
 				},
-				"file_hash": {
+				"evidence_type": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"chat_logs",
+							"images",
+							"videos",
+							"user_profile",
+							"metadata"
+						]
+					},
+					"description": "Types of evidence collected"
+				},
+				"perpetrator_indicators": {
 					"type": "object",
 					"properties": {
-						"md5": {
+						"account_id": {
 							"type": "string",
-							"pattern": "^[a-f0-9]{32}$"
+							"description": "Account identifier of perpetrator"
 						},
-						"sha1": {
-							"type": "string",
-							"pattern": "^[a-f0-9]{40}$"
+						"ip_addresses": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": "ipv4"
+							}
 						},
-						"sha256": {
+						"pattern_of_behavior": {
 							"type": "string",
-							"pattern": "^[a-f0-9]{64}$"
+							"description": "Description of behavioral patterns"
 						}
-					},
-					"description": "File hash values"
-				},
-				"media_type": {
-					"type": "string",
-					"enum": [
-						"image",
-						"video",
-						"text",
-						"audio",
-						"mixed"
-					],
-					"description": "Type of media containing CSAM"
+					}
 				},
 				"reporting_obligations": {
 					"type": "array",
@@ -86,35 +106,54 @@
 							"local_law_enforcement",
 							"europol",
 							"interpol",
+							"platform_safety_team",
 							"other"
 						]
 					},
 					"description": "Entities to which this has been or should be reported"
 				}
-			}
+			},
+			"required": [
+				"exploitation_type",
+				"detection_method"
+			]
 		}
 	],
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "csem-report-2025-001",
-			"timestamp": "2025-01-15T10:30:00Z",
+			"report_id": "csem-2025-grooming-001",
+			"timestamp": "2025-01-20T14:20:00Z",
 			"reporter": {
-				"org": "Content Safety Service",
-				"contact": "safety@example.org",
-				"type": "automated"
+				"org": "Platform Safety Team",
+				"contact": "safety@platform.example",
+				"type": "manual"
 			},
-			"source_identifier": "198.51.100.42",
+			"source_identifier": "203.0.113.55",
 			"class": "content",
 			"type": "csem",
-			"url": "https://example.com/illegal-content",
-			"classification": "A1",
-			"detection_method": "hash_match",
-			"media_type": "image",
+			"url": "https://platform.example/user/suspicious-account",
+			"exploitation_type": "grooming",
+			"victim_age_range": "pubescent",
+			"detection_method": "behavioral_analysis",
+			"platform": "social_media",
+			"evidence_type": [
+				"chat_logs",
+				"user_profile"
+			],
 			"reporting_obligations": [
 				"NCMEC",
-				"local_law_enforcement"
-			]
+				"local_law_enforcement",
+				"platform_safety_team"
+			],
+			"perpetrator_indicators": {
+				"account_id": "user123456",
+				"ip_addresses": [
+					"203.0.113.55",
+					"203.0.113.56"
+				],
+				"pattern_of_behavior": "Repeated contact with minors, requesting private information"
+			}
 		}
 	]
 }

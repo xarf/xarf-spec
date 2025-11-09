@@ -1,0 +1,114 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-csam.json",
+	"title": "XARF v4 Content - CSAM Type Schema",
+	"description": "Schema for Child Sexual Abuse Material (baseline/A1/A2/B1/B2 illegal content)",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "csam"
+				},
+				"classification": {
+					"type": "string",
+					"enum": [
+						"baseline",
+						"A1",
+						"A2",
+						"B1",
+						"B2"
+					],
+					"description": "Legal classification category for the material"
+				},
+				"media_type": {
+					"type": "string",
+					"enum": [
+						"image",
+						"video",
+						"audio",
+						"text",
+						"mixed"
+					],
+					"description": "Type of media containing CSAM"
+				},
+				"detection_method": {
+					"type": "string",
+					"enum": [
+						"hash_match",
+						"ai_detection",
+						"manual_review",
+						"user_report",
+						"automated_scan"
+					],
+					"description": "Method used to detect the CSAM"
+				},
+				"hash_values": {
+					"type": "object",
+					"properties": {
+						"md5": {
+							"type": "string",
+							"pattern": "^[a-fA-F0-9]{32}$"
+						},
+						"sha1": {
+							"type": "string",
+							"pattern": "^[a-fA-F0-9]{40}$"
+						},
+						"sha256": {
+							"type": "string",
+							"pattern": "^[a-fA-F0-9]{64}$"
+						},
+						"photodna": {
+							"type": "string"
+						}
+					},
+					"description": "Hash values of the illegal content"
+				},
+				"ncmec_report_id": {
+					"type": "string",
+					"description": "NCMEC CyberTipline report ID if applicable"
+				},
+				"content_removed": {
+					"type": "boolean",
+					"description": "Whether the content has been removed"
+				},
+				"account_suspended": {
+					"type": "boolean",
+					"description": "Whether associated accounts were suspended"
+				}
+			},
+			"required": [
+				"classification",
+				"detection_method"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "csam-report-2025-001",
+			"timestamp": "2025-01-15T10:30:00Z",
+			"reporter": {
+				"org": "Content Safety Service",
+				"contact": "safety@example.org",
+				"type": "automated"
+			},
+			"source_identifier": "198.51.100.42",
+			"class": "content",
+			"type": "csam",
+			"url": "https://example.com/illegal-content",
+			"classification": "A1",
+			"detection_method": "hash_match",
+			"media_type": "image",
+			"hash_values": {
+				"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+			},
+			"ncmec_report_id": "12345678",
+			"content_removed": true,
+			"account_suspended": true
+		}
+	]
+}

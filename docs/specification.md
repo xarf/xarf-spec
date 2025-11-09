@@ -333,7 +333,7 @@ All XARF v4 reports share this common structure:
 
 **Purpose:** Malicious web content including phishing, malware, fraud, exploitation, and harmful content
 
-**Valid Types:** `phishing`, `malware`, `fraud`, `spamvertised`, `csem`, `defacement`, `illegal_advertisement`, `web_hack`, `exploit`, `violence`, `harassment`, `doxing`, `ncii`, `fake_shop`, `hate_speech`, `terrorism`, `self_harm`, `identity_theft`, `pharma_fraud`, `illicit_goods`, `online_predation`, `carding`, `gambling_scam`, `threat_to_life`, `disinformation`
+**Valid Types:** `phishing`, `malware`, `fraud`, `spamvertised`, `csam`, `csem`, `defacement`, `illegal_advertisement`, `web_hack`, `exploit`, `violence`, `harassment`, `doxing`, `ncii`, `fake_shop`, `hate_speech`, `terrorism`, `self_harm`, `identity_theft`, `pharma_fraud`, `illicit_goods`, `online_predation`, `carding`, `gambling_scam`, `threat_to_life`, `disinformation`
 
 **Evidence Sources:** `crawler`, `user_report`, `automated_scan`, `spam_analysis`
 
