@@ -1,0 +1,31 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "sqli-2025-m3n4o5p6",
+	"timestamp": "2025-01-20T12:00:00Z",
+	"reporter": {
+		"org": "Web Application Firewall",
+		"contact": "security@example.com",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.45",
+	"class": "connection",
+	"type": "sql_injection",
+	"destination_ip": "198.51.100.10",
+	"destination_port": 443,
+	"protocol": "tcp",
+	"http_method": "GET",
+	"target_url": "https://example.com/products.php?id=1",
+	"injection_point": "query_parameter",
+	"payload_sample": "1' OR '1'='1",
+	"attack_technique": "union_based",
+	"attempts_count": 15,
+	"first_seen": "2025-01-20T11:45:00Z",
+	"last_seen": "2025-01-20T12:00:00Z",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "WAF log entry",
+			"payload": "V0FGIG1vZyBlbnRyeQ=="
+		}
+	]
+}

@@ -1,0 +1,44 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "recon-2025-u1v2w3x4",
+	"timestamp": "2025-01-20T16:45:00Z",
+	"reporter": {
+		"org": "Web Security Service",
+		"contact": "security@webhost.example",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.99",
+	"class": "connection",
+	"type": "reconnaissance",
+	"destination_ip": "198.51.100.75",
+	"destination_port": 443,
+	"protocol": "tcp",
+	"probed_resources": [
+		"/.env",
+		"/.git/config",
+		"/.aws/credentials",
+		"/wp-config.php.bak",
+		"/admin/.htpasswd"
+	],
+	"resource_categories": [
+		"environment_files",
+		"version_control",
+		"credential_files",
+		"backup_files"
+	],
+	"http_methods": ["GET", "HEAD"],
+	"response_codes": [404, 403, 200],
+	"successful_probes": ["/.git/config"],
+	"user_agent": "Mozilla/5.0 (compatible; SecurityScanner/1.0)",
+	"automated_tool": true,
+	"total_probes": 47,
+	"first_seen": "2025-01-20T16:30:00Z",
+	"last_seen": "2025-01-20T16:44:00Z",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Access log entries",
+			"payload": "QWNjZXNzIGxvZyBlbnRyaWVz"
+		}
+	]
+}

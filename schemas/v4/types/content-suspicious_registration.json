@@ -1,0 +1,205 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-suspicious_registration.json",
+	"title": "XARF v4 Content - Suspicious Registration Type Schema",
+	"description": "Schema for newly registered suspicious domains and preemptive threat detection",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "suspicious_registration"
+				},
+				"registration_date": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When the domain was registered"
+				},
+				"days_since_registration": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Number of days since domain registration"
+				},
+				"suspicious_indicators": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"typosquatting",
+							"homograph_attack",
+							"brand_keyword",
+							"suspicious_tld",
+							"bulk_registration",
+							"privacy_protection",
+							"suspicious_registrant",
+							"fast_flux",
+							"dga_pattern",
+							"known_bad_nameserver",
+							"suspicious_ssl_cert",
+							"immediate_activation",
+							"parked_page",
+							"other"
+						]
+					},
+					"minItems": 1,
+					"description": "Indicators that make this registration suspicious"
+				},
+				"risk_score": {
+					"type": "number",
+					"minimum": 0.0,
+					"maximum": 1.0,
+					"description": "Calculated risk score for this domain"
+				},
+				"targeted_brands": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Brands potentially targeted by this domain"
+				},
+				"registrant_details": {
+					"type": "object",
+					"properties": {
+						"email_domain": {
+							"type": "string",
+							"description": "Domain of registrant's email"
+						},
+						"country": {
+							"type": "string",
+							"pattern": "^[A-Z]{2}$"
+						},
+						"privacy_protected": {
+							"type": "boolean"
+						},
+						"bulk_registrations": {
+							"type": "integer",
+							"description": "Number of domains registered by same entity"
+						}
+					},
+					"description": "Information about the domain registrant"
+				},
+				"related_domains": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"domain": {
+								"type": "string"
+							},
+							"relationship": {
+								"type": "string",
+								"enum": [
+									"same_registrant",
+									"same_nameserver",
+									"same_ip",
+									"same_ssl_cert",
+									"similar_pattern",
+									"same_campaign"
+								]
+							}
+						}
+					},
+					"maxItems": 20,
+					"description": "Other domains related to this suspicious registration"
+				},
+				"predicted_usage": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"phishing",
+							"malware",
+							"spam",
+							"fraud",
+							"brand_abuse",
+							"botnet_c2",
+							"unknown"
+						]
+					},
+					"description": "Predicted malicious usage based on patterns"
+				},
+				"ssl_certificate_details": {
+					"type": "object",
+					"properties": {
+						"issued_immediately": {
+							"type": "boolean",
+							"description": "Certificate issued immediately after registration"
+						},
+						"free_certificate": {
+							"type": "boolean",
+							"description": "Using free SSL certificate provider"
+						},
+						"wildcard": {
+							"type": "boolean",
+							"description": "Wildcard certificate"
+						}
+					}
+				},
+				"activation_behavior": {
+					"type": "object",
+					"properties": {
+						"time_to_activation": {
+							"type": "integer",
+							"description": "Hours between registration and first content"
+						},
+						"initial_content": {
+							"type": "string",
+							"enum": [
+								"parked",
+								"under_construction",
+								"immediate_malicious",
+								"cloned_site",
+								"blank",
+								"other"
+							]
+						}
+					}
+				}
+			},
+			"required": ["registration_date", "suspicious_indicators"]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "c3d4e5f6-a7b8-9012-bcde-f34567890123",
+			"timestamp": "2025-01-15T08:00:00Z",
+			"reporter": {
+				"org": "Domain Threat Intelligence",
+				"contact": "alerts@domainthreat.example",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.200",
+			"class": "content",
+			"type": "suspicious_registration",
+			"url": "https://amaz0n-secure.example",
+			"domain": "amaz0n-secure.example",
+			"registration_date": "2025-01-14T22:00:00Z",
+			"days_since_registration": 0,
+			"suspicious_indicators": [
+				"typosquatting",
+				"brand_keyword",
+				"privacy_protection",
+				"immediate_activation"
+			],
+			"risk_score": 0.92,
+			"targeted_brands": ["Amazon"],
+			"registrant_details": {
+				"privacy_protected": true,
+				"country": "CN",
+				"bulk_registrations": 47
+			},
+			"predicted_usage": ["phishing", "fraud"],
+			"evidence": [
+				{
+					"content_type": "application/json",
+					"description": "WHOIS and DNS records",
+					"payload": "base64_encoded_data"
+				}
+			]
+		}
+	]
+}

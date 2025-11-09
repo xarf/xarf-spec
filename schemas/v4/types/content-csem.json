@@ -1,0 +1,143 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-csem.json",
+	"title": "XARF v4 Content - CSEM Type Schema",
+	"description": "Schema for Child Sexual Exploitation Material (other types of child exploitation material)",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "csem"
+				},
+				"exploitation_type": {
+					"type": "string",
+					"enum": [
+						"grooming",
+						"solicitation",
+						"sextortion",
+						"trafficking",
+						"non_sexual_exploitation",
+						"endangerment",
+						"other"
+					],
+					"description": "Type of child exploitation"
+				},
+				"victim_age_range": {
+					"type": "string",
+					"enum": [
+						"infant",
+						"toddler",
+						"prepubescent",
+						"pubescent",
+						"unknown"
+					],
+					"description": "Estimated age range of victim if known"
+				},
+				"ncmec_report_id": {
+					"type": "string",
+					"description": "NCMEC CyberTipline Report ID if available"
+				},
+				"detection_method": {
+					"type": "string",
+					"enum": [
+						"keyword_detection",
+						"ai_detection",
+						"manual_review",
+						"user_report",
+						"behavioral_analysis",
+						"automated_scan"
+					],
+					"description": "Method used to detect the CSEM"
+				},
+				"platform": {
+					"type": "string",
+					"description": "Platform where exploitation occurred",
+					"examples": [
+						"social_media",
+						"messaging_app",
+						"gaming_platform",
+						"forum",
+						"email"
+					]
+				},
+				"evidence_type": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"chat_logs",
+							"images",
+							"videos",
+							"user_profile",
+							"payment_records",
+							"metadata"
+						]
+					},
+					"description": "Types of evidence collected"
+				},
+				"reporting_obligations": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"NCMEC",
+							"IWF",
+							"local_law_enforcement",
+							"europol",
+							"interpol",
+							"platform_safety_team",
+							"other"
+						]
+					},
+					"description": "Entities to which this has been or should be reported"
+				},
+				"perpetrator_indicators": {
+					"type": "object",
+					"properties": {
+						"account_id": {
+							"type": "string",
+							"description": "Platform-specific account identifier"
+						},
+						"ip_addresses": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							},
+							"description": "Associated IP addresses"
+						},
+						"pattern_of_behavior": {
+							"type": "string",
+							"description": "Description of behavioral patterns"
+						}
+					},
+					"description": "Information about the perpetrator if known"
+				}
+			}
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "csem-report-2025-001",
+			"timestamp": "2025-01-15T14:20:00Z",
+			"reporter": {
+				"org": "Platform Safety Team",
+				"contact": "safety@platform.example",
+				"type": "manual"
+			},
+			"source_identifier": "203.0.113.55",
+			"class": "content",
+			"type": "csem",
+			"url": "https://platform.example/user/suspicious-account",
+			"exploitation_type": "grooming",
+			"detection_method": "behavioral_analysis",
+			"platform": "social_media",
+			"evidence_type": ["chat_logs", "user_profile"],
+			"reporting_obligations": ["NCMEC", "local_law_enforcement"]
+		}
+	]
+}

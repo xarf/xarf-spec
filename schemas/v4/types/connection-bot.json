@@ -1,0 +1,184 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-bot.json",
+	"title": "XARF v4 Connection - Bot Type Schema",
+	"description": "Schema for automated web bot activity including AI agents and search bots",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "bot"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address"
+				},
+				"destination_port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp"
+					],
+					"default": "tcp",
+					"description": "Network protocol used"
+				},
+				"bot_type": {
+					"type": "string",
+					"enum": [
+						"search_engine",
+						"ai_agent",
+						"monitoring",
+						"seo_analyzer",
+						"link_checker",
+						"feed_reader",
+						"social_media",
+						"advertising",
+						"malicious",
+						"unknown"
+					],
+					"description": "Classification of bot type"
+				},
+				"bot_name": {
+					"type": "string",
+					"description": "Identified bot name or signature",
+					"examples": [
+						"Googlebot",
+						"GPTBot",
+						"ChatGPT-User",
+						"Claude-Web",
+						"FacebookBot",
+						"TwitterBot",
+						"UptimeRobot",
+						"PingdomBot"
+					]
+				},
+				"user_agent": {
+					"type": "string",
+					"description": "Full User-Agent string"
+				},
+				"behavior_pattern": {
+					"type": "string",
+					"enum": [
+						"legitimate_crawling",
+						"aggressive_crawling",
+						"api_abuse",
+						"form_submission",
+						"comment_spam",
+						"account_creation",
+						"content_harvesting",
+						"vulnerability_probing",
+						"mixed"
+					],
+					"description": "Observed behavior pattern"
+				},
+				"request_rate": {
+					"type": "number",
+					"description": "Average requests per second"
+				},
+				"total_requests": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Total number of requests"
+				},
+				"respects_robots_txt": {
+					"type": "boolean",
+					"description": "Whether bot respects robots.txt directives"
+				},
+				"follows_crawl_delay": {
+					"type": "boolean",
+					"description": "Whether bot follows crawl-delay directive"
+				},
+				"javascript_execution": {
+					"type": "boolean",
+					"description": "Whether bot executes JavaScript"
+				},
+				"accepts_cookies": {
+					"type": "boolean",
+					"description": "Whether bot accepts and maintains cookies"
+				},
+				"api_endpoints_accessed": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "List of API endpoints accessed"
+				},
+				"verification_status": {
+					"type": "string",
+					"enum": [
+						"verified",
+						"unverified",
+						"spoofed",
+						"unknown"
+					],
+					"description": "Whether bot identity has been verified"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When bot activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When bot activity was last observed"
+				}
+			},
+			"required": [
+				"protocol",
+				"bot_type",
+				"first_seen"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "bot-2025-001",
+			"timestamp": "2025-01-15T11:30:00Z",
+			"reporter": {
+				"org": "Bot Detection Service",
+				"contact": "botreport@example.com",
+				"type": "automated"
+			},
+			"source_identifier": "203.0.113.42",
+			"class": "connection",
+			"type": "bot",
+			"destination_ip": "198.51.100.80",
+			"destination_port": 443,
+			"protocol": "tcp",
+			"bot_type": "ai_agent",
+			"bot_name": "GPTBot",
+			"user_agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.0)",
+			"behavior_pattern": "legitimate_crawling",
+			"request_rate": 2.5,
+			"total_requests": 150,
+			"respects_robots_txt": true,
+			"follows_crawl_delay": true,
+			"verification_status": "verified",
+			"first_seen": "2025-01-15T11:00:00Z",
+			"last_seen": "2025-01-15T11:28:00Z"
+		}
+	]
+}

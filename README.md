@@ -1,17 +1,17 @@
 # XARF v4 Specification
 
-The eXtended Abuse Reporting Format (XARF) is a standard for reporting abuse incidents in a structured, machine-readable format. XARF v4 introduces a class-based architecture with seven main abuse categories and enhanced evidence handling.
+The eXtended Abuse Reporting Format (XARF) is a standard for reporting abuse incidents in a structured, machine-readable format. XARF v4 introduces a category-based architecture with seven main abuse categories and enhanced evidence handling.
 
 ## 📚 Documentation
 
 - **[Introduction & Overview](docs/introduction.md)** - High-level overview and use cases
 - **[Technical Specification](docs/specification.md)** - Complete technical reference
 - **[Implementation Guide](docs/implementation-guide.md)** - Deployment and project management
-- **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 classes and event types
+- **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 categories and event types
 
-## 🗂️ Seven Abuse Classes
+## 🗂️ Seven Abuse Categories
 
-XARF v4 organizes all abuse reports into seven main classes:
+XARF v4 organizes all abuse reports into seven main categories:
 
 1. **messaging** - Communication abuse (email spam, SMS, chat)
 2. **connection** - Network attacks (DDoS, port scans, login attacks)
@@ -21,17 +21,17 @@ XARF v4 organizes all abuse reports into seven main classes:
 6. **vulnerability** - Security vulnerabilities (CVE reports, misconfigurations)
 7. **reputation** - Threat intelligence (blocklist entries, IOC data)
 
-### Event Types by Class
+### Event Types by Category
 
-Each class contains multiple specific event types with dedicated schemas:
+Each category contains multiple specific event types with dedicated schemas:
 
-| Class | Event Types | Schema Location |
+| Category | Event Types | Schema Location |
 |-------|-------------|-----------------|
 | **messaging** | `spam`, `bulk_messaging` | [`schemas/v4/types/messaging-*.json`](schemas/v4/types/) |
-| **connection** | `login_attack`, `port_scan`, `ddos`, `ddos_amplification`, `auth_failure` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
+| **connection** | `login_attack`, `port_scan`, `ddos`, `ddos_amplification`, `auth_failure`, `sql_injection`, `vuln_scanning`, `reconnaissance`, `scraping`, `bot` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
 | **vulnerability** | `cve`, `open`, `misconfiguration` | [`schemas/v4/types/vulnerability-*.json`](schemas/v4/types/) |
-| **content** | `phishing`, `malware` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
-| **infrastructure** | `bot`, `compromised_server` | [`schemas/v4/types/infrastructure-*.json`](schemas/v4/types/) |
+| **content** | `phishing`, `malware`, `fraud`, `csam`, `csem`, `exposed_data`, `ncii`, `fake_shop`, `hate_speech`, `terrorism`, `self_harm`, `identity_theft`, `pharma_fraud`, `illicit_goods`, `online_predation`, `harassment`, `doxing`, `violence`, `carding`, `gambling_scam`, `threat_to_life`, `disinformation`, `defacement`, `illegal_advertisement`, `web_hack`, `exploit`, `spamvertised` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
+| **infrastructure** | `botnet`, `compromised_server` | [`schemas/v4/types/infrastructure-*.json`](schemas/v4/types/) |
 | **reputation** | `blocklist`, `threat_intelligence` | [`schemas/v4/types/reputation-*.json`](schemas/v4/types/) |
 | **copyright** | `copyright`, `p2p`, `cyberlocker`, `ugc_platform`, `link_site`, `usenet` | [`schemas/v4/types/copyright-*.json`](schemas/v4/types/) |
 
@@ -41,7 +41,7 @@ Sample reports are organized by version for reference and migration purposes:
 
 ```
 samples/
-├── v4/               # XARF v4 samples - one per schema type (22 total)
+├── v4/               # XARF v4 samples - one per schema type (30 total)
 │   ├── messaging-spam.json
 │   ├── messaging-bulk-messaging.json
 │   ├── connection-login-attack.json
@@ -49,12 +49,20 @@ samples/
 │   ├── connection-ddos.json
 │   ├── connection-ddos-amplification.json
 │   ├── connection-auth-failure.json
+│   ├── connection-sql-injection.json
+│   ├── connection-vuln-scanning.json
+│   ├── connection-reconnaissance.json
+│   ├── connection-scraping.json
+│   ├── connection-bot.json
 │   ├── vulnerability-cve.json
 │   ├── vulnerability-open.json
 │   ├── vulnerability-misconfiguration.json
 │   ├── content-phishing.json
 │   ├── content-malware.json
-│   ├── infrastructure-bot.json
+│   ├── content-csam.json
+│   ├── content-csem.json
+│   ├── content-exposed-data.json
+│   ├── infrastructure-botnet.json
 │   ├── infrastructure-compromised-server.json
 │   ├── reputation-blocklist.json
 │   ├── reputation-threat-intelligence.json
@@ -119,8 +127,8 @@ XARF v4 maintains backward compatibility with v3 reports. See our [migration gui
     "type": "automated|manual|hybrid"
   },
   "source_identifier": "192.0.2.1",
-  "class": "messaging|connection|content|infrastructure|copyright|vulnerability|reputation",
-  "type": "specific_type_per_class",
+  "category": "messaging|connection|content|infrastructure|copyright|vulnerability|reputation",
+  "type": "specific_type_per_category",
   "evidence_source": "spamtrap|honeypot|user_report|automated_scan|manual_analysis",
   "evidence": [
     {

@@ -1,0 +1,117 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-csam.json",
+	"title": "XARF v4 Content - CSAM Type Schema",
+	"description": "Schema for Child Sexual Abuse Material (baseline/A1/A2/B1/B2 illegal content)",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "csam"
+				},
+				"classification": {
+					"type": "string",
+					"enum": [
+						"baseline",
+						"A1",
+						"A2",
+						"B1",
+						"B2"
+					],
+					"description": "CSAM classification category"
+				},
+				"ncmec_report_id": {
+					"type": "string",
+					"description": "NCMEC CyberTipline Report ID if available"
+				},
+				"iwf_hash": {
+					"type": "string",
+					"description": "IWF hash value if available"
+				},
+				"photodna_hash": {
+					"type": "string",
+					"description": "PhotoDNA hash value if available"
+				},
+				"detection_method": {
+					"type": "string",
+					"enum": [
+						"hash_match",
+						"ai_detection",
+						"manual_review",
+						"user_report",
+						"automated_scan"
+					],
+					"description": "Method used to detect the CSAM"
+				},
+				"file_hash": {
+					"type": "object",
+					"properties": {
+						"md5": {
+							"type": "string",
+							"pattern": "^[a-f0-9]{32}$"
+						},
+						"sha1": {
+							"type": "string",
+							"pattern": "^[a-f0-9]{40}$"
+						},
+						"sha256": {
+							"type": "string",
+							"pattern": "^[a-f0-9]{64}$"
+						}
+					},
+					"description": "File hash values"
+				},
+				"media_type": {
+					"type": "string",
+					"enum": [
+						"image",
+						"video",
+						"text",
+						"audio",
+						"mixed"
+					],
+					"description": "Type of media containing CSAM"
+				},
+				"reporting_obligations": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"NCMEC",
+							"IWF",
+							"local_law_enforcement",
+							"europol",
+							"interpol",
+							"other"
+						]
+					},
+					"description": "Entities to which this has been or should be reported"
+				}
+			}
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "csam-report-2025-001",
+			"timestamp": "2025-01-15T10:30:00Z",
+			"reporter": {
+				"org": "Content Safety Service",
+				"contact": "safety@example.org",
+				"type": "automated"
+			},
+			"source_identifier": "198.51.100.42",
+			"class": "content",
+			"type": "csam",
+			"url": "https://example.com/illegal-content",
+			"classification": "A1",
+			"detection_method": "hash_match",
+			"media_type": "image",
+			"reporting_obligations": ["NCMEC", "local_law_enforcement"]
+		}
+	]
+}

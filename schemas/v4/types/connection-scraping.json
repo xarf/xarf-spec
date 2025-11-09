@@ -1,0 +1,171 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-scraping.json",
+	"title": "XARF v4 Connection - Scraping Type Schema",
+	"description": "Schema for web crawling and scraping activities",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "scraping"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address being scraped"
+				},
+				"destination_port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number (typically 80 or 443)"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp"
+					],
+					"default": "tcp",
+					"description": "Network protocol used"
+				},
+				"scraping_pattern": {
+					"type": "string",
+					"enum": [
+						"sequential",
+						"random",
+						"targeted",
+						"sitemap_following",
+						"api_harvesting",
+						"deep_crawling",
+						"breadth_first",
+						"depth_first"
+					],
+					"description": "Pattern of scraping behavior observed"
+				},
+				"target_content": {
+					"type": "string",
+					"enum": [
+						"product_data",
+						"pricing_information",
+						"user_profiles",
+						"contact_information",
+						"news_articles",
+						"images",
+						"documents",
+						"api_data",
+						"search_results",
+						"general_content",
+						"other"
+					],
+					"description": "Type of content being scraped"
+				},
+				"user_agent": {
+					"type": "string",
+					"description": "User-Agent string used by the scraper"
+				},
+				"bot_signature": {
+					"type": "string",
+					"description": "Known bot or scraper signature if identified",
+					"examples": [
+						"Googlebot",
+						"Bingbot",
+						"AhrefsBot",
+						"SemrushBot",
+						"MJ12bot",
+						"DotBot",
+						"Custom Python Script",
+						"Scrapy"
+					]
+				},
+				"request_rate": {
+					"type": "number",
+					"description": "Average requests per second"
+				},
+				"total_requests": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Total number of requests made"
+				},
+				"unique_urls": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Number of unique URLs accessed"
+				},
+				"data_volume": {
+					"type": "integer",
+					"description": "Total bytes of data transferred"
+				},
+				"respects_robots_txt": {
+					"type": "boolean",
+					"description": "Whether the scraper respects robots.txt"
+				},
+				"session_duration": {
+					"type": "integer",
+					"description": "Duration of scraping session in seconds"
+				},
+				"concurrent_connections": {
+					"type": "integer",
+					"description": "Maximum concurrent connections observed"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When scraping activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When scraping activity was last observed"
+				}
+			},
+			"required": [
+				"protocol",
+				"first_seen",
+				"total_requests"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "scrape-2025-001",
+			"timestamp": "2025-01-15T14:00:00Z",
+			"reporter": {
+				"org": "Website Protection Service",
+				"contact": "abuse@hosting.example",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.150",
+			"class": "connection",
+			"type": "scraping",
+			"destination_ip": "198.51.100.25",
+			"destination_port": 443,
+			"protocol": "tcp",
+			"scraping_pattern": "deep_crawling",
+			"target_content": "product_data",
+			"user_agent": "Mozilla/5.0 (compatible; DataBot/1.0)",
+			"request_rate": 15.5,
+			"total_requests": 45000,
+			"unique_urls": 3500,
+			"respects_robots_txt": false,
+			"concurrent_connections": 25,
+			"first_seen": "2025-01-15T10:00:00Z",
+			"last_seen": "2025-01-15T13:45:00Z"
+		}
+	]
+}

@@ -1,0 +1,234 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-base.json",
+	"title": "XARF v4 Content Class - Base Schema",
+	"description": "Base schema for all content class abuse types with shared fields",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "content"
+				},
+				"url": {
+					"type": "string",
+					"format": "uri",
+					"description": "The URL of the abusive content",
+					"examples": [
+						"https://phishing-site.example.com/login",
+						"http://malware-host.example.net/payload.exe"
+					]
+				},
+				"domain": {
+					"type": "string",
+					"pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$",
+					"description": "Fully qualified domain name of the abusive content",
+					"examples": [
+						"phishing-site.example.com",
+						"malware.example.net"
+					]
+				},
+				"registrar": {
+					"type": "string",
+					"description": "Domain registrar if known",
+					"examples": [
+						"GoDaddy",
+						"Namecheap",
+						"CloudFlare"
+					]
+				},
+				"nameservers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "DNS nameservers for the domain",
+					"examples": [
+						["ns1.example.com", "ns2.example.com"]
+					]
+				},
+				"dns_records": {
+					"type": "object",
+					"properties": {
+						"a": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": "ipv4"
+							}
+						},
+						"aaaa": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": "ipv6"
+							}
+						},
+						"mx": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"txt": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"description": "Key DNS evidence records"
+				},
+				"screenshot_url": {
+					"type": "string",
+					"format": "uri",
+					"description": "Reference URL to screenshot evidence"
+				},
+				"verified_at": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When content was last verified as active"
+				},
+				"verification_method": {
+					"type": "string",
+					"enum": [
+						"manual",
+						"automated_crawler",
+						"user_report",
+						"honeypot",
+						"threat_intelligence"
+					],
+					"description": "How the abusive content was verified"
+				},
+				"attack_vector": {
+					"type": "string",
+					"enum": [
+						"phishing",
+						"malware",
+						"fraud",
+						"brand_infringement",
+						"copyright_infringement",
+						"data_leak",
+						"remote_compromise",
+						"suspicious_registration"
+					],
+					"description": "Primary attack vector classification"
+				},
+				"target_brand": {
+					"type": "string",
+					"description": "Impersonated brand or entity if applicable",
+					"examples": [
+						"PayPal",
+						"Microsoft",
+						"Amazon"
+					]
+				},
+				"hosting_provider": {
+					"type": "string",
+					"description": "Identified hosting provider",
+					"examples": [
+						"AWS",
+						"CloudFlare",
+						"DigitalOcean"
+					]
+				},
+				"asn": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 4294967295,
+					"description": "Autonomous System Number"
+				},
+				"country_code": {
+					"type": "string",
+					"pattern": "^[A-Z]{2}$",
+					"description": "ISO 3166-1 alpha-2 country code"
+				},
+				"ssl_certificate": {
+					"type": "object",
+					"properties": {
+						"issuer": {
+							"type": "string",
+							"description": "Certificate issuer"
+						},
+						"subject": {
+							"type": "string",
+							"description": "Certificate subject"
+						},
+						"valid_from": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"valid_to": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"fingerprint": {
+							"type": "string",
+							"description": "SHA256 fingerprint of the certificate"
+						}
+					},
+					"description": "SSL certificate details if HTTPS is used"
+				},
+				"whois": {
+					"type": "object",
+					"properties": {
+						"registrant": {
+							"type": "string",
+							"description": "Domain registrant name or organization"
+						},
+						"created_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "Domain creation date"
+						},
+						"updated_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "Domain last updated date"
+						},
+						"expiry_date": {
+							"type": "string",
+							"format": "date-time",
+							"description": "Domain expiration date"
+						},
+						"registrar_abuse_contact": {
+							"type": "string",
+							"format": "email",
+							"description": "Registrar's abuse contact email"
+						}
+					},
+					"description": "WHOIS data for the domain"
+				},
+				"dns_response": {
+					"type": "object",
+					"properties": {
+						"query_time": {
+							"type": "string",
+							"format": "date-time",
+							"description": "When the DNS query was made"
+						},
+						"authoritative": {
+							"type": "boolean",
+							"description": "Whether response was from authoritative nameserver"
+						},
+						"response_code": {
+							"type": "string",
+							"enum": [
+								"NOERROR",
+								"NXDOMAIN",
+								"SERVFAIL",
+								"REFUSED"
+							],
+							"description": "DNS response code"
+						}
+					},
+					"description": "DNS query response metadata"
+				}
+			},
+			"required": ["url"]
+		}
+	]
+}

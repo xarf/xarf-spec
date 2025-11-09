@@ -1,0 +1,210 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-remote_compromise.json",
+	"title": "XARF v4 Content - Remote Compromise Type Schema",
+	"description": "Schema for compromised websites, webshells, and unauthorized access",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "remote_compromise"
+				},
+				"compromise_type": {
+					"type": "string",
+					"enum": [
+						"webshell",
+						"backdoor",
+						"defacement",
+						"malicious_redirect",
+						"seo_spam",
+						"cryptominer",
+						"phishing_kit",
+						"malware_host",
+						"c2_server",
+						"proxy",
+						"scanner",
+						"other"
+					],
+					"description": "Type of compromise detected"
+				},
+				"compromise_indicators": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"type": {
+								"type": "string",
+								"enum": [
+									"file_path",
+									"process",
+									"network_connection",
+									"user_account",
+									"scheduled_task",
+									"registry_key",
+									"service"
+								]
+							},
+							"value": {
+								"type": "string",
+								"description": "Indicator value (e.g., file path, process name)"
+							},
+							"description": {
+								"type": "string"
+							}
+						},
+						"required": ["type", "value"]
+					},
+					"description": "Specific indicators of compromise"
+				},
+				"webshell_details": {
+					"type": "object",
+					"properties": {
+						"family": {
+							"type": "string",
+							"description": "Known webshell family",
+							"examples": ["WSO", "C99", "B374K", "R57"]
+						},
+						"capabilities": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"enum": [
+									"file_manager",
+									"command_execution",
+									"database_access",
+									"network_scanning",
+									"privilege_escalation",
+									"persistence",
+									"other"
+								]
+							}
+						},
+						"password_protected": {
+							"type": "boolean"
+						}
+					},
+					"description": "Details specific to webshell compromises"
+				},
+				"affected_cms": {
+					"type": "string",
+					"enum": [
+						"wordpress",
+						"joomla",
+						"drupal",
+						"magento",
+						"prestashop",
+						"opencart",
+						"custom",
+						"unknown",
+						"other"
+					],
+					"description": "Content management system if identified"
+				},
+				"vulnerability_exploited": {
+					"type": "object",
+					"properties": {
+						"cve": {
+							"type": "string",
+							"pattern": "^CVE-\\d{4}-\\d{4,}$"
+						},
+						"description": {
+							"type": "string"
+						},
+						"component": {
+							"type": "string",
+							"description": "Vulnerable component (e.g., plugin name)"
+						}
+					},
+					"description": "Vulnerability used for initial compromise if known"
+				},
+				"persistence_mechanisms": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"cron_job",
+							"modified_core_files",
+							"hidden_admin_account",
+							"autoload_backdoor",
+							"htaccess_modification",
+							"database_backdoor",
+							"other"
+						]
+					},
+					"description": "Methods used to maintain access"
+				},
+				"malicious_activities": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"spam_sending",
+							"ddos_attacks",
+							"cryptocurrency_mining",
+							"data_exfiltration",
+							"lateral_movement",
+							"hosting_malware",
+							"hosting_phishing",
+							"scanning",
+							"other"
+						]
+					},
+					"description": "Observed malicious activities from the compromised site"
+				},
+				"cleanup_status": {
+					"type": "string",
+					"enum": [
+						"not_cleaned",
+						"partially_cleaned",
+						"cleaned",
+						"reinfected",
+						"unknown"
+					],
+					"description": "Current cleanup status of the compromise"
+				}
+			},
+			"required": ["compromise_type"]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "d4e5f6a7-b8c9-0123-def4-567890abcdef",
+			"timestamp": "2025-01-15T11:30:00Z",
+			"reporter": {
+				"org": "Web Security Scanner",
+				"contact": "abuse@websecscanner.example",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.150",
+			"class": "content",
+			"type": "remote_compromise",
+			"url": "https://compromised-site.example.com/wp-content/uploads/shell.php",
+			"compromise_type": "webshell",
+			"affected_cms": "wordpress",
+			"webshell_details": {
+				"family": "WSO",
+				"capabilities": ["file_manager", "command_execution", "database_access"],
+				"password_protected": true
+			},
+			"compromise_indicators": [
+				{
+					"type": "file_path",
+					"value": "/wp-content/uploads/2025/01/shell.php",
+					"description": "Webshell located in uploads directory"
+				}
+			],
+			"evidence": [
+				{
+					"content_type": "text/plain",
+					"description": "Webshell source code snippet",
+					"payload": "base64_encoded_code"
+				}
+			]
+		}
+	]
+}

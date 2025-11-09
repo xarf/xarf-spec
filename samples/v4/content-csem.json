@@ -1,0 +1,32 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "csem-2025-e5f6g7h8",
+	"timestamp": "2025-01-20T14:20:00Z",
+	"reporter": {
+		"org": "Platform Safety Team",
+		"contact": "safety@platform.example",
+		"type": "manual"
+	},
+	"source_identifier": "203.0.113.55",
+	"class": "content",
+	"type": "csem",
+	"url": "https://platform.example/user/suspicious-account",
+	"exploitation_type": "grooming",
+	"victim_age_range": "pubescent",
+	"detection_method": "behavioral_analysis",
+	"platform": "social_media",
+	"evidence_type": ["chat_logs", "user_profile"],
+	"reporting_obligations": ["NCMEC", "local_law_enforcement", "platform_safety_team"],
+	"perpetrator_indicators": {
+		"account_id": "user123456",
+		"ip_addresses": ["203.0.113.55", "203.0.113.56"],
+		"pattern_of_behavior": "Repeated contact with minors, requesting private information"
+	},
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Redacted chat transcript",
+			"payload": "UmVkYWN0ZWQgY2hhdCB0cmFuc2NyaXB0"
+		}
+	]
+}

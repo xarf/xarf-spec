@@ -1,0 +1,142 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-sql-injection.json",
+	"title": "XARF v4 Connection - SQL Injection Type Schema",
+	"description": "Schema for SQL injection attack attempts",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "sql_injection"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address"
+				},
+				"destination_port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number (typically 80, 443)"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp"
+					],
+					"default": "tcp",
+					"description": "Network protocol used"
+				},
+				"http_method": {
+					"type": "string",
+					"enum": [
+						"GET",
+						"POST",
+						"PUT",
+						"DELETE",
+						"PATCH",
+						"HEAD",
+						"OPTIONS"
+					],
+					"description": "HTTP method used in the attack"
+				},
+				"target_url": {
+					"type": "string",
+					"format": "uri",
+					"description": "Full URL that was targeted"
+				},
+				"injection_point": {
+					"type": "string",
+					"enum": [
+						"query_parameter",
+						"post_body",
+						"cookie",
+						"header",
+						"path",
+						"json_parameter"
+					],
+					"description": "Where the SQL injection was attempted"
+				},
+				"payload_sample": {
+					"type": "string",
+					"description": "Sample of the SQL injection payload (sanitized)",
+					"maxLength": 1000
+				},
+				"attack_technique": {
+					"type": "string",
+					"enum": [
+						"union_based",
+						"error_based",
+						"boolean_blind",
+						"time_blind",
+						"stacked_queries",
+						"out_of_band",
+						"second_order",
+						"other"
+					],
+					"description": "SQL injection technique used"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When attack activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When attack activity was last observed"
+				},
+				"attempts_count": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Number of injection attempts observed"
+				}
+			},
+			"required": [
+				"protocol",
+				"first_seen"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "sql-2025-001",
+			"timestamp": "2025-01-15T12:00:00Z",
+			"reporter": {
+				"org": "Web Application Firewall",
+				"contact": "security@example.com",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.45",
+			"class": "connection",
+			"type": "sql_injection",
+			"destination_ip": "198.51.100.10",
+			"destination_port": 443,
+			"protocol": "tcp",
+			"http_method": "GET",
+			"target_url": "https://example.com/products.php?id=1",
+			"injection_point": "query_parameter",
+			"attack_technique": "union_based",
+			"attempts_count": 15,
+			"first_seen": "2025-01-15T11:45:00Z",
+			"last_seen": "2025-01-15T12:00:00Z"
+		}
+	]
+}

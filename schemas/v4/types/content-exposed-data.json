@@ -1,0 +1,180 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-exposed-data.json",
+	"title": "XARF v4 Content - Exposed Data Type Schema",
+	"description": "Schema for exposed sensitive data and information leaks",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "exposed_data"
+				},
+				"data_types": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"personal_information",
+							"credentials",
+							"financial",
+							"medical",
+							"government_id",
+							"email_addresses",
+							"phone_numbers",
+							"api_keys",
+							"database_dumps",
+							"source_code",
+							"internal_documents",
+							"customer_data",
+							"employee_data",
+							"intellectual_property",
+							"other"
+						]
+					},
+					"minItems": 1,
+					"description": "Types of data exposed"
+				},
+				"exposure_method": {
+					"type": "string",
+					"enum": [
+						"misconfigured_server",
+						"open_directory",
+						"database_exposure",
+						"git_repository",
+						"backup_file",
+						"log_file",
+						"cloud_storage",
+						"paste_site",
+						"forum_post",
+						"ransomware_leak",
+						"intentional_leak",
+						"other"
+					],
+					"description": "How the data was exposed"
+				},
+				"record_count": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Number of records exposed (if known)"
+				},
+				"affected_organization": {
+					"type": "string",
+					"description": "Organization whose data was exposed"
+				},
+				"data_format": {
+					"type": "string",
+					"enum": [
+						"plaintext",
+						"csv",
+						"json",
+						"xml",
+						"sql",
+						"excel",
+						"pdf",
+						"mixed",
+						"other"
+					],
+					"description": "Format of the exposed data"
+				},
+				"sensitive_fields": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Specific sensitive data fields exposed",
+					"examples": [
+						["ssn", "credit_card", "password"],
+						["email", "phone", "address"]
+					]
+				},
+				"encryption_status": {
+					"type": "string",
+					"enum": [
+						"unencrypted",
+						"encrypted",
+						"partially_encrypted",
+						"hashed",
+						"unknown"
+					],
+					"description": "Whether the exposed data was encrypted"
+				},
+				"accessibility": {
+					"type": "string",
+					"enum": [
+						"public",
+						"requires_authentication",
+						"requires_payment",
+						"dark_web",
+						"removed"
+					],
+					"description": "Current accessibility of the exposed data"
+				},
+				"discovery_source": {
+					"type": "string",
+					"enum": [
+						"security_researcher",
+						"automated_scan",
+						"breach_monitoring",
+						"user_report",
+						"law_enforcement",
+						"threat_intelligence",
+						"other"
+					],
+					"description": "How the data exposure was discovered"
+				},
+				"sample_records": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"description": {
+								"type": "string"
+							},
+							"redacted_sample": {
+								"type": "string"
+							}
+						}
+					},
+					"maxItems": 5,
+					"description": "Redacted samples of exposed records for verification"
+				}
+			},
+			"required": ["data_types", "exposure_method"]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "f1e2d3c4-b5a6-7890-abcd-ef1234567890",
+			"timestamp": "2025-01-15T09:20:00Z",
+			"reporter": {
+				"org": "Data Breach Monitor",
+				"contact": "alerts@breachmonitor.example",
+				"type": "automated"
+			},
+			"source_identifier": "198.51.100.99",
+			"class": "content",
+			"type": "exposed_data",
+			"url": "http://exposed-database.example.com:8080/dump.sql",
+			"data_types": ["credentials", "personal_information", "financial"],
+			"exposure_method": "misconfigured_server",
+			"record_count": 150000,
+			"affected_organization": "Example Corp",
+			"data_format": "sql",
+			"sensitive_fields": ["email", "password_hash", "credit_card"],
+			"encryption_status": "hashed",
+			"accessibility": "public",
+			"evidence": [
+				{
+					"content_type": "text/plain",
+					"description": "Sample of exposed database structure",
+					"payload": "base64_encoded_sample"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,148 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-vuln-scanning.json",
+	"title": "XARF v4 Connection - Vulnerability Scanning Type Schema",
+	"description": "Schema for vulnerability scanning activities",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "vuln_scanning"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address being scanned"
+				},
+				"scan_type": {
+					"type": "string",
+					"enum": [
+						"port_scan",
+						"vulnerability_scan",
+						"version_detection",
+						"os_fingerprinting",
+						"service_enumeration",
+						"web_vuln_scan",
+						"directory_brute_force",
+						"mixed"
+					],
+					"description": "Type of scanning activity"
+				},
+				"scanner_signature": {
+					"type": "string",
+					"description": "Known scanner tool signature if identified",
+					"examples": [
+						"Nmap",
+						"Masscan",
+						"Nikto",
+						"OpenVAS",
+						"Nessus",
+						"Acunetix",
+						"Burp Scanner"
+					]
+				},
+				"targeted_ports": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 65535
+					},
+					"description": "List of ports that were scanned"
+				},
+				"targeted_services": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Services that were targeted",
+					"examples": [
+						["http", "https", "ssh", "ftp", "mysql", "postgresql", "mongodb"]
+					]
+				},
+				"vulnerabilities_probed": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Specific vulnerabilities or CVEs that were probed"
+				},
+				"scan_rate": {
+					"type": "number",
+					"description": "Requests per second if measurable"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp",
+						"icmp",
+						"mixed"
+					],
+					"description": "Network protocol(s) used in scanning"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When scanning activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When scanning activity was last observed"
+				},
+				"total_requests": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Total number of scanning requests observed"
+				},
+				"user_agent": {
+					"type": "string",
+					"description": "User-Agent string if HTTP-based scanning"
+				}
+			},
+			"required": [
+				"scan_type",
+				"protocol",
+				"first_seen"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "scan-2025-001",
+			"timestamp": "2025-01-15T09:30:00Z",
+			"reporter": {
+				"org": "Network Security Monitor",
+				"contact": "noc@example.net",
+				"type": "automated"
+			},
+			"source_identifier": "203.0.113.77",
+			"class": "connection",
+			"type": "vuln_scanning",
+			"destination_ip": "198.51.100.50",
+			"scan_type": "web_vuln_scan",
+			"scanner_signature": "Nikto",
+			"targeted_ports": [80, 443, 8080, 8443],
+			"protocol": "tcp",
+			"total_requests": 1250,
+			"first_seen": "2025-01-15T09:15:00Z",
+			"last_seen": "2025-01-15T09:28:00Z"
+		}
+	]
+}

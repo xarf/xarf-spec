@@ -391,15 +391,15 @@ def process_abuse_email(email_message):
     # Parse with automatic v3/v4 detection
     report = xarf_parser.parse(xarf_data)
     
-    # Route based on class and type
-    if report.class == 'messaging' and report.type == 'spam':
+    # Route based on category and type
+    if report.category == 'messaging' and report.type == 'spam':
         route_to_spam_team(report)
-    elif report.class == 'content' and report.type == 'phishing':
+    elif report.category == 'content' and report.type == 'phishing':
         route_to_takedown_team(report)
-    
+
     # Create ticket with structured data
     ticket = create_ticket(
-        title=f"{report.class.title()} abuse from {report.source_identifier}",
+        title=f"{report.category.title()} abuse from {report.source_identifier}",
         description=format_report_summary(report),
         evidence=report.evidence,
         priority=calculate_priority(report)
@@ -418,8 +418,8 @@ app.post('/xarf/reports', async (req, res) => {
     await validateReport(report);
     const enrichedReport = await enrichWithThreatIntel(report);
     
-    // Process based on class
-    switch (report.class) {
+    // Process based on category
+    switch (report.category) {
       case 'connection':
         await handleNetworkAttack(enrichedReport);
         break;
@@ -455,7 +455,7 @@ func processXARFStream(stream chan []byte) {
         
         // Update metrics
         metrics.ReportsProcessed.Inc()
-        metrics.ReportsByClass.WithLabelValues(report.Class).Inc()
+        metrics.ReportsByCategory.WithLabelValues(report.Category).Inc()
     }
 }
 ```
@@ -488,7 +488,7 @@ def parse_xarf_report(data):
 metrics:
   - name: xarf_reports_processed_total
     type: counter
-    labels: [class, type, source]
+    labels: [category, type, source]
   - name: xarf_parsing_errors_total
     type: counter
     labels: [error_type, version]
@@ -521,6 +521,45 @@ alerts:
 - **Error Handling**: Structured error responses with detailed validation information
 - **Extensibility**: Plugin architecture for custom validation and processing
 - **Backwards Compatibility**: Automatic v3 support with transparent conversion
+
+### Attribute Categorization Implementation
+
+**Three-Tier Field System:**
+
+Parsers must implement support for the three-tier attribute categorization system:
+
+1. **Required Attributes**
+   - **Validation**: MUST reject reports missing these fields
+   - **Error Handling**: Return clear error messages identifying missing required fields
+   - **Documentation**: Clearly mark as mandatory in all API documentation
+
+2. **Recommended Attributes**
+   - **Validation**: SHOULD generate warnings when missing
+   - **Configuration**: Allow users to upgrade warnings to errors (strict mode)
+   - **Reporting**: Track and report missing recommended fields in validation summary
+   - **Documentation**: Explain why these fields improve report utility
+
+3. **Optional Attributes**
+   - **Validation**: No warnings or errors when missing
+   - **Support**: Full parsing and validation when present
+   - **Extension**: Allow custom optional fields for organization-specific needs
+   - **Documentation**: Provide use cases and examples
+
+**Validation Mode Configuration:**
+```python
+# Example API for validation modes
+parser = XARFParser(
+    mode="standard",  # standard, strict, permissive, legacy
+    warn_missing_recommended=True,
+    allow_unknown_fields=False
+)
+```
+
+**Implementation Guidelines:**
+- Provide clear validation mode configuration options
+- Support runtime switching between validation modes
+- Generate detailed validation reports showing field categorization
+- Include migration tools to help upgrade from permissive to strict validation
 
 ### Testing Strategy
 
@@ -602,7 +641,7 @@ jobs:
 ```
 
 **Test Data Management:**
-- **Comprehensive Sample Set**: Real-world reports from all classes and types
+- **Comprehensive Sample Set**: Real-world reports from all categories and types
 - **Edge Case Collection**: Malformed, oversized, and boundary condition samples
 - **Version Compatibility**: Complete v3 sample set for conversion testing
 - **Security Test Cases**: Malicious payloads and attack vectors

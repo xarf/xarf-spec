@@ -1,0 +1,133 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/content-fraud.json",
+	"title": "XARF v4 Content - Fraud Type Schema",
+	"description": "Schema for fraud and scam websites",
+	"allOf": [
+		{
+			"$ref": "./content-base.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"type": {
+					"const": "fraud"
+				},
+				"fraud_type": {
+					"type": "string",
+					"enum": [
+						"investment",
+						"romance",
+						"tech_support",
+						"lottery",
+						"advance_fee",
+						"cryptocurrency",
+						"shopping",
+						"charity",
+						"employment",
+						"government_impersonation",
+						"other"
+					],
+					"description": "Specific type of fraud"
+				},
+				"payment_methods": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"credit_card",
+							"bank_transfer",
+							"cryptocurrency",
+							"gift_cards",
+							"wire_transfer",
+							"paypal",
+							"western_union",
+							"moneygram",
+							"cashapp",
+							"venmo",
+							"other"
+						]
+					},
+					"description": "Payment methods requested by fraudsters"
+				},
+				"cryptocurrency_addresses": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"currency": {
+								"type": "string",
+								"enum": [
+									"bitcoin",
+									"ethereum",
+									"usdt",
+									"bnb",
+									"monero",
+									"other"
+								]
+							},
+							"address": {
+								"type": "string",
+								"description": "Cryptocurrency wallet address"
+							}
+						},
+						"required": ["currency", "address"]
+					},
+					"description": "Cryptocurrency addresses used in the fraud"
+				},
+				"claimed_entity": {
+					"type": "string",
+					"description": "Organization or person the fraudster claims to represent"
+				},
+				"loss_amount": {
+					"type": "object",
+					"properties": {
+						"currency": {
+							"type": "string",
+							"pattern": "^[A-Z]{3}$",
+							"description": "ISO 4217 currency code"
+						},
+						"amount": {
+							"type": "number",
+							"minimum": 0,
+							"description": "Estimated or actual loss amount"
+						}
+					},
+					"description": "Financial loss information if known"
+				}
+			},
+			"required": ["fraud_type"]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
+			"timestamp": "2025-01-15T10:30:00Z",
+			"reporter": {
+				"org": "Anti-Fraud Coalition",
+				"contact": "reports@antifraud.example",
+				"type": "automated"
+			},
+			"source_identifier": "198.51.100.45",
+			"class": "content",
+			"type": "fraud",
+			"url": "https://get-rich-quick.example.com",
+			"fraud_type": "investment",
+			"payment_methods": ["cryptocurrency", "wire_transfer"],
+			"cryptocurrency_addresses": [
+				{
+					"currency": "bitcoin",
+					"address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+				}
+			],
+			"evidence": [
+				{
+					"content_type": "image/png",
+					"description": "Screenshot of fraudulent investment site",
+					"payload": "base64_encoded_screenshot"
+				}
+			]
+		}
+	]
+}

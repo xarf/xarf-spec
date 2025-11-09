@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://xarf.org/schemas/v4/types/infrastructure-bot.json",
-	"title": "XARF v4 Infrastructure - Bot Type Schema",
+	"$id": "https://xarf.org/schemas/v4/types/infrastructure-botnet.json",
+	"title": "XARF v4 Infrastructure - Botnet Type Schema",
 	"description": "Schema for Botnet infections and compromised systems",
 	"allOf": [
 		{
@@ -14,7 +14,7 @@
 					"const": "infrastructure"
 				},
 				"type": {
-					"const": "bot"
+					"const": "botnet"
 				},
 				"malware_family": {
 					"type": "string",

@@ -49,9 +49,9 @@ XARF v4 is built around the principle: **One incident = One report**, sent immed
 
 ## Core Concepts
 
-### Seven Abuse Classes
+### Seven Abuse Categories
 
-XARF v4 organizes all abuse into seven primary classes, each with specific types and evidence requirements:
+XARF v4 organizes all abuse into seven primary categories, each with specific types and evidence requirements:
 
 1. **`messaging`** - Communication abuse (spam, bulk messaging)
    - *Examples*: Email spam, SMS spam, chat abuse
@@ -120,7 +120,7 @@ XARF v4 Report → Parser → Ticket System → Automated Response
 **What you get:**
 - **Rich context** for campaign tracking and attribution
 - **Flexible evidence** format supports any content type
-- **Tag system** for classification and correlation
+- **Tag system** for categorization and correlation
 - **Multi-language libraries** (Python, JavaScript, Go, PHP, Java, Rust)
 
 **Common use cases:**
@@ -204,7 +204,7 @@ See the [Implementation Guide](./implementation-guide.md) for:
     "type": "automated"
   },
   "source_identifier": "192.0.2.1",
-  "class": "messaging",
+  "category": "messaging",
   "type": "spam",
   "evidence": [...],
   "tags": ["malware:conficker", "campaign:winter2024"]
@@ -212,10 +212,12 @@ See the [Implementation Guide](./implementation-guide.md) for:
 ```
 
 **Key design principles:**
+- **Three-tier attribute system**: Clear categorization of Required, Recommended, and Optional fields
 - **Required fields**: Only essential information for abuse response
-- **Optional enrichment**: Tags, confidence scores, additional context
+- **Recommended fields**: Important context that significantly improves report utility
+- **Optional enrichment**: Tags, confidence scores, additional context for advanced use cases
 - **Forward compatibility**: Unknown fields are preserved but ignored
-- **Validation**: JSON Schema-based with type-specific rules
+- **Validation**: JSON Schema-based with type-specific rules and configurable validation modes
 
 ### Backwards Compatibility
 
@@ -229,13 +231,13 @@ XARF v4 maintains complete compatibility with v3:
 ### Version Evolution
 
 ```
-v4.0.0: Initial release with messaging class
-v4.1.0: Add connection class (login attacks, DDoS)
-v4.2.0: Add content class (phishing, malware)
-v4.3.0: Add infrastructure class (botnets, C2)
-v4.4.0: Add copyright class (DMCA replacement)
-v4.5.0: Add vulnerability class (security disclosures)
-v4.6.0: Add reputation class (threat intelligence)
+v4.0.0: Initial release with messaging category
+v4.1.0: Add connection category (login attacks, DDoS)
+v4.2.0: Add content category (phishing, malware)
+v4.3.0: Add infrastructure category (botnets, C2)
+v4.4.0: Add copyright category (DMCA replacement)
+v4.5.0: Add vulnerability category (security disclosures)
+v4.6.0: Add reputation category (threat intelligence)
 v5.0.0: Breaking changes (years in future)
 ```
 

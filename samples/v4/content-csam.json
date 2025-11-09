@@ -1,0 +1,31 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "csam-2025-a1b2c3d4",
+	"timestamp": "2025-01-20T10:30:00Z",
+	"reporter": {
+		"org": "Content Safety Service",
+		"contact": "safety@example.org",
+		"type": "automated"
+	},
+	"source_identifier": "198.51.100.42",
+	"class": "content",
+	"type": "csam",
+	"url": "https://example.com/illegal-content",
+	"domain": "example.com",
+	"classification": "A1",
+	"detection_method": "hash_match",
+	"media_type": "image",
+	"ncmec_report_id": "NCMEC-2025-0001234",
+	"file_hash": {
+		"md5": "d41d8cd98f00b204e9800998ecf8427e",
+		"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+	},
+	"reporting_obligations": ["NCMEC", "local_law_enforcement"],
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Hash match details",
+			"payload": "SGFzaCBtYXRjaCBkZXRhaWxz"
+		}
+	]
+}

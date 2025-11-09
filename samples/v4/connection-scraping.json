@@ -1,0 +1,36 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "scrape-2025-y5z6a7b8",
+	"timestamp": "2025-01-20T14:00:00Z",
+	"reporter": {
+		"org": "Website Protection Service",
+		"contact": "abuse@hosting.example",
+		"type": "automated"
+	},
+	"source_identifier": "192.0.2.150",
+	"class": "connection",
+	"type": "scraping",
+	"destination_ip": "198.51.100.25",
+	"destination_port": 443,
+	"protocol": "tcp",
+	"scraping_pattern": "deep_crawling",
+	"target_content": "product_data",
+	"user_agent": "Mozilla/5.0 (compatible; DataBot/1.0)",
+	"bot_signature": "Custom Python Script",
+	"request_rate": 15.5,
+	"total_requests": 45000,
+	"unique_urls": 3500,
+	"data_volume": 524288000,
+	"respects_robots_txt": false,
+	"session_duration": 13800,
+	"concurrent_connections": 25,
+	"first_seen": "2025-01-20T10:00:00Z",
+	"last_seen": "2025-01-20T13:45:00Z",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Rate limiting logs",
+			"payload": "UmF0ZSBsaW1pdGluZyBsb2dz"
+		}
+	]
+}

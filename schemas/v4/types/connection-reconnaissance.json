@@ -1,0 +1,165 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://xarf.org/schemas/v4/types/connection-reconnaissance.json",
+	"title": "XARF v4 Connection - Reconnaissance Type Schema",
+	"description": "Schema for reconnaissance and probing activities (e.g., .env, .git, .htaccess files)",
+	"allOf": [
+		{
+			"$ref": "../xarf-core.json"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": {
+					"const": "connection"
+				},
+				"type": {
+					"const": "reconnaissance"
+				},
+				"destination_ip": {
+					"type": "string",
+					"anyOf": [
+						{
+							"format": "ipv4"
+						},
+						{
+							"format": "ipv6"
+						}
+					],
+					"description": "Target IP address"
+				},
+				"destination_port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number"
+				},
+				"protocol": {
+					"type": "string",
+					"enum": [
+						"tcp",
+						"udp"
+					],
+					"default": "tcp",
+					"description": "Network protocol used"
+				},
+				"probed_resources": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "List of resources that were probed",
+					"examples": [
+						["/.env", "/.git/config", "/.htaccess", "/wp-config.php.bak", "/config.json", "/.aws/credentials", "/.docker/config.json", "/admin/.htpasswd"]
+					]
+				},
+				"resource_categories": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"environment_files",
+							"version_control",
+							"configuration_files",
+							"backup_files",
+							"admin_panels",
+							"database_files",
+							"log_files",
+							"credential_files",
+							"api_endpoints",
+							"debug_endpoints",
+							"other"
+						]
+					},
+					"description": "Categories of resources being probed"
+				},
+				"http_methods": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"GET",
+							"POST",
+							"HEAD",
+							"OPTIONS",
+							"PUT",
+							"DELETE",
+							"TRACE",
+							"CONNECT"
+						]
+					},
+					"description": "HTTP methods used in reconnaissance"
+				},
+				"response_codes": {
+					"type": "array",
+					"items": {
+						"type": "integer"
+					},
+					"description": "HTTP response codes received"
+				},
+				"successful_probes": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Resources that returned success responses (200, 301, 302)"
+				},
+				"user_agent": {
+					"type": "string",
+					"description": "User-Agent string used"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When reconnaissance activity was first observed"
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When reconnaissance activity was last observed"
+				},
+				"total_probes": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Total number of probe attempts"
+				},
+				"automated_tool": {
+					"type": "boolean",
+					"description": "Whether activity appears to be from an automated tool"
+				}
+			},
+			"required": [
+				"protocol",
+				"probed_resources",
+				"first_seen"
+			]
+		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "recon-2025-001",
+			"timestamp": "2025-01-15T16:45:00Z",
+			"reporter": {
+				"org": "Web Security Service",
+				"contact": "security@webhost.example",
+				"type": "automated"
+			},
+			"source_identifier": "192.0.2.99",
+			"class": "connection",
+			"type": "reconnaissance",
+			"destination_ip": "198.51.100.75",
+			"destination_port": 443,
+			"protocol": "tcp",
+			"probed_resources": ["/.env", "/.git/config", "/.aws/credentials", "/wp-config.php.bak", "/admin/.htpasswd"],
+			"resource_categories": ["environment_files", "version_control", "credential_files", "backup_files"],
+			"http_methods": ["GET", "HEAD"],
+			"response_codes": [404, 403, 200],
+			"successful_probes": ["/.git/config"],
+			"automated_tool": true,
+			"total_probes": 47,
+			"first_seen": "2025-01-15T16:30:00Z",
+			"last_seen": "2025-01-15T16:44:00Z"
+		}
+	]
+}
