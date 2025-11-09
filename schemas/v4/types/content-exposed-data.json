@@ -87,8 +87,16 @@
 					},
 					"description": "Specific sensitive data fields exposed",
 					"examples": [
-						["ssn", "credit_card", "password"],
-						["email", "phone", "address"]
+						[
+							"ssn",
+							"credit_card",
+							"password"
+						],
+						[
+							"email",
+							"phone",
+							"address"
+						]
 					]
 				},
 				"encryption_status": {
@@ -143,7 +151,10 @@
 					"description": "Redacted samples of exposed records for verification"
 				}
 			},
-			"required": ["data_types", "exposure_method"]
+			"required": [
+				"data_types",
+				"exposure_method"
+			]
 		}
 	],
 	"examples": [
@@ -160,12 +171,20 @@
 			"class": "content",
 			"type": "exposed_data",
 			"url": "http://exposed-database.example.com:8080/dump.sql",
-			"data_types": ["credentials", "personal_information", "financial"],
+			"data_types": [
+				"credentials",
+				"personal_information",
+				"financial"
+			],
 			"exposure_method": "misconfigured_server",
 			"record_count": 150000,
 			"affected_organization": "Example Corp",
 			"data_format": "sql",
-			"sensitive_fields": ["email", "password_hash", "credit_card"],
+			"sensitive_fields": [
+				"email",
+				"password_hash",
+				"credit_card"
+			],
 			"encryption_status": "hashed",
 			"accessibility": "public",
 			"evidence": [

@@ -56,7 +56,10 @@
 								"type": "string"
 							}
 						},
-						"required": ["type", "value"]
+						"required": [
+							"type",
+							"value"
+						]
 					},
 					"description": "Specific indicators of compromise"
 				},
@@ -66,7 +69,12 @@
 						"family": {
 							"type": "string",
 							"description": "Known webshell family",
-							"examples": ["WSO", "C99", "B374K", "R57"]
+							"examples": [
+								"WSO",
+								"C99",
+								"B374K",
+								"R57"
+							]
 						},
 						"capabilities": {
 							"type": "array",
@@ -167,7 +175,9 @@
 					"description": "Current cleanup status of the compromise"
 				}
 			},
-			"required": ["compromise_type"]
+			"required": [
+				"compromise_type"
+			]
 		}
 	],
 	"examples": [
@@ -188,7 +198,11 @@
 			"affected_cms": "wordpress",
 			"webshell_details": {
 				"family": "WSO",
-				"capabilities": ["file_manager", "command_execution", "database_access"],
+				"capabilities": [
+					"file_manager",
+					"command_execution",
+					"database_access"
+				],
 				"password_protected": true
 			},
 			"compromise_indicators": [

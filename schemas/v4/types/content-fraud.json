@@ -71,7 +71,10 @@
 								"description": "Cryptocurrency wallet address"
 							}
 						},
-						"required": ["currency", "address"]
+						"required": [
+							"currency",
+							"address"
+						]
 					},
 					"description": "Cryptocurrency addresses used in the fraud"
 				},
@@ -96,7 +99,9 @@
 					"description": "Financial loss information if known"
 				}
 			},
-			"required": ["fraud_type"]
+			"required": [
+				"fraud_type"
+			]
 		}
 	],
 	"examples": [
@@ -114,7 +119,10 @@
 			"type": "fraud",
 			"url": "https://get-rich-quick.example.com",
 			"fraud_type": "investment",
-			"payment_methods": ["cryptocurrency", "wire_transfer"],
+			"payment_methods": [
+				"cryptocurrency",
+				"wire_transfer"
+			],
 			"cryptocurrency_addresses": [
 				{
 					"currency": "bitcoin",

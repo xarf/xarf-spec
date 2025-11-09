@@ -23,7 +23,10 @@
 	"follows_crawl_delay": true,
 	"javascript_execution": false,
 	"accepts_cookies": true,
-	"api_endpoints_accessed": ["/api/v1/content", "/api/v1/search"],
+	"api_endpoints_accessed": [
+		"/api/v1/content",
+		"/api/v1/search"
+	],
 	"verification_status": "verified",
 	"first_seen": "2025-01-20T11:00:00Z",
 	"last_seen": "2025-01-20T11:28:00Z",

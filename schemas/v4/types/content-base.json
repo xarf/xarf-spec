@@ -47,7 +47,10 @@
 					},
 					"description": "DNS nameservers for the domain",
 					"examples": [
-						["ns1.example.com", "ns2.example.com"]
+						[
+							"ns1.example.com",
+							"ns2.example.com"
+						]
 					]
 				},
 				"dns_records": {
@@ -228,7 +231,9 @@
 					"description": "DNS query response metadata"
 				}
 			},
-			"required": ["url"]
+			"required": [
+				"url"
+			]
 		}
 	]
 }

@@ -159,7 +159,10 @@
 					}
 				}
 			},
-			"required": ["registration_date", "suspicious_indicators"]
+			"required": [
+				"registration_date",
+				"suspicious_indicators"
+			]
 		}
 	],
 	"examples": [
@@ -186,13 +189,18 @@
 				"immediate_activation"
 			],
 			"risk_score": 0.92,
-			"targeted_brands": ["Amazon"],
+			"targeted_brands": [
+				"Amazon"
+			],
 			"registrant_details": {
 				"privacy_protected": true,
 				"country": "CN",
 				"bulk_registrations": 47
 			},
-			"predicted_usage": ["phishing", "fraud"],
+			"predicted_usage": [
+				"phishing",
+				"fraud"
+			],
 			"evidence": [
 				{
 					"content_type": "application/json",

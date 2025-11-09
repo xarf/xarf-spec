@@ -71,7 +71,15 @@
 					},
 					"description": "Services that were targeted",
 					"examples": [
-						["http", "https", "ssh", "ftp", "mysql", "postgresql", "mongodb"]
+						[
+							"http",
+							"https",
+							"ssh",
+							"ftp",
+							"mysql",
+							"postgresql",
+							"mongodb"
+						]
 					]
 				},
 				"vulnerabilities_probed": {
@@ -138,7 +146,12 @@
 			"destination_ip": "198.51.100.50",
 			"scan_type": "web_vuln_scan",
 			"scanner_signature": "Nikto",
-			"targeted_ports": [80, 443, 8080, 8443],
+			"targeted_ports": [
+				80,
+				443,
+				8080,
+				8443
+			],
 			"protocol": "tcp",
 			"total_requests": 1250,
 			"first_seen": "2025-01-15T09:15:00Z",

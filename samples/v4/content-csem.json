@@ -15,11 +15,21 @@
 	"victim_age_range": "pubescent",
 	"detection_method": "behavioral_analysis",
 	"platform": "social_media",
-	"evidence_type": ["chat_logs", "user_profile"],
-	"reporting_obligations": ["NCMEC", "local_law_enforcement", "platform_safety_team"],
+	"evidence_type": [
+		"chat_logs",
+		"user_profile"
+	],
+	"reporting_obligations": [
+		"NCMEC",
+		"local_law_enforcement",
+		"platform_safety_team"
+	],
 	"perpetrator_indicators": {
 		"account_id": "user123456",
-		"ip_addresses": ["203.0.113.55", "203.0.113.56"],
+		"ip_addresses": [
+			"203.0.113.55",
+			"203.0.113.56"
+		],
 		"pattern_of_behavior": "Repeated contact with minors, requesting private information"
 	},
 	"evidence": [

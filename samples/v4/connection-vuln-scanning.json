@@ -13,9 +13,20 @@
 	"destination_ip": "198.51.100.50",
 	"scan_type": "web_vuln_scan",
 	"scanner_signature": "Nikto",
-	"targeted_ports": [80, 443, 8080, 8443],
-	"targeted_services": ["http", "https"],
-	"vulnerabilities_probed": ["CVE-2021-44228", "CVE-2022-22965"],
+	"targeted_ports": [
+		80,
+		443,
+		8080,
+		8443
+	],
+	"targeted_services": [
+		"http",
+		"https"
+	],
+	"vulnerabilities_probed": [
+		"CVE-2021-44228",
+		"CVE-2022-22965"
+	],
 	"scan_rate": 25.5,
 	"protocol": "tcp",
 	"total_requests": 1250,

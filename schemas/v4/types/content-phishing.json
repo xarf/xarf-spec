@@ -20,9 +20,20 @@
 					},
 					"description": "Form fields present on the phishing page",
 					"examples": [
-						["username", "password"],
-						["email", "password", "pin"],
-						["card_number", "cvv", "expiry"]
+						[
+							"username",
+							"password"
+						],
+						[
+							"email",
+							"password",
+							"pin"
+						],
+						[
+							"card_number",
+							"cvv",
+							"expiry"
+						]
 					]
 				},
 				"phishing_kit": {
@@ -103,7 +114,11 @@
 			"url": "https://secure-banking-login.example.com/auth",
 			"target_brand": "Major Bank Corp",
 			"cloned_site": "https://www.majorbank.com",
-			"credential_fields": ["username", "password", "pin"],
+			"credential_fields": [
+				"username",
+				"password",
+				"pin"
+			],
 			"lure_type": "security_alert",
 			"evidence": [
 				{

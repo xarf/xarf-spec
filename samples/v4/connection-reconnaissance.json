@@ -26,9 +26,18 @@
 		"credential_files",
 		"backup_files"
 	],
-	"http_methods": ["GET", "HEAD"],
-	"response_codes": [404, 403, 200],
-	"successful_probes": ["/.git/config"],
+	"http_methods": [
+		"GET",
+		"HEAD"
+	],
+	"response_codes": [
+		404,
+		403,
+		200
+	],
+	"successful_probes": [
+		"/.git/config"
+	],
 	"user_agent": "Mozilla/5.0 (compatible; SecurityScanner/1.0)",
 	"automated_tool": true,
 	"total_probes": 47,

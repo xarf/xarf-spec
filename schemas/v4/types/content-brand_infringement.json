@@ -113,7 +113,10 @@
 					"description": "Previous enforcement actions taken"
 				}
 			},
-			"required": ["infringement_type", "legitimate_site"]
+			"required": [
+				"infringement_type",
+				"legitimate_site"
+			]
 		}
 	],
 	"examples": [
@@ -133,7 +136,11 @@
 			"infringement_type": "typosquatting",
 			"legitimate_site": "https://www.amazon.com",
 			"similarity_score": 0.87,
-			"infringing_elements": ["logo", "brand_name", "color_scheme"],
+			"infringing_elements": [
+				"logo",
+				"brand_name",
+				"color_scheme"
+			],
 			"target_brand": "Amazon",
 			"evidence": [
 				{

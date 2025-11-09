@@ -12,12 +12,20 @@
 	"type": "exposed_data",
 	"url": "http://exposed-database.example.com:8080/dump.sql",
 	"domain": "exposed-database.example.com",
-	"data_types": ["credentials", "personal_information", "financial"],
+	"data_types": [
+		"credentials",
+		"personal_information",
+		"financial"
+	],
 	"exposure_method": "misconfigured_server",
 	"record_count": 150000,
 	"affected_organization": "Example Corp",
 	"data_format": "sql",
-	"sensitive_fields": ["email", "password_hash", "credit_card"],
+	"sensitive_fields": [
+		"email",
+		"password_hash",
+		"credit_card"
+	],
 	"encryption_status": "hashed",
 	"accessibility": "public",
 	"discovery_source": "automated_scan",

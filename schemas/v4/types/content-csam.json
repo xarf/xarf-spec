@@ -111,7 +111,10 @@
 			"classification": "A1",
 			"detection_method": "hash_match",
 			"media_type": "image",
-			"reporting_obligations": ["NCMEC", "local_law_enforcement"]
+			"reporting_obligations": [
+				"NCMEC",
+				"local_law_enforcement"
+			]
 		}
 	]
 }

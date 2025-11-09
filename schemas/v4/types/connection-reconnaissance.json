@@ -50,7 +50,16 @@
 					},
 					"description": "List of resources that were probed",
 					"examples": [
-						["/.env", "/.git/config", "/.htaccess", "/wp-config.php.bak", "/config.json", "/.aws/credentials", "/.docker/config.json", "/admin/.htpasswd"]
+						[
+							"/.env",
+							"/.git/config",
+							"/.htaccess",
+							"/wp-config.php.bak",
+							"/config.json",
+							"/.aws/credentials",
+							"/.docker/config.json",
+							"/admin/.htpasswd"
+						]
 					]
 				},
 				"resource_categories": {
@@ -151,11 +160,31 @@
 			"destination_ip": "198.51.100.75",
 			"destination_port": 443,
 			"protocol": "tcp",
-			"probed_resources": ["/.env", "/.git/config", "/.aws/credentials", "/wp-config.php.bak", "/admin/.htpasswd"],
-			"resource_categories": ["environment_files", "version_control", "credential_files", "backup_files"],
-			"http_methods": ["GET", "HEAD"],
-			"response_codes": [404, 403, 200],
-			"successful_probes": ["/.git/config"],
+			"probed_resources": [
+				"/.env",
+				"/.git/config",
+				"/.aws/credentials",
+				"/wp-config.php.bak",
+				"/admin/.htpasswd"
+			],
+			"resource_categories": [
+				"environment_files",
+				"version_control",
+				"credential_files",
+				"backup_files"
+			],
+			"http_methods": [
+				"GET",
+				"HEAD"
+			],
+			"response_codes": [
+				404,
+				403,
+				200
+			],
+			"successful_probes": [
+				"/.git/config"
+			],
 			"automated_tool": true,
 			"total_probes": 47,
 			"first_seen": "2025-01-15T16:30:00Z",

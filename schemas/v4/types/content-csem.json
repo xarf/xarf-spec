@@ -136,8 +136,14 @@
 			"exploitation_type": "grooming",
 			"detection_method": "behavioral_analysis",
 			"platform": "social_media",
-			"evidence_type": ["chat_logs", "user_profile"],
-			"reporting_obligations": ["NCMEC", "local_law_enforcement"]
+			"evidence_type": [
+				"chat_logs",
+				"user_profile"
+			],
+			"reporting_obligations": [
+				"NCMEC",
+				"local_law_enforcement"
+			]
 		}
 	]
 }
