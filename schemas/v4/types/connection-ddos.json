@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://xarf.org/schemas/v4/types/connection-ddos.json",
 	"title": "XARF v4 Connection - DDoS Type Schema",
-	"description": "Schema for Distributed Denial of Service attack reports",
+	"description": "Schema for Distributed Denial of Service attack reports including volumetric attacks (SYN floods, UDP floods, HTTP floods) and amplification/reflection attacks (DNS, NTP, memcached, SSDP)",
 	"allOf": [
 		{
 			"$ref": "../xarf-core.json"
