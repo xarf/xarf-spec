@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://xarf.org/schemas/v4/types/connection-bot.json",
-	"title": "XARF v4 Connection - Bot Type Schema",
-	"description": "Schema for automated web bot activity including AI agents and search bots",
+	"$id": "https://xarf.org/schemas/v4/types/connection-infected-host.json",
+	"title": "XARF v4 Connection - Infected Host Type Schema",
+	"description": "Schema for compromised systems participating in botnets or being remotely controlled for malicious activities (DDoS, spam distribution, click fraud, cryptocurrency mining, credential stuffing)",
 	"allOf": [
 		{
 			"$ref": "../xarf-core.json"
@@ -14,7 +14,7 @@
 					"const": "connection"
 				},
 				"type": {
-					"const": "bot"
+					"const": "infected_host"
 				},
 				"destination_ip": {
 					"type": "string",
@@ -164,7 +164,7 @@
 			},
 			"source_identifier": "203.0.113.42",
 			"class": "connection",
-			"type": "bot",
+			"type": "infected_host",
 			"destination_ip": "198.51.100.80",
 			"destination_port": 443,
 			"protocol": "tcp",
