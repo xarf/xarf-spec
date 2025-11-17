@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://xarf.org/schemas/v4/types/connection-login-attack.json",
 	"title": "XARF v4 Connection - Login Attack Type Schema",
-	"description": "Schema for Brute force login attempts and authentication attacks",
+	"description": "Schema for brute force login attempts, credential stuffing campaigns, password spraying attacks, and repeated authentication failures against authentication systems (SSH, RDP, web logins, API authentication)",
 	"allOf": [
 		{
 			"$ref": "../xarf-core.json"
