@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T10:49:26Z",
 	"reporter": {
 		"org": "Authentication Monitor",
+		"contact": "auth-failures@secmonitor.net"
+	},
+	"sender": {
+		"org": "Authentication Monitor",
 		"contact": "auth-failures@secmonitor.net",
-		"type": "automated"
+		"domain": "secmonitor.net"
 	},
 	"source_identifier": "172.16.0.99",
 	"source_port": 3389,

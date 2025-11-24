@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T15:15:24Z",
 	"reporter": {
 		"org": "YBrandProtection",
+		"contact": "takedown@ybrandprotection.com"
+	},
+	"sender": {
+		"org": "YBrandProtection",
 		"contact": "takedown@ybrandprotection.com",
-		"type": "automated"
+		"domain": "ybrandprotection.com"
 	},
 	"source_identifier": "203.0.113.45",
 	"category": "content",

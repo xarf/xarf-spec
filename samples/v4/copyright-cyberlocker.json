@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T14:16:41Z",
 	"reporter": {
 		"org": "Content Protection Agency",
+		"contact": "dmca@content-protection.example"
+	},
+	"sender": {
+		"org": "Content Protection Agency",
 		"contact": "dmca@content-protection.example",
-		"type": "manual"
+		"domain": "content-protection.example"
 	},
 	"source_identifier": "file-sharing.example.com",
 	"category": "copyright",

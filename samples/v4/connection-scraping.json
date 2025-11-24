@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-20T14:00:00Z",
 	"reporter": {
 		"org": "Website Protection Service",
+		"contact": "abuse@hosting.example"
+	},
+	"sender": {
+		"org": "Website Protection Service",
 		"contact": "abuse@hosting.example",
-		"type": "automated"
+		"domain": "hosting.example"
 	},
 	"source_identifier": "192.0.2.150",
 	"category": "connection",

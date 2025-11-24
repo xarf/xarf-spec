@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T12:17:20Z",
 	"reporter": {
 		"org": "SSH Honeypot Network",
+		"contact": "honeypot@sshsecurity.org"
+	},
+	"sender": {
+		"org": "SSH Honeypot Network",
 		"contact": "honeypot@sshsecurity.org",
-		"type": "automated"
+		"domain": "sshsecurity.org"
 	},
 	"source_identifier": "198.51.100.77",
 	"source_port": 45621,

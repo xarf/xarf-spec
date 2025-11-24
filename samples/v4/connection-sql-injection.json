@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-20T12:00:00Z",
 	"reporter": {
 		"org": "Web Application Firewall",
+		"contact": "security@example.com"
+	},
+	"sender": {
+		"org": "Web Application Firewall",
 		"contact": "security@example.com",
-		"type": "automated"
+		"domain": "example.com"
 	},
 	"source_identifier": "192.0.2.45",
 	"category": "connection",

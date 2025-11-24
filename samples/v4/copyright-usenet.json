@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T09:12:59Z",
 	"reporter": {
 		"org": "Usenet Copyright Monitor",
+		"contact": "usenet@copyright-watch.example"
+	},
+	"sender": {
+		"org": "Usenet Copyright Monitor",
 		"contact": "usenet@copyright-watch.example",
-		"type": "automated"
+		"domain": "copyright-watch.example"
 	},
 	"source_identifier": "news.usenet-provider.example.com",
 	"category": "copyright",

@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-20T11:30:00Z",
 	"reporter": {
 		"org": "Bot Detection Service",
+		"contact": "botreport@example.com"
+	},
+	"sender": {
+		"org": "Bot Detection Service",
 		"contact": "botreport@example.com",
-		"type": "automated"
+		"domain": "example.com"
 	},
 	"source_identifier": "203.0.113.42",
 	"category": "connection",

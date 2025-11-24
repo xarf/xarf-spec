@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T13:44:41Z",
 	"reporter": {
 		"org": "P2P Monitoring Service",
+		"contact": "p2p-reports@copyright-monitor.example"
+	},
+	"sender": {
+		"org": "P2P Monitoring Service",
 		"contact": "p2p-reports@copyright-monitor.example",
-		"type": "automated"
+		"domain": "copyright-monitor.example"
 	},
 	"source_identifier": "192.0.2.100",
 	"category": "copyright",

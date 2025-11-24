@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T14:02:29Z",
 	"reporter": {
 		"org": "Bulk Email Monitor",
+		"contact": "reports@email-monitor.example"
+	},
+	"sender": {
+		"org": "Bulk Email Monitor",
 		"contact": "reports@email-monitor.example",
-		"type": "automated"
+		"domain": "email-monitor.example"
 	},
 	"source_identifier": "mail.bulk-sender.example",
 	"category": "messaging",

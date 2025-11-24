@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T10:51:30Z",
 	"reporter": {
 		"org": "Threat Intelligence Consortium",
+		"contact": "intel@threatconsortium.org"
+	},
+	"sender": {
+		"org": "Threat Intelligence Consortium",
 		"contact": "intel@threatconsortium.org",
-		"type": "automated"
+		"domain": "threatconsortium.org"
 	},
 	"source_identifier": "203.0.113.200",
 	"category": "reputation",

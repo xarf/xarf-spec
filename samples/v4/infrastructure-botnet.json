@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T15:00:52Z",
 	"reporter": {
 		"org": "Example CERT Organization",
+		"contact": "cert@cert-org.example"
+	},
+	"sender": {
+		"org": "Example CERT Organization",
 		"contact": "cert@cert-org.example",
-		"type": "automated"
+		"domain": "cert-org.example"
 	},
 	"source_identifier": "198.51.100.25",
 	"category": "infrastructure",

@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T09:32:18Z",
 	"reporter": {
 		"org": "Example CERT",
+		"contact": "incident@cert-example.org"
+	},
+	"sender": {
+		"org": "Example CERT",
 		"contact": "incident@cert-example.org",
-		"type": "automated"
+		"domain": "cert-example.org"
 	},
 	"source_identifier": "172.16.254.10",
 	"source_port": 53,

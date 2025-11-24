@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T11:26:59Z",
 	"reporter": {
 		"org": "Network Security Monitoring",
+		"contact": "alerts@netsec-mon.com"
+	},
+	"sender": {
+		"org": "Network Security Monitoring",
 		"contact": "alerts@netsec-mon.com",
-		"type": "automated"
+		"domain": "netsec-mon.com"
 	},
 	"source_identifier": "198.51.100.150",
 	"category": "connection",

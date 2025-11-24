@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T10:38:41Z",
 	"reporter": {
 		"org": "Threat Intelligence Provider",
+		"contact": "intel@threat-research.example"
+	},
+	"sender": {
+		"org": "Threat Intelligence Provider",
 		"contact": "intel@threat-research.example",
-		"type": "automated"
+		"domain": "threat-research.example"
 	},
 	"source_identifier": "192.0.2.50",
 	"category": "reputation",

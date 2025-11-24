@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T08:00:36Z",
 	"reporter": {
 		"org": "Digital Rights Management",
+		"contact": "takedowns@drm-service.example"
+	},
+	"sender": {
+		"org": "Digital Rights Management",
 		"contact": "takedowns@drm-service.example",
-		"type": "automated"
+		"domain": "drm-service.example"
 	},
 	"source_identifier": "video-platform.example.com",
 	"category": "copyright",

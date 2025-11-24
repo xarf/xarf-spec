@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T14:12:10Z",
 	"reporter": {
 		"org": "Anti-Piracy Monitoring",
+		"contact": "links@antipiracy-monitor.example"
+	},
+	"sender": {
+		"org": "Anti-Piracy Monitoring",
 		"contact": "links@antipiracy-monitor.example",
-		"type": "automated"
+		"domain": "antipiracy-monitor.example"
 	},
 	"source_identifier": "links-aggregator.example.net",
 	"category": "copyright",

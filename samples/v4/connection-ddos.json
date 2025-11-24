@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T09:21:23Z",
 	"reporter": {
 		"org": "DDoS Protection Service",
+		"contact": "ddos@protectionservice.net"
+	},
+	"sender": {
+		"org": "DDoS Protection Service",
 		"contact": "ddos@protectionservice.net",
-		"type": "automated"
+		"domain": "protectionservice.net"
 	},
 	"source_identifier": "192.0.2.155",
 	"source_port": 0,

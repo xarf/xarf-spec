@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-20T10:30:00Z",
 	"reporter": {
 		"org": "Content Safety Service",
+		"contact": "safety@example.org"
+	},
+	"sender": {
+		"org": "Content Safety Service",
 		"contact": "safety@example.org",
-		"type": "automated"
+		"domain": "example.org"
 	},
 	"source_identifier": "198.51.100.42",
 	"category": "content",

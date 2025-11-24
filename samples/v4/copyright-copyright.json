@@ -4,8 +4,12 @@
 	"timestamp": "2025-01-11T11:52:34Z",
 	"reporter": {
 		"org": "TVB Copyright Department",
+		"contact": "copyright@tvb.com"
+	},
+	"sender": {
+		"org": "TVB Copyright Department",
 		"contact": "copyright@tvb.com",
-		"type": "automated"
+		"domain": "tvb.com"
 	},
 	"source_identifier": "198.51.100.75",
 	"category": "copyright",
