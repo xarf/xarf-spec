@@ -9,6 +9,7 @@
 		"report_id",
 		"timestamp",
 		"reporter",
+		"sender",
 		"source_identifier",
 		"category",
 		"type"
@@ -42,8 +43,12 @@
 			]
 		},
 		"reporter": {
-			"$ref": "#/$defs/reporter",
-			"description": "Information about the organization reporting this abuse incident"
+			"$ref": "#/$defs/contact_info",
+			"description": "The organization that owns/generated the abuse complaint (the victim or complainant)"
+		},
+		"sender": {
+			"$ref": "#/$defs/contact_info",
+			"description": "The organization that transmitted/filed this report (may be same as reporter or a service provider)"
 		},
 		"source_identifier": {
 			"type": "string",
@@ -180,20 +185,20 @@
 	},
 	"additionalProperties": true,
 	"$defs": {
-		"reporter": {
+		"contact_info": {
 			"type": "object",
 			"required": [
 				"org",
 				"contact",
-				"type"
+				"domain"
 			],
 			"properties": {
 				"org": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Name of the reporting organization",
+					"description": "Organization name",
 					"examples": [
-						"SpamCop",
+						"Acme Corporation",
 						"Abusix",
 						"Security Research Lab"
 					]
@@ -201,23 +206,20 @@
 				"contact": {
 					"type": "string",
 					"format": "email",
-					"description": "Contact email address for follow-up communication",
+					"description": "Contact email address",
 					"examples": [
 						"abuse@example.com",
-						"reports@security-org.net"
+						"reports@abusix.com"
 					]
 				},
-				"type": {
+				"domain": {
 					"type": "string",
-					"enum": [
-						"automated",
-						"manual",
-						"unknown"
-					],
-					"description": "How this report was generated",
+					"format": "hostname",
+					"description": "Organization domain for verification",
 					"examples": [
-						"automated",
-						"manual"
+						"example.com",
+						"abusix.com",
+						"security-lab.org"
 					]
 				}
 			},
