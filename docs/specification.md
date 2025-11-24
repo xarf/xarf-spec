@@ -137,7 +137,7 @@ All XARF v4 reports share this common structure:
     },
     "type": {
       "type": "string",
-      "description": "Specific abuse type within class"
+      "description": "Specific abuse type within category"
     },
     "evidence_source": {
       "type": "string",
@@ -817,7 +817,7 @@ Phase 4: v4-only processing
 
 ## Sample Reports
 
-Complete sample reports demonstrating proper format for each class:
+Complete sample reports demonstrating proper format for each category:
 
 ### Messaging Category -Spam Report
 ```json

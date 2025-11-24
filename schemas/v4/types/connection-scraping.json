@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "connection"
 				},
 				"type": {
@@ -151,7 +151,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.150",
-			"class": "connection",
+			"category": "connection",
 			"type": "scraping",
 			"destination_ip": "198.51.100.25",
 			"destination_port": 443,

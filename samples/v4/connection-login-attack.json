@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "198.51.100.77",
 	"source_port": 45621,
-	"class": "connection",
+	"category": "connection",
 	"type": "login_attack",
 	"evidence_source": "honeypot",
 	"destination_ip": "203.0.113.22",

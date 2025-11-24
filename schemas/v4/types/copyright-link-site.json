@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "copyright"
 				},
 				"type": {
@@ -204,7 +204,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "torrent-indexer.example",
-			"class": "copyright",
+			"category": "copyright",
 			"type": "link_site",
 			"infringing_url": "https://torrentindex.example/torrent/12345/blockbuster-movie-2024",
 			"site_name": "TorrentIndex",

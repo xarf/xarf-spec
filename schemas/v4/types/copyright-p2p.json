@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "copyright"
 				},
 				"type": {
@@ -175,7 +175,7 @@
 			},
 			"source_identifier": "203.0.113.150",
 			"source_port": 6881,
-			"class": "copyright",
+			"category": "copyright",
 			"type": "p2p",
 			"p2p_protocol": "bittorrent",
 			"work_title": "Movie Title 2024",

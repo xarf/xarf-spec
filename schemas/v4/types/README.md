@@ -69,8 +69,8 @@ Each type schema follows this structure:
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://xarf.org/schemas/v4/types/{class}-{type}.json",
-  "title": "XARF v4 {Class} - {Type} Type Schema",
+  "$id": "https://xarf.org/schemas/v4/types/{category}-{type}.json",
+  "title": "XARF v4 {Category} - {Type} Type Schema",
   "description": "Schema for {specific abuse type description}",
   "allOf": [
     {
@@ -79,7 +79,7 @@ Each type schema follows this structure:
     {
       "type": "object",
       "properties": {
-        "class": {"const": "{class}"},
+        "category": {"const": "{category}"},
         "type": {"const": "{type}"},
         // Type-specific fields and constraints
       },
@@ -121,11 +121,11 @@ master_schema = load_schema("../xarf-v4-master.json")
 
 ## Adding New Types
 
-1. Create new schema file: `{class}-{new-type}.json`
+1. Create new schema file: `{category}-{new-type}.json`
 2. Add conditional reference in `../xarf-v4-master.json`
 3. Update this README with the new type
 4. Add test cases in the test suite
 
 ## Migration from Class-Based Schemas
 
-The original class-based schemas (`messaging-class.json`, etc.) are preserved for backward compatibility. New implementations should use type-specific schemas for better granularity and maintainability.
+The original category-based schemas (`messaging-class.json`, etc.) are preserved for backward compatibility. New implementations should use type-specific schemas for better granularity and maintainability.

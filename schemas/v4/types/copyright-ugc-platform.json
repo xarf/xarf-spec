@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "copyright"
 				},
 				"type": {
@@ -221,7 +221,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "video-platform.example",
-			"class": "copyright",
+			"category": "copyright",
 			"type": "ugc_platform",
 			"infringing_url": "https://platform.example/watch?v=abc123def456",
 			"platform_name": "VideoShare",

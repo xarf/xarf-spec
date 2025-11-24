@@ -106,8 +106,8 @@ All XARF v4 reports must include:
 - `timestamp` - ISO 8601 datetime when abuse occurred
 - `reporter` - Organization information (`org`, `contact`, `type`)
 - `source_identifier` - IP, domain, or identifier of abuse source
-- `class` - Primary abuse classification  
-- `type` - Specific abuse type within class
+- `category` - Primary abuse classification  
+- `type` - Specific abuse type within category
 
 ## 🔧 Schema Usage Guide
 
@@ -144,9 +144,9 @@ if not is_valid:
 For focused validation or development:
 
 ```python
-def validate_specific_type(report_data, class_name, type_name):
+def validate_specific_type(report_data, category_name, type_name):
     """Validate against specific type schema."""
-    schema_file = f'schemas/v4/types/{class_name}-{type_name.replace("_", "-")}.json'
+    schema_file = f'schemas/v4/types/{category_name}-{type_name.replace("_", "-")}.json'
     
     with open(schema_file) as f:
         schema = json.load(f)
@@ -165,7 +165,7 @@ import json
 import uuid
 from datetime import datetime
 
-def create_xarf_report(class_name, type_name, source_identifier, **kwargs):
+def create_xarf_report(category_name, type_name, source_identifier, **kwargs):
     """Create a valid XARF v4 report."""
     report = {
         "xarf_version": "4.0.0",
@@ -177,7 +177,7 @@ def create_xarf_report(class_name, type_name, source_identifier, **kwargs):
             "type": kwargs.get("reporter_type", "automated")
         },
         "source_identifier": source_identifier,
-        "class": class_name,
+        "category": category_name,
         "type": type_name,
         **{k: v for k, v in kwargs.items() if not k.startswith('reporter_')}
     }
@@ -188,7 +188,7 @@ def create_xarf_report(class_name, type_name, source_identifier, **kwargs):
 
 # Example: Create spam report
 spam_report = create_xarf_report(
-    class_name="messaging",
+    category_name="messaging",
     type_name="spam",
     source_identifier="192.0.2.100", 
     protocol="smtp",
@@ -213,7 +213,7 @@ spam_report = create_xarf_report(
   },
   "source_identifier": "192.0.2.123",
   "source_port": 25,
-  "class": "messaging",
+  "category": "messaging",
   "type": "spam",
   "protocol": "smtp",
   "smtp_from": "fake@example.com",
@@ -234,7 +234,7 @@ spam_report = create_xarf_report(
     "type": "automated"
   },
   "source_identifier": "198.51.100.75",
-  "class": "connection",
+  "category": "connection",
   "type": "ddos",
   "protocol": "tcp",
   "first_seen": "2024-01-15T10:15:00Z",
@@ -256,7 +256,7 @@ spam_report = create_xarf_report(
     "type": "automated"
   },
   "source_identifier": "192.0.2.100",
-  "class": "copyright",
+  "category": "copyright",
   "type": "p2p",
   "p2p_protocol": "bittorrent",
   "swarm_info": {
@@ -325,7 +325,7 @@ Solution: Add required fields per type schema
 
 **2. Invalid Type/Class Combination**
 ```
-Error: No schema found for class 'messaging' type 'invalid_type'
+Error: No schema found for category 'messaging' type 'invalid_type'
 Solution: Use valid type from type-specific schemas
 ```
 
@@ -354,7 +354,7 @@ app.post('/xarf/reports', async (req, res) => {
     await validateXARFReport(report);
     
     // Route based on class and type
-    const handler = getHandlerForType(report.class, report.type);
+    const handler = getHandlerForType(report.category, report.type);
     await handler.process(report);
     
     res.json({ 
@@ -390,7 +390,7 @@ def process_xarf_stream(reports_stream):
             validator.validate(report_data)
             
             # Route to appropriate handler
-            handler_key = f"{report_data['class']}:{report_data['type']}"
+            handler_key = f"{report_data['category']}:{report_data['type']}"
             if handler_key in handlers:
                 handlers[handler_key](report_data)
             else:

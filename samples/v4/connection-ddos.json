@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "192.0.2.155",
 	"source_port": 0,
-	"class": "connection",
+	"category": "connection",
 	"type": "ddos",
 	"evidence_source": "flow_analysis",
 	"destination_ip": "203.0.113.100",

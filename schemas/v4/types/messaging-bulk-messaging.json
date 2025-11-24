@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "messaging"
 				},
 				"type": {
@@ -116,7 +116,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.200",
-			"class": "messaging",
+			"category": "messaging",
 			"type": "bulk_messaging",
 			"protocol": "smtp",
 			"smtp_from": "newsletter@company.example",

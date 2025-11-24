@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "198.51.100.150",
-	"class": "connection",
+	"category": "connection",
 	"type": "port_scan",
 	"evidence_source": "ids_detection",
 	"destination_ip": "203.0.113.50",

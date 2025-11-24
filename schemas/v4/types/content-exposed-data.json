@@ -168,7 +168,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "198.51.100.99",
-			"class": "content",
+			"category": "content",
 			"type": "exposed_data",
 			"url": "http://exposed-database.example.com:8080/dump.sql",
 			"data_types": [

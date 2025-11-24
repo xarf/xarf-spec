@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "mail.bulk-sender.example",
-	"class": "messaging",
+	"category": "messaging",
 	"type": "bulk_messaging",
 	"evidence_source": "automated_filter",
 	"protocol": "smtp",

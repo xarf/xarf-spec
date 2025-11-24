@@ -10,7 +10,7 @@
 		"timestamp",
 		"reporter",
 		"source_identifier",
-		"class",
+		"category",
 		"type"
 	],
 	"properties": {
@@ -67,7 +67,7 @@
 				3389
 			]
 		},
-		"class": {
+		"category": {
 			"type": "string",
 			"enum": [
 				"messaging",
@@ -82,7 +82,7 @@
 		},
 		"type": {
 			"type": "string",
-			"description": "Specific abuse type within the class - validation depends on class value",
+			"description": "Specific abuse type within the category - validation depends on category value",
 			"examples": [
 				"spam",
 				"phishing",

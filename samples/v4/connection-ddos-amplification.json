@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "172.16.254.10",
 	"source_port": 53,
-	"class": "connection",
+	"category": "connection",
 	"type": "ddos_amplification",
 	"evidence_source": "flow_analysis",
 	"destination_ip": "203.0.113.100",

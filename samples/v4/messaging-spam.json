@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "192.168.1.100",
 	"source_port": 25,
-	"class": "messaging",
+	"category": "messaging",
 	"type": "spam",
 	"evidence_source": "spamtrap",
 	"protocol": "smtp",

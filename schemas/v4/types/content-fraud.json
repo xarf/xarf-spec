@@ -115,7 +115,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "198.51.100.45",
-			"class": "content",
+			"category": "content",
 			"type": "fraud",
 			"url": "https://get-rich-quick.example.com",
 			"fraud_type": "investment",

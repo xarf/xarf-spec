@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "links-aggregator.example.net",
-	"class": "copyright",
+	"category": "copyright",
 	"type": "link_site",
 	"evidence_source": "crawler",
 	"infringing_url": "https://links-aggregator.example.net/movie/protected-film-2024",

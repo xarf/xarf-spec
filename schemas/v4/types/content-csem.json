@@ -130,7 +130,7 @@
 				"type": "manual"
 			},
 			"source_identifier": "203.0.113.55",
-			"class": "content",
+			"category": "content",
 			"type": "csem",
 			"url": "https://platform.example/user/suspicious-account",
 			"exploitation_type": "grooming",

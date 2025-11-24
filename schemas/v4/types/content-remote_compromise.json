@@ -191,7 +191,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.150",
-			"class": "content",
+			"category": "content",
 			"type": "remote_compromise",
 			"url": "https://compromised-site.example.com/wp-content/uploads/shell.php",
 			"compromise_type": "webshell",

@@ -8,7 +8,7 @@
 		"type": "manual"
 	},
 	"source_identifier": "file-sharing.example.com",
-	"class": "copyright",
+	"category": "copyright",
 	"type": "cyberlocker",
 	"evidence_source": "crawler",
 	"infringing_url": "https://file-sharing.example.com/download/movie2024.mp4",

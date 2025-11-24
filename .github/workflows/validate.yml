@@ -5,19 +5,34 @@ on:
     branches: [ master, main, develop ]
   pull_request:
     branches: [ master, main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 10
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y jq python3
+        sudo apt-get install -y jq
         
     - name: Validate XARF repository
       run: ./scripts/validate.sh
@@ -40,12 +55,18 @@ jobs:
 
   schema-coverage:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: validate
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
     - name: Install jq
       run: sudo apt-get update && sudo apt-get install -y jq
       

@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "connection"
 				},
 				"type": {
@@ -159,7 +159,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.155",
-			"class": "connection",
+			"category": "connection",
 			"type": "ddos",
 			"destination_ip": "203.0.113.100",
 			"destination_port": 80,

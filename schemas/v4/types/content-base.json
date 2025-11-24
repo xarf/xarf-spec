@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://xarf.org/schemas/v4/types/content-base.json",
-	"title": "XARF v4 Content Class - Base Schema",
-	"description": "Base schema for all content class abuse types with shared fields",
+	"title": "XARF v4 Content Category - Base Schema",
+	"description": "Base schema for all content category abuse types with shared fields",
 	"allOf": [
 		{
 			"$ref": "../xarf-core.json"
@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "content"
 				},
 				"url": {

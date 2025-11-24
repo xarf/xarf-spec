@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "203.0.113.150",
 	"source_port": 80,
-	"class": "infrastructure",
+	"category": "infrastructure",
 	"type": "compromised_server",
 	"evidence_source": "automated_discovery",
 	"service": "apache_web_server",

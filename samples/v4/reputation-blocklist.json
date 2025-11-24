@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "203.0.113.200",
-	"class": "reputation",
+	"category": "reputation",
 	"type": "blocklist",
 	"evidence_source": "threat_intelligence",
 	"threat_type": "command_and_control",

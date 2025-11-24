@@ -79,7 +79,7 @@ We especially welcome contributions in these areas:
 {
   "comment": "Brief explanation of the abuse scenario",
   "xarf_version": "4.0.0",
-  "class": "messaging",
+  "category": "messaging",
   "type": "spam",
   // ... rest of sample
 }

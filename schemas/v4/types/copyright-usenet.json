@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "copyright"
 				},
 				"type": {
@@ -219,7 +219,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "news.example-provider.com",
-			"class": "copyright",
+			"category": "copyright",
 			"type": "usenet",
 			"newsgroup": "alt.binaries.movies.divx",
 			"work_title": "Latest Movie 2024",

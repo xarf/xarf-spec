@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "203.0.113.45",
-	"class": "content",
+	"category": "content",
 	"type": "phishing",
 	"evidence_source": "automated_scan",
 	"url": "http://secure-banking-login.example.com/auth",

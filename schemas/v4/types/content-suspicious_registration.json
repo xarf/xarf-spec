@@ -176,7 +176,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.200",
-			"class": "content",
+			"category": "content",
 			"type": "suspicious_registration",
 			"url": "https://amaz0n-secure.example",
 			"domain": "amaz0n-secure.example",

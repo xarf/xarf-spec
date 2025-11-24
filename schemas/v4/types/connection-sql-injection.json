@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "connection"
 				},
 				"type": {
@@ -125,7 +125,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.45",
-			"class": "connection",
+			"category": "connection",
 			"type": "sql_injection",
 			"destination_ip": "198.51.100.10",
 			"destination_port": 443,

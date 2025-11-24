@@ -109,7 +109,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "203.0.113.45",
-			"class": "content",
+			"category": "content",
 			"type": "phishing",
 			"url": "https://secure-banking-login.example.com/auth",
 			"target_brand": "Major Bank Corp",

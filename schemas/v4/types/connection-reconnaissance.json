@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "connection"
 				},
 				"type": {
@@ -155,7 +155,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "192.0.2.99",
-			"class": "connection",
+			"category": "connection",
 			"type": "reconnaissance",
 			"destination_ip": "198.51.100.75",
 			"destination_port": 443,

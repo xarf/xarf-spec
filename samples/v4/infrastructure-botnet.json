@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "198.51.100.25",
-	"class": "infrastructure",
+	"category": "infrastructure",
 	"type": "botnet",
 	"evidence_source": "traffic_analysis",
 	"malware_family": "Conficker",

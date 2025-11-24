@@ -10,7 +10,7 @@
 		{
 			"type": "object",
 			"properties": {
-				"class": {
+				"category": {
 					"const": "copyright"
 				},
 				"type": {
@@ -175,7 +175,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "cyberlocker-service.example",
-			"class": "copyright",
+			"category": "copyright",
 			"type": "cyberlocker",
 			"infringing_url": "https://filehost.example/download/abc123def456",
 			"hosting_service": "FileHost Pro",

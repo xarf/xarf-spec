@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "video-platform.example.com",
-	"class": "copyright",
+	"category": "copyright",
 	"type": "ugc_platform",
 	"evidence_source": "automated_monitoring",
 	"infringing_url": "https://video-platform.example.com/watch?v=copyrighted_content",

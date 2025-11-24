@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://xarf.org/schemas/v4/xarf-v4-master.json",
 	"title": "XARF v4 Master Schema",
-	"description": "Complete XARF v4 schema with type-specific validation for all classes and event types. This provides granular validation for each specific abuse type.",
+	"description": "Complete XARF v4 schema with type-specific validation for all categories and event types. This provides granular validation for each specific abuse type.",
 	"type": "object",
 	"allOf": [
 		{
@@ -13,7 +13,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "messaging"
 							},
 							"type": {
@@ -28,7 +28,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "messaging"
 							},
 							"type": {
@@ -43,7 +43,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "connection"
 							},
 							"type": {
@@ -58,7 +58,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "connection"
 							},
 							"type": {
@@ -73,7 +73,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "connection"
 							},
 							"type": {
@@ -88,7 +88,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "connection"
 							},
 							"type": {
@@ -103,7 +103,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "connection"
 							},
 							"type": {
@@ -118,7 +118,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "vulnerability"
 							},
 							"type": {
@@ -133,7 +133,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "vulnerability"
 							},
 							"type": {
@@ -148,7 +148,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "vulnerability"
 							},
 							"type": {
@@ -163,7 +163,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "reputation"
 							},
 							"type": {
@@ -178,7 +178,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "reputation"
 							},
 							"type": {
@@ -193,7 +193,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "infrastructure"
 							},
 							"type": {
@@ -208,7 +208,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "infrastructure"
 							},
 							"type": {
@@ -223,7 +223,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "content"
 							},
 							"type": {
@@ -238,7 +238,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "content"
 							},
 							"type": {
@@ -253,7 +253,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -268,7 +268,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -283,7 +283,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -298,7 +298,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -313,7 +313,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -328,7 +328,7 @@
 				{
 					"if": {
 						"properties": {
-							"class": {
+							"category": {
 								"const": "copyright"
 							},
 							"type": {
@@ -352,25 +352,25 @@
 	"examples": [
 		{
 			"title": "Messaging Spam Report",
-			"class": "messaging",
+			"category": "messaging",
 			"type": "spam",
 			"description": "Spam email detected by spamtrap"
 		},
 		{
 			"title": "Connection DDoS Report",
-			"class": "connection",
+			"category": "connection",
 			"type": "ddos",
 			"description": "DDoS attack with SYN flood technique"
 		},
 		{
 			"title": "Vulnerability CVE Report",
-			"class": "vulnerability",
+			"category": "vulnerability",
 			"type": "cve",
 			"description": "Apache HTTP Server CVE-2021-41773 vulnerability"
 		},
 		{
 			"title": "Content Phishing Report",
-			"class": "content",
+			"category": "content",
 			"type": "phishing",
 			"description": "Phishing website targeting banking credentials"
 		}

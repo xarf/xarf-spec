@@ -8,7 +8,7 @@
 		"type": "automated"
 	},
 	"source_identifier": "news.usenet-provider.example.com",
-	"class": "copyright",
+	"category": "copyright",
 	"type": "usenet",
 	"evidence_source": "automated_monitoring",
 	"newsgroup": "alt.binaries.movies.divx",

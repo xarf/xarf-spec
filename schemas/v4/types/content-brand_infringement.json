@@ -50,7 +50,7 @@
 							"type": "string",
 							"description": "Trademark jurisdiction (country/region)"
 						},
-						"class": {
+						"category": {
 							"type": "array",
 							"items": {
 								"type": "integer",
@@ -130,7 +130,7 @@
 				"type": "automated"
 			},
 			"source_identifier": "203.0.113.77",
-			"class": "content",
+			"category": "content",
 			"type": "brand_infringement",
 			"url": "https://amaz0n-deals.example.com",
 			"infringement_type": "typosquatting",

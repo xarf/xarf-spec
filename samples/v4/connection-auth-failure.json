@@ -9,7 +9,7 @@
 	},
 	"source_identifier": "172.16.0.99",
 	"source_port": 3389,
-	"class": "connection",
+	"category": "connection",
 	"type": "auth_failure",
 	"evidence_source": "firewall_logs",
 	"destination_ip": "192.0.2.44",
