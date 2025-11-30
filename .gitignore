@@ -1,5 +1,10 @@
-# Claude AI files
+# AI Tool Coordination (auto-generated, do not commit)
 .claude/
+.claude-flow/
+.swarm/
+.aider/
+.cursor/
+.copilot/
 
 # Editor files
 .vscode/
