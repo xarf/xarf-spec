@@ -306,8 +306,14 @@ All XARF v4 reports share this common structure:
   "reporter": {
     "org": "Example Security",
     "contact": "abuse@example.com",
+    "domain": "example.com",
     "type": "automated",
     "reporter_reference_id": "TICKET-2024-001"
+  },
+  "sender": {
+    "org": "Example Security",
+    "contact": "abuse@example.com",
+    "domain": "example.com"
   },
   "source_identifier": "192.0.2.1",
   "source_port": 25,
@@ -828,8 +834,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "SpamCop",
     "contact": "reports@spamcop.net",
+    "domain": "spamcop.net",
     "type": "automated",
     "reporter_reference_id": "SC-2024-789012"
+  },
+  "sender": {
+    "org": "SpamCop",
+    "contact": "reports@spamcop.net",
+    "domain": "spamcop.net"
   },
   "source_identifier": "192.0.2.123",
   "source_port": 25,
@@ -861,8 +873,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "PhishTank",
     "contact": "admin@phishtank.com",
+    "domain": "phishtank.com",
     "type": "automated",
     "reporter_reference_id": "PT-2024-456789"
+  },
+  "sender": {
+    "org": "PhishTank",
+    "contact": "admin@phishtank.com",
+    "domain": "phishtank.com"
   },
   "source_identifier": "203.0.113.45",
   "category": "content",
@@ -901,8 +919,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "DDoS Protection Service",
     "contact": "security@ddosprotect.com",
+    "domain": "ddosprotect.com",
     "type": "automated",
     "reporter_reference_id": "DDOS-INC-20240115-0001"
+  },
+  "sender": {
+    "org": "DDoS Protection Service",
+    "contact": "security@ddosprotect.com",
+    "domain": "ddosprotect.com"
   },
   "source_identifier": "198.51.100.75",
   "category": "connection",
@@ -934,8 +958,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Botnet Research Group",
     "contact": "research@botnetwatch.org",
+    "domain": "botnetwatch.org",
     "type": "automated",
     "reporter_reference_id": "BRG-BOT-2024-00234"
+  },
+  "sender": {
+    "org": "Botnet Research Group",
+    "contact": "research@botnetwatch.org",
+    "domain": "botnetwatch.org"
   },
   "source_identifier": "192.0.2.200",
   "category": "infrastructure",
@@ -966,8 +996,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Malware Analysis Lab",
     "contact": "samples@malware-lab.org",
+    "domain": "malware-lab.org",
     "type": "automated",
     "reporter_reference_id": "MAL-2024-9876"
+  },
+  "sender": {
+    "org": "Malware Analysis Lab",
+    "contact": "samples@malware-lab.org",
+    "domain": "malware-lab.org"
   },
   "source_identifier": "198.51.100.200",
   "category": "content",
@@ -1005,8 +1041,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Consumer Protection Agency",
     "contact": "fraud@consumer-protect.org",
+    "domain": "consumer-protect.org",
     "type": "manual",
     "reporter_reference_id": "CPA-FAKE-2024-0891"
+  },
+  "sender": {
+    "org": "Consumer Protection Agency",
+    "contact": "fraud@consumer-protect.org",
+    "domain": "consumer-protect.org"
   },
   "source_identifier": "198.51.100.88",
   "category": "content",
@@ -1037,8 +1079,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Online Safety Monitor",
     "contact": "reports@safety-monitor.org",
+    "domain": "safety-monitor.org",
     "type": "automated",
     "reporter_reference_id": "OSM-HS-2024-3456"
+  },
+  "sender": {
+    "org": "Online Safety Monitor",
+    "contact": "reports@safety-monitor.org",
+    "domain": "safety-monitor.org"
   },
   "source_identifier": "203.0.113.92",
   "category": "content",
@@ -1069,8 +1117,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Financial Crime Investigation Unit",
     "contact": "cybercrimes@fciu.org",
+    "domain": "fciu.org",
     "type": "manual",
     "reporter_reference_id": "FCIU-CARD-2024-1122"
+  },
+  "sender": {
+    "org": "Financial Crime Investigation Unit",
+    "contact": "cybercrimes@fciu.org",
+    "domain": "fciu.org"
   },
   "source_identifier": "198.51.100.135",
   "category": "content",
@@ -1101,8 +1155,14 @@ Complete sample reports demonstrating proper format for each category:
   "reporter": {
     "org": "Digital Integrity Alliance",
     "contact": "disinfo@digital-integrity.org",
+    "domain": "digital-integrity.org",
     "type": "manual",
     "reporter_reference_id": "DIA-DISINFO-2024-7890"
+  },
+  "sender": {
+    "org": "Digital Integrity Alliance",
+    "contact": "disinfo@digital-integrity.org",
+    "domain": "digital-integrity.org"
   },
   "source_identifier": "203.0.113.201",
   "category": "content",

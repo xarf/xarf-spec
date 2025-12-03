@@ -124,7 +124,13 @@ XARF v4 maintains backward compatibility with v3 reports. See our [migration gui
   "reporter": {
     "org": "Example Security",
     "contact": "abuse@example.com",
+    "domain": "example.com",
     "type": "automated|manual|hybrid"
+  },
+  "sender": {
+    "org": "Example Security",
+    "contact": "abuse@example.com",
+    "domain": "example.com"
   },
   "source_identifier": "192.0.2.1",
   "category": "messaging|connection|content|infrastructure|copyright|vulnerability|reputation",
