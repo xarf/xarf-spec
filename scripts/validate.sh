@@ -106,7 +106,7 @@ validate_sample_structure() {
     local error_count=0
     
     # Required XARF fields
-    local required_fields=("xarf_version" "report_id" "timestamp" "reporter" "source_identifier" "class" "type")
+    local required_fields=("xarf_version" "report_id" "timestamp" "reporter" "source_identifier" "category" "type")
     
     for field in "${required_fields[@]}"; do
         if ! jq -e ".$field" "$file" >/dev/null 2>&1; then
