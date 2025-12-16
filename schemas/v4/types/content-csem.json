@@ -122,17 +122,23 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "csem-2025-grooming-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
 			"timestamp": "2025-01-20T14:20:00Z",
 			"reporter": {
 				"org": "Platform Safety Team",
 				"contact": "safety@platform.example",
-				"type": "manual"
+				"domain": "platform.example"
+			},
+			"sender": {
+				"org": "Platform Safety Team",
+				"contact": "safety@platform.example",
+				"domain": "platform.example"
 			},
 			"source_identifier": "203.0.113.55",
 			"category": "content",
 			"type": "csem",
 			"url": "https://platform.example/user/suspicious-account",
+			"evidence_source": "automated_scan",
 			"exploitation_type": "grooming",
 			"victim_age_range": "pubescent",
 			"detection_method": "behavioral_analysis",

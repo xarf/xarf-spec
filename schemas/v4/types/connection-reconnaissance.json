@@ -147,16 +147,22 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "recon-2025-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440001",
 			"timestamp": "2025-01-15T16:45:00Z",
 			"reporter": {
 				"org": "Web Security Service",
 				"contact": "security@webhost.example",
-				"type": "automated"
+				"domain": "webhost.example"
+			},
+			"sender": {
+				"org": "Web Security Service",
+				"contact": "security@webhost.example",
+				"domain": "webhost.example"
 			},
 			"source_identifier": "192.0.2.99",
 			"category": "connection",
 			"type": "reconnaissance",
+			"evidence_source": "flow_analysis",
 			"destination_ip": "198.51.100.75",
 			"destination_port": 443,
 			"protocol": "tcp",

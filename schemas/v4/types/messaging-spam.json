@@ -18,15 +18,15 @@
 				},
 				"evidence_source": {
 					"type": "string",
-					"enum": [
+					"description": "Source of spam evidence",
+					"examples": [
 						"spamtrap",
 						"user_complaint",
 						"automated_filter",
 						"honeypot",
 						"content_analysis",
 						"reputation_feed"
-					],
-					"description": "Source of spam evidence"
+					]
 				},
 				"protocol": {
 					"type": "string",
@@ -161,21 +161,26 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "spam-123e4567-e89b-12d3-a456-426614174000",
+			"report_id": "123e4567-e89b-12d3-a456-426614174000",
 			"timestamp": "2024-01-15T14:30:25Z",
 			"reporter": {
 				"org": "SpamCop",
+				"domain": "spamcop.net",
+				"contact": "reports@spamcop.net"
+			},
+			"sender": {
+				"org": "SpamCop",
 				"contact": "reports@spamcop.net",
-				"type": "automated"
+				"domain": "spamcop.net"
 			},
 			"source_identifier": "192.0.2.123",
 			"source_port": 25,
 			"category": "messaging",
 			"type": "spam",
+			"evidence_source": "spamtrap",
 			"protocol": "smtp",
 			"smtp_from": "fake@example.com",
 			"subject": "Urgent: Verify Your Account",
-			"evidence_source": "spamtrap",
 			"evidence": [
 				{
 					"content_type": "message/rfc822",

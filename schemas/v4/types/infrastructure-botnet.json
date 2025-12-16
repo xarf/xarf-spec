@@ -74,6 +74,36 @@
 						"Malicious process running",
 						"Suspicious network traffic patterns"
 					]
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When the botnet activity was first observed",
+					"examples": [
+						"2024-01-14T18:45:00Z"
+					]
+				},
+				"last_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When the botnet activity was last observed",
+					"examples": [
+						"2025-01-11T12:16:22Z"
+					]
+				},
+				"infection_vector": {
+					"type": "string",
+					"enum": [
+						"network_worm",
+						"email_attachment",
+						"drive_by_download",
+						"exploit_kit",
+						"social_engineering",
+						"malicious_link",
+						"usb_propagation",
+						"brute_force"
+					],
+					"description": "How the system was initially infected"
 				}
 			},
 			"required": [

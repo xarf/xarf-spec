@@ -19,11 +19,11 @@
 				"evidence_source": {
 					"type": "string",
 					"enum": [
-						"automated_crawl",
-						"manual_monitoring",
+						"automated_scan",
+						"automated_discovery",
+						"researcher_analysis",
 						"user_report",
-						"rights_holder",
-						"watermark_detection"
+						"user_complaint"
 					],
 					"description": "Source of P2P infringement evidence"
 				},
@@ -127,7 +127,7 @@
 				"detection_method": {
 					"type": "string",
 					"enum": [
-						"automated_crawl",
+						"automated_scan",
 						"fingerprinting",
 						"metadata_match",
 						"manual_verification"
@@ -166,22 +166,27 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "p2p-789a1234-b567-89c0-d123-456789abcdef",
+			"report_id": "789a1234-b567-89c0-d123-456789abcdef",
 			"timestamp": "2024-01-15T18:30:45Z",
 			"reporter": {
 				"org": "Content Protection Agency",
-				"contact": "reports@cpa.org",
-				"type": "automated"
+				"domain": "cpa.org",
+				"contact": "reports@cpa.org"
+			},
+			"sender": {
+				"org": "Content Protection Agency",
+				"domain": "cpa.org",
+				"contact": "reports@cpa.org"
 			},
 			"source_identifier": "203.0.113.150",
 			"source_port": 6881,
 			"category": "copyright",
 			"type": "p2p",
+			"evidence_source": "automated_scan",
 			"p2p_protocol": "bittorrent",
 			"work_title": "Movie Title 2024",
 			"rights_holder": "Major Studio Inc",
 			"work_category": "movie",
-			"evidence_source": "automated_crawl",
 			"swarm_info": {
 				"info_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
 				"torrent_name": "Movie.Title.2024.1080p.BluRay.x264",

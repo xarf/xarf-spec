@@ -127,7 +127,12 @@
 			"reporter": {
 				"org": "Brand Protection Services",
 				"contact": "enforcement@brandprotect.example",
-				"type": "automated"
+				"domain": "brandprotect.example"
+			},
+			"sender": {
+				"org": "Brand Protection Services",
+				"contact": "enforcement@brandprotect.example",
+				"domain": "brandprotect.example"
 			},
 			"source_identifier": "203.0.113.77",
 			"category": "content",
@@ -142,6 +147,7 @@
 				"color_scheme"
 			],
 			"target_brand": "Amazon",
+			"evidence_source": "automated_scan",
 			"evidence": [
 				{
 					"content_type": "image/png",

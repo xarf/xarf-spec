@@ -19,11 +19,11 @@
 				"evidence_source": {
 					"type": "string",
 					"enum": [
-						"automated_crawl",
-						"manual_discovery",
+						"automated_scan",
+						"automated_discovery",
+						"researcher_analysis",
 						"user_report",
-						"rights_holder",
-						"search_engine"
+						"user_complaint"
 					],
 					"description": "Source of cyberlocker infringement evidence"
 				},
@@ -167,12 +167,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "cyber-456b7890-c123-45d6-e789-012345678901",
+			"report_id": "456b7890-c123-45d6-e789-012345678901",
 			"timestamp": "2024-01-15T11:15:20Z",
 			"reporter": {
 				"org": "Anti-Piracy Coalition",
 				"contact": "takedowns@antipiracy.org",
-				"type": "automated"
+				"domain": "antipiracy.org"
+			},
+			"sender": {
+				"org": "Anti-Piracy Coalition",
+				"contact": "takedowns@antipiracy.org",
+				"domain": "antipiracy.org"
 			},
 			"source_identifier": "cyberlocker-service.example",
 			"category": "copyright",
@@ -182,7 +187,7 @@
 			"work_title": "Popular Movie 2024",
 			"rights_holder": "Entertainment Studios LLC",
 			"work_category": "movie",
-			"evidence_source": "automated_crawl",
+			"evidence_source": "automated_scan",
 			"file_info": {
 				"filename": "Popular.Movie.2024.1080p.WEBRip.x264.mp4",
 				"file_size": 2147483648,

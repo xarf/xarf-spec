@@ -143,13 +143,19 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "scrape-2025-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440001",
 			"timestamp": "2025-01-15T14:00:00Z",
 			"reporter": {
 				"org": "Website Protection Service",
-				"contact": "abuse@hosting.example",
-				"type": "automated"
+				"domain": "hosting.example",
+				"contact": "abuse@hosting.example"
 			},
+			"sender": {
+				"org": "Automated Scraping Monitor",
+				"contact": "reports@hosting.example",
+				"domain": "hosting.example"
+			},
+			"evidence_source": "flow_analysis",
 			"source_identifier": "192.0.2.150",
 			"category": "connection",
 			"type": "scraping",

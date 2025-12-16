@@ -15,10 +15,63 @@
 				},
 				"type": {
 					"const": "compromised_server"
+				},
+				"compromise_type": {
+					"type": "string",
+					"enum": [
+						"webshell",
+						"backdoor",
+						"rootkit",
+						"malware",
+						"credential_theft",
+						"privilege_escalation",
+						"remote_access_trojan",
+						"cryptominer"
+					],
+					"description": "Type of compromise detected on the server"
+				},
+				"service": {
+					"type": "string",
+					"maxLength": 200,
+					"description": "Compromised service name",
+					"examples": [
+						"apache_web_server",
+						"nginx",
+						"ssh_server",
+						"ftp_server"
+					]
+				},
+				"service_version": {
+					"type": "string",
+					"maxLength": 100,
+					"description": "Version of the compromised service",
+					"examples": [
+						"Apache/2.4.29",
+						"OpenSSH 7.4"
+					]
+				},
+				"malicious_files": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "List of malicious files found on the compromised server"
+				},
+				"c2_communications": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Command and control communication endpoints"
+				},
+				"first_seen": {
+					"type": "string",
+					"format": "date-time",
+					"description": "When the compromise was first observed"
 				}
 			},
 			"required": [
-				"compromise_method"
+				"compromise_type"
 			]
 		}
 	]

@@ -1,10 +1,11 @@
 {
 	"xarf_version": "4.0.0",
-	"report_id": "f6g7h8i9-j0k1-2345-fg67-89012ef34567",
+	"report_id": "f6a7b8c9-d0e1-4234-a567-890123456789",
 	"timestamp": "2025-01-11T15:00:52Z",
 	"reporter": {
 		"org": "Example CERT Organization",
-		"contact": "cert@cert-org.example"
+		"contact": "cert@cert-org.example",
+		"domain": "cert-org.example"
 	},
 	"sender": {
 		"org": "Example CERT Organization",
@@ -25,7 +26,7 @@
 			"content_type": "text/plain",
 			"description": "Network traffic patterns indicating bot communication",
 			"payload": "Qm90bmV0IGNvbW11bmljYXRpb24gZGV0ZWN0ZWQ6IENvbmZpY2tlciBDMiBjaGFubmVs",
-			"hash": "751c9ad33534c7835566b26e9ddcba79b43887be12458bccc81f8c8e1b20a874"
+			"hash": "sha256:751c9ad33534c7835566b26e9ddcba79b43887be12458bccc81f8c8e1b20a874"
 		}
 	],
 	"tags": [

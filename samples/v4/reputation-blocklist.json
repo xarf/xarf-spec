@@ -1,10 +1,11 @@
 {
 	"xarf_version": "4.0.0",
-	"report_id": "g7h8i9j0-k1l2-3456-gh78-90123fg45678",
+	"report_id": "a7b8c9d0-e1f2-4567-8901-23456789abcd",
 	"timestamp": "2025-01-11T10:51:30Z",
 	"reporter": {
 		"org": "Threat Intelligence Consortium",
-		"contact": "intel@threatconsortium.org"
+		"contact": "intel@threatconsortium.org",
+		"domain": "threatconsortium.org"
 	},
 	"sender": {
 		"org": "Threat Intelligence Consortium",

@@ -1,10 +1,11 @@
 {
 	"xarf_version": "4.0.0",
-	"report_id": "l2m3n4o5-p6q7-8901-lm23-45678kl90123",
+	"report_id": "f2e3d4c5-b6a7-4891-8e23-456789ab0123",
 	"timestamp": "2025-01-11T15:57:57Z",
 	"reporter": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org"
+		"contact": "incidents@serversec.org",
+		"domain": "serversec.org"
 	},
 	"sender": {
 		"org": "Server Security Monitor",

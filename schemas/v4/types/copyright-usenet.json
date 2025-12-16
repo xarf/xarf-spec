@@ -19,11 +19,11 @@
 				"evidence_source": {
 					"type": "string",
 					"enum": [
-						"automated_monitoring",
-						"newsgroup_crawl",
+						"automated_scan",
+						"automated_discovery",
+						"traffic_analysis",
 						"user_report",
-						"rights_holder",
-						"nzb_index_monitoring"
+						"user_complaint"
 					],
 					"description": "Source of Usenet infringement evidence"
 				},
@@ -211,12 +211,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "usenet-345d6789-e012-34f5-g678-901234567890",
+			"report_id": "345d6789-e012-34f5-a678-901234567890",
 			"timestamp": "2024-01-15T07:20:45Z",
 			"reporter": {
 				"org": "Usenet Monitoring Service",
-				"contact": "reports@usenetmonitor.org",
-				"type": "automated"
+				"domain": "usenetmonitor.org",
+				"contact": "reports@usenetmonitor.org"
+			},
+			"sender": {
+				"org": "Usenet Monitoring Service",
+				"domain": "usenetmonitor.org",
+				"contact": "reports@usenetmonitor.org"
 			},
 			"source_identifier": "news.example-provider.com",
 			"category": "copyright",
@@ -225,7 +230,7 @@
 			"work_title": "Latest Movie 2024",
 			"rights_holder": "Film Distribution Corp",
 			"work_category": "movie",
-			"evidence_source": "automated_monitoring",
+			"evidence_source": "automated_scan",
 			"message_info": {
 				"message_id": "<abc123def456@news.provider.com>",
 				"subject": "[1/50] Latest.Movie.2024.1080p.BluRay.x264 - File 01 of 50",

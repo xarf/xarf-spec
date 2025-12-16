@@ -18,13 +18,13 @@
 				},
 				"evidence_source": {
 					"type": "string",
-					"enum": [
+					"description": "Source of bulk messaging evidence",
+					"examples": [
 						"user_complaint",
 						"automated_filter",
 						"reputation_feed",
 						"volume_analysis"
-					],
-					"description": "Source of bulk messaging evidence"
+					]
 				},
 				"protocol": {
 					"type": "string",
@@ -108,20 +108,25 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "bulk-456e7890-a12b-34c5-d678-901234567890",
+			"report_id": "456e7890-a12b-34c5-d678-901234567890",
 			"timestamp": "2024-01-15T16:45:10Z",
 			"reporter": {
 				"org": "Email Service Provider",
-				"contact": "abuse@esp-provider.com",
-				"type": "automated"
+				"domain": "esp-provider.com",
+				"contact": "abuse@esp-provider.com"
 			},
 			"source_identifier": "192.0.2.200",
+			"sender": {
+				"org": "Company Newsletter",
+				"domain": "company.example",
+				"contact": "newsletter@company.example"
+			},
 			"category": "messaging",
 			"type": "bulk_messaging",
+			"evidence_source": "user_complaint",
 			"protocol": "smtp",
 			"smtp_from": "newsletter@company.example",
 			"subject": "Weekly Newsletter - January Edition",
-			"evidence_source": "user_complaint",
 			"recipient_count": 50000,
 			"unsubscribe_provided": false,
 			"tags": [

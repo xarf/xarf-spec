@@ -19,11 +19,11 @@
 				"evidence_source": {
 					"type": "string",
 					"enum": [
-						"automated_crawl",
-						"manual_monitoring",
+						"automated_scan",
+						"automated_discovery",
+						"researcher_analysis",
 						"user_report",
-						"rights_holder",
-						"search_monitoring"
+						"user_complaint"
 					],
 					"description": "Source of link site infringement evidence"
 				},
@@ -196,12 +196,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "link-012c3456-d789-01e2-f345-678901234567",
+			"report_id": "550e8400-e29b-41d4-a716-446655440012",
 			"timestamp": "2024-01-15T20:10:30Z",
 			"reporter": {
 				"org": "Digital Rights Enforcement",
 				"contact": "enforcement@digitalrights.org",
-				"type": "automated"
+				"domain": "digitalrights.org"
+			},
+			"sender": {
+				"org": "Digital Rights Enforcement",
+				"contact": "enforcement@digitalrights.org",
+				"domain": "digitalrights.org"
 			},
 			"source_identifier": "torrent-indexer.example",
 			"category": "copyright",
@@ -212,7 +217,7 @@
 			"work_title": "Blockbuster Movie 2024",
 			"rights_holder": "Hollywood Studios",
 			"work_category": "movie",
-			"evidence_source": "automated_crawl",
+			"evidence_source": "automated_scan",
 			"link_info": {
 				"page_title": "Blockbuster Movie 2024 1080p BluRay x264",
 				"posting_date": "2024-01-14T22:30:00Z",

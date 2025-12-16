@@ -117,12 +117,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "sql-2025-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440001",
 			"timestamp": "2025-01-15T12:00:00Z",
 			"reporter": {
 				"org": "Web Application Firewall",
 				"contact": "security@example.com",
-				"type": "automated"
+				"domain": "example.com"
+			},
+			"sender": {
+				"org": "Web Application Firewall",
+				"contact": "security@example.com",
+				"domain": "example.com"
 			},
 			"source_identifier": "192.0.2.45",
 			"category": "connection",
@@ -136,7 +141,8 @@
 			"attack_technique": "union_based",
 			"attempts_count": 15,
 			"first_seen": "2025-01-15T11:45:00Z",
-			"last_seen": "2025-01-15T12:00:00Z"
+			"last_seen": "2025-01-15T12:00:00Z",
+			"evidence_source": "ids_detection"
 		}
 	]
 }

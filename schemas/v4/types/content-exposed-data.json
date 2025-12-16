@@ -160,12 +160,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "f1e2d3c4-b5a6-7890-abcd-ef1234567890",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
 			"timestamp": "2025-01-15T09:20:00Z",
 			"reporter": {
 				"org": "Data Breach Monitor",
+				"domain": "breachmonitor.example",
+				"contact": "alerts@breachmonitor.example"
+			},
+			"sender": {
+				"org": "Data Breach Monitor",
 				"contact": "alerts@breachmonitor.example",
-				"type": "automated"
+				"domain": "breachmonitor.example"
 			},
 			"source_identifier": "198.51.100.99",
 			"category": "content",
@@ -187,6 +192,7 @@
 			],
 			"encryption_status": "hashed",
 			"accessibility": "public",
+			"evidence_source": "automated_scan",
 			"evidence": [
 				{
 					"content_type": "text/plain",

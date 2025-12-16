@@ -112,11 +112,17 @@
 			"reporter": {
 				"org": "Anti-Fraud Coalition",
 				"contact": "reports@antifraud.example",
-				"type": "automated"
+				"domain": "antifraud.example"
+			},
+			"sender": {
+				"org": "Anti-Fraud Coalition",
+				"contact": "reports@antifraud.example",
+				"domain": "antifraud.example"
 			},
 			"source_identifier": "198.51.100.45",
 			"category": "content",
 			"type": "fraud",
+			"evidence_source": "user_report",
 			"url": "https://get-rich-quick.example.com",
 			"fraud_type": "investment",
 			"payment_methods": [

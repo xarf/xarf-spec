@@ -89,14 +89,19 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "csam-report-2025-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
 			"timestamp": "2025-01-15T10:30:00Z",
 			"reporter": {
 				"org": "Content Safety Service",
 				"contact": "safety@example.org",
-				"type": "automated"
+				"domain": "example.org"
 			},
 			"source_identifier": "198.51.100.42",
+			"sender": {
+				"org": "Content Safety Service",
+				"contact": "safety@example.org",
+				"domain": "example.org"
+			},
 			"category": "content",
 			"type": "csam",
 			"url": "https://example.com/illegal-content",
@@ -108,7 +113,8 @@
 			},
 			"ncmec_report_id": "12345678",
 			"content_removed": true,
-			"account_suspended": true
+			"account_suspended": true,
+			"evidence_source": "automated_scan"
 		}
 	]
 }

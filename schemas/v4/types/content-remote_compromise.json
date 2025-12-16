@@ -183,16 +183,22 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "d4e5f6a7-b8c9-0123-def4-567890abcdef",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
 			"timestamp": "2025-01-15T11:30:00Z",
 			"reporter": {
 				"org": "Web Security Scanner",
 				"contact": "abuse@websecscanner.example",
-				"type": "automated"
+				"domain": "websecscanner.example"
+			},
+			"sender": {
+				"org": "Web Security Scanner",
+				"contact": "abuse@websecscanner.example",
+				"domain": "websecscanner.example"
 			},
 			"source_identifier": "192.0.2.150",
 			"category": "content",
 			"type": "remote_compromise",
+			"evidence_source": "automated_scan",
 			"url": "https://compromised-site.example.com/wp-content/uploads/shell.php",
 			"compromise_type": "webshell",
 			"affected_cms": "wordpress",

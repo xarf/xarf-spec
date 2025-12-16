@@ -19,12 +19,11 @@
 				"evidence_source": {
 					"type": "string",
 					"enum": [
-						"automated_detection",
+						"automated_scan",
 						"user_report",
-						"rights_holder",
-						"content_id_match",
-						"fingerprint_match",
-						"manual_review"
+						"user_complaint",
+						"automated_discovery",
+						"researcher_analysis"
 					],
 					"description": "Source of UGC platform infringement evidence"
 				},
@@ -213,22 +212,27 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "ugc-789c0123-d456-78e9-f012-345678901234",
+			"report_id": "789c0123-d456-78e9-f012-345678901234",
 			"timestamp": "2024-01-15T13:45:15Z",
 			"reporter": {
 				"org": "Music Rights Management",
-				"contact": "copyright@musicrights.org",
-				"type": "automated"
+				"domain": "musicrights.org",
+				"contact": "copyright@musicrights.org"
+			},
+			"sender": {
+				"org": "Music Rights Management",
+				"domain": "musicrights.org",
+				"contact": "copyright@musicrights.org"
 			},
 			"source_identifier": "video-platform.example",
 			"category": "copyright",
 			"type": "ugc_platform",
+			"evidence_source": "automated_scan",
 			"infringing_url": "https://platform.example/watch?v=abc123def456",
 			"platform_name": "VideoShare",
 			"work_title": "Hit Song 2024",
 			"rights_holder": "Record Label Inc",
 			"work_category": "music",
-			"evidence_source": "content_id_match",
 			"infringement_type": "background_music",
 			"content_info": {
 				"content_id": "vid_abc123def456",

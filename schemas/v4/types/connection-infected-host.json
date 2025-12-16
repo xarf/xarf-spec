@@ -155,13 +155,19 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "bot-2025-001",
+			"report_id": "550e8400-e29b-41d4-a716-446655440001",
 			"timestamp": "2025-01-15T11:30:00Z",
 			"reporter": {
 				"org": "Bot Detection Service",
 				"contact": "botreport@example.com",
-				"type": "automated"
+				"domain": "example.com"
 			},
+			"sender": {
+				"org": "Bot Detection Service",
+				"contact": "botreport@example.com",
+				"domain": "example.com"
+			},
+			"evidence_source": "flow_analysis",
 			"source_identifier": "203.0.113.42",
 			"category": "connection",
 			"type": "infected_host",

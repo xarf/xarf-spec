@@ -21,5 +21,39 @@
 				"threat_type"
 			]
 		}
+	],
+	"examples": [
+		{
+			"xarf_version": "4.0.0",
+			"report_id": "550e8400-e29b-41d4-a716-446655440000",
+			"timestamp": "2024-01-15T14:30:25Z",
+			"reporter": {
+				"org": "Threat Intelligence Corp",
+				"contact": "reports@threat-intel.com",
+				"domain": "threat-intel.com"
+			},
+			"sender": {
+				"org": "Threat Intelligence Corp",
+				"contact": "reports@threat-intel.com",
+				"domain": "threat-intel.com"
+			},
+			"source_identifier": "198.51.100.42",
+			"category": "reputation",
+			"type": "threat_intelligence",
+			"threat_type": "malware_c2",
+			"evidence_source": "automated_discovery",
+			"evidence": [
+				{
+					"content_type": "application/json",
+					"description": "IOC details and context",
+					"payload": "eyJpb2NfdHlwZSI6ICJpcCIsICJzZXZlcml0eSI6ICJoaWdoIn0="
+				}
+			],
+			"tags": [
+				"threat:malware_c2",
+				"severity:high"
+			],
+			"confidence": 0.95
+		}
 	]
 }

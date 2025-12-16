@@ -151,12 +151,17 @@
 	"examples": [
 		{
 			"xarf_version": "4.0.0",
-			"report_id": "ddos-789a0123-b456-78c9-d012-345678901234",
+			"report_id": "789a0123-b456-48c9-a012-345678901234",
 			"timestamp": "2024-01-15T16:55:42Z",
 			"reporter": {
 				"org": "DDoS Protection Service",
 				"contact": "ddos@protectionservice.net",
-				"type": "automated"
+				"domain": "protectionservice.net"
+			},
+			"sender": {
+				"org": "DDoS Protection Service",
+				"contact": "ddos@protectionservice.net",
+				"domain": "protectionservice.net"
 			},
 			"source_identifier": "192.0.2.155",
 			"category": "connection",
