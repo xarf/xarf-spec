@@ -37,6 +37,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     print_status $BLUE "📦 Installing dependencies via Homebrew..."
     brew install jq python3
     
+    print_status $BLUE "🐍 Installing Python packages..."
+    python3 -m pip install --user jsonschema
+    
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     print_status $BLUE "🐧 Detected Linux"
@@ -44,30 +47,45 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if command -v apt-get &> /dev/null; then
         print_status $BLUE "📦 Installing dependencies via apt..."
         sudo apt-get update
-        sudo apt-get install -y jq python3
+        sudo apt-get install -y jq python3 python3-pip
+        
+        print_status $BLUE "🐍 Installing Python packages..."
+        python3 -m pip install --user jsonschema
     elif command -v yum &> /dev/null; then
         print_status $BLUE "📦 Installing dependencies via yum..."
-        sudo yum install -y jq python3
+        sudo yum install -y jq python3 python3-pip
+        
+        print_status $BLUE "🐍 Installing Python packages..."
+        python3 -m pip install --user jsonschema
     else
-        print_status $YELLOW "⚠️  Please install jq and python3 manually"
+        print_status $YELLOW "⚠️  Please install jq, python3, and 'pip install jsonschema' manually"
     fi
 else
-    print_status $YELLOW "⚠️  Unsupported OS. Please install jq and python3 manually"
+    print_status $YELLOW "⚠️  Unsupported OS. Please install jq, python3, and 'pip install jsonschema' manually"
 fi
 
 # Test validation
-print_status $BLUE "🧪 Testing validation script..."
-if "$ROOT_DIR/scripts/validate.sh"; then
-    print_status $GREEN "✅ Validation test passed!"
+print_status $BLUE "🧪 Testing validation scripts..."
+echo "Testing JSON formatting..."
+if "$ROOT_DIR/scripts/format-json.sh" check; then
+    print_status $GREEN "✅ JSON formatting test passed!"
 else
-    print_status $YELLOW "⚠️  Validation test failed - this is expected if there are validation errors"
+    print_status $YELLOW "⚠️  JSON formatting test failed"
+fi
+
+echo "Testing schema validation..."
+if python3 "$ROOT_DIR/scripts/validate-schemas.py" > /dev/null; then
+    print_status $GREEN "✅ Schema validation test passed!"
+else
+    print_status $YELLOW "⚠️  Schema validation test failed - check for schema errors"
 fi
 
 echo ""
 print_status $GREEN "🎉 Setup complete!"
 echo ""
 echo "Available commands:"
-echo "  ./scripts/validate.sh         - Validate all JSON files"
-echo "  ./scripts/validate.sh format  - Format all JSON files"
+echo "  ./scripts/format-json.sh check       - Check JSON formatting"
+echo "  ./scripts/format-json.sh format      - Format all JSON files"
+echo "  python3 scripts/validate-schemas.py  - Validate samples against schemas"
 echo ""
 echo "For CI/CD, the GitHub Actions workflow will run validation automatically."
