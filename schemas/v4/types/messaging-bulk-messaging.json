@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://xarf.org/schemas/v4/types/messaging-bulk.json",
+	"$id": "https://xarf.org/schemas/v4/types/messaging-bulk-messaging.json",
 	"title": "XARF v4 Messaging - Bulk Messaging Type Schema",
 	"description": "Schema for bulk messaging reports - legitimate but unwanted bulk communications",
 	"allOf": [
