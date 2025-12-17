@@ -29,7 +29,7 @@
 						"scanner",
 						"other"
 					],
-					"description": "Type of compromise detected"
+					"description": "REQUIRED: Type of compromise detected"
 				},
 				"compromise_indicators": {
 					"type": "array",
@@ -46,14 +46,16 @@
 									"scheduled_task",
 									"registry_key",
 									"service"
-								]
+								],
+								"description": "REQUIRED: Type of indicator"
 							},
 							"value": {
 								"type": "string",
-								"description": "Indicator value (e.g., file path, process name)"
+								"description": "REQUIRED: Indicator value (e.g., file path, process name)"
 							},
 							"description": {
-								"type": "string"
+								"type": "string",
+								"description": "OPTIONAL: Additional description"
 							}
 						},
 						"required": [
@@ -61,14 +63,15 @@
 							"value"
 						]
 					},
-					"description": "Specific indicators of compromise"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Specific indicators of compromise"
 				},
 				"webshell_details": {
 					"type": "object",
 					"properties": {
 						"family": {
 							"type": "string",
-							"description": "Known webshell family",
+							"description": "OPTIONAL: Known webshell family",
 							"examples": [
 								"WSO",
 								"C99",
@@ -89,13 +92,16 @@
 									"persistence",
 									"other"
 								]
-							}
+							},
+							"description": "OPTIONAL: Webshell capabilities"
 						},
 						"password_protected": {
-							"type": "boolean"
+							"type": "boolean",
+							"description": "OPTIONAL: Whether webshell is password protected"
 						}
 					},
-					"description": "Details specific to webshell compromises"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Details specific to webshell compromises"
 				},
 				"affected_cms": {
 					"type": "string",
@@ -110,24 +116,27 @@
 						"unknown",
 						"other"
 					],
-					"description": "Content management system if identified"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Content management system if identified"
 				},
 				"vulnerability_exploited": {
 					"type": "object",
 					"properties": {
 						"cve": {
 							"type": "string",
-							"pattern": "^CVE-\\d{4}-\\d{4,}$"
+							"pattern": "^CVE-\\d{4}-\\d{4,}$",
+							"description": "OPTIONAL: CVE identifier"
 						},
 						"description": {
-							"type": "string"
+							"type": "string",
+							"description": "OPTIONAL: Vulnerability description"
 						},
 						"component": {
 							"type": "string",
-							"description": "Vulnerable component (e.g., plugin name)"
+							"description": "OPTIONAL: Vulnerable component (e.g., plugin name)"
 						}
 					},
-					"description": "Vulnerability used for initial compromise if known"
+					"description": "OPTIONAL: Vulnerability used for initial compromise if known"
 				},
 				"persistence_mechanisms": {
 					"type": "array",
@@ -143,7 +152,8 @@
 							"other"
 						]
 					},
-					"description": "Methods used to maintain access"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Methods used to maintain access"
 				},
 				"malicious_activities": {
 					"type": "array",
@@ -161,7 +171,8 @@
 							"other"
 						]
 					},
-					"description": "Observed malicious activities from the compromised site"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Observed malicious activities from the compromised site"
 				},
 				"cleanup_status": {
 					"type": "string",
@@ -172,7 +183,7 @@
 						"reinfected",
 						"unknown"
 					],
-					"description": "Current cleanup status of the compromise"
+					"description": "OPTIONAL: Current cleanup status of the compromise"
 				}
 			},
 			"required": [

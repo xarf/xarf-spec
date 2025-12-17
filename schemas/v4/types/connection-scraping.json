@@ -26,13 +26,15 @@
 							"format": "ipv6"
 						}
 					],
-					"description": "Target IP address being scraped"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target IP address being scraped"
 				},
 				"destination_port": {
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 65535,
-					"description": "Target port number (typically 80 or 443)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target port number (typically 80 or 443)"
 				},
 				"protocol": {
 					"type": "string",
@@ -41,7 +43,7 @@
 						"udp"
 					],
 					"default": "tcp",
-					"description": "Network protocol used"
+					"description": "REQUIRED: Network protocol used"
 				},
 				"scraping_pattern": {
 					"type": "string",
@@ -55,7 +57,8 @@
 						"breadth_first",
 						"depth_first"
 					],
-					"description": "Pattern of scraping behavior observed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Pattern of scraping behavior observed"
 				},
 				"target_content": {
 					"type": "string",
@@ -72,15 +75,17 @@
 						"general_content",
 						"other"
 					],
-					"description": "Type of content being scraped"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Type of content being scraped"
 				},
 				"user_agent": {
 					"type": "string",
-					"description": "User-Agent string used by the scraper"
+					"x-recommended": true,
+					"description": "RECOMMENDED: User-Agent string used by the scraper"
 				},
 				"bot_signature": {
 					"type": "string",
-					"description": "Known bot or scraper signature if identified",
+					"description": "OPTIONAL: Known bot or scraper signature if identified",
 					"examples": [
 						"Googlebot",
 						"Bingbot",
@@ -94,43 +99,43 @@
 				},
 				"request_rate": {
 					"type": "number",
-					"description": "Average requests per second"
+					"description": "OPTIONAL: Average requests per second"
 				},
 				"total_requests": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Total number of requests made"
+					"description": "REQUIRED: Total number of requests made"
 				},
 				"unique_urls": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Number of unique URLs accessed"
+					"description": "OPTIONAL: Number of unique URLs accessed"
 				},
 				"data_volume": {
 					"type": "integer",
-					"description": "Total bytes of data transferred"
+					"description": "OPTIONAL: Total bytes of data transferred"
 				},
 				"respects_robots_txt": {
 					"type": "boolean",
-					"description": "Whether the scraper respects robots.txt"
+					"description": "OPTIONAL: Whether the scraper respects robots.txt"
 				},
 				"session_duration": {
 					"type": "integer",
-					"description": "Duration of scraping session in seconds"
+					"description": "OPTIONAL: Duration of scraping session in seconds"
 				},
 				"concurrent_connections": {
 					"type": "integer",
-					"description": "Maximum concurrent connections observed"
+					"description": "OPTIONAL: Maximum concurrent connections observed"
 				},
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When scraping activity was first observed"
+					"description": "REQUIRED: When scraping activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When scraping activity was last observed"
+					"description": "OPTIONAL: When scraping activity was last observed"
 				}
 			},
 			"required": [

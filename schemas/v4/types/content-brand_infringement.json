@@ -26,29 +26,30 @@
 						"logo_misuse",
 						"other"
 					],
-					"description": "Specific type of brand infringement"
+					"description": "REQUIRED: Specific type of brand infringement"
 				},
 				"legitimate_site": {
 					"type": "string",
 					"format": "uri",
-					"description": "URL of the legitimate brand website"
+					"description": "REQUIRED: URL of the legitimate brand website"
 				},
 				"similarity_score": {
 					"type": "number",
 					"minimum": 0.0,
 					"maximum": 1.0,
-					"description": "Visual or textual similarity score (0.0 = no similarity, 1.0 = identical)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Visual or textual similarity score (0.0 = no similarity, 1.0 = identical)"
 				},
 				"trademark_details": {
 					"type": "object",
 					"properties": {
 						"registration_number": {
 							"type": "string",
-							"description": "Trademark registration number"
+							"description": "OPTIONAL: Trademark registration number"
 						},
 						"jurisdiction": {
 							"type": "string",
-							"description": "Trademark jurisdiction (country/region)"
+							"description": "OPTIONAL: Trademark jurisdiction (country/region)"
 						},
 						"category": {
 							"type": "array",
@@ -57,10 +58,10 @@
 								"minimum": 1,
 								"maximum": 45
 							},
-							"description": "Nice Classification classes"
+							"description": "OPTIONAL: Nice Classification classes"
 						}
 					},
-					"description": "Trademark registration details if applicable"
+					"description": "OPTIONAL: Trademark registration details if applicable"
 				},
 				"infringing_elements": {
 					"type": "array",
@@ -77,14 +78,15 @@
 							"other"
 						]
 					},
-					"description": "Specific brand elements being infringed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Specific brand elements being infringed"
 				},
 				"products_offered": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					},
-					"description": "Products or services offered on the infringing site"
+					"description": "OPTIONAL: Products or services offered on the infringing site"
 				},
 				"previous_enforcement": {
 					"type": "array",
@@ -93,7 +95,8 @@
 						"properties": {
 							"date": {
 								"type": "string",
-								"format": "date"
+								"format": "date",
+								"description": "OPTIONAL: Date of enforcement action"
 							},
 							"action": {
 								"type": "string",
@@ -103,14 +106,16 @@
 									"domain_dispute",
 									"legal_action",
 									"other"
-								]
+								],
+								"description": "OPTIONAL: Type of action taken"
 							},
 							"result": {
-								"type": "string"
+								"type": "string",
+								"description": "OPTIONAL: Result of the action"
 							}
 						}
 					},
-					"description": "Previous enforcement actions taken"
+					"description": "OPTIONAL: Previous enforcement actions taken"
 				}
 			},
 			"required": [

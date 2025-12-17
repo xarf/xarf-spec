@@ -15,6 +15,10 @@
 				},
 				"type": {
 					"const": "threat_intelligence"
+				},
+				"threat_type": {
+					"type": "string",
+					"description": "REQUIRED: Type of threat for intelligence report"
 				}
 			},
 			"required": [

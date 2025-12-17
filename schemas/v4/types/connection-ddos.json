@@ -25,7 +25,8 @@
 						"traffic_monitoring",
 						"honeypot"
 					],
-					"description": "Source of DDoS attack evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of DDoS attack evidence"
 				},
 				"destination_ip": {
 					"type": "string",
@@ -37,13 +38,15 @@
 							"format": "ipv6"
 						}
 					],
-					"description": "Target IP address of the DDoS attack (optional victim context)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target IP address of the DDoS attack"
 				},
 				"destination_port": {
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 65535,
-					"description": "Target port number",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target port number",
 					"examples": [
 						80,
 						443,
@@ -59,11 +62,12 @@
 						"icmp",
 						"sctp"
 					],
-					"description": "Network protocol used in the attack (REQUIRED)"
+					"description": "REQUIRED: Network protocol used in the attack"
 				},
 				"attack_vector": {
 					"type": "string",
-					"description": "Specific DDoS attack method",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Specific DDoS attack method",
 					"examples": [
 						"syn_flood",
 						"udp_flood",
@@ -77,41 +81,43 @@
 				"peak_pps": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Peak packets per second during attack"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Peak packets per second during attack"
 				},
 				"peak_bps": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Peak bits per second during attack"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Peak bits per second during attack"
 				},
 				"duration_seconds": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Duration of the DDoS attack in seconds"
+					"description": "OPTIONAL: Duration of the DDoS attack in seconds"
 				},
 				"amplification_factor": {
 					"type": "number",
 					"minimum": 1.0,
-					"description": "Amplification factor for reflection attacks"
+					"description": "OPTIONAL: Amplification factor for reflection attacks"
 				},
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When DDoS attack was first observed"
+					"description": "REQUIRED: When DDoS attack was first observed"
 				},
 				"last_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When DDoS attack was last observed"
+					"description": "OPTIONAL: When DDoS attack was last observed"
 				},
 				"threshold_exceeded": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When detection threshold was exceeded"
+					"description": "OPTIONAL: When detection threshold was exceeded"
 				},
 				"mitigation_applied": {
 					"type": "boolean",
-					"description": "Whether mitigation measures were applied"
+					"description": "OPTIONAL: Whether mitigation measures were applied"
 				},
 				"service_impact": {
 					"type": "string",
@@ -120,7 +126,7 @@
 						"degraded",
 						"unavailable"
 					],
-					"description": "Impact on target service availability"
+					"description": "OPTIONAL: Impact on target service availability"
 				}
 			},
 			"required": [

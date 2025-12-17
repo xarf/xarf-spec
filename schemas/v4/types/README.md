@@ -102,6 +102,63 @@ Each type schema follows this structure:
 }
 ```
 
+## Field Classification
+
+All schemas use a three-tier field classification system to indicate field requirements:
+
+### Classification Levels
+
+| Level | In Schema | Description |
+|-------|-----------|-------------|
+| **Required** | In `required` array | Must be present for valid reports |
+| **Recommended** | Has `x-recommended: true` | Should be included when available |
+| **Optional** | Neither of the above | May be included for additional context |
+
+### Detection Methods
+
+**1. Description Prefixes**
+
+All field descriptions are prefixed with their requirement level for human readability:
+- `"description": "REQUIRED: Field must be present"`
+- `"description": "RECOMMENDED: Field should be included when available"`
+- `"description": "OPTIONAL: Field may be included for additional context"`
+
+**2. Programmatic Detection**
+
+Use the `x-recommended` extension property to programmatically identify recommended fields:
+
+```python
+def get_requirement_level(schema, field_name):
+    if field_name in schema.get("required", []):
+        return "required"
+    elif schema["properties"][field_name].get("x-recommended"):
+        return "recommended"
+    return "optional"
+```
+
+### Example
+
+```json
+{
+  "properties": {
+    "fraud_type": {
+      "type": "string",
+      "description": "REQUIRED: Specific type of fraud"
+    },
+    "payment_methods": {
+      "type": "array",
+      "x-recommended": true,
+      "description": "RECOMMENDED: Payment methods requested by fraudsters"
+    },
+    "loss_amount": {
+      "type": "object",
+      "description": "OPTIONAL: Financial loss information if known"
+    }
+  },
+  "required": ["fraud_type"]
+}
+```
+
 ## Usage
 
 ### Validate Against Specific Type

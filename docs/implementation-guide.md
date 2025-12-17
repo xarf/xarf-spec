@@ -545,6 +545,31 @@ Parsers must implement support for the three-tier attribute categorization syste
    - **Extension**: Allow custom optional fields for organization-specific needs
    - **Documentation**: Provide use cases and examples
 
+**Detecting Field Requirements Programmatically:**
+
+XARF v4 schemas provide two mechanisms for determining field requirements:
+
+1. **Description Prefixes**: All field descriptions start with `REQUIRED:`, `RECOMMENDED:`, or `OPTIONAL:`
+2. **`x-recommended` Extension**: Recommended fields include `"x-recommended": true`
+
+```python
+def get_field_requirement(schema, field_name):
+    """Determine field requirement level from schema."""
+    field_schema = schema.get("properties", {}).get(field_name, {})
+    required_fields = schema.get("required", [])
+
+    if field_name in required_fields:
+        return "required"
+    elif field_schema.get("x-recommended", False):
+        return "recommended"
+    else:
+        return "optional"
+
+# Example usage
+requirement = get_field_requirement(messaging_schema, "source_port")
+# Returns: "recommended"
+```
+
 **Validation Mode Configuration:**
 ```python
 # Example API for validation modes
@@ -559,6 +584,7 @@ parser = XARFParser(
 - Provide clear validation mode configuration options
 - Support runtime switching between validation modes
 - Generate detailed validation reports showing field categorization
+- Use `x-recommended` property to programmatically identify recommended fields
 - Include migration tools to help upgrade from permissive to strict validation
 
 ### Testing Strategy

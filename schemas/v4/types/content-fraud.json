@@ -28,7 +28,7 @@
 						"government_impersonation",
 						"other"
 					],
-					"description": "Specific type of fraud"
+					"description": "REQUIRED: Specific type of fraud"
 				},
 				"payment_methods": {
 					"type": "array",
@@ -48,7 +48,8 @@
 							"other"
 						]
 					},
-					"description": "Payment methods requested by fraudsters"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Payment methods requested by fraudsters"
 				},
 				"cryptocurrency_addresses": {
 					"type": "array",
@@ -64,11 +65,12 @@
 									"bnb",
 									"monero",
 									"other"
-								]
+								],
+								"description": "OPTIONAL: Cryptocurrency type"
 							},
 							"address": {
 								"type": "string",
-								"description": "Cryptocurrency wallet address"
+								"description": "OPTIONAL: Cryptocurrency wallet address"
 							}
 						},
 						"required": [
@@ -76,11 +78,12 @@
 							"address"
 						]
 					},
-					"description": "Cryptocurrency addresses used in the fraud"
+					"description": "OPTIONAL: Cryptocurrency addresses used in the fraud"
 				},
 				"claimed_entity": {
 					"type": "string",
-					"description": "Organization or person the fraudster claims to represent"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person the fraudster claims to represent"
 				},
 				"loss_amount": {
 					"type": "object",
@@ -88,15 +91,15 @@
 						"currency": {
 							"type": "string",
 							"pattern": "^[A-Z]{3}$",
-							"description": "ISO 4217 currency code"
+							"description": "OPTIONAL: ISO 4217 currency code"
 						},
 						"amount": {
 							"type": "number",
 							"minimum": 0,
-							"description": "Estimated or actual loss amount"
+							"description": "OPTIONAL: Estimated or actual loss amount"
 						}
 					},
-					"description": "Financial loss information if known"
+					"description": "OPTIONAL: Financial loss information if known"
 				}
 			},
 			"required": [

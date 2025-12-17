@@ -26,13 +26,15 @@
 							"format": "ipv6"
 						}
 					],
-					"description": "Target IP address"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target IP address"
 				},
 				"destination_port": {
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 65535,
-					"description": "Target port number"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target port number"
 				},
 				"protocol": {
 					"type": "string",
@@ -41,14 +43,14 @@
 						"udp"
 					],
 					"default": "tcp",
-					"description": "Network protocol used"
+					"description": "REQUIRED: Network protocol used"
 				},
 				"probed_resources": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					},
-					"description": "List of resources that were probed",
+					"description": "REQUIRED: List of resources that were probed",
 					"examples": [
 						[
 							"/.env",
@@ -80,7 +82,8 @@
 							"other"
 						]
 					},
-					"description": "Categories of resources being probed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Categories of resources being probed"
 				},
 				"http_methods": {
 					"type": "array",
@@ -97,44 +100,45 @@
 							"CONNECT"
 						]
 					},
-					"description": "HTTP methods used in reconnaissance"
+					"description": "OPTIONAL: HTTP methods used in reconnaissance"
 				},
 				"response_codes": {
 					"type": "array",
 					"items": {
 						"type": "integer"
 					},
-					"description": "HTTP response codes received"
+					"description": "OPTIONAL: HTTP response codes received"
 				},
 				"successful_probes": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					},
-					"description": "Resources that returned success responses (200, 301, 302)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Resources that returned success responses (200, 301, 302)"
 				},
 				"user_agent": {
 					"type": "string",
-					"description": "User-Agent string used"
+					"description": "OPTIONAL: User-Agent string used"
 				},
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When reconnaissance activity was first observed"
+					"description": "REQUIRED: When reconnaissance activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When reconnaissance activity was last observed"
+					"description": "OPTIONAL: When reconnaissance activity was last observed"
 				},
 				"total_probes": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Total number of probe attempts"
+					"description": "OPTIONAL: Total number of probe attempts"
 				},
 				"automated_tool": {
 					"type": "boolean",
-					"description": "Whether activity appears to be from an automated tool"
+					"description": "OPTIONAL: Whether activity appears to be from an automated tool"
 				}
 			},
 			"required": [

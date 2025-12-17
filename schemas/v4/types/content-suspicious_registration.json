@@ -16,12 +16,13 @@
 				"registration_date": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When the domain was registered"
+					"description": "REQUIRED: When the domain was registered"
 				},
 				"days_since_registration": {
 					"type": "integer",
 					"minimum": 0,
-					"description": "Number of days since domain registration"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Number of days since domain registration"
 				},
 				"suspicious_indicators": {
 					"type": "array",
@@ -45,41 +46,46 @@
 						]
 					},
 					"minItems": 1,
-					"description": "Indicators that make this registration suspicious"
+					"description": "REQUIRED: Indicators that make this registration suspicious"
 				},
 				"risk_score": {
 					"type": "number",
 					"minimum": 0.0,
 					"maximum": 1.0,
-					"description": "Calculated risk score for this domain"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Calculated risk score for this domain"
 				},
 				"targeted_brands": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					},
-					"description": "Brands potentially targeted by this domain"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Brands potentially targeted by this domain"
 				},
 				"registrant_details": {
 					"type": "object",
 					"properties": {
 						"email_domain": {
 							"type": "string",
-							"description": "Domain of registrant's email"
+							"description": "OPTIONAL: Domain of registrant's email"
 						},
 						"country": {
 							"type": "string",
-							"pattern": "^[A-Z]{2}$"
+							"pattern": "^[A-Z]{2}$",
+							"description": "OPTIONAL: ISO 3166-1 alpha-2 country code"
 						},
 						"privacy_protected": {
-							"type": "boolean"
+							"type": "boolean",
+							"description": "OPTIONAL: Whether WHOIS privacy is enabled"
 						},
 						"bulk_registrations": {
 							"type": "integer",
-							"description": "Number of domains registered by same entity"
+							"description": "OPTIONAL: Number of domains registered by same entity"
 						}
 					},
-					"description": "Information about the domain registrant"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Information about the domain registrant"
 				},
 				"related_domains": {
 					"type": "array",
@@ -87,7 +93,8 @@
 						"type": "object",
 						"properties": {
 							"domain": {
-								"type": "string"
+								"type": "string",
+								"description": "OPTIONAL: Related domain name"
 							},
 							"relationship": {
 								"type": "string",
@@ -98,12 +105,13 @@
 									"same_ssl_cert",
 									"similar_pattern",
 									"same_campaign"
-								]
+								],
+								"description": "OPTIONAL: Type of relationship"
 							}
 						}
 					},
 					"maxItems": 20,
-					"description": "Other domains related to this suspicious registration"
+					"description": "OPTIONAL: Other domains related to this suspicious registration"
 				},
 				"predicted_usage": {
 					"type": "array",
@@ -119,31 +127,33 @@
 							"unknown"
 						]
 					},
-					"description": "Predicted malicious usage based on patterns"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Predicted malicious usage based on patterns"
 				},
 				"ssl_certificate_details": {
 					"type": "object",
 					"properties": {
 						"issued_immediately": {
 							"type": "boolean",
-							"description": "Certificate issued immediately after registration"
+							"description": "OPTIONAL: Certificate issued immediately after registration"
 						},
 						"free_certificate": {
 							"type": "boolean",
-							"description": "Using free SSL certificate provider"
+							"description": "OPTIONAL: Using free SSL certificate provider"
 						},
 						"wildcard": {
 							"type": "boolean",
-							"description": "Wildcard certificate"
+							"description": "OPTIONAL: Wildcard certificate"
 						}
-					}
+					},
+					"description": "OPTIONAL: SSL certificate details"
 				},
 				"activation_behavior": {
 					"type": "object",
 					"properties": {
 						"time_to_activation": {
 							"type": "integer",
-							"description": "Hours between registration and first content"
+							"description": "OPTIONAL: Hours between registration and first content"
 						},
 						"initial_content": {
 							"type": "string",
@@ -154,9 +164,11 @@
 								"cloned_site",
 								"blank",
 								"other"
-							]
+							],
+							"description": "OPTIONAL: Type of initial content"
 						}
-					}
+					},
+					"description": "OPTIONAL: Activation behavior details"
 				}
 			},
 			"required": [

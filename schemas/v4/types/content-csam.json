@@ -22,7 +22,7 @@
 						"B1",
 						"B2"
 					],
-					"description": "Legal classification category for the material"
+					"description": "REQUIRED: Legal classification category for the material"
 				},
 				"media_type": {
 					"type": "string",
@@ -33,7 +33,8 @@
 						"text",
 						"mixed"
 					],
-					"description": "Type of media containing CSAM"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Type of media containing CSAM"
 				},
 				"detection_method": {
 					"type": "string",
@@ -44,40 +45,47 @@
 						"user_report",
 						"automated_scan"
 					],
-					"description": "Method used to detect the CSAM"
+					"description": "REQUIRED: Method used to detect the CSAM"
 				},
 				"hash_values": {
 					"type": "object",
 					"properties": {
 						"md5": {
 							"type": "string",
-							"pattern": "^[a-fA-F0-9]{32}$"
+							"pattern": "^[a-fA-F0-9]{32}$",
+							"description": "OPTIONAL: MD5 hash"
 						},
 						"sha1": {
 							"type": "string",
-							"pattern": "^[a-fA-F0-9]{40}$"
+							"pattern": "^[a-fA-F0-9]{40}$",
+							"description": "OPTIONAL: SHA1 hash"
 						},
 						"sha256": {
 							"type": "string",
-							"pattern": "^[a-fA-F0-9]{64}$"
+							"pattern": "^[a-fA-F0-9]{64}$",
+							"description": "RECOMMENDED: SHA256 hash"
 						},
 						"photodna": {
-							"type": "string"
+							"type": "string",
+							"description": "RECOMMENDED: PhotoDNA hash for image matching"
 						}
 					},
-					"description": "Hash values of the illegal content"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Hash values of the illegal content"
 				},
 				"ncmec_report_id": {
 					"type": "string",
-					"description": "NCMEC CyberTipline report ID if applicable"
+					"x-recommended": true,
+					"description": "RECOMMENDED: NCMEC CyberTipline report ID if applicable"
 				},
 				"content_removed": {
 					"type": "boolean",
-					"description": "Whether the content has been removed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Whether the content has been removed"
 				},
 				"account_suspended": {
 					"type": "boolean",
-					"description": "Whether associated accounts were suspended"
+					"description": "OPTIONAL: Whether associated accounts were suspended"
 				}
 			},
 			"required": [

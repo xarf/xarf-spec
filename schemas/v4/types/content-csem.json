@@ -24,7 +24,7 @@
 						"production",
 						"possession"
 					],
-					"description": "Type of exploitation activity"
+					"description": "REQUIRED: Type of exploitation activity"
 				},
 				"victim_age_range": {
 					"type": "string",
@@ -35,7 +35,8 @@
 						"pubescent",
 						"unknown"
 					],
-					"description": "Estimated age range of victim"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Estimated age range of victim"
 				},
 				"platform": {
 					"type": "string",
@@ -48,7 +49,8 @@
 						"darkweb",
 						"other"
 					],
-					"description": "Platform where exploitation occurred"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Platform where exploitation occurred"
 				},
 				"detection_method": {
 					"type": "string",
@@ -60,7 +62,7 @@
 						"manual_review",
 						"law_enforcement_referral"
 					],
-					"description": "Method used to detect the exploitation"
+					"description": "REQUIRED: Method used to detect the exploitation"
 				},
 				"evidence_type": {
 					"type": "array",
@@ -74,27 +76,30 @@
 							"metadata"
 						]
 					},
-					"description": "Types of evidence collected"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Types of evidence collected"
 				},
 				"perpetrator_indicators": {
 					"type": "object",
 					"properties": {
 						"account_id": {
 							"type": "string",
-							"description": "Account identifier of perpetrator"
+							"description": "OPTIONAL: Account identifier of perpetrator"
 						},
 						"ip_addresses": {
 							"type": "array",
 							"items": {
 								"type": "string",
 								"format": "ipv4"
-							}
+							},
+							"description": "OPTIONAL: IP addresses associated with perpetrator"
 						},
 						"pattern_of_behavior": {
 							"type": "string",
-							"description": "Description of behavioral patterns"
+							"description": "OPTIONAL: Description of behavioral patterns"
 						}
-					}
+					},
+					"description": "OPTIONAL: Indicators associated with the perpetrator"
 				},
 				"reporting_obligations": {
 					"type": "array",
@@ -110,7 +115,8 @@
 							"other"
 						]
 					},
-					"description": "Entities to which this has been or should be reported"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Entities to which this has been or should be reported"
 				}
 			},
 			"required": [

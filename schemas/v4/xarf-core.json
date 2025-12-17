@@ -18,7 +18,7 @@
 		"xarf_version": {
 			"type": "string",
 			"pattern": "^4\\.[0-9]+\\.[0-9]+$",
-			"description": "XARF schema version using semantic versioning (e.g., '4.0.0')",
+			"description": "REQUIRED: XARF schema version using semantic versioning (e.g., '4.0.0')",
 			"examples": [
 				"4.0.0",
 				"4.1.2",
@@ -28,7 +28,7 @@
 		"report_id": {
 			"type": "string",
 			"format": "uuid",
-			"description": "Unique report identifier using UUID v4 format",
+			"description": "REQUIRED: Unique report identifier using UUID v4 format",
 			"examples": [
 				"550e8400-e29b-41d4-a716-446655440000"
 			]
@@ -36,7 +36,7 @@
 		"timestamp": {
 			"type": "string",
 			"format": "date-time",
-			"description": "ISO 8601 timestamp when the abuse incident occurred",
+			"description": "REQUIRED: ISO 8601 timestamp when the abuse incident occurred",
 			"examples": [
 				"2024-01-15T14:30:25Z",
 				"2024-01-15T14:30:25.123Z"
@@ -44,15 +44,15 @@
 		},
 		"reporter": {
 			"$ref": "#/$defs/contact_info",
-			"description": "The organization that owns/generated the abuse complaint (the victim or complainant)"
+			"description": "REQUIRED: The organization that owns/generated the abuse complaint (the victim or complainant)"
 		},
 		"sender": {
 			"$ref": "#/$defs/contact_info",
-			"description": "The organization that transmitted/filed this report (may be same as reporter or a service provider)"
+			"description": "REQUIRED: The organization that transmitted/filed this report (may be same as reporter or a service provider)"
 		},
 		"source_identifier": {
 			"type": "string",
-			"description": "IP address, domain, or other identifier of the abuse source",
+			"description": "REQUIRED: IP address, domain, or other identifier of the abuse source",
 			"examples": [
 				"192.0.2.1",
 				"2001:db8::1",
@@ -64,7 +64,8 @@
 			"type": "integer",
 			"minimum": 1,
 			"maximum": 65535,
-			"description": "Source port number - critical for identifying sources in CGNAT environments",
+			"x-recommended": true,
+			"description": "RECOMMENDED: Source port number - critical for identifying sources in CGNAT environments",
 			"examples": [
 				25,
 				80,
@@ -83,11 +84,11 @@
 				"infrastructure",
 				"reputation"
 			],
-			"description": "Primary abuse classification category"
+			"description": "REQUIRED: Primary abuse classification category"
 		},
 		"type": {
 			"type": "string",
-			"description": "Specific abuse type within the category - validation depends on category value",
+			"description": "REQUIRED: Specific abuse type within the category - validation depends on category value",
 			"examples": [
 				"spam",
 				"phishing",
@@ -99,7 +100,8 @@
 		},
 		"evidence_source": {
 			"type": "string",
-			"description": "Quality and reliability indicator for the evidence provided",
+			"x-recommended": true,
+			"description": "RECOMMENDED: Quality and reliability indicator for the evidence provided",
 			"examples": [
 				"spamtrap",
 				"user_complaint",
@@ -124,7 +126,8 @@
 			"items": {
 				"$ref": "#/$defs/evidence_item"
 			},
-			"description": "Array of evidence items supporting this abuse report",
+			"x-recommended": true,
+			"description": "RECOMMENDED: Array of evidence items supporting this abuse report",
 			"maxItems": 50
 		},
 		"tags": {
@@ -132,9 +135,9 @@
 			"items": {
 				"type": "string",
 				"pattern": "^[a-z0-9_]+:[a-z0-9_]+$",
-				"description": "Namespaced tag in format 'namespace:value'"
+				"description": "OPTIONAL: Namespaced tag in format 'namespace:value'"
 			},
-			"description": "Namespaced tags for categorization, correlation, and automation",
+			"description": "OPTIONAL: Namespaced tags for categorization, correlation, and automation",
 			"examples": [
 				[
 					"malware:conficker",
@@ -155,7 +158,8 @@
 			"type": "number",
 			"minimum": 0.0,
 			"maximum": 1.0,
-			"description": "Confidence score for this report (0.0 = no confidence, 1.0 = complete confidence)",
+			"x-recommended": true,
+			"description": "RECOMMENDED: Confidence score for this report (0.0 = no confidence, 1.0 = complete confidence)",
 			"examples": [
 				0.85,
 				0.95,
@@ -165,7 +169,7 @@
 		"description": {
 			"type": "string",
 			"maxLength": 1000,
-			"description": "Human-readable description of the abuse incident",
+			"description": "OPTIONAL: Human-readable description of the abuse incident",
 			"examples": [
 				"Spam email campaign targeting financial institutions",
 				"DDoS attack against web services using SYN flood technique"
@@ -176,11 +180,11 @@
 			"enum": [
 				"3"
 			],
-			"description": "Original XARF version if this report was converted from v3 format"
+			"description": "OPTIONAL: Original XARF version if this report was converted from v3 format"
 		},
 		"_internal": {
 			"$ref": "#/$defs/internal_metadata",
-			"description": "Internal operational metadata - NEVER transmitted between systems"
+			"description": "OPTIONAL: Internal operational metadata - NEVER transmitted between systems"
 		}
 	},
 	"additionalProperties": true,
@@ -196,7 +200,7 @@
 				"org": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization name",
+					"description": "REQUIRED: Organization name",
 					"examples": [
 						"Acme Corporation",
 						"Abusix",
@@ -206,7 +210,7 @@
 				"contact": {
 					"type": "string",
 					"format": "email",
-					"description": "Contact email address",
+					"description": "REQUIRED: Contact email address",
 					"examples": [
 						"abuse@example.com",
 						"reports@abusix.com"
@@ -215,7 +219,7 @@
 				"domain": {
 					"type": "string",
 					"format": "hostname",
-					"description": "Organization domain for verification",
+					"description": "REQUIRED: Organization domain for verification",
 					"examples": [
 						"example.com",
 						"abusix.com",
@@ -234,7 +238,7 @@
 			"properties": {
 				"content_type": {
 					"type": "string",
-					"description": "MIME type of the evidence content",
+					"description": "REQUIRED: MIME type of the evidence content",
 					"examples": [
 						"text/plain",
 						"text/csv",
@@ -253,7 +257,8 @@
 				"description": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Human-readable description of this evidence item",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Human-readable description of this evidence item",
 					"examples": [
 						"Original spam email with headers",
 						"Screenshot of phishing page",
@@ -262,13 +267,14 @@
 				},
 				"payload": {
 					"type": "string",
-					"description": "Base64-encoded evidence data",
+					"description": "REQUIRED: Base64-encoded evidence data",
 					"contentEncoding": "base64"
 				},
 				"hash": {
 					"type": "string",
 					"pattern": "^(md5|sha1|sha256|sha512):[a-fA-F0-9]+$",
-					"description": "Hash of evidence for integrity verification in format 'algorithm:hexvalue'",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Hash of evidence for integrity verification in format 'algorithm:hexvalue'",
 					"examples": [
 						"sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
 						"md5:d41d8cd98f00b204e9800998ecf8427e"
@@ -278,14 +284,14 @@
 					"type": "integer",
 					"minimum": 0,
 					"maximum": 5242880,
-					"description": "Size of evidence in bytes (max 5MB per item)"
+					"description": "OPTIONAL: Size of evidence in bytes (max 5MB per item)"
 				}
 			},
 			"additionalProperties": false
 		},
 		"internal_metadata": {
 			"type": "object",
-			"description": "Internal operational metadata - completely flexible, organization-defined structure. NEVER transmitted between systems.",
+			"description": "OPTIONAL: Internal operational metadata - completely flexible, organization-defined structure. NEVER transmitted between systems.",
 			"additionalProperties": true,
 			"examples": [
 				{

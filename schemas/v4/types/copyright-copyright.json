@@ -19,7 +19,7 @@
 				"infringing_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "URL of the infringing content (REQUIRED - this is what's being reported)",
+					"description": "REQUIRED: URL of the infringing content - this is what's being reported",
 					"examples": [
 						"http://piracy-site.example.com/movies/copyrighted-movie.mp4",
 						"https://file-sharing.example.org/download/12345"
@@ -28,7 +28,8 @@
 				"work_title": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Title of the copyrighted work",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Title of the copyrighted work",
 					"examples": [
 						"Avengers: Endgame",
 						"Beatles - Abbey Road",
@@ -38,7 +39,8 @@
 				"rights_holder": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization or person holding the copyright",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person holding the copyright",
 					"examples": [
 						"Disney Enterprises, Inc.",
 						"Sony Music",
@@ -48,7 +50,7 @@
 				"original_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "URL of the legitimate/original content",
+					"description": "OPTIONAL: URL of the legitimate/original content",
 					"examples": [
 						"https://www.disney.com/movies/avengers-endgame"
 					]
@@ -62,7 +64,8 @@
 						"download",
 						"distribution"
 					],
-					"description": "Type of copyright infringement"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Type of copyright infringement"
 				}
 			},
 			"required": [
