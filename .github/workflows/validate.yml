@@ -58,7 +58,7 @@ jobs:
   schema-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: validate
+    needs: formatting
 
     steps:
     - name: Checkout repository
