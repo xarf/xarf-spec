@@ -1,0 +1,44 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "h8i9j0k1-l2m3-4567-hi89-01234gh56789",
+	"timestamp": "2025-01-11T13:42:15Z",
+	"reporter": {
+		"org": "Malware Detection Service",
+		"contact": "infections@malware-detect.example",
+		"domain": "malware-detect.example"
+	},
+	"sender": {
+		"org": "Malware Detection Service",
+		"contact": "infections@malware-detect.example",
+		"domain": "malware-detect.example"
+	},
+	"source_identifier": "203.0.113.85",
+	"source_port": 443,
+	"category": "connection",
+	"type": "infected_host",
+	"evidence_source": "traffic_analysis",
+	"destination_ip": "198.51.100.150",
+	"destination_port": 8080,
+	"protocol": "tcp",
+	"malware_family": "Zeus",
+	"infection_type": "banking_trojan",
+	"c2_server": "evil-command.example.com",
+	"communication_frequency": "every_30_minutes",
+	"data_exfiltration": true,
+	"bot_id": "bot_12345678",
+	"first_seen": "2025-01-10T08:00:00Z",
+	"last_seen": "2025-01-11T13:40:00Z",
+	"evidence": [
+		{
+			"content_type": "text/plain",
+			"description": "Network traffic analysis showing C2 communication",
+			"payload": "SW5mZWN0ZWQgaG9zdCBjb21tdW5pY2F0aW5nIHdpdGggQzIgc2VydmVy",
+			"hash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456"
+		}
+	],
+	"tags": [
+		"malware:zeus",
+		"infection:banking_trojan",
+		"c2:active"
+	]
+}

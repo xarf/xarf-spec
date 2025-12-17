@@ -1,0 +1,50 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "j0k1l2m3-n4o5-6789-jk01-23456ij78901",
+	"timestamp": "2025-01-11T16:22:45Z",
+	"reporter": {
+		"org": "Anti-Fraud Coalition",
+		"contact": "fraud-reports@antifraud-coalition.example",
+		"domain": "antifraud-coalition.example"
+	},
+	"sender": {
+		"org": "Anti-Fraud Coalition",
+		"contact": "fraud-reports@antifraud-coalition.example",
+		"domain": "antifraud-coalition.example"
+	},
+	"source_identifier": "crypto-scam-invest.example.com",
+	"category": "content",
+	"type": "fraud",
+	"evidence_source": "user_report",
+	"url": "https://crypto-scam-invest.example.com/guaranteed-returns",
+	"fraud_type": "investment",
+	"scheme_description": "Fake cryptocurrency investment platform promising guaranteed 500% returns",
+	"financial_loss_reported": true,
+	"estimated_loss_usd": 50000,
+	"victim_count": 127,
+	"social_engineering_tactics": [
+		"urgency_pressure",
+		"false_testimonials",
+		"fake_endorsements"
+	],
+	"payment_methods": [
+		"cryptocurrency",
+		"wire_transfer",
+		"gift_cards"
+	],
+	"impersonated_entity": "Legitimate Investment Fund",
+	"law_enforcement_contacted": true,
+	"evidence": [
+		{
+			"content_type": "text/html",
+			"description": "Screenshot of fraudulent investment website",
+			"payload": "PGh0bWw+PGJvZHk+PGgxPkd1YXJhbnRlZWQgNTAwJSBSZXR1cm5zITwvaDE+PC9ib2R5PjwvaHRtbD4=",
+			"hash": "sha256:c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789a"
+		}
+	],
+	"tags": [
+		"fraud:investment",
+		"crypto:scam",
+		"victims:127"
+	]
+}
