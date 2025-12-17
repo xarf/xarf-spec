@@ -1,0 +1,48 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "cee14783-58e5-421d-94b4-67a4d70a589c",
+	"timestamp": "2025-01-11T18:05:12Z",
+	"reporter": {
+		"org": "Website Security Monitor",
+		"contact": "compromise-alerts@websec-monitor.example",
+		"domain": "websec-monitor.example"
+	},
+	"sender": {
+		"org": "Website Security Monitor",
+		"contact": "compromise-alerts@websec-monitor.example",
+		"domain": "websec-monitor.example"
+	},
+	"source_identifier": "compromised-blog.example.com",
+	"category": "content",
+	"type": "remote_compromise",
+	"evidence_source": "web_scan",
+	"url": "https://compromised-blog.example.com/wp-admin/shell.php",
+	"compromise_type": "webshell",
+	"compromise_method": "wordpress_vulnerability",
+	"webshell_type": "php_webshell",
+	"shell_functionality": [
+		"file_upload",
+		"command_execution",
+		"database_access"
+	],
+	"legitimate_site": "Personal Blog",
+	"original_content_intact": true,
+	"backdoor_persistence": true,
+	"data_exfiltration_detected": false,
+	"cleanup_difficulty": "moderate",
+	"vulnerability_cve": "CVE-2024-12345",
+	"first_seen": "2025-01-11T15:30:00Z",
+	"evidence": [
+		{
+			"content_type": "text/php",
+			"description": "PHP webshell code found on compromised site",
+			"payload": "PD9waHAgZXZhbCgkX1BPU1RbJ2NtZCddKTsgPz4=",
+			"hash": "sha256:d4e5f6789012345678901234567890abcdef1234567890abcdef123456789abc"
+		}
+	],
+	"tags": [
+		"compromise:webshell",
+		"platform:wordpress",
+		"severity:moderate"
+	]
+}

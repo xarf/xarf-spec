@@ -1,0 +1,76 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "7fed2742-0e7c-4150-8839-69c511b6f861",
+	"timestamp": "2025-01-11T20:30:15Z",
+	"reporter": {
+		"org": "Domain Intelligence Monitor",
+		"contact": "suspicious-domains@domain-intel.example",
+		"domain": "domain-intel.example"
+	},
+	"sender": {
+		"org": "Domain Intelligence Monitor",
+		"contact": "suspicious-domains@domain-intel.example",
+		"domain": "domain-intel.example"
+	},
+	"source_identifier": "g00gle-verify.example.com",
+	"category": "content",
+	"type": "suspicious_registration",
+	"evidence_source": "automated_monitoring",
+	"url": "https://g00gle-verify.example.com",
+	"domain": "g00gle-verify.example.com",
+	"registration_date": "2025-01-11T18:00:00Z",
+	"days_since_registration": 0,
+	"suspicious_indicators": [
+		"typosquatting",
+		"brand_keyword",
+		"privacy_protection",
+		"immediate_activation",
+		"suspicious_ssl_cert"
+	],
+	"risk_score": 0.89,
+	"targeted_brands": [
+		"Google"
+	],
+	"registrant_details": {
+		"email_domain": "guerrillamail.com",
+		"country": "RU",
+		"privacy_protected": true,
+		"bulk_registrations": 23
+	},
+	"related_domains": [
+		{
+			"domain": "g00gle-accounts.example.com",
+			"relationship": "same_registrant"
+		},
+		{
+			"domain": "g0ogle-security.example.net",
+			"relationship": "similar_pattern"
+		}
+	],
+	"predicted_usage": [
+		"phishing",
+		"brand_abuse"
+	],
+	"ssl_certificate_details": {
+		"issued_immediately": true,
+		"free_certificate": true,
+		"wildcard": false
+	},
+	"activation_behavior": {
+		"time_to_activation": 2,
+		"initial_content": "cloned_site"
+	},
+	"evidence": [
+		{
+			"content_type": "application/json",
+			"description": "WHOIS and DNS analysis showing suspicious registration patterns",
+			"payload": "eyJkb21haW4iOiJnMDBnbGUtdmVyaWZ5LmV4YW1wbGUuY29tIiwicmVnaXN0cmF0aW9uIjoiMjAyNS0wMS0xMSIsIm5hbWVzZXJ2ZXJzIjpbInN1c3BpY2lvdXMubnMxLmV4YW1wbGUiXX0=",
+			"hash": "sha256:e4f5a6789012345678901234567890abcdef1234567890abcdef123456789def"
+		}
+	],
+	"tags": [
+		"suspicious:typosquatting",
+		"brand:google",
+		"risk:high"
+	]
+}

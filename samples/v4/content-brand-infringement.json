@@ -1,0 +1,41 @@
+{
+	"xarf_version": "4.0.0",
+	"report_id": "51aab126-b37d-458d-ad32-9ebf3d63865f",
+	"timestamp": "2025-01-11T14:15:30Z",
+	"reporter": {
+		"org": "Brand Protection Services",
+		"contact": "brand-abuse@protection-services.example",
+		"domain": "protection-services.example"
+	},
+	"sender": {
+		"org": "Brand Protection Services",
+		"contact": "brand-abuse@protection-services.example",
+		"domain": "protection-services.example"
+	},
+	"source_identifier": "fake-apple-store.example.com",
+	"category": "content",
+	"type": "brand_infringement",
+	"evidence_source": "brand_monitoring",
+	"url": "https://fake-apple-store.example.com/iphone",
+	"infringement_type": "counterfeit",
+	"affected_brand": "Apple Inc.",
+	"trademark_violated": "Apple",
+	"infringing_content": "Fake Apple Store selling counterfeit iPhones",
+	"visual_similarity_score": 0.85,
+	"domain_registration_date": "2025-01-10T00:00:00Z",
+	"monetization_detected": true,
+	"legal_action_recommended": true,
+	"evidence": [
+		{
+			"content_type": "text/html",
+			"description": "Screenshot of fake Apple Store website",
+			"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkFwcGxlIFN0b3JlIC0gRmFrZTwvdGl0bGU+PC9oZWFkPjwvaHRtbD4=",
+			"hash": "sha256:b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678"
+		}
+	],
+	"tags": [
+		"brand:apple",
+		"infringement:counterfeit",
+		"monetization:detected"
+	]
+}

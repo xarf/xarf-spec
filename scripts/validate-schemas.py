@@ -15,7 +15,7 @@ from typing import Dict, List, Tuple, Any
 
 try:
     import jsonschema
-    from jsonschema import Draft202012Validator
+    from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
     print("❌ Error: jsonschema library not installed")
     print("Install with: pip install jsonschema")
@@ -55,17 +55,18 @@ def resolve_schema_refs(schema: Dict[str, Any], schema_dir: Path) -> Dict[str, A
         if isinstance(obj, dict):
             if '$ref' in obj:
                 ref_path = obj['$ref']
-                if not ref_path.startswith('http'):  # Local reference
+                if not ref_path.startswith('http') and not ref_path.startswith('#'):  # Local file reference (not internal JSON Schema reference)
                     ref_file = current_dir / ref_path
                     if ref_file in schema_cache:
                         return resolve_ref(schema_cache[ref_file], current_dir)
                     elif ref_file.exists():
                         ref_schema, error = load_json_file(ref_file)
                         if error:
-                            print_status(Colors.YELLOW, f"⚠️  Warning: Could not resolve reference {ref_path}: {error}")
-                            return obj
+                            raise ValueError(f"Failed to load schema reference '{ref_path}': {error}")
                         schema_cache[ref_file] = ref_schema
-                        return resolve_ref(ref_schema, current_dir)
+                        return resolve_ref(ref_schema, ref_file.parent)
+                    else:
+                        raise FileNotFoundError(f"Schema reference not found: {ref_path} (resolved to {ref_file})")
                 return obj
             else:
                 return {k: resolve_ref(v, current_dir) for k, v in obj.items()}
@@ -78,7 +79,14 @@ def resolve_schema_refs(schema: Dict[str, Any], schema_dir: Path) -> Dict[str, A
 def validate_sample_against_schema(sample_data: Dict[str, Any], resolved_schema: Dict[str, Any]) -> Tuple[bool, List[str]]:
     """Validate a sample against a resolved schema"""
     try:
-        validator = Draft202012Validator(resolved_schema)
+        # Enable format validation (including UUID validation)
+        validator = Draft202012Validator(resolved_schema, format_checker=FormatChecker())
+    except jsonschema.SchemaError as e:
+        return False, [f"Invalid schema: {e}"]
+    except Exception as e:
+        return False, [f"Schema validator creation failed: {e}"]
+    
+    try:
         errors = list(validator.iter_errors(sample_data))
         if errors:
             error_messages = []
@@ -88,8 +96,10 @@ def validate_sample_against_schema(sample_data: Dict[str, Any], resolved_schema:
                 error_messages.append(f"  • {path}: {error.message}")
             return False, error_messages
         return True, []
+    except jsonschema.ValidationError as e:
+        return False, [f"Validation failed: {e}"]
     except Exception as e:
-        return False, [f"Validation error: {e}"]
+        return False, [f"Unexpected validation error: {e}"]
 
 def get_sample_category_type(sample_data: Dict[str, Any]) -> Tuple[str, str]:
     """Extract category and type from sample data"""
@@ -142,8 +152,14 @@ def main():
     
     try:
         resolved_master_schema = resolve_schema_refs(master_schema, master_schema_path.parent)
+    except FileNotFoundError as e:
+        print_status(Colors.RED, f"❌ Missing schema file: {e}")
+        return 1
+    except ValueError as e:
+        print_status(Colors.RED, f"❌ Schema parsing error: {e}")
+        return 1
     except Exception as e:
-        print_status(Colors.RED, f"❌ Failed to resolve master schema references: {e}")
+        print_status(Colors.RED, f"❌ Unexpected error resolving schema references: {e}")
         return 1
     
     print()
@@ -170,6 +186,12 @@ def main():
         category, sample_type = get_sample_category_type(sample_data)
         if category and sample_type:
             print(f"   Category: {category}, Type: {sample_type}")
+        else:
+            print_status(Colors.YELLOW, f"⚠️  Warning: {sample_name} missing category or type fields")
+            if not category:
+                print("   Missing: category")
+            if not sample_type:
+                print("   Missing: type")
         
         # Validate against resolved master schema
         is_valid, errors = validate_sample_against_schema(sample_data, resolved_master_schema)

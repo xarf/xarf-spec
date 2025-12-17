@@ -4,23 +4,21 @@ This directory contains exactly one representative sample for each of the 30 XAR
 
 ## Coverage
 
-**30 Schema Types → 30 Samples (1:1 mapping)**
+**32 Schema Types → 32 Samples (1:1 mapping)**
 
 ### Messaging Class (2 types)
 - `messaging-spam.json` → messaging:spam
 - `messaging-bulk-messaging.json` → messaging:bulk_messaging
 
-### Connection Class (10 types)  
+### Connection Class (8 types)  
 - `connection-login-attack.json` → connection:login_attack
 - `connection-port-scan.json` → connection:port_scan
 - `connection-ddos.json` → connection:ddos
-- `connection-ddos-amplification.json` → connection:ddos_amplification
-- `connection-auth-failure.json` → connection:auth_failure
-- `connection-bot.json` → connection:bot
+- `connection-infected-host.json` → connection:infected_host
 - `connection-reconnaissance.json` → connection:reconnaissance
 - `connection-scraping.json` → connection:scraping
 - `connection-sql-injection.json` → connection:sql_injection
-- `connection-vuln-scanning.json` → connection:vuln_scanning
+- `connection-vulnerability-scan.json` → connection:vuln_scanning
 
 ### Vulnerability Class (3 types)
 - `vulnerability-cve.json` → vulnerability:cve
@@ -35,12 +33,16 @@ This directory contains exactly one representative sample for each of the 30 XAR
 - `infrastructure-botnet.json` → infrastructure:botnet
 - `infrastructure-compromised-server.json` → infrastructure:compromised_server
 
-### Content Class (5 types)
+### Content Class (9 types)
 - `content-phishing.json` → content:phishing
 - `content-malware.json` → content:malware
 - `content-csam.json` → content:csam
 - `content-csem.json` → content:csem
 - `content-exposed-data.json` → content:exposed_data
+- `content-brand-infringement.json` → content:brand_infringement
+- `content-fraud.json` → content:fraud
+- `content-remote-compromise.json` → content:remote_compromise
+- `content-suspicious-registration.json` → content:suspicious_registration
 
 ### Copyright Class (6 types)
 - `copyright-copyright.json` → copyright:copyright

@@ -16,14 +16,17 @@ schemas/
 │       ├── connection-login-attack.json
 │       ├── connection-port-scan.json
 │       ├── connection-ddos.json
-│       ├── connection-ddos-amplification.json
-│       ├── connection-auth-failure.json
+│       ├── connection-infected-host.json
+│       ├── connection-reconnaissance.json
+│       ├── connection-scraping.json
+│       ├── connection-sql-injection.json
+│       ├── connection-vuln-scanning.json
 │       ├── vulnerability-cve.json
-│       ├── vulnerability-open.json
+│       ├── vulnerability-open-service.json
 │       ├── vulnerability-misconfiguration.json
 │       ├── content-phishing.json
 │       ├── content-malware.json
-│       ├── infrastructure-bot.json
+│       ├── infrastructure-botnet.json
 │       ├── infrastructure-compromised-server.json
 │       ├── reputation-blocklist.json
 │       ├── reputation-threat-intelligence.json
@@ -77,15 +80,15 @@ print('✅ Valid against type-specific schema!')
 
 ### XARF v4 Type-Specific Architecture
 
-XARF v4 uses a **type-specific architecture** with 22 dedicated schemas across 7 abuse classes:
+XARF v4 uses a **type-specific architecture** with 32 dedicated schemas across 7 abuse classes:
 
 | Class | Type-Specific Schemas | Purpose |
 |-------|----------------------|---------|
 | **messaging** (2) | `messaging-spam`, `messaging-bulk-messaging` | Communication abuse |
-| **connection** (5) | `connection-login-attack`, `connection-port-scan`, `connection-ddos`, `connection-ddos-amplification`, `connection-auth-failure` | Network attacks |
-| **vulnerability** (3) | `vulnerability-cve`, `vulnerability-open`, `vulnerability-misconfiguration` | Security vulnerabilities |
-| **content** (2) | `content-phishing`, `content-malware` | Malicious web content |
-| **infrastructure** (2) | `infrastructure-bot`, `infrastructure-compromised-server` | Compromised systems |
+| **connection** (8) | `connection-login-attack`, `connection-port-scan`, `connection-ddos`, `connection-infected-host`, `connection-reconnaissance`, `connection-scraping`, `connection-sql-injection`, `connection-vulnerability-scan` | Network attacks |
+| **vulnerability** (3) | `vulnerability-cve`, `vulnerability-open-service`, `vulnerability-misconfiguration` | Security vulnerabilities |
+| **content** (7) | `content-phishing`, `content-malware`, `content-csam`, `content-csem`, `content-exposed-data`, `content-brand-infringement`, `content-fraud`, `content-remote-compromise`, `content-suspicious-registration` | Malicious web content |
+| **infrastructure** (2) | `infrastructure-botnet`, `infrastructure-compromised-server` | Compromised systems |
 | **reputation** (2) | `reputation-blocklist`, `reputation-threat-intelligence` | Threat intelligence |
 | **copyright** (6) | `copyright-copyright`, `copyright-p2p`, `copyright-cyberlocker`, `copyright-ugc-platform`, `copyright-link-site`, `copyright-usenet` | Intellectual property infringement |
 
