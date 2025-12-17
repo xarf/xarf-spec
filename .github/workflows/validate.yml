@@ -47,6 +47,29 @@ jobs:
           echo "✅ All JSON files are properly formatted"
         fi
 
+  schema-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: validate
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+
+    - name: Install Python dependencies
+      run: |
+        pip install jsonschema
+
+    - name: Validate samples against schemas
+      run: |
+        echo "🔍 Validating all sample files against their JSON schemas..."
+        python3 scripts/validate-schemas.py
+
   schema-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
