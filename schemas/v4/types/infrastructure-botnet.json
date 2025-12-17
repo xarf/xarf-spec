@@ -19,7 +19,8 @@
 				"malware_family": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Malware family classification (optional metadata)",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Malware family classification",
 					"examples": [
 						"conficker",
 						"mirai",
@@ -29,7 +30,8 @@
 				},
 				"c2_server": {
 					"type": "string",
-					"description": "Command and control server domain or IP",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Command and control server domain or IP",
 					"examples": [
 						"evil-c2.example.com",
 						"192.0.2.100"
@@ -47,7 +49,8 @@
 						"p2p",
 						"custom"
 					],
-					"description": "Protocol used for C2 communications"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Protocol used for C2 communications"
 				},
 				"bot_capabilities": {
 					"type": "array",
@@ -64,11 +67,12 @@
 							"data_theft"
 						]
 					},
-					"description": "Capabilities observed in the bot"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Capabilities observed in the bot"
 				},
 				"compromise_evidence": {
 					"type": "string",
-					"description": "Evidence of how compromise was detected (REQUIRED)",
+					"description": "REQUIRED: Evidence of how compromise was detected",
 					"examples": [
 						"C2 communication observed",
 						"Malicious process running",

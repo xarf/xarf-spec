@@ -25,7 +25,8 @@
 						"rights_holder",
 						"watermark_detection"
 					],
-					"description": "Source of P2P infringement evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of P2P infringement evidence"
 				},
 				"p2p_protocol": {
 					"type": "string",
@@ -36,7 +37,7 @@
 						"kademlia",
 						"other"
 					],
-					"description": "P2P protocol used for infringement (REQUIRED)"
+					"description": "REQUIRED: P2P protocol used for infringement"
 				},
 				"swarm_info": {
 					"type": "object",
@@ -44,30 +45,32 @@
 						"info_hash": {
 							"type": "string",
 							"pattern": "^[a-fA-F0-9]{40}$",
-							"description": "BitTorrent info hash (SHA-1)"
+							"description": "RECOMMENDED: BitTorrent info hash (SHA-1)"
 						},
 						"magnet_uri": {
 							"type": "string",
 							"pattern": "^magnet:\\?xt=urn:",
-							"description": "Magnet link for the infringing content"
+							"description": "RECOMMENDED: Magnet link for the infringing content"
 						},
 						"torrent_name": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Name of the torrent"
+							"description": "OPTIONAL: Name of the torrent"
 						},
 						"file_count": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Number of files in the torrent"
+							"description": "OPTIONAL: Number of files in the torrent"
 						},
 						"total_size": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Total size in bytes"
+							"description": "OPTIONAL: Total size in bytes"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"x-recommended": true,
+					"description": "RECOMMENDED: Swarm information (info_hash or magnet_uri required)"
 				},
 				"peer_info": {
 					"type": "object",
@@ -75,35 +78,38 @@
 						"peer_id": {
 							"type": "string",
 							"maxLength": 100,
-							"description": "P2P client peer ID"
+							"description": "OPTIONAL: P2P client peer ID"
 						},
 						"client_version": {
 							"type": "string",
 							"maxLength": 100,
-							"description": "P2P client software and version"
+							"description": "OPTIONAL: P2P client software and version"
 						},
 						"upload_amount": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Amount uploaded in bytes"
+							"description": "OPTIONAL: Amount uploaded in bytes"
 						},
 						"download_amount": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Amount downloaded in bytes"
+							"description": "OPTIONAL: Amount downloaded in bytes"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Peer information"
 				},
 				"work_title": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Title of the copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Title of the copyrighted work"
 				},
 				"rights_holder": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization or person holding the copyright"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person holding the copyright"
 				},
 				"work_category": {
 					"type": "string",
@@ -117,12 +123,13 @@
 						"game",
 						"other"
 					],
-					"description": "Category of copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Category of copyrighted work"
 				},
 				"release_date": {
 					"type": "string",
 					"format": "date",
-					"description": "Official release date of the work"
+					"description": "OPTIONAL: Official release date of the work"
 				},
 				"detection_method": {
 					"type": "string",
@@ -132,7 +139,7 @@
 						"metadata_match",
 						"manual_verification"
 					],
-					"description": "Method used to detect the infringement"
+					"description": "OPTIONAL: Method used to detect the infringement"
 				}
 			},
 			"required": [

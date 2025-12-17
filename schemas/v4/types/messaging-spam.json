@@ -26,7 +26,8 @@
 						"content_analysis",
 						"reputation_feed"
 					],
-					"description": "Source of spam evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of spam evidence"
 				},
 				"protocol": {
 					"type": "string",
@@ -41,12 +42,12 @@
 						"push_notification",
 						"other"
 					],
-					"description": "Communication protocol used for spam delivery"
+					"description": "REQUIRED: Communication protocol used for spam delivery"
 				},
 				"smtp_from": {
 					"type": "string",
 					"format": "email",
-					"description": "SMTP envelope sender address (required when protocol=smtp)",
+					"description": "REQUIRED: SMTP envelope sender address (required when protocol=smtp)",
 					"examples": [
 						"spam@example.com",
 						"noreply@malicious-domain.org"
@@ -55,7 +56,8 @@
 				"smtp_to": {
 					"type": "string",
 					"format": "email",
-					"description": "SMTP envelope recipient address",
+					"x-recommended": true,
+					"description": "RECOMMENDED: SMTP envelope recipient address",
 					"examples": [
 						"victim@example.org",
 						"spamtrap@security-org.net"
@@ -64,7 +66,8 @@
 				"subject": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Message subject line",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Message subject line",
 					"examples": [
 						"Urgent: Account Verification Required",
 						"Your package is ready for delivery",
@@ -74,7 +77,7 @@
 				"sender_name": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Display name of the sender",
+					"description": "OPTIONAL: Display name of the sender",
 					"examples": [
 						"Customer Support",
 						"No Reply",
@@ -84,7 +87,8 @@
 				"message_id": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Message ID from headers",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Message ID from headers - helps with deduplication",
 					"examples": [
 						"<abc123@example.com>",
 						"msg_1234567890"
@@ -93,7 +97,7 @@
 				"user_agent": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "User agent string from message headers",
+					"description": "OPTIONAL: User agent string from message headers",
 					"examples": [
 						"Outlook 16.0",
 						"bulk_mailer_v2.1"
@@ -102,12 +106,12 @@
 				"recipient_count": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Number of recipients for bulk spam campaigns"
+					"description": "OPTIONAL: Number of recipients for bulk spam campaigns"
 				},
 				"language": {
 					"type": "string",
 					"pattern": "^[a-z]{2}(-[A-Z]{2})?$",
-					"description": "Primary language of message content (ISO 639-1)",
+					"description": "OPTIONAL: Primary language of message content (ISO 639-1)",
 					"examples": [
 						"en",
 						"es",
@@ -125,18 +129,18 @@
 								"type": "string",
 								"format": "uri"
 							},
-							"description": "Suspicious URLs found in the message"
+							"description": "OPTIONAL: Suspicious URLs found in the message"
 						},
 						"commercial_content": {
 							"type": "boolean",
-							"description": "Whether message contains commercial offers"
+							"description": "OPTIONAL: Whether message contains commercial offers"
 						},
 						"bulk_characteristics": {
 							"type": "boolean",
-							"description": "Whether message shows bulk mailing characteristics"
+							"description": "OPTIONAL: Whether message shows bulk mailing characteristics"
 						}
 					},
-					"description": "Indicators specific to spam detection",
+					"description": "OPTIONAL: Indicators specific to spam detection",
 					"additionalProperties": false
 				}
 			},

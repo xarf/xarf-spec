@@ -85,6 +85,57 @@ XARF v4 uses a three-tier system for attribute categorization to provide clear i
 
 This categorization helps implementers prioritize which fields to support while maintaining interoperability.
 
+### Schema Field Classification
+
+To enable both human readability and programmatic detection of field requirements, XARF v4 schemas use two complementary mechanisms:
+
+#### 1. Description Prefixes
+
+All field descriptions are prefixed with their requirement level:
+
+- **`REQUIRED:`** - Field must be present (also in `required` array)
+- **`RECOMMENDED:`** - Field should be included when available
+- **`OPTIONAL:`** - Field may be included for additional context
+
+Example:
+```json
+{
+  "source_port": {
+    "type": "integer",
+    "description": "RECOMMENDED: Source port number - critical for identifying sources in CGNAT environments"
+  }
+}
+```
+
+#### 2. The `x-recommended` Extension
+
+For programmatic detection of recommended fields, schemas use the JSON Schema extension property `x-recommended: true`:
+
+```json
+{
+  "source_port": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 65535,
+    "x-recommended": true,
+    "description": "RECOMMENDED: Source port number - critical for identifying sources in CGNAT environments"
+  }
+}
+```
+
+**Determining Field Requirements Programmatically:**
+
+| Condition | Requirement Level |
+|-----------|-------------------|
+| Field is in `required` array | **Required** |
+| Field has `x-recommended: true` | **Recommended** |
+| Neither of the above | **Optional** |
+
+This dual approach ensures that:
+- Developers can quickly understand requirements by reading descriptions
+- Validators and tools can programmatically determine field requirements
+- The schema remains compatible with standard JSON Schema validators
+
 ### Base Report Structure
 
 All XARF v4 reports share this common structure:

@@ -36,7 +36,7 @@
 						]
 					},
 					"minItems": 1,
-					"description": "Types of data exposed"
+					"description": "REQUIRED: Types of data exposed"
 				},
 				"exposure_method": {
 					"type": "string",
@@ -54,16 +54,18 @@
 						"intentional_leak",
 						"other"
 					],
-					"description": "How the data was exposed"
+					"description": "REQUIRED: How the data was exposed"
 				},
 				"record_count": {
 					"type": "integer",
 					"minimum": 0,
-					"description": "Number of records exposed (if known)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Number of records exposed (if known)"
 				},
 				"affected_organization": {
 					"type": "string",
-					"description": "Organization whose data was exposed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization whose data was exposed"
 				},
 				"data_format": {
 					"type": "string",
@@ -78,14 +80,15 @@
 						"mixed",
 						"other"
 					],
-					"description": "Format of the exposed data"
+					"description": "OPTIONAL: Format of the exposed data"
 				},
 				"sensitive_fields": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					},
-					"description": "Specific sensitive data fields exposed",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Specific sensitive data fields exposed",
 					"examples": [
 						[
 							"ssn",
@@ -108,7 +111,8 @@
 						"hashed",
 						"unknown"
 					],
-					"description": "Whether the exposed data was encrypted"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Whether the exposed data was encrypted"
 				},
 				"accessibility": {
 					"type": "string",
@@ -119,7 +123,7 @@
 						"dark_web",
 						"removed"
 					],
-					"description": "Current accessibility of the exposed data"
+					"description": "OPTIONAL: Current accessibility of the exposed data"
 				},
 				"discovery_source": {
 					"type": "string",
@@ -132,7 +136,7 @@
 						"threat_intelligence",
 						"other"
 					],
-					"description": "How the data exposure was discovered"
+					"description": "OPTIONAL: How the data exposure was discovered"
 				},
 				"sample_records": {
 					"type": "array",
@@ -140,15 +144,17 @@
 						"type": "object",
 						"properties": {
 							"description": {
-								"type": "string"
+								"type": "string",
+								"description": "OPTIONAL: Description of sample record"
 							},
 							"redacted_sample": {
-								"type": "string"
+								"type": "string",
+								"description": "OPTIONAL: Redacted sample content"
 							}
 						}
 					},
 					"maxItems": 5,
-					"description": "Redacted samples of exposed records for verification"
+					"description": "OPTIONAL: Redacted samples of exposed records for verification"
 				}
 			},
 			"required": [

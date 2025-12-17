@@ -15,6 +15,10 @@
 				},
 				"type": {
 					"const": "compromised_server"
+				},
+				"compromise_method": {
+					"type": "string",
+					"description": "REQUIRED: Method used to compromise the server"
 				}
 			},
 			"required": [

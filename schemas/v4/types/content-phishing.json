@@ -18,7 +18,8 @@
 					"items": {
 						"type": "string"
 					},
-					"description": "Form fields present on the phishing page",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Form fields present on the phishing page",
 					"examples": [
 						[
 							"username",
@@ -38,7 +39,7 @@
 				},
 				"phishing_kit": {
 					"type": "string",
-					"description": "Known phishing kit identifier if detected",
+					"description": "OPTIONAL: Known phishing kit identifier if detected",
 					"examples": [
 						"Kr3pto",
 						"16Shop",
@@ -51,17 +52,19 @@
 						"type": "string",
 						"format": "uri"
 					},
-					"description": "URL redirect sequence leading to phishing page"
+					"description": "OPTIONAL: URL redirect sequence leading to phishing page"
 				},
 				"submission_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "Where credentials are submitted"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Where credentials are submitted"
 				},
 				"cloned_site": {
 					"type": "string",
 					"format": "uri",
-					"description": "Legitimate site being impersonated"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Legitimate site being impersonated"
 				},
 				"detection_evasion": {
 					"type": "array",
@@ -78,7 +81,7 @@
 							"other"
 						]
 					},
-					"description": "Evasion techniques used by the phishing page"
+					"description": "OPTIONAL: Evasion techniques used by the phishing page"
 				},
 				"lure_type": {
 					"type": "string",
@@ -93,7 +96,8 @@
 						"tax_refund",
 						"other"
 					],
-					"description": "Social engineering lure used"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Social engineering lure used"
 				}
 			}
 		}

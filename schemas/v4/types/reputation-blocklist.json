@@ -15,6 +15,10 @@
 				},
 				"type": {
 					"const": "blocklist"
+				},
+				"threat_type": {
+					"type": "string",
+					"description": "REQUIRED: Type of threat for blocklist inclusion"
 				}
 			},
 			"required": [

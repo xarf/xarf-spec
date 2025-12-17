@@ -24,7 +24,8 @@
 						"reputation_feed",
 						"volume_analysis"
 					],
-					"description": "Source of bulk messaging evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of bulk messaging evidence"
 				},
 				"protocol": {
 					"type": "string",
@@ -37,52 +38,55 @@
 						"push_notification",
 						"other"
 					],
-					"description": "Communication protocol used for bulk messaging"
+					"description": "REQUIRED: Communication protocol used for bulk messaging"
 				},
 				"smtp_from": {
 					"type": "string",
 					"format": "email",
-					"description": "SMTP envelope sender address (required when protocol=smtp)"
+					"description": "REQUIRED: SMTP envelope sender address (required when protocol=smtp)"
 				},
 				"subject": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Message subject line"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Message subject line"
 				},
 				"sender_name": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Display name of the sender"
+					"description": "OPTIONAL: Display name of the sender"
 				},
 				"recipient_count": {
 					"type": "integer",
 					"minimum": 100,
-					"description": "Number of recipients (bulk requires minimum 100 recipients)"
+					"description": "REQUIRED: Number of recipients (bulk requires minimum 100 recipients)"
 				},
 				"unsubscribe_provided": {
 					"type": "boolean",
-					"description": "Whether message provides unsubscribe mechanism"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Whether message provides unsubscribe mechanism"
 				},
 				"opt_in_evidence": {
 					"type": "boolean",
-					"description": "Whether there is evidence of recipient opt-in"
+					"description": "OPTIONAL: Whether there is evidence of recipient opt-in"
 				},
 				"bulk_indicators": {
 					"type": "object",
 					"properties": {
 						"high_volume": {
 							"type": "boolean",
-							"description": "High volume sending pattern detected"
+							"description": "OPTIONAL: High volume sending pattern detected"
 						},
 						"template_based": {
 							"type": "boolean",
-							"description": "Message appears to be template-based"
+							"description": "OPTIONAL: Message appears to be template-based"
 						},
 						"commercial_sender": {
 							"type": "boolean",
-							"description": "Sender appears to be commercial entity"
+							"description": "OPTIONAL: Sender appears to be commercial entity"
 						}
 					},
+					"description": "OPTIONAL: Indicators specific to bulk messaging detection",
 					"additionalProperties": false
 				}
 			},

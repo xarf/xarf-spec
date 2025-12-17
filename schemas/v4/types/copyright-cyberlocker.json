@@ -25,17 +25,18 @@
 						"rights_holder",
 						"search_engine"
 					],
-					"description": "Source of cyberlocker infringement evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of cyberlocker infringement evidence"
 				},
 				"infringing_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "URL to the infringing file on the hosting service (REQUIRED)"
+					"description": "REQUIRED: URL to the infringing file on the hosting service"
 				},
 				"hosting_service": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Name of the file hosting service (REQUIRED)",
+					"description": "REQUIRED: Name of the file hosting service",
 					"examples": [
 						"Rapidshare",
 						"Megaupload",
@@ -51,30 +52,32 @@
 						"filename": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Name of the infringing file"
+							"description": "OPTIONAL: Name of the infringing file"
 						},
 						"file_size": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "File size in bytes"
+							"description": "OPTIONAL: File size in bytes"
 						},
 						"file_hash": {
 							"type": "string",
 							"pattern": "^(md5|sha1|sha256):[a-fA-F0-9]+$",
-							"description": "File hash with algorithm prefix"
+							"description": "OPTIONAL: File hash with algorithm prefix"
 						},
 						"upload_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "When file was uploaded to service"
+							"description": "OPTIONAL: When file was uploaded to service"
 						},
 						"download_count": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Number of downloads if available"
+							"description": "OPTIONAL: Number of downloads if available"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"x-recommended": true,
+					"description": "RECOMMENDED: File information details"
 				},
 				"uploader_info": {
 					"type": "object",
@@ -82,12 +85,12 @@
 						"username": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "Username of the uploader"
+							"description": "OPTIONAL: Username of the uploader"
 						},
 						"user_id": {
 							"type": "string",
 							"maxLength": 100,
-							"description": "User ID on the hosting service"
+							"description": "OPTIONAL: User ID on the hosting service"
 						},
 						"account_type": {
 							"type": "string",
@@ -97,20 +100,23 @@
 								"business",
 								"unknown"
 							],
-							"description": "Type of user account"
+							"description": "OPTIONAL: Type of user account"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Information about the uploader"
 				},
 				"work_title": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Title of the copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Title of the copyrighted work"
 				},
 				"rights_holder": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization or person holding the copyright"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person holding the copyright"
 				},
 				"work_category": {
 					"type": "string",
@@ -125,7 +131,8 @@
 						"document",
 						"other"
 					],
-					"description": "Category of copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Category of copyrighted work"
 				},
 				"access_method": {
 					"type": "string",
@@ -136,7 +143,7 @@
 						"time_limited",
 						"captcha_protected"
 					],
-					"description": "How the file can be accessed"
+					"description": "OPTIONAL: How the file can be accessed"
 				},
 				"takedown_info": {
 					"type": "object",
@@ -144,18 +151,19 @@
 						"previous_requests": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Number of previous takedown requests for this file"
+							"description": "OPTIONAL: Number of previous takedown requests for this file"
 						},
 						"service_response_time": {
 							"type": "string",
-							"description": "Expected response time from hosting service"
+							"description": "OPTIONAL: Expected response time from hosting service"
 						},
 						"automated_removal": {
 							"type": "boolean",
-							"description": "Whether service supports automated removal"
+							"description": "OPTIONAL: Whether service supports automated removal"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Takedown request information"
 				}
 			},
 			"required": [

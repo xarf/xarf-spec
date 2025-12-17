@@ -25,12 +25,13 @@
 						"rights_holder",
 						"nzb_index_monitoring"
 					],
-					"description": "Source of Usenet infringement evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of Usenet infringement evidence"
 				},
 				"newsgroup": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Name of the newsgroup containing infringing content (REQUIRED)",
+					"description": "REQUIRED: Name of the newsgroup containing infringing content",
 					"examples": [
 						"alt.binaries.movies.divx",
 						"alt.binaries.tv",
@@ -45,40 +46,42 @@
 						"message_id": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Usenet Message-ID header"
+							"description": "RECOMMENDED: Usenet Message-ID header"
 						},
 						"subject": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Subject line of the post"
+							"description": "OPTIONAL: Subject line of the post"
 						},
 						"from_header": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "From header of the post"
+							"description": "OPTIONAL: From header of the post"
 						},
 						"posting_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "When message was posted to newsgroup"
+							"description": "OPTIONAL: When message was posted to newsgroup"
 						},
 						"part_number": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Part number if multi-part post"
+							"description": "OPTIONAL: Part number if multi-part post"
 						},
 						"total_parts": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Total number of parts in posting"
+							"description": "OPTIONAL: Total number of parts in posting"
 						},
 						"file_size": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Size of the posted file in bytes"
+							"description": "OPTIONAL: Size of the posted file in bytes"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"x-recommended": true,
+					"description": "RECOMMENDED: Message information (message_id required)"
 				},
 				"nzb_info": {
 					"type": "object",
@@ -86,26 +89,27 @@
 						"nzb_name": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Name of the NZB file"
+							"description": "OPTIONAL: Name of the NZB file"
 						},
 						"nzb_url": {
 							"type": "string",
 							"format": "uri",
-							"description": "URL to NZB file on indexing site"
+							"description": "OPTIONAL: URL to NZB file on indexing site"
 						},
 						"indexer_site": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "NZB indexing site name"
+							"description": "OPTIONAL: NZB indexing site name"
 						},
 						"completion_percentage": {
 							"type": "number",
 							"minimum": 0.0,
 							"maximum": 100.0,
-							"description": "Completion percentage of the post"
+							"description": "OPTIONAL: Completion percentage of the post"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: NZB file information"
 				},
 				"server_info": {
 					"type": "object",
@@ -113,30 +117,33 @@
 						"nntp_server": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "NNTP server hostname"
+							"description": "OPTIONAL: NNTP server hostname"
 						},
 						"server_group": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "News server provider group"
+							"description": "OPTIONAL: News server provider group"
 						},
 						"retention_days": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Server retention period in days"
+							"description": "OPTIONAL: Server retention period in days"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Server information"
 				},
 				"work_title": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Title of the copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Title of the copyrighted work"
 				},
 				"rights_holder": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization or person holding the copyright"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person holding the copyright"
 				},
 				"work_category": {
 					"type": "string",
@@ -152,7 +159,8 @@
 						"adult_content",
 						"other"
 					],
-					"description": "Category of copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Category of copyrighted work"
 				},
 				"encoding_info": {
 					"type": "object",
@@ -165,18 +173,19 @@
 								"base64",
 								"other"
 							],
-							"description": "Binary encoding format used"
+							"description": "OPTIONAL: Binary encoding format used"
 						},
 						"par2_recovery": {
 							"type": "boolean",
-							"description": "Whether PAR2 recovery files are included"
+							"description": "OPTIONAL: Whether PAR2 recovery files are included"
 						},
 						"rar_compression": {
 							"type": "boolean",
-							"description": "Whether content is RAR compressed"
+							"description": "OPTIONAL: Whether content is RAR compressed"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Encoding information"
 				},
 				"detection_method": {
 					"type": "string",
@@ -186,7 +195,7 @@
 						"content_sampling",
 						"nzb_metadata"
 					],
-					"description": "Method used to detect infringement"
+					"description": "OPTIONAL: Method used to detect infringement"
 				}
 			},
 			"required": [

@@ -26,13 +26,15 @@
 							"format": "ipv6"
 						}
 					],
-					"description": "Target IP address (optional victim context)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target IP address of the login attack"
 				},
 				"destination_port": {
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 65535,
-					"description": "Target port number"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target port number"
 				},
 				"protocol": {
 					"type": "string",
@@ -42,17 +44,17 @@
 						"icmp",
 						"sctp"
 					],
-					"description": "Network protocol used in the attack"
+					"description": "REQUIRED: Network protocol used in the attack"
 				},
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When attack activity was first observed"
+					"description": "REQUIRED: When attack activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When attack activity was last observed"
+					"description": "OPTIONAL: When attack activity was last observed"
 				}
 			},
 			"required": [

@@ -26,13 +26,15 @@
 							"format": "ipv6"
 						}
 					],
-					"description": "Target IP address"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target IP address"
 				},
 				"destination_port": {
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 65535,
-					"description": "Target port number (typically 80, 443)"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Target port number (typically 80, 443)"
 				},
 				"protocol": {
 					"type": "string",
@@ -41,7 +43,7 @@
 						"udp"
 					],
 					"default": "tcp",
-					"description": "Network protocol used"
+					"description": "REQUIRED: Network protocol used"
 				},
 				"http_method": {
 					"type": "string",
@@ -54,12 +56,14 @@
 						"HEAD",
 						"OPTIONS"
 					],
-					"description": "HTTP method used in the attack"
+					"x-recommended": true,
+					"description": "RECOMMENDED: HTTP method used in the attack"
 				},
 				"target_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "Full URL that was targeted"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Full URL that was targeted"
 				},
 				"injection_point": {
 					"type": "string",
@@ -71,11 +75,12 @@
 						"path",
 						"json_parameter"
 					],
-					"description": "Where the SQL injection was attempted"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Where the SQL injection was attempted"
 				},
 				"payload_sample": {
 					"type": "string",
-					"description": "Sample of the SQL injection payload (sanitized)",
+					"description": "OPTIONAL: Sample of the SQL injection payload (sanitized)",
 					"maxLength": 1000
 				},
 				"attack_technique": {
@@ -90,22 +95,23 @@
 						"second_order",
 						"other"
 					],
-					"description": "SQL injection technique used"
+					"x-recommended": true,
+					"description": "RECOMMENDED: SQL injection technique used"
 				},
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When attack activity was first observed"
+					"description": "REQUIRED: When attack activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When attack activity was last observed"
+					"description": "OPTIONAL: When attack activity was last observed"
 				},
 				"attempts_count": {
 					"type": "integer",
 					"minimum": 1,
-					"description": "Number of injection attempts observed"
+					"description": "OPTIONAL: Number of injection attempts observed"
 				}
 			},
 			"required": [

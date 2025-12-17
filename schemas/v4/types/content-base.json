@@ -16,7 +16,7 @@
 				"url": {
 					"type": "string",
 					"format": "uri",
-					"description": "The URL of the abusive content",
+					"description": "REQUIRED: The URL of the abusive content",
 					"examples": [
 						"https://phishing-site.example.com/login",
 						"http://malware-host.example.net/payload.exe"
@@ -25,7 +25,8 @@
 				"domain": {
 					"type": "string",
 					"pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$",
-					"description": "Fully qualified domain name of the abusive content",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Fully qualified domain name of the abusive content",
 					"examples": [
 						"phishing-site.example.com",
 						"malware.example.net"
@@ -33,7 +34,7 @@
 				},
 				"registrar": {
 					"type": "string",
-					"description": "Domain registrar if known",
+					"description": "OPTIONAL: Domain registrar if known",
 					"examples": [
 						"GoDaddy",
 						"Namecheap",
@@ -45,7 +46,7 @@
 					"items": {
 						"type": "string"
 					},
-					"description": "DNS nameservers for the domain",
+					"description": "OPTIONAL: DNS nameservers for the domain",
 					"examples": [
 						[
 							"ns1.example.com",
@@ -83,17 +84,18 @@
 							}
 						}
 					},
-					"description": "Key DNS evidence records"
+					"description": "OPTIONAL: Key DNS evidence records"
 				},
 				"screenshot_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "Reference URL to screenshot evidence"
+					"description": "OPTIONAL: Reference URL to screenshot evidence"
 				},
 				"verified_at": {
 					"type": "string",
 					"format": "date-time",
-					"description": "When content was last verified as active"
+					"x-recommended": true,
+					"description": "RECOMMENDED: When content was last verified as active"
 				},
 				"verification_method": {
 					"type": "string",
@@ -104,7 +106,8 @@
 						"honeypot",
 						"threat_intelligence"
 					],
-					"description": "How the abusive content was verified"
+					"x-recommended": true,
+					"description": "RECOMMENDED: How the abusive content was verified"
 				},
 				"attack_vector": {
 					"type": "string",
@@ -118,11 +121,12 @@
 						"remote_compromise",
 						"suspicious_registration"
 					],
-					"description": "Primary attack vector classification"
+					"description": "OPTIONAL: Primary attack vector classification"
 				},
 				"target_brand": {
 					"type": "string",
-					"description": "Impersonated brand or entity if applicable",
+					"x-recommended": true,
+					"description": "RECOMMENDED: Impersonated brand or entity if applicable",
 					"examples": [
 						"PayPal",
 						"Microsoft",
@@ -131,7 +135,7 @@
 				},
 				"hosting_provider": {
 					"type": "string",
-					"description": "Identified hosting provider",
+					"description": "OPTIONAL: Identified hosting provider",
 					"examples": [
 						"AWS",
 						"CloudFlare",
@@ -142,23 +146,23 @@
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 4294967295,
-					"description": "Autonomous System Number"
+					"description": "OPTIONAL: Autonomous System Number"
 				},
 				"country_code": {
 					"type": "string",
 					"pattern": "^[A-Z]{2}$",
-					"description": "ISO 3166-1 alpha-2 country code"
+					"description": "OPTIONAL: ISO 3166-1 alpha-2 country code"
 				},
 				"ssl_certificate": {
 					"type": "object",
 					"properties": {
 						"issuer": {
 							"type": "string",
-							"description": "Certificate issuer"
+							"description": "OPTIONAL: Certificate issuer"
 						},
 						"subject": {
 							"type": "string",
-							"description": "Certificate subject"
+							"description": "OPTIONAL: Certificate subject"
 						},
 						"valid_from": {
 							"type": "string",
@@ -170,40 +174,40 @@
 						},
 						"fingerprint": {
 							"type": "string",
-							"description": "SHA256 fingerprint of the certificate"
+							"description": "OPTIONAL: SHA256 fingerprint of the certificate"
 						}
 					},
-					"description": "SSL certificate details if HTTPS is used"
+					"description": "OPTIONAL: SSL certificate details if HTTPS is used"
 				},
 				"whois": {
 					"type": "object",
 					"properties": {
 						"registrant": {
 							"type": "string",
-							"description": "Domain registrant name or organization"
+							"description": "OPTIONAL: Domain registrant name or organization"
 						},
 						"created_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "Domain creation date"
+							"description": "OPTIONAL: Domain creation date"
 						},
 						"updated_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "Domain last updated date"
+							"description": "OPTIONAL: Domain last updated date"
 						},
 						"expiry_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "Domain expiration date"
+							"description": "OPTIONAL: Domain expiration date"
 						},
 						"registrar_abuse_contact": {
 							"type": "string",
 							"format": "email",
-							"description": "Registrar's abuse contact email"
+							"description": "OPTIONAL: Registrar's abuse contact email"
 						}
 					},
-					"description": "WHOIS data for the domain"
+					"description": "OPTIONAL: WHOIS data for the domain"
 				},
 				"dns_response": {
 					"type": "object",
@@ -211,11 +215,11 @@
 						"query_time": {
 							"type": "string",
 							"format": "date-time",
-							"description": "When the DNS query was made"
+							"description": "OPTIONAL: When the DNS query was made"
 						},
 						"authoritative": {
 							"type": "boolean",
-							"description": "Whether response was from authoritative nameserver"
+							"description": "OPTIONAL: Whether response was from authoritative nameserver"
 						},
 						"response_code": {
 							"type": "string",
@@ -225,10 +229,10 @@
 								"SERVFAIL",
 								"REFUSED"
 							],
-							"description": "DNS response code"
+							"description": "OPTIONAL: DNS response code"
 						}
 					},
-					"description": "DNS query response metadata"
+					"description": "OPTIONAL: DNS query response metadata"
 				}
 			},
 			"required": [

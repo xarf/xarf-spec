@@ -25,17 +25,18 @@
 						"rights_holder",
 						"search_monitoring"
 					],
-					"description": "Source of link site infringement evidence"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Source of link site infringement evidence"
 				},
 				"infringing_url": {
 					"type": "string",
 					"format": "uri",
-					"description": "URL to the page containing infringing links (REQUIRED)"
+					"description": "REQUIRED: URL to the page containing infringing links"
 				},
 				"site_name": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Name of the link aggregation site (REQUIRED)",
+					"description": "REQUIRED: Name of the link aggregation site",
 					"examples": [
 						"The Pirate Bay",
 						"1337x",
@@ -56,7 +57,8 @@
 						"forum_links",
 						"other"
 					],
-					"description": "Category of link aggregation site"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Category of link aggregation site"
 				},
 				"link_info": {
 					"type": "object",
@@ -64,35 +66,37 @@
 						"page_title": {
 							"type": "string",
 							"maxLength": 500,
-							"description": "Title of the page containing links"
+							"description": "OPTIONAL: Title of the page containing links"
 						},
 						"posting_date": {
 							"type": "string",
 							"format": "date-time",
-							"description": "When links were posted"
+							"description": "OPTIONAL: When links were posted"
 						},
 						"uploader": {
 							"type": "string",
 							"maxLength": 200,
-							"description": "Username who posted the links"
+							"description": "OPTIONAL: Username who posted the links"
 						},
 						"download_count": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Number of downloads/views"
+							"description": "OPTIONAL: Number of downloads/views"
 						},
 						"link_count": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Number of infringing links on the page"
+							"description": "OPTIONAL: Number of infringing links on the page"
 						},
 						"comments_count": {
 							"type": "integer",
 							"minimum": 0,
-							"description": "Number of user comments"
+							"description": "OPTIONAL: Number of user comments"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"x-recommended": true,
+					"description": "RECOMMENDED: Information about the link page"
 				},
 				"linked_content": {
 					"type": "array",
@@ -102,7 +106,7 @@
 							"target_url": {
 								"type": "string",
 								"format": "uri",
-								"description": "URL that the link points to"
+								"description": "REQUIRED: URL that the link points to"
 							},
 							"link_type": {
 								"type": "string",
@@ -113,17 +117,18 @@
 									"streaming_link",
 									"usenet_nzb",
 									"other"
-								]
+								],
+								"description": "REQUIRED: Type of link"
 							},
 							"hosting_service": {
 								"type": "string",
 								"maxLength": 200,
-								"description": "Service hosting the linked content"
+								"description": "OPTIONAL: Service hosting the linked content"
 							},
 							"file_size": {
 								"type": "integer",
 								"minimum": 0,
-								"description": "Size of linked file in bytes"
+								"description": "OPTIONAL: Size of linked file in bytes"
 							}
 						},
 						"required": [
@@ -133,17 +138,20 @@
 						"additionalProperties": false
 					},
 					"maxItems": 50,
-					"description": "Details about the linked infringing content"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Details about the linked infringing content"
 				},
 				"work_title": {
 					"type": "string",
 					"maxLength": 500,
-					"description": "Title of the copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Title of the copyrighted work"
 				},
 				"rights_holder": {
 					"type": "string",
 					"maxLength": 200,
-					"description": "Organization or person holding the copyright"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Organization or person holding the copyright"
 				},
 				"work_category": {
 					"type": "string",
@@ -158,7 +166,8 @@
 						"adult_content",
 						"other"
 					],
-					"description": "Category of copyrighted work"
+					"x-recommended": true,
+					"description": "RECOMMENDED: Category of copyrighted work"
 				},
 				"search_terms": {
 					"type": "array",
@@ -167,7 +176,7 @@
 						"maxLength": 200
 					},
 					"maxItems": 10,
-					"description": "Search terms used to find the infringing links"
+					"description": "OPTIONAL: Search terms used to find the infringing links"
 				},
 				"site_ranking": {
 					"type": "object",
@@ -175,16 +184,17 @@
 						"alexa_rank": {
 							"type": "integer",
 							"minimum": 1,
-							"description": "Alexa traffic ranking of the site"
+							"description": "OPTIONAL: Alexa traffic ranking of the site"
 						},
 						"popularity_score": {
 							"type": "number",
 							"minimum": 0.0,
 							"maximum": 10.0,
-							"description": "Popularity score (0.0-10.0)"
+							"description": "OPTIONAL: Popularity score (0.0-10.0)"
 						}
 					},
-					"additionalProperties": false
+					"additionalProperties": false,
+					"description": "OPTIONAL: Site ranking information"
 				}
 			},
 			"required": [
