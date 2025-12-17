@@ -85,7 +85,7 @@ XARF v4 uses a **type-specific architecture** with 32 dedicated schemas across 7
 | Class | Type-Specific Schemas | Purpose |
 |-------|----------------------|---------|
 | **messaging** (2) | `messaging-spam`, `messaging-bulk-messaging` | Communication abuse |
-| **connection** (8) | `connection-login-attack`, `connection-port-scan`, `connection-ddos`, `connection-infected-host`, `connection-reconnaissance`, `connection-scraping`, `connection-sql-injection`, `connection-vuln-scanning` | Network attacks |
+| **connection** (8) | `connection-login-attack`, `connection-port-scan`, `connection-ddos`, `connection-infected-host`, `connection-reconnaissance`, `connection-scraping`, `connection-sql-injection`, `connection-vulnerability-scan` | Network attacks |
 | **vulnerability** (3) | `vulnerability-cve`, `vulnerability-open-service`, `vulnerability-misconfiguration` | Security vulnerabilities |
 | **content** (7) | `content-phishing`, `content-malware`, `content-csam`, `content-csem`, `content-exposed-data`, `content-brand-infringement`, `content-fraud`, `content-remote-compromise`, `content-suspicious-registration` | Malicious web content |
 | **infrastructure** (2) | `infrastructure-botnet`, `infrastructure-compromised-server` | Compromised systems |

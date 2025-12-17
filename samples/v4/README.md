@@ -18,7 +18,7 @@ This directory contains exactly one representative sample for each of the 30 XAR
 - `connection-reconnaissance.json` → connection:reconnaissance
 - `connection-scraping.json` → connection:scraping
 - `connection-sql-injection.json` → connection:sql_injection
-- `connection-vuln-scanning.json` → connection:vuln_scanning
+- `connection-vulnerability-scan.json` → connection:vuln_scanning
 
 ### Vulnerability Class (3 types)
 - `vulnerability-cve.json` → vulnerability:cve

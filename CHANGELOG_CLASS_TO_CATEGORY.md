@@ -76,7 +76,7 @@
 - connection-reconnaissance.json
 - connection-scraping.json
 - connection-sql-injection.json
-- connection-vuln-scanning.json
+- connection-vulnerability-scan.json
 - content-csam.json
 - content-csem.json
 - content-exposed-data.json

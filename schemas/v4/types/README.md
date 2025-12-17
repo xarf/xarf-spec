@@ -28,7 +28,7 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 | `reconnaissance` | `connection-reconnaissance.json` | Network reconnaissance and information gathering |
 | `scraping` | `connection-scraping.json` | Automated content scraping and harvesting |
 | `sql_injection` | `connection-sql-injection.json` | SQL injection attack attempts |
-| `vuln_scanning` | `connection-vuln-scanning.json` | Vulnerability scanning activities |
+| `vuln_scanning` | `connection-vulnerability-scan.json` | Vulnerability scanning activities |
 
 ### Vulnerability Class
 | Type | Schema File | Description |
