@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T10:49:26Z",
 	"reporter": {
 		"org": "Authentication Monitor",
-		"contact": "auth-failures@secmonitor.net"
+		"contact": "auth-failures@secmonitor.net",
+		"domain": "secmonitor.net"
 	},
 	"sender": {
 		"org": "Authentication Monitor",
@@ -38,7 +39,7 @@
 			"content_type": "text/plain",
 			"description": "RDP authentication failure logs",
 			"payload": "UkRQIGF1dGhlbnRpY2F0aW9uIGZhaWx1cmVzOiAxNTYgYXR0ZW1wdHMgaW4gMSBob3Vy",
-			"hash": "a476507a17fa65a36d244632ab65b828d92b8b92378f3b5937c003deccee05c7"
+			"hash": "sha256:a476507a17fa65a36d244632ab65b828d92b8b92378f3b5937c003deccee05c7"
 		}
 	],
 	"tags": [

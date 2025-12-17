@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T11:26:59Z",
 	"reporter": {
 		"org": "Network Security Monitoring",
-		"contact": "alerts@netsec-mon.com"
+		"contact": "alerts@netsec-mon.com",
+		"domain": "netsec-mon.com"
 	},
 	"sender": {
 		"org": "Network Security Monitoring",
@@ -38,7 +39,7 @@
 			"content_type": "text/plain",
 			"description": "IDS log entries showing systematic port scanning activity",
 			"payload": "MjAyNC0wMS0xNSAwNzoyMjoxOCBQb3J0IHNjYW4gZGV0ZWN0ZWQ6IFNZTiBzY2FuIGZyb20gMTk4LjUxLjEwMC4xNTA=",
-			"hash": "a4bd02459c084b80d7991ad2b606d2fe75fef7d44598d4f1c002ff7c671ad58d"
+			"hash": "sha256:a4bd02459c084b80d7991ad2b606d2fe75fef7d44598d4f1c002ff7c671ad58d"
 		}
 	],
 	"tags": [

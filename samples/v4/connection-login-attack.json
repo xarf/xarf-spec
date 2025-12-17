@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T12:17:20Z",
 	"reporter": {
 		"org": "SSH Honeypot Network",
-		"contact": "honeypot@sshsecurity.org"
+		"contact": "honeypot@sshsecurity.org",
+		"domain": "sshsecurity.org"
 	},
 	"sender": {
 		"org": "SSH Honeypot Network",
@@ -42,7 +43,7 @@
 			"content_type": "text/plain",
 			"description": "SSH authentication failure logs showing brute force pattern",
 			"payload": "U1NIIGJydXRlIGZvcmNlIGF0dGFjayBkZXRlY3RlZDogMjg0NyBhdHRlbXB0cyBpbiAzIGhvdXJz",
-			"hash": "ef3c219beff759f9e6e1fe8c1d7983ffbad5adf477714d7ec88f7dfa577b3504"
+			"hash": "sha256:ef3c219beff759f9e6e1fe8c1d7983ffbad5adf477714d7ec88f7dfa577b3504"
 		}
 	],
 	"tags": [

@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T16:45:00Z",
 	"reporter": {
 		"org": "Web Security Service",
-		"contact": "security@webhost.example"
+		"contact": "security@webhost.example",
+		"domain": "webhost.example"
 	},
 	"sender": {
 		"org": "Web Security Service",

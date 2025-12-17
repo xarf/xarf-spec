@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T14:12:10Z",
 	"reporter": {
 		"org": "Anti-Piracy Monitoring",
-		"contact": "links@antipiracy-monitor.example"
+		"contact": "links@antipiracy-monitor.example",
+		"domain": "antipiracy-monitor.example"
 	},
 	"sender": {
 		"org": "Anti-Piracy Monitoring",
@@ -28,7 +29,7 @@
 			"content_type": "text/html",
 			"description": "Link aggregation page with download links",
 			"payload": "PGRpdj48aDI+RG93bmxvYWQgTGlua3M8L2gyPjx1bD48bGk+TGluayAxPC9saT48L3VsPjwvZGl2Pg==",
-			"hash": "0a0a16f39418e87a6f3b40db4ad18c079c6099f421670f4cdf31a8f07dc59964"
+			"hash": "sha256:0a0a16f39418e87a6f3b40db4ad18c079c6099f421670f4cdf31a8f07dc59964"
 		}
 	],
 	"tags": [

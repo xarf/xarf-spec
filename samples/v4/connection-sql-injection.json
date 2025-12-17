@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T12:00:00Z",
 	"reporter": {
 		"org": "Web Application Firewall",
-		"contact": "security@example.com"
+		"contact": "security@example.com",
+		"domain": "example.com"
 	},
 	"sender": {
 		"org": "Web Application Firewall",

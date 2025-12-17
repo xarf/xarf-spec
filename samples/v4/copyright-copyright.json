@@ -27,7 +27,7 @@
 			"content_type": "text/plain",
 			"description": "DMCA takedown notice with legal references",
 			"payload": "RE1DQSBUYWtlZG93biBOb3RpY2U6IFVuYXV0aG9yaXplZCBkaXN0cmlidXRpb24gb2YgY29weXJpZ2h0ZWQgY29udGVudA==",
-			"hash": "c01b5f92c49c17411e67c8fa7202faa865dd432d96db24c4801ed1bdfe9b56ef"
+			"hash": "sha256:c01b5f92c49c17411e67c8fa7202faa865dd432d96db24c4801ed1bdfe9b56ef"
 		}
 	],
 	"tags": [

@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T14:16:41Z",
 	"reporter": {
 		"org": "Content Protection Agency",
-		"contact": "dmca@content-protection.example"
+		"contact": "dmca@content-protection.example",
+		"domain": "content-protection.example"
 	},
 	"sender": {
 		"org": "Content Protection Agency",
@@ -24,7 +25,7 @@
 			"content_type": "text/html",
 			"description": "Cyberlocker download page",
 			"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkRvd25sb2FkPC90aXRsZT48L2hlYWQ+PC9odG1sPg==",
-			"hash": "12da1fc31eb254da390b23acd54a9e4a5461426d82622940cde70cb3e1058c54"
+			"hash": "sha256:12da1fc31eb254da390b23acd54a9e4a5461426d82622940cde70cb3e1058c54"
 		}
 	],
 	"tags": [

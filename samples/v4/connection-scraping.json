@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T14:00:00Z",
 	"reporter": {
 		"org": "Website Protection Service",
-		"contact": "abuse@hosting.example"
+		"contact": "abuse@hosting.example",
+		"domain": "hosting.example"
 	},
 	"sender": {
 		"org": "Website Protection Service",

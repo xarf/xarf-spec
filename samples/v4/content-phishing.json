@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T15:15:24Z",
 	"reporter": {
 		"org": "YBrandProtection",
-		"contact": "takedown@ybrandprotection.com"
+		"contact": "takedown@ybrandprotection.com",
+		"domain": "ybrandprotection.com"
 	},
 	"sender": {
 		"org": "YBrandProtection",
@@ -23,13 +24,13 @@
 			"content_type": "image/png",
 			"description": "Screenshot of phishing page mimicking bank login",
 			"payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
-			"hash": "6b7fa434f92a8b80aab02d9bf1a12e49ffcae424e4013a1c4f68b67e3d2bbcd0"
+			"hash": "sha256:6b7fa434f92a8b80aab02d9bf1a12e49ffcae424e4013a1c4f68b67e3d2bbcd0"
 		},
 		{
 			"content_type": "text/html",
 			"description": "Source code of phishing page",
 			"payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPlNlY3VyZSBCYW5raW5nIExvZ2luPC90aXRsZT48L2hlYWQ+",
-			"hash": "ae9d634a3f01a120303e5e6f83b5308f105bc2de86a97089b47ff11b9494f0f7"
+			"hash": "sha256:ae9d634a3f01a120303e5e6f83b5308f105bc2de86a97089b47ff11b9494f0f7"
 		}
 	],
 	"tags": [
