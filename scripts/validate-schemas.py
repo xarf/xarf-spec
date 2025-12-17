@@ -15,7 +15,7 @@ from typing import Dict, List, Tuple, Any
 
 try:
     import jsonschema
-    from jsonschema import Draft202012Validator
+    from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
     print("❌ Error: jsonschema library not installed")
     print("Install with: pip install jsonschema")
@@ -79,7 +79,8 @@ def resolve_schema_refs(schema: Dict[str, Any], schema_dir: Path) -> Dict[str, A
 def validate_sample_against_schema(sample_data: Dict[str, Any], resolved_schema: Dict[str, Any]) -> Tuple[bool, List[str]]:
     """Validate a sample against a resolved schema"""
     try:
-        validator = Draft202012Validator(resolved_schema)
+        # Enable format validation (including UUID validation)
+        validator = Draft202012Validator(resolved_schema, format_checker=FormatChecker())
     except jsonschema.SchemaError as e:
         return False, [f"Invalid schema: {e}"]
     except Exception as e:
