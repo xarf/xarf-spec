@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T09:12:59Z",
 	"reporter": {
 		"org": "Usenet Copyright Monitor",
-		"contact": "usenet@copyright-watch.example"
+		"contact": "usenet@copyright-watch.example",
+		"domain": "copyright-watch.example"
 	},
 	"sender": {
 		"org": "Usenet Copyright Monitor",
@@ -33,7 +34,7 @@
 			"content_type": "message/rfc822",
 			"description": "Usenet post headers showing copyrighted movie",
 			"payload": "TWVzc2FnZS1JRDogPGFiYzEyM2RlZjQ1NkBuZXdzLnByb3ZpZGVyLmV4YW1wbGUuY29tPg==",
-			"hash": "42ace7f383180f0d106239aff788c5db2011fc1ef4a51476256489664381a080"
+			"hash": "sha256:42ace7f383180f0d106239aff788c5db2011fc1ef4a51476256489664381a080"
 		}
 	],
 	"tags": [

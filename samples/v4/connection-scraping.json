@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T14:00:00Z",
 	"reporter": {
 		"org": "Website Protection Service",
-		"contact": "abuse@hosting.example"
+		"contact": "abuse@hosting.example",
+		"domain": "hosting.example"
 	},
 	"sender": {
 		"org": "Website Protection Service",
@@ -34,7 +35,12 @@
 		{
 			"content_type": "text/plain",
 			"description": "Rate limiting logs",
-			"payload": "UmF0ZSBsaW1pdGluZyBsb2dz"
+			"payload": "UmF0ZSBsaW1pdGluZyBsb2dz",
+			"hash": "sha256:def456abc789def456abc789def456abc789def456abc789def456abc789def456"
 		}
+	],
+	"tags": [
+		"activity:scraping",
+		"bot:automated"
 	]
 }

@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T10:30:00Z",
 	"reporter": {
 		"org": "Content Safety Service",
-		"contact": "safety@example.org"
+		"contact": "safety@example.org",
+		"domain": "example.org"
 	},
 	"sender": {
 		"org": "Content Safety Service",
@@ -32,7 +33,12 @@
 		{
 			"content_type": "text/plain",
 			"description": "Hash match details",
-			"payload": "SGFzaCBtYXRjaCBkZXRhaWxz"
+			"payload": "SGFzaCBtYXRjaCBkZXRhaWxz",
+			"hash": "sha256:fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321"
 		}
+	],
+	"tags": [
+		"csem:detected",
+		"classification:a1"
 	]
 }

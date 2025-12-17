@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T09:21:23Z",
 	"reporter": {
 		"org": "DDoS Protection Service",
-		"contact": "ddos@protectionservice.net"
+		"contact": "ddos@protectionservice.net",
+		"domain": "protectionservice.net"
 	},
 	"sender": {
 		"org": "DDoS Protection Service",
@@ -12,7 +13,7 @@
 		"domain": "protectionservice.net"
 	},
 	"source_identifier": "192.0.2.155",
-	"source_port": 0,
+	"source_port": 1,
 	"category": "connection",
 	"type": "ddos",
 	"evidence_source": "flow_analysis",
@@ -32,7 +33,7 @@
 			"content_type": "text/plain",
 			"description": "DDoS attack flow analysis and statistics",
 			"payload": "RERvUyBhdHRhY2sgZGV0ZWN0ZWQ6IDI1MEsgcHBzLCAxLjJHYnBzLCA0NSBtaW51dGVz",
-			"hash": "4586a6802ae021fbda3f5a8923109d6c4469a0c36d2f46e3face6c297b1f24e8"
+			"hash": "sha256:4586a6802ae021fbda3f5a8923109d6c4469a0c36d2f46e3face6c297b1f24e8"
 		}
 	],
 	"tags": [

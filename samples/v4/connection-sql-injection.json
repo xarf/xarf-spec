@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T12:00:00Z",
 	"reporter": {
 		"org": "Web Application Firewall",
-		"contact": "security@example.com"
+		"contact": "security@example.com",
+		"domain": "example.com"
 	},
 	"sender": {
 		"org": "Web Application Firewall",
@@ -29,7 +30,12 @@
 		{
 			"content_type": "text/plain",
 			"description": "WAF log entry",
-			"payload": "V0FGIG1vZyBlbnRyeQ=="
+			"payload": "V0FGIG1vZyBlbnRyeQ==",
+			"hash": "sha256:abc123def456abc123def456abc123def456abc123def456abc123def456abc123"
 		}
+	],
+	"tags": [
+		"attack:sql_injection",
+		"technique:union_based"
 	]
 }

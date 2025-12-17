@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T14:02:29Z",
 	"reporter": {
 		"org": "Bulk Email Monitor",
-		"contact": "reports@email-monitor.example"
+		"contact": "reports@email-monitor.example",
+		"domain": "email-monitor.example"
 	},
 	"sender": {
 		"org": "Bulk Email Monitor",
@@ -25,7 +26,7 @@
 			"content_type": "text/csv",
 			"description": "Sample of bulk email recipient list",
 			"payload": "cmVjaXBpZW50LGVtYWlsCnVzZXIxQGV4YW1wbGUuY29tLHVzZXIxQGV4YW1wbGUuY29t",
-			"hash": "7f6f7407e3a24a84b290fdbe1fc5d49d0cbf662058449325d80107b4a2716372"
+			"hash": "sha256:7f6f7407e3a24a84b290fdbe1fc5d49d0cbf662058449325d80107b4a2716372"
 		}
 	],
 	"tags": [

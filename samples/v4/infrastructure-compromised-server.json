@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T15:57:57Z",
 	"reporter": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org"
+		"contact": "incidents@serversec.org",
+		"domain": "serversec.org"
 	},
 	"sender": {
 		"org": "Server Security Monitor",
@@ -32,7 +33,7 @@
 			"content_type": "text/plain",
 			"description": "Web server access logs showing suspicious activity",
 			"payload": "MjAyNC0wMS0xNSAxNDoyMjoxOCBDb21wcm9taXNlZCBzZXJ2ZXIgZGV0ZWN0ZWQ6IHdlYnNoZWxsIGFjdGl2aXR5",
-			"hash": "c0487a7e87ddd06d38e3ff397ba416ce0c3ba58098adad3c34380934154a07a9"
+			"hash": "sha256:c0487a7e87ddd06d38e3ff397ba416ce0c3ba58098adad3c34380934154a07a9"
 		}
 	],
 	"tags": [

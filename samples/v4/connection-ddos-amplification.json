@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T09:32:18Z",
 	"reporter": {
 		"org": "Example CERT",
-		"contact": "incident@cert-example.org"
+		"contact": "incident@cert-example.org",
+		"domain": "cert-example.org"
 	},
 	"sender": {
 		"org": "Example CERT",
@@ -29,7 +30,7 @@
 			"content_type": "text/plain",
 			"description": "Network flow analysis showing DNS amplification pattern",
 			"payload": "MjAyNC0wMS0xNSAwODoxNTo0NSBETlMgYW1wbGlmaWNhdGlvbiBhdHRhY2sgZGV0ZWN0ZWQ=",
-			"hash": "175aba8d1c61f23ae9321795328e6fb261241d03032a403b6038d82969d56eaa"
+			"hash": "sha256:175aba8d1c61f23ae9321795328e6fb261241d03032a403b6038d82969d56eaa"
 		}
 	],
 	"tags": [
