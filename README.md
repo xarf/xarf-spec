@@ -28,9 +28,9 @@ Each category contains multiple specific event types with dedicated schemas:
 | Category | Event Types | Schema Location |
 |-------|-------------|-----------------|
 | **messaging** | `spam`, `bulk_messaging` | [`schemas/v4/types/messaging-*.json`](schemas/v4/types/) |
-| **connection** | `login_attack`, `port_scan`, `ddos`, `ddos_amplification`, `auth_failure`, `sql_injection`, `vuln_scanning`, `reconnaissance`, `scraping`, `bot` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
+| **connection** | `login_attack`, `port_scan`, `ddos`, `infected_host`, `sql_injection`, `vuln_scanning`, `reconnaissance`, `scraping` | [`schemas/v4/types/connection-*.json`](schemas/v4/types/) |
 | **vulnerability** | `cve`, `open`, `misconfiguration` | [`schemas/v4/types/vulnerability-*.json`](schemas/v4/types/) |
-| **content** | `phishing`, `malware`, `fraud`, `csam`, `csem`, `exposed_data`, `ncii`, `fake_shop`, `hate_speech`, `terrorism`, `self_harm`, `identity_theft`, `pharma_fraud`, `illicit_goods`, `online_predation`, `harassment`, `doxing`, `violence`, `carding`, `gambling_scam`, `threat_to_life`, `disinformation`, `defacement`, `illegal_advertisement`, `web_hack`, `exploit`, `spamvertised` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
+| **content** | `phishing`, `malware`, `fraud`, `csam`, `csem`, `exposed_data`, `brand_infringement`, `remote_compromise`, `suspicious_registration` | [`schemas/v4/types/content-*.json`](schemas/v4/types/) |
 | **infrastructure** | `botnet`, `compromised_server` | [`schemas/v4/types/infrastructure-*.json`](schemas/v4/types/) |
 | **reputation** | `blocklist`, `threat_intelligence` | [`schemas/v4/types/reputation-*.json`](schemas/v4/types/) |
 | **copyright** | `copyright`, `p2p`, `cyberlocker`, `ugc_platform`, `link_site`, `usenet` | [`schemas/v4/types/copyright-*.json`](schemas/v4/types/) |
@@ -41,19 +41,21 @@ Sample reports are organized by version for reference and migration purposes:
 
 ```
 samples/
-├── v4/               # XARF v4 samples - one per schema type (30 total)
+├── v4/               # XARF v4 samples - one per schema type (32 total)
 │   ├── messaging-spam.json
 │   ├── messaging-bulk-messaging.json
 │   ├── connection-login-attack.json
 │   ├── connection-port-scan.json
 │   ├── connection-ddos.json
-│   ├── connection-ddos-amplification.json
-│   ├── connection-auth-failure.json
+│   ├── connection-infected-host.json
 │   ├── connection-sql-injection.json
 │   ├── connection-vuln-scanning.json
 │   ├── connection-reconnaissance.json
 │   ├── connection-scraping.json
-│   ├── connection-bot.json
+│   ├── content-brand-infringement.json
+│   ├── content-fraud.json
+│   ├── content-remote-compromise.json
+│   ├── content-suspicious-registration.json
 │   ├── vulnerability-cve.json
 │   ├── vulnerability-open.json
 │   ├── vulnerability-misconfiguration.json

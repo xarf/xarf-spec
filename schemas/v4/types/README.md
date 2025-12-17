@@ -24,14 +24,17 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 | `login_attack` | `connection-login-attack.json` | Brute force login attempts and authentication attacks |
 | `port_scan` | `connection-port-scan.json` | Network port scanning and reconnaissance activities |
 | `ddos` | `connection-ddos.json` | Distributed Denial of Service attacks |
-| `ddos_amplification` | `connection-ddos-amplification.json` | DDoS attacks using amplification techniques |
-| `auth_failure` | `connection-auth-failure.json` | Authentication failure incidents |
+| `infected_host` | `connection-infected-host.json` | Compromised systems participating in botnets |
+| `reconnaissance` | `connection-reconnaissance.json` | Network reconnaissance and information gathering |
+| `scraping` | `connection-scraping.json` | Automated content scraping and harvesting |
+| `sql_injection` | `connection-sql-injection.json` | SQL injection attack attempts |
+| `vuln_scanning` | `connection-vuln-scanning.json` | Vulnerability scanning activities |
 
 ### Vulnerability Class
 | Type | Schema File | Description |
 |------|-------------|-------------|
 | `cve` | `vulnerability-cve.json` | Common Vulnerabilities and Exposures reports |
-| `open` | `vulnerability-open.json` | Open services and exposed resources |
+| `open` | `vulnerability-open-service.json` | Open services and exposed resources |
 | `misconfiguration` | `vulnerability-misconfiguration.json` | Security misconfigurations and hardening issues |
 
 ### Reputation Class
@@ -43,7 +46,7 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 ### Infrastructure Class
 | Type | Schema File | Description |
 |------|-------------|-------------|
-| `bot` | `infrastructure-bot.json` | Botnet infections and compromised systems |
+| `botnet` | `infrastructure-botnet.json` | Botnet infections and compromised systems |
 | `compromised_server` | `infrastructure-compromised-server.json` | Compromised servers and infrastructure |
 
 ### Content Class
@@ -51,6 +54,13 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 |------|-------------|-------------|
 | `phishing` | `content-phishing.json` | Phishing websites and credential harvesting |
 | `malware` | `content-malware.json` | Malware hosting and distribution |
+| `csam` | `content-csam.json` | Child sexual abuse material |
+| `csem` | `content-csem.json` | Child sexual exploitation material |
+| `exposed_data` | `content-exposed-data.json` | Exposed sensitive data and information leaks |
+| `brand_infringement` | `content-brand-infringement.json` | Brand impersonation and trademark violations |
+| `fraud` | `content-fraud.json` | Fraudulent websites and scam content |
+| `remote_compromise` | `content-remote-compromise.json` | Remote compromise and webshell infections |
+| `suspicious_registration` | `content-suspicious-registration.json` | Suspicious domain registrations and threat indicators |
 
 ### Copyright Class
 | Type | Schema File | Description |
