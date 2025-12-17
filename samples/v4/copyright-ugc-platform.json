@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T08:00:36Z",
 	"reporter": {
 		"org": "Digital Rights Management",
-		"contact": "takedowns@drm-service.example"
+		"contact": "takedowns@drm-service.example",
+		"domain": "drm-service.example"
 	},
 	"sender": {
 		"org": "Digital Rights Management",
@@ -25,7 +26,7 @@
 			"content_type": "application/json",
 			"description": "Video metadata and content fingerprint",
 			"payload": "eyJ2aWRlb19pZCI6ICJjb3B5cmlnaHRlZF9jb250ZW50IiwgInVwbG9hZGVyIjogInVzZXIxMjM0NTYifQ==",
-			"hash": "737dd9b97fbd14ceadced0ef6a3f23c26e45736025701cd1003b15cfa7cc204a"
+			"hash": "sha256:737dd9b97fbd14ceadced0ef6a3f23c26e45736025701cd1003b15cfa7cc204a"
 		}
 	],
 	"tags": [

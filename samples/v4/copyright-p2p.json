@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T13:44:41Z",
 	"reporter": {
 		"org": "P2P Monitoring Service",
-		"contact": "p2p-reports@copyright-monitor.example"
+		"contact": "p2p-reports@copyright-monitor.example",
+		"domain": "copyright-monitor.example"
 	},
 	"sender": {
 		"org": "P2P Monitoring Service",
@@ -27,7 +28,7 @@
 			"content_type": "application/json",
 			"description": "P2P swarm analysis data",
 			"payload": "eyJpbmZvX2hhc2giOiAiZGEzOWEzZWU1ZTZiNGIwZDMyNTViZmVmOTU2MDE4OTBhZmQ4MDcwOSJ9",
-			"hash": "de15e32c2c6a636d3af2aa0ed9403b56bc010859a63e3cdf0c000a557f2bcbab"
+			"hash": "sha256:de15e32c2c6a636d3af2aa0ed9403b56bc010859a63e3cdf0c000a557f2bcbab"
 		}
 	],
 	"tags": [

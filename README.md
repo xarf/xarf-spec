@@ -82,17 +82,23 @@ samples/
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies (jq and python3)
+# Install dependencies (jq, python3, jsonschema)
 ./scripts/setup.sh
 
 # View a sample report
 cat samples/v4/messaging-spam.json
 
-# Validate all schemas and samples
-./scripts/validate.sh
+# Check JSON formatting
+./scripts/format-json.sh check
 
-# Format all JSON files
-./scripts/validate.sh format
+# Format all JSON files  
+./scripts/format-json.sh format
+
+# Validate all samples against schemas
+python3 scripts/validate-schemas.py
+
+# Or using nix-shell (NixOS users)
+nix-shell -p python3 python3Packages.jsonschema --run "python3 scripts/validate-schemas.py"
 
 # Validate specific sample against its schema
 python3 -c "

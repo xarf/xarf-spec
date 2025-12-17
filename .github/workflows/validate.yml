@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
+  formatting:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -28,29 +28,37 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y jq
         
-    - name: Validate XARF repository
-      run: ./scripts/validate.sh
-      
     - name: Check JSON formatting
       run: |
-        # Check if any JSON files need formatting
-        ./scripts/validate.sh format
-        
-        # Check if any files were changed by formatting
-        if ! git diff --quiet; then
-          echo "❌ JSON files are not properly formatted"
-          echo "Changed files:"
-          git diff --name-only
-          echo "Run './scripts/validate.sh format' to fix formatting"
-          exit 1
-        else
-          echo "✅ All JSON files are properly formatted"
-        fi
+        ./scripts/format-json.sh check
+
+  schema-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: formatting
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+
+    - name: Install Python dependencies
+      run: |
+        pip install jsonschema
+
+    - name: Validate samples against schemas
+      run: |
+        echo "🔍 Validating all sample files against their JSON schemas..."
+        python3 scripts/validate-schemas.py
 
   schema-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: validate
+    needs: formatting
 
     steps:
     - name: Checkout repository

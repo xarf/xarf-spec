@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T10:38:41Z",
 	"reporter": {
 		"org": "Threat Intelligence Provider",
-		"contact": "intel@threat-research.example"
+		"contact": "intel@threat-research.example",
+		"domain": "threat-research.example"
 	},
 	"sender": {
 		"org": "Threat Intelligence Provider",
@@ -25,7 +26,7 @@
 			"content_type": "application/json",
 			"description": "Threat intelligence indicators",
 			"payload": "eyJ0aHJlYXRfdHlwZSI6ICJjMmMiLCAiaW9jX3R5cGUiOiAiaXAifQ==",
-			"hash": "b6ab202a404ef8e8dbf27df78c46a33b5042bd80ce1b8b88baeffd8d8298e5df"
+			"hash": "sha256:b6ab202a404ef8e8dbf27df78c46a33b5042bd80ce1b8b88baeffd8d8298e5df"
 		}
 	],
 	"tags": [

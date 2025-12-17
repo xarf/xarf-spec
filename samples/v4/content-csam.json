@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-20T10:30:00Z",
 	"reporter": {
 		"org": "Content Safety Service",
-		"contact": "safety@example.org"
+		"contact": "safety@example.org",
+		"domain": "example.org"
 	},
 	"sender": {
 		"org": "Content Safety Service",
@@ -29,7 +30,12 @@
 		{
 			"content_type": "text/plain",
 			"description": "Hash match notification",
-			"payload": "SGFzaCBtYXRjaCBub3RpZmljYXRpb24="
+			"payload": "SGFzaCBtYXRjaCBub3RpZmljYXRpb24=",
+			"hash": "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
 		}
+	],
+	"tags": [
+		"csam:detected",
+		"classification:a1"
 	]
 }

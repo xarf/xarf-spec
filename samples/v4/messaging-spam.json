@@ -4,7 +4,8 @@
 	"timestamp": "2025-01-11T10:59:45Z",
 	"reporter": {
 		"org": "Example Anti-Spam Service",
-		"contact": "reports@antispam-service.example"
+		"contact": "reports@antispam-service.example",
+		"domain": "antispam-service.example"
 	},
 	"sender": {
 		"org": "Example Anti-Spam Service",
@@ -24,7 +25,7 @@
 			"content_type": "message/rfc822",
 			"description": "Complete spam email with headers",
 			"payload": "UmVjZWl2ZWQ6IGZyb20gZXhhbXBsZS5jb20gKGV4YW1wbGUuY29tIFsxOTIuMTY4LjEuMTAwXSkKCVN1YmplY3Q6IFVyZ2VudDogQ2xhaW0gWW91ciBQcml6ZSBOb3chCglGcm9tOiBtYXJrZXRpbmdAZXhhbXBsZS5jb20=",
-			"hash": "cee5863cbfe009a2560168a939bbced8d16eebafa97eb34d7b3b9d90f7bf1a17"
+			"hash": "sha256:cee5863cbfe009a2560168a939bbced8d16eebafa97eb34d7b3b9d90f7bf1a17"
 		}
 	],
 	"tags": [
