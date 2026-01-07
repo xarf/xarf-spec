@@ -175,6 +175,79 @@
 				"DDoS attack against web services using SYN flood technique"
 			]
 		},
+		"severity": {
+			"type": "string",
+			"enum": [
+				"low",
+				"medium",
+				"high",
+				"critical"
+			],
+			"description": "OPTIONAL: Severity level of the abuse incident",
+			"examples": [
+				"low",
+				"medium",
+				"high",
+				"critical"
+			]
+		},
+		"occurrence": {
+			"type": "object",
+			"properties": {
+				"start": {
+					"type": "string",
+					"format": "date-time",
+					"description": "REQUIRED: Start time of the abuse occurrence"
+				},
+				"end": {
+					"type": "string",
+					"format": "date-time",
+					"description": "REQUIRED: End time of the abuse occurrence"
+				}
+			},
+			"required": [
+				"start",
+				"end"
+			],
+			"additionalProperties": false,
+			"description": "OPTIONAL: Time range when the abuse occurred"
+		},
+		"target": {
+			"type": "object",
+			"properties": {
+				"ip": {
+					"type": "string",
+					"description": "Target IP address"
+				},
+				"domain": {
+					"type": "string",
+					"format": "hostname",
+					"description": "Target domain name"
+				},
+				"url": {
+					"type": "string",
+					"format": "uri",
+					"description": "Target URL"
+				},
+				"email": {
+					"type": "string",
+					"format": "email",
+					"description": "Target email address"
+				},
+				"port": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 65535,
+					"description": "Target port number"
+				}
+			},
+			"additionalProperties": false,
+			"description": "OPTIONAL: Information about the target/victim of the abuse"
+		},
+		"on_behalf_of": {
+			"$ref": "#/$defs/contact_info",
+			"description": "OPTIONAL: The organization on whose behalf this report is filed (if different from reporter)"
+		},
 		"legacy_version": {
 			"type": "string",
 			"enum": [
