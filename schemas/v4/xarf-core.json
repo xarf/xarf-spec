@@ -134,22 +134,22 @@
 			"type": "array",
 			"items": {
 				"type": "string",
-				"pattern": "^[a-z0-9_]+:[a-z0-9_]+$",
-				"description": "OPTIONAL: Namespaced tag in format 'namespace:value'"
+				"pattern": "^[a-z0-9][a-z0-9_+-]*:[a-z0-9][a-z0-9_+-]*$",
+				"description": "OPTIONAL: Namespaced tag in format 'namespace:predicate'"
 			},
 			"description": "OPTIONAL: Namespaced tags for categorization, correlation, and automation",
 			"examples": [
 				[
 					"malware:conficker",
-					"campaign:winter2024"
+					"campaign:winter-2024"
 				],
 				[
-					"phishing:banking",
-					"target:example_bank"
+					"botnet:command-and-control",
+					"malware:cobalt-strike"
 				],
 				[
-					"attack:syn_flood",
-					"volume:high"
+					"language:c++",
+					"attack:syn-flood"
 				]
 			],
 			"maxItems": 20
