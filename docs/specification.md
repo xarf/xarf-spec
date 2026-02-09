@@ -51,7 +51,7 @@ XARF v4 organizes abuse reports into seven primary categories, each with specifi
 | Category | Purpose | Required Fields | Evidence Focus |
 |----------|---------|----------------|----------------|
 | `messaging` | Communication abuse | `protocol`, `smtp_from`, `subject` | Original messages, headers |
-| `connection` | Network attacks | `destination_ip`, `protocol` | Attack logs, connection data |
+| `connection` | Network attacks | `protocol` | Attack logs, connection data |
 | `infrastructure` | Compromised systems | None beyond base | Traffic analysis, indicators |
 | `content` | Malicious web content | `url` | Screenshots, webpage samples |
 | `copyright` | IP infringement | `work_title`, `rights_holder` | DMCA notices, content samples |
