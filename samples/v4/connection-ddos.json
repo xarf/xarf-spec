@@ -40,5 +40,6 @@
 		"attack:syn_flood",
 		"volume:high",
 		"mitigation:applied"
-	]
+	],
+	"first_seen": "2025-01-11T08:45:00Z"
 }

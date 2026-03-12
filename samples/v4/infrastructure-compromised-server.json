@@ -40,5 +40,6 @@
 		"compromise:webshell",
 		"service:apache",
 		"severity:high"
-	]
+	],
+	"compromise_method": "webshell_deployment"
 }

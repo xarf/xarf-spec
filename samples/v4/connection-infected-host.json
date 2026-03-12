@@ -40,5 +40,6 @@
 		"malware:zeus",
 		"infection:banking_trojan",
 		"c2:active"
-	]
+	],
+	"bot_type": "malicious"
 }

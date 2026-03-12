@@ -46,5 +46,7 @@
 		"scan_type:syn",
 		"target:multi_port",
 		"pattern:systematic"
-	]
+	],
+	"first_seen": "2025-01-11T11:20:00Z",
+	"source_port": 54321
 }

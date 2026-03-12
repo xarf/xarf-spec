@@ -15,7 +15,7 @@
 	"source_identifier": "links-aggregator.example.net",
 	"category": "copyright",
 	"type": "link_site",
-	"evidence_source": "crawler",
+	"evidence_source": "automated_crawl",
 	"infringing_url": "https://links-aggregator.example.net/movie/protected-film-2024",
 	"link_type": "aggregator",
 	"downstream_links": [
@@ -35,5 +35,6 @@
 	"tags": [
 		"copyright:links",
 		"type:aggregator"
-	]
+	],
+	"site_name": "Links Aggregator"
 }

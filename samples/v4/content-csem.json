@@ -18,7 +18,7 @@
 	"url": "https://example.com/illegal-content",
 	"domain": "example.com",
 	"classification": "A1",
-	"detection_method": "hash_match",
+	"detection_method": "ai_detection",
 	"media_type": "image",
 	"ncmec_report_id": "NCMEC-2025-0001234",
 	"file_hash": {
@@ -40,5 +40,6 @@
 	"tags": [
 		"csem:detected",
 		"classification:a1"
-	]
+	],
+	"exploitation_type": "distribution"
 }

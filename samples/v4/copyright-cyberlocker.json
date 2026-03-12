@@ -15,7 +15,7 @@
 	"source_identifier": "file-sharing.example.com",
 	"category": "copyright",
 	"type": "cyberlocker",
-	"evidence_source": "crawler",
+	"evidence_source": "automated_crawl",
 	"infringing_url": "https://file-sharing.example.com/download/movie2024.mp4",
 	"file_size": 4294967296,
 	"work_title": "Protected Movie 2024",
@@ -31,5 +31,6 @@
 	"tags": [
 		"copyright:cyberlocker",
 		"filetype:video"
-	]
+	],
+	"hosting_service": "FileShare Example"
 }

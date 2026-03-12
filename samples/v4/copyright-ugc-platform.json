@@ -15,7 +15,7 @@
 	"source_identifier": "video-platform.example.com",
 	"category": "copyright",
 	"type": "ugc_platform",
-	"evidence_source": "automated_monitoring",
+	"evidence_source": "automated_detection",
 	"infringing_url": "https://video-platform.example.com/watch?v=copyrighted_content",
 	"platform_name": "VideoShare Platform",
 	"uploader_id": "user123456",

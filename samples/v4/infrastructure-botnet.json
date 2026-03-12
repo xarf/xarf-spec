@@ -33,5 +33,6 @@
 		"malware:conficker",
 		"botnet:active",
 		"infection:worm"
-	]
+	],
+	"compromise_evidence": "C2 communication detected via traffic analysis on Conficker channel"
 }
