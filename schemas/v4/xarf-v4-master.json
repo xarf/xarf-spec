@@ -13,44 +13,111 @@
 			"anyOf": [
 				{
 					"properties": {
-						"category": { "const": "messaging" },
-						"type": { "enum": ["spam", "bulk_messaging"] }
+						"category": {
+							"const": "messaging"
+						},
+						"type": {
+							"enum": [
+								"spam",
+								"bulk_messaging"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "connection" },
-						"type": { "enum": ["login_attack", "port_scan", "ddos", "infected_host", "reconnaissance", "scraping", "sql_injection", "vulnerability_scan"] }
+						"category": {
+							"const": "connection"
+						},
+						"type": {
+							"enum": [
+								"login_attack",
+								"port_scan",
+								"ddos",
+								"infected_host",
+								"reconnaissance",
+								"scraping",
+								"sql_injection",
+								"vulnerability_scan"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "vulnerability" },
-						"type": { "enum": ["cve", "open_service", "misconfiguration"] }
+						"category": {
+							"const": "vulnerability"
+						},
+						"type": {
+							"enum": [
+								"cve",
+								"open_service",
+								"misconfiguration"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "reputation" },
-						"type": { "enum": ["blocklist", "threat_intelligence"] }
+						"category": {
+							"const": "reputation"
+						},
+						"type": {
+							"enum": [
+								"blocklist",
+								"threat_intelligence"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "infrastructure" },
-						"type": { "enum": ["botnet", "compromised_server"] }
+						"category": {
+							"const": "infrastructure"
+						},
+						"type": {
+							"enum": [
+								"botnet",
+								"compromised_server"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "content" },
-						"type": { "enum": ["phishing", "malware", "csam", "csem", "exposed_data", "brand_infringement", "fraud", "remote_compromise", "suspicious_registration"] }
+						"category": {
+							"const": "content"
+						},
+						"type": {
+							"enum": [
+								"phishing",
+								"malware",
+								"csam",
+								"csem",
+								"exposed_data",
+								"brand_infringement",
+								"fraud",
+								"remote_compromise",
+								"suspicious_registration"
+							]
+						}
 					}
 				},
 				{
 					"properties": {
-						"category": { "const": "copyright" },
-						"type": { "enum": ["copyright", "p2p", "cyberlocker", "ugc_platform", "link_site", "usenet"] }
+						"category": {
+							"const": "copyright"
+						},
+						"type": {
+							"enum": [
+								"copyright",
+								"p2p",
+								"cyberlocker",
+								"ugc_platform",
+								"link_site",
+								"usenet"
+							]
+						}
 					}
 				}
 			]
@@ -58,8 +125,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "messaging" },
-					"type": { "const": "spam" }
+					"category": {
+						"const": "messaging"
+					},
+					"type": {
+						"const": "spam"
+					}
 				}
 			},
 			"then": {
@@ -69,8 +140,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "messaging" },
-					"type": { "const": "bulk_messaging" }
+					"category": {
+						"const": "messaging"
+					},
+					"type": {
+						"const": "bulk_messaging"
+					}
 				}
 			},
 			"then": {
@@ -80,8 +155,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "login_attack" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "login_attack"
+					}
 				}
 			},
 			"then": {
@@ -91,8 +170,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "port_scan" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "port_scan"
+					}
 				}
 			},
 			"then": {
@@ -102,8 +185,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "ddos" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "ddos"
+					}
 				}
 			},
 			"then": {
@@ -113,8 +200,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "infected_host" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "infected_host"
+					}
 				}
 			},
 			"then": {
@@ -124,8 +215,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "reconnaissance" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "reconnaissance"
+					}
 				}
 			},
 			"then": {
@@ -135,8 +230,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "scraping" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "scraping"
+					}
 				}
 			},
 			"then": {
@@ -146,8 +245,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "sql_injection" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "sql_injection"
+					}
 				}
 			},
 			"then": {
@@ -157,8 +260,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "connection" },
-					"type": { "const": "vulnerability_scan" }
+					"category": {
+						"const": "connection"
+					},
+					"type": {
+						"const": "vulnerability_scan"
+					}
 				}
 			},
 			"then": {
@@ -168,8 +275,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "vulnerability" },
-					"type": { "const": "cve" }
+					"category": {
+						"const": "vulnerability"
+					},
+					"type": {
+						"const": "cve"
+					}
 				}
 			},
 			"then": {
@@ -179,8 +290,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "vulnerability" },
-					"type": { "const": "open_service" }
+					"category": {
+						"const": "vulnerability"
+					},
+					"type": {
+						"const": "open_service"
+					}
 				}
 			},
 			"then": {
@@ -190,8 +305,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "vulnerability" },
-					"type": { "const": "misconfiguration" }
+					"category": {
+						"const": "vulnerability"
+					},
+					"type": {
+						"const": "misconfiguration"
+					}
 				}
 			},
 			"then": {
@@ -201,8 +320,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "reputation" },
-					"type": { "const": "blocklist" }
+					"category": {
+						"const": "reputation"
+					},
+					"type": {
+						"const": "blocklist"
+					}
 				}
 			},
 			"then": {
@@ -212,8 +335,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "reputation" },
-					"type": { "const": "threat_intelligence" }
+					"category": {
+						"const": "reputation"
+					},
+					"type": {
+						"const": "threat_intelligence"
+					}
 				}
 			},
 			"then": {
@@ -223,8 +350,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "infrastructure" },
-					"type": { "const": "botnet" }
+					"category": {
+						"const": "infrastructure"
+					},
+					"type": {
+						"const": "botnet"
+					}
 				}
 			},
 			"then": {
@@ -234,8 +365,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "infrastructure" },
-					"type": { "const": "compromised_server" }
+					"category": {
+						"const": "infrastructure"
+					},
+					"type": {
+						"const": "compromised_server"
+					}
 				}
 			},
 			"then": {
@@ -245,8 +380,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "phishing" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "phishing"
+					}
 				}
 			},
 			"then": {
@@ -256,8 +395,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "malware" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "malware"
+					}
 				}
 			},
 			"then": {
@@ -267,8 +410,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "csam" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "csam"
+					}
 				}
 			},
 			"then": {
@@ -278,8 +425,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "csem" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "csem"
+					}
 				}
 			},
 			"then": {
@@ -289,8 +440,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "exposed_data" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "exposed_data"
+					}
 				}
 			},
 			"then": {
@@ -300,8 +455,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "brand_infringement" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "brand_infringement"
+					}
 				}
 			},
 			"then": {
@@ -311,8 +470,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "fraud" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "fraud"
+					}
 				}
 			},
 			"then": {
@@ -322,8 +485,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "remote_compromise" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "remote_compromise"
+					}
 				}
 			},
 			"then": {
@@ -333,8 +500,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "content" },
-					"type": { "const": "suspicious_registration" }
+					"category": {
+						"const": "content"
+					},
+					"type": {
+						"const": "suspicious_registration"
+					}
 				}
 			},
 			"then": {
@@ -344,8 +515,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "copyright" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "copyright"
+					}
 				}
 			},
 			"then": {
@@ -355,8 +530,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "p2p" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "p2p"
+					}
 				}
 			},
 			"then": {
@@ -366,8 +545,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "cyberlocker" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "cyberlocker"
+					}
 				}
 			},
 			"then": {
@@ -377,8 +560,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "ugc_platform" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "ugc_platform"
+					}
 				}
 			},
 			"then": {
@@ -388,8 +575,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "link_site" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "link_site"
+					}
 				}
 			},
 			"then": {
@@ -399,8 +590,12 @@
 		{
 			"if": {
 				"properties": {
-					"category": { "const": "copyright" },
-					"type": { "const": "usenet" }
+					"category": {
+						"const": "copyright"
+					},
+					"type": {
+						"const": "usenet"
+					}
 				}
 			},
 			"then": {
