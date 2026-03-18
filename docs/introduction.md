@@ -32,7 +32,7 @@ XARF v4 addresses these challenges with:
 
 | **v3 Approach** | **v4 Approach** | **Benefit** |
 |-----------------|-----------------|-------------|
-| Simple Types | Type-Specific Architecture (22 types) | Granular categorization |
+| Simple Types | Type-Specific Architecture (32 types) | Granular categorization |
 | Static Schema | Type-Specific Validation | Flexible yet structured |
 | Basic Fields | Rich Attribution & Tags | Better context and automation |
 | Email-Only | Multi-Transport (email, API, streaming) | Real-time processing |
@@ -43,7 +43,7 @@ XARF v4 addresses these challenges with:
 XARF v4 is built around the principle: **One incident = One report**, sent immediately when detected.
 
 - **No bundling** multiple incidents together
-- **No daily batching** or delayed reporting  
+- **No daily batching** or delayed reporting
 - **Exception**: Threshold-based reporting (e.g., wait for >5 login attempts before reporting brute force)
 - **Goal**: Minimize time between abuse detection and ISP notification
 
@@ -87,7 +87,6 @@ Every XARF v4 report includes actionable evidence:
 
 - **Structured evidence** with MIME types and descriptions
 - **Base64 encoding** for binary content (screenshots, files)
-- **Size limits** (5MB per item, 15MB total per report)
 - **Hash verification** for evidence integrity
 - **Context metadata** (timestamps, source quality indicators)
 
@@ -139,7 +138,7 @@ XARF v4 Report → Parser → Ticket System → Automated Response
 
 **Integration examples:**
 - fail2ban XARF output plugin
-- Log analyzer XARF generators  
+- Log analyzer XARF generators
 - Security tool report export
 - Custom abuse response systems
 
@@ -162,7 +161,7 @@ XARF v4 Report → Parser → Ticket System → Automated Response
 
 Review sample reports for your use case:
 - **Spam reports**: `samples/v4/messaging-spam.json`
-- **Phishing reports**: `samples/v4/content-phishing.json` 
+- **Phishing reports**: `samples/v4/content-phishing.json`
 - **DDoS reports**: `samples/v4/connection-ddos.json`
 
 All samples available in the [Technical Specification](./specification.md#sample-reports).
@@ -200,7 +199,7 @@ See the [Implementation Guide](./implementation-guide.md) for:
   "timestamp": "2024-01-01T12:00:00Z",
   "reporter": {
     "org": "Example Security",
-    "contact": "abuse@example.com", 
+    "contact": "abuse@example.com",
     "type": "automated"
   },
   "source_identifier": "192.0.2.1",
@@ -228,19 +227,6 @@ XARF v4 maintains complete compatibility with v3:
 - **Migration tools**: Batch conversion utilities for existing report databases
 - **Gradual adoption**: No forced migration timeline
 
-### Version Evolution
-
-```
-v4.0.0: Initial release with messaging category
-v4.1.0: Add connection category (login attacks, DDoS)
-v4.2.0: Add content category (phishing, malware)
-v4.3.0: Add infrastructure category (botnets, C2)
-v4.4.0: Add copyright category (DMCA replacement)
-v4.5.0: Add vulnerability category (security disclosures)
-v4.6.0: Add reputation category (threat intelligence)
-v5.0.0: Breaking changes (years in future)
-```
-
 ## Next Steps
 
 ### For Technical Implementation
@@ -254,7 +240,7 @@ v5.0.0: Breaking changes (years in future)
 
 ### For Project Management & Operations
 
-**→ Read the [Implementation Guide](./implementation-guide.md)**  
+**→ Read the [Implementation Guide](./implementation-guide.md)**
 - Project roadmap and timelines
 - Community governance and contribution
 - Integration patterns and best practices

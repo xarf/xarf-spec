@@ -38,7 +38,7 @@ For a high-level introduction to XARF v4, see the [Introduction & Overview](./in
 ### Validation Approach
 
 - **JSON Schema based** - Formal validation using JSON Schema Draft 7
-- **Conditional validation** - Type-specific requirements based on category/type combinations  
+- **Conditional validation** - Type-specific requirements based on category/type combinations
 - **Extensible design** - Forward compatibility with unknown fields
 - **Multi-level validation** - Strict, permissive, and legacy modes
 
@@ -298,7 +298,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `spamtrap`, `user_complaint`, `automated_filter`, `honeypot`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Condition |
 |-------|----------|------|-------------|-----------|
@@ -399,7 +399,7 @@ All XARF v4 reports share this common structure:
 - PNG format preferred for web content screenshots
 - Include both screenshot and HTML source when possible
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Use Case |
 |-------|----------|------|-------------|----------|
@@ -437,7 +437,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `automated_scan`, `rights_holder_report`, `crawler`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Context |
 |-------|----------|------|-------------|---------|
@@ -459,7 +459,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `honeypot`, `firewall_logs`, `ids_detection`, `flow_analysis`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Context |
 |-------|----------|------|-------------|---------|
@@ -483,7 +483,7 @@ All XARF v4 reports share this common structure:
       "description": "Number of packets sent"
     },
     "byte_count": {
-      "type": "integer", 
+      "type": "integer",
       "minimum": 0,
       "description": "Number of bytes transferred"
     }
@@ -500,7 +500,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `vulnerability_scan`, `researcher_analysis`, `automated_discovery`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Context |
 |-------|----------|------|-------------|---------|
@@ -538,7 +538,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `researcher_analysis`, `automated_discovery`, `traffic_analysis`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Context |
 |-------|----------|------|-------------|---------|
@@ -559,7 +559,7 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `threat_intelligence`, `automated_analysis`, `researcher_analysis`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
 | Field | Category | Type | Description | Context |
 |-------|----------|------|-------------|---------|
@@ -755,14 +755,14 @@ These fields MAY be included for additional context:
 {
   "evidence": [
     {
-      "content_type": "image/png", 
+      "content_type": "image/png",
       "description": "Screenshot of phishing page",
       "payload": "base64-encoded-screenshot",
       "hash": "sha256:abcd1234..."
     },
     {
       "content_type": "text/html",
-      "description": "HTML source of phishing page", 
+      "description": "HTML source of phishing page",
       "payload": "base64-encoded-html"
     }
   ]
@@ -805,7 +805,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
     "ReporterOrgEmail": "abuse@example.com"
   },
   "Report": {
-    "ReportClass": "Activity", 
+    "ReportClass": "Activity",
     "ReportType": "Spam",
     "SourceIp": "192.0.2.1",
     "SourcePort": 25,
@@ -829,7 +829,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
   "source_identifier": "192.0.2.1",
   "source_port": 25,
   "category": "messaging",
-  "type": "spam", 
+  "type": "spam",
   "evidence_source": "unknown",
   "protocol": "smtp",
   "smtp_from": "spam@example.com",
@@ -842,7 +842,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
 
 | v3 Field | v4 Field | Conversion Notes |
 |----------|----------|------------------|
-| `Version` | `xarf_version` | Set to "4.0.0", add `legacy_version: "3"` |
+| `Version` | `xarf_version` | Set to "4.x.x", add `legacy_version: "3"` |
 | `ReporterInfo.ReporterOrg` | `reporter.org` | Direct mapping |
 | `ReporterInfo.ReporterOrgEmail` | `reporter.contact` | Direct mapping |
 | N/A | `reporter.type` | Set to "unknown" for v3 |
@@ -1254,7 +1254,7 @@ The `_internal` field provides a completely flexible container for operational m
 ```json
 {
   "_internal": {
-    "threat_id": "THR-2024-001234", 
+    "threat_id": "THR-2024-001234",
     "honeypot_source": "trap_bank_001",
     "campaign_cluster": "fake_bank_wave_2024",
     "ml_confidence": 0.94,
@@ -1294,7 +1294,7 @@ The `_internal` field provides a completely flexible container for operational m
 Organizations typically use internal metadata for:
 
 - **Workflow tracking**: Status, assignments, deadlines, escalations
-- **Integration data**: Ticket IDs, case references, external system links  
+- **Integration data**: Ticket IDs, case references, external system links
 - **Quality metrics**: Confidence scores, validation flags, review requirements
 - **Business data**: Customer info, billing, SLA tracking, priority levels
 - **Technical metadata**: Processing times, system versions, batch IDs
