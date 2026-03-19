@@ -4,13 +4,13 @@
 	"timestamp": "2025-01-11T15:57:57Z",
 	"reporter": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org",
-		"domain": "serversec.org"
+		"contact": "incidents@server-monitor.example",
+		"domain": "server-monitor.example"
 	},
 	"sender": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org",
-		"domain": "serversec.org"
+		"contact": "incidents@server-monitor.example",
+		"domain": "server-monitor.example"
 	},
 	"source_identifier": "203.0.113.150",
 	"source_port": 80,

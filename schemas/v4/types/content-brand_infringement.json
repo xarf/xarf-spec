@@ -142,16 +142,16 @@
 			"source_identifier": "203.0.113.77",
 			"category": "content",
 			"type": "brand_infringement",
-			"url": "https://amaz0n-deals.example.com",
+			"url": "https://sh0p-deals.example.com",
 			"infringement_type": "typosquatting",
-			"legitimate_site": "https://www.amazon.com",
+			"legitimate_site": "https://www.shop.example",
 			"similarity_score": 0.87,
 			"infringing_elements": [
 				"logo",
 				"brand_name",
 				"color_scheme"
 			],
-			"target_brand": "Amazon",
+			"target_brand": "Major Retailer",
 			"evidence": [
 				{
 					"content_type": "image/png",

@@ -116,13 +116,13 @@
 			"timestamp": "2024-01-15T16:45:10Z",
 			"reporter": {
 				"org": "Email Service Provider",
-				"contact": "abuse@esp-provider.com",
-				"domain": "esp-provider.com"
+				"contact": "abuse@email-provider.example",
+				"domain": "email-provider.example"
 			},
 			"sender": {
 				"org": "Email Service Provider",
-				"contact": "abuse@esp-provider.com",
-				"domain": "esp-provider.com"
+				"contact": "abuse@email-provider.example",
+				"domain": "email-provider.example"
 			},
 			"source_identifier": "192.0.2.200",
 			"category": "messaging",

@@ -4,13 +4,13 @@
 	"timestamp": "2025-01-11T10:51:30Z",
 	"reporter": {
 		"org": "Threat Intelligence Consortium",
-		"contact": "intel@threatconsortium.org",
-		"domain": "threatconsortium.org"
+		"contact": "intel@threat-intel.example",
+		"domain": "threat-intel.example"
 	},
 	"sender": {
 		"org": "Threat Intelligence Consortium",
-		"contact": "intel@threatconsortium.org",
-		"domain": "threatconsortium.org"
+		"contact": "intel@threat-intel.example",
+		"domain": "threat-intel.example"
 	},
 	"source_identifier": "203.0.113.200",
 	"category": "reputation",

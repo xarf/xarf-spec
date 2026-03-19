@@ -38,5 +38,5 @@
 		"infringement:counterfeit",
 		"monetization:detected"
 	],
-	"legitimate_site": "https://www.apple.com"
+	"legitimate_site": "https://www.brand.example"
 }

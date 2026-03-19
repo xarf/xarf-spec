@@ -210,13 +210,13 @@
 			"timestamp": "2024-01-15T20:10:30Z",
 			"reporter": {
 				"org": "Digital Rights Enforcement",
-				"contact": "enforcement@digitalrights.org",
-				"domain": "digitalrights.org"
+				"contact": "enforcement@digital-rights.example",
+				"domain": "digital-rights.example"
 			},
 			"sender": {
 				"org": "Digital Rights Enforcement",
-				"contact": "enforcement@digitalrights.org",
-				"domain": "digitalrights.org"
+				"contact": "enforcement@digital-rights.example",
+				"domain": "digital-rights.example"
 			},
 			"source_identifier": "torrent-indexer.example",
 			"category": "copyright",

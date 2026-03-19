@@ -224,13 +224,13 @@
 			"timestamp": "2024-01-15T07:20:45Z",
 			"reporter": {
 				"org": "Usenet Monitoring Service",
-				"contact": "reports@usenetmonitor.org",
-				"domain": "usenetmonitor.org"
+				"contact": "reports@usenet-monitor.example",
+				"domain": "usenet-monitor.example"
 			},
 			"sender": {
 				"org": "Usenet Monitoring Service",
-				"contact": "reports@usenetmonitor.org",
-				"domain": "usenetmonitor.org"
+				"contact": "reports@usenet-monitor.example",
+				"domain": "usenet-monitor.example"
 			},
 			"source_identifier": "news.example-provider.com",
 			"category": "copyright",
@@ -241,9 +241,9 @@
 			"work_category": "movie",
 			"evidence_source": "automated_monitoring",
 			"message_info": {
-				"message_id": "<abc123def456@news.provider.com>",
+				"message_id": "<abc123def456@news.provider.example.com>",
 				"subject": "[1/50] Latest.Movie.2024.1080p.BluRay.x264 - File 01 of 50",
-				"from_header": "movieposter@anon.com (MoviePoster)",
+				"from_header": "movieposter@anon.example.com (MoviePoster)",
 				"posting_date": "2024-01-14T05:30:00Z",
 				"part_number": 1,
 				"total_parts": 50,

@@ -161,13 +161,13 @@
 			"timestamp": "2024-01-15T16:55:42Z",
 			"reporter": {
 				"org": "DDoS Protection Service",
-				"contact": "ddos@protectionservice.net",
-				"domain": "protectionservice.net"
+				"contact": "ddos@ddos-monitor.example",
+				"domain": "ddos-monitor.example"
 			},
 			"sender": {
 				"org": "DDoS Protection Service",
-				"contact": "ddos@protectionservice.net",
-				"domain": "protectionservice.net"
+				"contact": "ddos@ddos-monitor.example",
+				"domain": "ddos-monitor.example"
 			},
 			"source_identifier": "192.0.2.155",
 			"category": "connection",

@@ -122,7 +122,7 @@
 			"type": "phishing",
 			"url": "https://secure-banking-login.example.com/auth",
 			"target_brand": "Major Bank Corp",
-			"cloned_site": "https://www.majorbank.com",
+			"cloned_site": "https://www.bank.example",
 			"credential_fields": [
 				"username",
 				"password",

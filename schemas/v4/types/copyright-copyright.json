@@ -52,7 +52,7 @@
 					"format": "uri",
 					"description": "OPTIONAL: URL of the legitimate/original content",
 					"examples": [
-						"https://www.disney.com/movies/avengers-endgame"
+						"https://www.studio.example/movies/blockbuster-film"
 					]
 				},
 				"infringement_type": {

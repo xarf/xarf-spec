@@ -179,13 +179,13 @@
 			"timestamp": "2024-01-15T11:15:20Z",
 			"reporter": {
 				"org": "Anti-Piracy Coalition",
-				"contact": "takedowns@antipiracy.org",
-				"domain": "antipiracy.org"
+				"contact": "takedowns@anti-piracy.example",
+				"domain": "anti-piracy.example"
 			},
 			"sender": {
 				"org": "Anti-Piracy Coalition",
-				"contact": "takedowns@antipiracy.org",
-				"domain": "antipiracy.org"
+				"contact": "takedowns@anti-piracy.example",
+				"domain": "anti-piracy.example"
 			},
 			"source_identifier": "cyberlocker-service.example",
 			"category": "copyright",

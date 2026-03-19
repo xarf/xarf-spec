@@ -3,14 +3,14 @@
 	"report_id": "1a5ec293-0849-40a4-9eba-d5926262ff05",
 	"timestamp": "2025-01-11T15:15:24Z",
 	"reporter": {
-		"org": "YBrandProtection",
-		"contact": "takedown@ybrandprotection.com",
-		"domain": "ybrandprotection.com"
+		"org": "Brand Protection Service",
+		"contact": "takedown@brand-protect.example",
+		"domain": "brand-protect.example"
 	},
 	"sender": {
-		"org": "YBrandProtection",
-		"contact": "takedown@ybrandprotection.com",
-		"domain": "ybrandprotection.com"
+		"org": "Brand Protection Service",
+		"contact": "takedown@brand-protect.example",
+		"domain": "brand-protect.example"
 	},
 	"source_identifier": "203.0.113.45",
 	"category": "content",
