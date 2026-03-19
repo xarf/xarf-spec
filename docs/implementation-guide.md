@@ -309,3 +309,31 @@ Machine-readable test definitions with performance targets and compatibility req
 | Validation modes | Standard and strict behavior must differ as specified |
 
 Implementations that cannot pass the shared test suite should not claim XARF v4 conformance.
+
+---
+
+## Security Considerations
+
+### For Parser Developers
+
+1. **Input Validation**: Validate all fields against schema
+2. **Size Limits**: Enforce maximum sizes to prevent DoS
+3. **Type Safety**: Use strong typing where possible
+4. **Error Handling**: Don't expose sensitive information in errors
+5. **Sanitization**: Sanitize all user-provided data
+
+### For Report Generators
+
+1. **Data Privacy**: Don't include PII unless necessary
+2. **Evidence Selection**: Only include relevant evidence
+3. **Size Management**: Compress large evidence items
+4. **Timestamp Accuracy**: Use correct timezone information
+5. **Field Validation**: Validate before sending
+
+### For Report Processors
+
+1. **Trust Boundaries**: Treat incoming reports as untrusted
+2. **Validation**: Validate against specification strictly
+3. **Rate Limiting**: Implement rate limits for report processing
+4. **Storage**: Secure storage for sensitive report data
+5. **Access Control**: Restrict access to report data

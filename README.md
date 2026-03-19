@@ -6,7 +6,7 @@ The eXtended Abuse Reporting Format (XARF) is a standard for reporting abuse inc
 
 - **[Introduction & Overview](docs/introduction.md)** - High-level overview and use cases
 - **[Technical Specification](docs/specification.md)** - Complete technical reference
-- **[Implementation Guide](docs/implementation-guide.md)** - Deployment and project management
+- **[Implementer's Guide](docs/implementation-guide.md)** - Conformance guide for parser, validator, and generator authors
 - **[JSON Schemas](schemas/)** - Formal validation schemas for all XARF v4 categories and event types
 - **[Sample Reports](samples/)** - Sample reports organized for all XARF v4 categories and event types
 

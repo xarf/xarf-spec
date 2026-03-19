@@ -139,7 +139,6 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 - **GitHub Discussions**: For questions and brainstorming
 - **GitHub Issues**: For specific bugs or feature requests
-- **Email**: contact@xarf.org for private matters
 
 ## 🏆 Recognition
 
