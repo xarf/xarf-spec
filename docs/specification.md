@@ -658,7 +658,7 @@ Phase 4: v4-only processing
 
 ## Sample Reports
 
-Complete sample reports for all 33 valid category/type combinations are in [`samples/v4/`](../samples/v4/). Each schema file also contains an inlined example.
+Complete sample reports for all 32 valid category/type combinations are in [`samples/v4/`](../samples/v4/). Each schema file also contains an inlined example.
 
 ## Internal Metadata Usage
 

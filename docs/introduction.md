@@ -4,7 +4,7 @@
 
 XARF (eXtended Abuse Reporting Format) v4 is an open JSON standard for reporting internet abuse incidents. It is designed for **real-time operational response** — helping ISPs, hosting providers, and network operators quickly understand and act on abuse reports, rather than serving as a research or analysis format.
 
-XARF v4 organizes abuse into seven categories (`messaging`, `connection`, `infrastructure`, `content`, `copyright`, `vulnerability`, `reputation`) with 33 specific types across them, each with its own validated schema.
+XARF v4 organizes abuse into seven categories (`messaging`, `connection`, `infrastructure`, `content`, `copyright`, `vulnerability`, `reputation`) with 32 specific types across them, each with its own validated schema.
 
 ## Why XARF v4 Matters
 
@@ -30,7 +30,7 @@ XARF v4 addresses these challenges with:
 
 | **v3 Approach** | **v4 Approach** | **Benefit** |
 |-----------------|-----------------|-------------|
-| Simple Types | Type-Specific Architecture (33 types) | Granular categorization |
+| Simple Types | Type-Specific Architecture (32 types) | Granular categorization |
 | Static Schema | Type-Specific Validation | Flexible yet structured |
 | Basic Fields | Rich Attribution & Tags | Better context and automation |
 | Email-Only | Multi-Transport (email, API, streaming) | Real-time processing |
@@ -94,7 +94,7 @@ XARF v4 Report → Parser → Ticket System → Automated Response
 
 **→ Read the [Technical Specification](./specification.md)**
 - Base report structure and field definitions
-- All 33 category/type schemas with required, recommended, and optional fields
+- All 32 category/type schemas with required, recommended, and optional fields
 - Evidence format, backwards compatibility, and internal metadata
 
 ### Building a Parser, Validator, or Generator

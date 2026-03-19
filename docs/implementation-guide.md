@@ -27,7 +27,7 @@ Every XARF v4 report validates against two schemas in sequence:
 
 The `category` and `type` fields together determine which type schema applies. The schema file is always `schemas/v4/types/<category>-<type>.json`.
 
-All 33 valid combinations:
+All 32 valid combinations:
 
 | Category | Types |
 |----------|-------|
@@ -109,7 +109,7 @@ Validate in order:
 
 1. Parse JSON. On failure, return a structured error with position and reason.
 2. Validate against `xarf-core.json`. Collect all errors before returning — do not stop at the first failure.
-3. Extract `category` and `type`. Reject if the combination is not in the valid set of 33.
+3. Extract `category` and `type`. Reject if the combination is not in the valid set of 32.
 4. Resolve the type schema path: `schemas/v4/types/<category>-<type>.json`.
 5. Validate against the type schema.
 
@@ -285,7 +285,7 @@ v3 `ReportType` values do not map 1:1 to v4 category/type combinations. Implemen
 | Memory usage | Proportional to evidence size only |
 | Thread safety | Stateless parser design required |
 
-Lazy schema loading (load on first use, cache thereafter) is the recommended approach for environments with constrained startup memory. All 33 type schemas need not be loaded eagerly.
+Lazy schema loading (load on first use, cache thereafter) is the recommended approach for environments with constrained startup memory. All 32 type schemas need not be loaded eagerly.
 
 ---
 
@@ -302,7 +302,7 @@ Machine-readable test definitions with performance targets and compatibility req
 
 | Area | Requirement |
 |------|-------------|
-| Valid category/type combinations | All 33 must parse successfully |
+| Valid category/type combinations | All 32 must parse successfully |
 | v3 → v4 conversion | Common types must convert correctly |
 | Invalid report rejection | All samples in `samples/invalid/` must be rejected with appropriate errors |
 | Evidence edge cases | Max size enforcement, invalid base64, hash mismatch, hash verification success |
