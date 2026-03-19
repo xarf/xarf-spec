@@ -9,13 +9,12 @@
 6. [Backwards Compatibility](#backwards-compatibility)
 7. [Sample Reports](#sample-reports)
 8. [Internal Metadata Usage](#internal-metadata-usage)
-9. [Implementation Requirements](#implementation-requirements)
 
 ## Overview
 
 This document provides the complete technical specification for XARF v4 schema validation, field definitions, and format requirements. It serves as the authoritative reference for implementing XARF v4 parsers, validators, and generators.
 
-For a high-level introduction to XARF v4, see the [Introduction & Overview](./introduction.md). For implementation guidance and project management, see the [Implementation Guide](./implementation-guide.md).
+For a high-level introduction to XARF v4, see the [Introduction & Overview](./introduction.md). For guidance on building parsers, validators, and generators against this spec, see the [Implementer's Guide](./implementation-guide.md).
 
 ### Design Principles
 
@@ -36,10 +35,10 @@ For a high-level introduction to XARF v4, see the [Introduction & Overview](./in
 
 ### Validation Approach
 
-- **JSON Schema based** - Formal validation using JSON Schema Draft 7
+- **JSON Schema based** - Formal validation using JSON Schema Draft 2020-12
 - **Conditional validation** - Type-specific requirements based on category/type combinations
-- **Extensible design** - Forward compatibility with unknown fields
-- **Multi-level validation** - Strict, permissive, and legacy modes
+- **Extensible design** - `additionalProperties: true` at the report level permits unknown fields for forward compatibility
+- **Multi-level validation** - Standard and strict modes
 
 ## Schema Architecture
 
@@ -741,80 +740,4 @@ Organizations typically use internal metadata for:
 - Customer data in internal fields must follow privacy regulations
 - Access controls should apply to internal metadata viewing
 
-## Implementation Requirements
-
-### Parser Requirements
-
-XARF v4 parsers MUST implement:
-
-1. **Format Detection**
-   - Detect v3 vs v4 format automatically
-   - Handle malformed JSON gracefully
-   - Provide clear error messages for invalid input
-
-2. **Schema Validation**
-   - Validate against complete JSON schema
-   - Support all 22 types and their specific requirements
-   - Implement conditional validation based on category/type
-   - Handle unknown fields according to validation mode
-
-3. **Backwards Compatibility**
-   - Convert v3 reports to v4 format automatically
-   - Preserve original v3 data when possible
-   - Generate appropriate default values for missing v4 fields
-   - Add `legacy_version` metadata for tracking
-
-4. **Evidence Processing**
-   - Validate base64 encoding
-   - Enforce size limits (5MB per item, 15MB total)
-   - Verify content-type headers
-   - Support hash verification when provided
-
-5. **Error Handling**
-   - Provide detailed validation error messages
-   - Include field path information for errors
-   - Support multiple validation modes (strict/permissive/legacy)
-   - Return structured error responses
-
-### Generator Requirements
-
-XARF v4 generators MUST implement:
-
-1. **Report Construction**
-   - Generate valid UUID v4 for report_id
-   - Set appropriate timestamp in ISO 8601 format
-   - Validate all required fields for chosen category/type
-   - Support all evidence content types
-
-2. **Evidence Handling**
-   - Proper base64 encoding of all payloads
-   - Generate integrity hashes when requested
-   - Enforce size limits with clear error messages
-   - Support multiple evidence items per report
-
-3. **Validation**
-   - Self-validate generated reports
-   - Ensure compliance with category-specific schemas
-   - Check tag format and namespace compliance
-   - Verify all required fields are present
-
-### Performance Requirements
-
-**Parsing Performance:**
-- Sub-millisecond parsing for typical reports (< 1MB)
-- Sub-second parsing for maximum size reports (15MB)
-- Memory usage proportional to evidence size only
-- Support for streaming large evidence payloads
-
-**Memory Usage:**
-- Minimal memory overhead beyond evidence payload size
-- Efficient base64 decoding without intermediate copies
-- Configurable memory limits for protection
-- Garbage collection friendly object structures
-
-**Scalability:**
-- Thread-safe parsing operations
-- Support for concurrent processing
-- Stateless parser design for easy scaling
-- Minimal startup overhead for CLI tools
 
