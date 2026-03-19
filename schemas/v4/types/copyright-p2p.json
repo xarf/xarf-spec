@@ -172,13 +172,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "p2p-789a1234-b567-89c0-d123-456789abcdef",
+			"xarf_version": "4.2.0",
+			"report_id": "789a1234-b567-89c0-d123-456789abcdef",
 			"timestamp": "2024-01-15T18:30:45Z",
 			"reporter": {
 				"org": "Content Protection Agency",
 				"contact": "reports@cpa.org",
-				"type": "automated"
+				"domain": "cpa.org"
+			},
+			"sender": {
+				"org": "Content Protection Agency",
+				"contact": "reports@cpa.org",
+				"domain": "cpa.org"
 			},
 			"source_identifier": "203.0.113.150",
 			"source_port": 6881,

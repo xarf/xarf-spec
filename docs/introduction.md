@@ -194,7 +194,7 @@ See the [Implementation Guide](./implementation-guide.md) for:
 
 ```json
 {
-  "xarf_version": "4.0.0",
+  "xarf_version": "4.2.0",
   "report_id": "uuid-v4",
   "timestamp": "2024-01-01T12:00:00Z",
   "reporter": {

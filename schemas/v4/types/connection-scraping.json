@@ -147,13 +147,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "scrape-2025-001",
+			"xarf_version": "4.2.0",
+			"report_id": "a2b3c4d5-e6f7-8901-abcd-ef1234567890",
 			"timestamp": "2025-01-15T14:00:00Z",
 			"reporter": {
 				"org": "Website Protection Service",
 				"contact": "abuse@hosting.example",
-				"type": "automated"
+				"domain": "hosting.example"
+			},
+			"sender": {
+				"org": "Website Protection Service",
+				"contact": "abuse@hosting.example",
+				"domain": "hosting.example"
 			},
 			"source_identifier": "192.0.2.150",
 			"category": "connection",

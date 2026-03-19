@@ -219,13 +219,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "usenet-345d6789-e012-34f5-g678-901234567890",
+			"xarf_version": "4.2.0",
+			"report_id": "345d6789-e012-34f5-a678-901234567890",
 			"timestamp": "2024-01-15T07:20:45Z",
 			"reporter": {
 				"org": "Usenet Monitoring Service",
 				"contact": "reports@usenetmonitor.org",
-				"type": "automated"
+				"domain": "usenetmonitor.org"
+			},
+			"sender": {
+				"org": "Usenet Monitoring Service",
+				"contact": "reports@usenetmonitor.org",
+				"domain": "usenetmonitor.org"
 			},
 			"source_identifier": "news.example-provider.com",
 			"category": "copyright",

@@ -109,13 +109,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
+			"xarf_version": "4.2.0",
 			"report_id": "550e8400-e29b-41d4-a716-446655440000",
 			"timestamp": "2025-01-15T10:30:00Z",
 			"reporter": {
 				"org": "Anti-Fraud Coalition",
 				"contact": "reports@antifraud.example",
-				"type": "automated"
+				"domain": "antifraud.example"
+			},
+			"sender": {
+				"org": "Anti-Fraud Coalition",
+				"contact": "reports@antifraud.example",
+				"domain": "antifraud.example"
 			},
 			"source_identifier": "198.51.100.45",
 			"category": "content",

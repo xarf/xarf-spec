@@ -127,13 +127,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "csem-2025-grooming-001",
+			"xarf_version": "4.2.0",
+			"report_id": "a8b9c0d1-e2f3-4567-abcd-ef0123456789",
 			"timestamp": "2025-01-20T14:20:00Z",
 			"reporter": {
 				"org": "Platform Safety Team",
 				"contact": "safety@platform.example",
-				"type": "manual"
+				"domain": "platform.example"
+			},
+			"sender": {
+				"org": "Platform Safety Team",
+				"contact": "safety@platform.example",
+				"domain": "platform.example"
 			},
 			"source_identifier": "203.0.113.55",
 			"category": "content",

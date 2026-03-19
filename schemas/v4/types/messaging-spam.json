@@ -164,13 +164,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "spam-123e4567-e89b-12d3-a456-426614174000",
+			"xarf_version": "4.2.0",
+			"report_id": "123e4567-e89b-12d3-a456-426614174000",
 			"timestamp": "2024-01-15T14:30:25Z",
 			"reporter": {
 				"org": "SpamCop",
 				"contact": "reports@spamcop.net",
-				"type": "automated"
+				"domain": "spamcop.net"
+			},
+			"sender": {
+				"org": "SpamCop",
+				"contact": "reports@spamcop.net",
+				"domain": "spamcop.net"
 			},
 			"source_identifier": "192.0.2.123",
 			"source_port": 25,

@@ -193,13 +193,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
+			"xarf_version": "4.2.0",
 			"report_id": "d4e5f6a7-b8c9-0123-def4-567890abcdef",
 			"timestamp": "2025-01-15T11:30:00Z",
 			"reporter": {
 				"org": "Web Security Scanner",
 				"contact": "abuse@websecscanner.example",
-				"type": "automated"
+				"domain": "websecscanner.example"
+			},
+			"sender": {
+				"org": "Web Security Scanner",
+				"contact": "abuse@websecscanner.example",
+				"domain": "websecscanner.example"
 			},
 			"source_identifier": "192.0.2.150",
 			"category": "content",
