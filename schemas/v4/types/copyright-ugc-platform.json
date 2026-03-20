@@ -224,13 +224,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "ugc-789c0123-d456-78e9-f012-345678901234",
+			"xarf_version": "4.2.0",
+			"report_id": "789c0123-d456-78e9-f012-345678901234",
 			"timestamp": "2024-01-15T13:45:15Z",
 			"reporter": {
 				"org": "Music Rights Management",
-				"contact": "copyright@musicrights.org",
-				"type": "automated"
+				"contact": "copyright@music-rights.example",
+				"domain": "music-rights.example"
+			},
+			"sender": {
+				"org": "Music Rights Management",
+				"contact": "copyright@music-rights.example",
+				"domain": "music-rights.example"
 			},
 			"source_identifier": "video-platform.example",
 			"category": "copyright",

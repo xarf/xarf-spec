@@ -74,17 +74,6 @@ We especially welcome contributions in these areas:
 - Include **code examples** where helpful
 - Use **active voice** when possible
 
-### Sample Data
-```json
-{
-  "comment": "Brief explanation of the abuse scenario",
-  "xarf_version": "4.0.0",
-  "category": "messaging",
-  "type": "spam",
-  // ... rest of sample
-}
-```
-
 ### Commit Messages
 - Use **imperative mood** ("Add new phishing type" not "Added new phishing type")
 - **Limit** first line to 50 characters
@@ -102,14 +91,14 @@ Before submitting a PR:
 - [ ] Examples are accurate
 
 ### Sample Contributions
-- [ ] JSON validates against schema (`./scripts/validate.sh`)
+- [ ] JSON validates against schema
 - [ ] Data is properly anonymized
 - [ ] Comments explain the scenario
 - [ ] Follows naming conventions
 
 ### Schema Changes
 - [ ] Backward compatibility maintained
-- [ ] All samples still validate (`./scripts/validate.sh`)
+- [ ] All samples still validate (`scripts/validate-schemas.py`)
 - [ ] Documentation updated
 - [ ] Breaking changes documented
 
@@ -143,14 +132,13 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 1. **Read** the [specification documentation](docs/)
 2. **Browse** existing [samples](samples/v4/) for examples
-3. **Check** [open issues](https://github.com/xarf/xarf-spec/issues) for contribution opportunities  
+3. **Check** [open issues](https://github.com/xarf/xarf-spec/issues) for contribution opportunities
 4. **Join** [discussions](https://github.com/xarf/xarf-spec/discussions) to ask questions
 
 ## 📞 Getting Help
 
 - **GitHub Discussions**: For questions and brainstorming
 - **GitHub Issues**: For specific bugs or feature requests
-- **Email**: contact@xarf.org for private matters
 
 ## 🏆 Recognition
 

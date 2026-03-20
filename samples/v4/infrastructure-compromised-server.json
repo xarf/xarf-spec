@@ -1,16 +1,16 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "ff27d1fb-edcc-4d9c-aa12-2a3603315e3e",
 	"timestamp": "2025-01-11T15:57:57Z",
 	"reporter": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org",
-		"domain": "serversec.org"
+		"contact": "incidents@server-monitor.example",
+		"domain": "server-monitor.example"
 	},
 	"sender": {
 		"org": "Server Security Monitor",
-		"contact": "incidents@serversec.org",
-		"domain": "serversec.org"
+		"contact": "incidents@server-monitor.example",
+		"domain": "server-monitor.example"
 	},
 	"source_identifier": "203.0.113.150",
 	"source_port": 80,
@@ -40,5 +40,6 @@
 		"compromise:webshell",
 		"service:apache",
 		"severity:high"
-	]
+	],
+	"compromise_method": "webshell_deployment"
 }

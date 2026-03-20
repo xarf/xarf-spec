@@ -96,13 +96,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "csam-report-2025-001",
+			"xarf_version": "4.2.0",
+			"report_id": "f7a8b9c0-d1e2-3456-fabc-def012345678",
 			"timestamp": "2025-01-15T10:30:00Z",
 			"reporter": {
 				"org": "Content Safety Service",
 				"contact": "safety@example.org",
-				"type": "automated"
+				"domain": "example.org"
+			},
+			"sender": {
+				"org": "Content Safety Service",
+				"contact": "safety@example.org",
+				"domain": "example.org"
 			},
 			"source_identifier": "198.51.100.42",
 			"category": "content",

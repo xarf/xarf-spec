@@ -1,16 +1,16 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "5cb60abc-119f-4f7d-a81d-26f89eed942b",
 	"timestamp": "2025-01-11T11:26:59Z",
 	"reporter": {
 		"org": "Network Security Monitoring",
-		"contact": "alerts@netsec-mon.com",
-		"domain": "netsec-mon.com"
+		"contact": "alerts@netsec-monitor.example",
+		"domain": "netsec-monitor.example"
 	},
 	"sender": {
 		"org": "Network Security Monitoring",
-		"contact": "alerts@netsec-mon.com",
-		"domain": "netsec-mon.com"
+		"contact": "alerts@netsec-monitor.example",
+		"domain": "netsec-monitor.example"
 	},
 	"source_identifier": "198.51.100.150",
 	"category": "connection",
@@ -46,5 +46,7 @@
 		"scan_type:syn",
 		"target:multi_port",
 		"pattern:systematic"
-	]
+	],
+	"first_seen": "2025-01-11T11:20:00Z",
+	"source_port": 54321
 }

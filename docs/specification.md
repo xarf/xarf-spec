@@ -5,18 +5,16 @@
 2. [Schema Architecture](#schema-architecture)
 3. [Core Schema Definition](#core-schema-definition)
 4. [Category-Specific Schemas](#category-specific-schemas)
-5. [Field Definitions Reference](#field-definitions-reference)
-6. [Validation Rules](#validation-rules)
-7. [Evidence Specifications](#evidence-specifications)
-8. [Backwards Compatibility](#backwards-compatibility)
-9. [Sample Reports](#sample-reports)
-10. [Implementation Requirements](#implementation-requirements)
+5. [Evidence Specifications](#evidence-specifications)
+6. [Backwards Compatibility](#backwards-compatibility)
+7. [Sample Reports](#sample-reports)
+8. [Internal Metadata Usage](#internal-metadata-usage)
 
 ## Overview
 
 This document provides the complete technical specification for XARF v4 schema validation, field definitions, and format requirements. It serves as the authoritative reference for implementing XARF v4 parsers, validators, and generators.
 
-For a high-level introduction to XARF v4, see the [Introduction & Overview](./introduction.md). For implementation guidance and project management, see the [Implementation Guide](./implementation-guide.md).
+For a high-level introduction to XARF v4, see the [Introduction & Overview](./introduction.md). For guidance on building parsers, validators, and generators against this spec, see the [Implementer's Guide](./implementation-guide.md).
 
 ### Design Principles
 
@@ -37,10 +35,10 @@ For a high-level introduction to XARF v4, see the [Introduction & Overview](./in
 
 ### Validation Approach
 
-- **JSON Schema based** - Formal validation using JSON Schema Draft 7
-- **Conditional validation** - Type-specific requirements based on category/type combinations  
-- **Extensible design** - Forward compatibility with unknown fields
-- **Multi-level validation** - Strict, permissive, and legacy modes
+- **JSON Schema based** - Formal validation using JSON Schema Draft 2020-12
+- **Conditional validation** - Type-specific requirements based on category/type combinations
+- **Extensible design** - `additionalProperties: true` at the report level permits unknown fields for forward compatibility
+- **Multi-level validation** - Standard and strict modes
 
 ## Schema Architecture
 
@@ -138,155 +136,31 @@ This dual approach ensures that:
 
 ### Base Report Structure
 
-All XARF v4 reports share this common structure:
+The authoritative base schema is defined in [`xarf-core.json`](../schemas/v4/xarf-core.json). All XARF v4 reports are validated against it.
 
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "required": [
-    "xarf_version",
-    "report_id",
-    "timestamp",
-    "reporter",
-    "source_identifier",
-    "category",
-    "type"
-  ],
-  "properties": {
-    "xarf_version": {
-      "type": "string",
-      "pattern": "^4\\.[0-9]+\\.[0-9]+$",
-      "description": "XARF schema version (semantic versioning)"
-    },
-    "report_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Unique report identifier (UUID v4)"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time",
-      "description": "When the abuse occurred (ISO 8601)"
-    },
-    "reporter": {
-      "$ref": "#/definitions/reporter"
-    },
-    "source_identifier": {
-      "type": "string",
-      "description": "IP address, domain, or identifier of abuse source"
-    },
-    "source_port": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535,
-      "description": "Source port (critical for CGNAT networks)"
-    },
-    "category": {
-      "type": "string",
-      "enum": ["messaging", "content", "copyright", "connection", "vulnerability", "infrastructure", "reputation"]
-    },
-    "type": {
-      "type": "string",
-      "description": "Specific abuse type within category"
-    },
-    "evidence_source": {
-      "type": "string",
-      "description": "Quality/reliability indicator for evidence"
-    },
-    "evidence": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/evidence_item" }
-    },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^[a-z0-9_]+:[a-z0-9_]+$"
-      },
-      "description": "Namespaced tags for categorization"
-    },
-    "_internal": {
-      "$ref": "#/definitions/internal_metadata",
-      "description": "Internal metadata for operational use - NOT transmitted"
-    }
-  }
-}
-```
+Every report carries a small set of required identity and routing fields: the schema version, a unique report ID, when the incident occurred, who is reporting it, what the abuse source is, and how the abuse is classified (category + type). Beyond those, the schema defines recommended fields that improve report utility — such as evidence and a confidence score — and optional fields for additional context.
 
-### Common Definitions
+Contact information (reporter and sender) follows a shared structure capturing the organization name, a contact email, and a domain for verification. The distinction between reporter and sender matters when a third-party service files on behalf of a client.
 
-```json
-{
-  "definitions": {
-    "reporter": {
-      "type": "object",
-      "required": ["org", "contact", "type"],
-      "properties": {
-        "org": {
-          "type": "string",
-          "description": "Reporting organization name"
-        },
-        "contact": {
-          "type": "string",
-          "format": "email",
-          "description": "Contact email for follow-up"
-        },
-        "type": {
-          "type": "string",
-          "enum": ["automated", "manual", "unknown"],
-          "description": "How this report was generated"
-        },
-        "reporter_reference_id": {
-          "type": "string",
-          "description": "Reporter's internal ticket/case ID for correlation and follow-up"
-        }
-      }
-    },
-    "evidence_item": {
-      "type": "object",
-      "required": ["content_type", "payload"],
-      "properties": {
-        "content_type": {
-          "type": "string",
-          "description": "MIME type of evidence"
-        },
-        "description": {
-          "type": "string",
-          "description": "Human-readable evidence description"
-        },
-        "payload": {
-          "type": "string",
-          "description": "Base64-encoded evidence data"
-        },
-        "hash": {
-          "type": "string",
-          "pattern": "^(md5|sha1|sha256|sha512):[a-fA-F0-9]+$",
-          "description": "Primary hash of evidence for integrity (deprecated - use hashes array)"
-        },
-        "hashes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(md5|sha1|sha256|sha512):[a-fA-F0-9]+$"
-          },
-          "description": "Array of file hashes using multiple algorithms (e.g., ['md5:abc123', 'sha256:def456'])"
-        },
-        "size": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Size of evidence in bytes"
-        }
-      }
-    },
-    "internal_metadata": {
-      "type": "object",
-      "description": "Internal operational metadata - NEVER transmitted, for local use only",
-      "additionalProperties": true
-    }
-  }
-}
-```
+| Field | Required | Type | Notes |
+|-------|----------|------|-------|
+| `org` | Yes | string | Organization name; max 200 chars |
+| `contact` | Yes | email | Contact email address |
+| `domain` | Yes | hostname | Organization domain for verification |
+
+Evidence items each carry a MIME type and a base64-encoded payload. Integrity hashes and a human-readable description are recommended; size metadata is optional.
+
+| Field | Requirement | Type | Notes |
+|-------|-------------|------|-------|
+| `content_type` | Required | string | MIME type of the evidence (e.g. `message/rfc822`, `image/png`) |
+| `payload` | Required | string | Base64-encoded evidence data |
+| `description` | Recommended | string | Human-readable description; max 500 chars |
+| `hash` | Recommended | string | Integrity hash; format: `algorithm:hexvalue` (e.g. `sha256:e3b0c4…`) |
+| `size` | Optional | integer | Size in bytes; max 5 MB per item |
+
+The `_internal` object is a free-form container for operational metadata (ticket IDs, analyst assignments, SLA data, etc.) that parsers must strip before transmitting any report.
+
+Each specific `category` + `type` combination has its own schema that extends it with additional required, recommended, and optional fields. The following section describe those per-type schemas which are defined in [`/schemas/v4/types/`](../schemas/v4/types/).
 
 ## Category-Specific Schemas
 
@@ -298,406 +172,316 @@ All XARF v4 reports share this common structure:
 
 **Evidence Sources:** `spamtrap`, `user_complaint`, `automated_filter`, `honeypot`
 
-**Class-Specific Fields:**
+**Category-Specific Fields:**
 
-| Field | Category | Type | Description | Condition |
-|-------|----------|------|-------------|-----------|
-| `protocol` | **Required** | enum | Communication protocol used | Always |
-| `smtp_from` | **Required** | email | SMTP envelope sender | When protocol=smtp |
-| `subject` | **Required** | string | Message subject line | When protocol=smtp |
-| `message_id` | **Recommended** | string | Message identifier | Helps deduplication |
-| `recipient` | **Recommended** | email | Target recipient | Improves tracking |
-| `headers` | **Optional** | object | Additional headers | Advanced analysis |
-| `body_hash` | **Optional** | string | Message body hash | Duplicate detection |
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `protocol` | Required | both | enum | Values differ slightly per type; `signal` and `chat` only valid for `spam` |
+| `smtp_from` | Required | both | email | Required when `protocol=smtp`; `source_port` also required in that case |
+| `recipient_count` | Required | `bulk_messaging` | integer | Minimum 100 |
+| `subject` | Recommended | both | string | Max 500 characters |
+| `unsubscribe_provided` | Recommended | `bulk_messaging` | boolean | Whether the message includes an unsubscribe mechanism |
+| `message_id` | Recommended | `spam` | string | Helps with deduplication |
+| `smtp_to` | Recommended | `spam` | email | SMTP envelope recipient |
+| `sender_name` | Optional | both | string | Display name of the sender |
+| `bulk_indicators` | Optional | `bulk_messaging` | object | Structured sub-fields: `high_volume`, `template_based`, `commercial_sender` |
+| `opt_in_evidence` | Optional | `bulk_messaging` | boolean | Whether there is evidence of recipient opt-in |
+| `language` | Optional | `spam` | string | ISO 639-1 (e.g. `en`, `en-US`) |
+| `spam_indicators` | Optional | `spam` | object | Structured sub-fields: `suspicious_links`, `commercial_content`, `bulk_characteristics` |
+| `user_agent` | Optional | `spam` | string | From message headers |
 
-**Schema Definition:**
-```json
-{
-  "properties": {
-    "protocol": {
-      "type": "string",
-      "enum": ["smtp", "sms", "whatsapp", "telegram", "signal", "chat", "social_media"],
-      "description": "Communication protocol used"
-    },
-    "smtp_from": {
-      "type": "string",
-      "format": "email",
-      "description": "SMTP envelope sender"
-    },
-    "subject": {
-      "type": "string",
-      "description": "Message subject line"
-    },
-    "message_id": {
-      "type": "string",
-      "description": "Message identifier for tracking"
-    },
-    "recipient": {
-      "type": "string",
-      "format": "email",
-      "description": "Target recipient address"
-    }
-  },
-  "required": ["protocol"],
-  "if": {
-    "properties": { "protocol": { "const": "smtp" } }
-  },
-  "then": {
-    "required": ["smtp_from", "subject"]
-  }
-}
-```
-
-**Example:**
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "550e8400-e29b-41d4-a716-446655440000",
-  "timestamp": "2024-01-01T12:00:00Z",
-  "reporter": {
-    "org": "Example Security",
-    "contact": "abuse@example.com",
-    "domain": "example.com",
-    "type": "automated",
-    "reporter_reference_id": "TICKET-2024-001"
-  },
-  "sender": {
-    "org": "Example Security",
-    "contact": "abuse@example.com",
-    "domain": "example.com"
-  },
-  "source_identifier": "192.0.2.1",
-  "source_port": 25,
-  "category": "messaging",
-  "type": "spam",
-  "protocol": "smtp",
-  "smtp_from": "spam@example.com",
-  "subject": "Buy now!",
-  "evidence_source": "spamtrap",
-  "evidence": [
-    {
-      "content_type": "message/rfc822",
-      "description": "Original spam email",
-      "payload": "base64-encoded-email-content"
-    }
-  ],
-  "tags": ["malware:conficker", "campaign:winter2024"],
-  "confidence": 0.95
-}
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`messaging-spam.json`](../schemas/v4/types/messaging-spam.json), [`messaging-bulk-messaging.json`](../schemas/v4/types/messaging-bulk-messaging.json)
 
 ### 2. Content Category
 
-**Purpose:** Malicious web content including phishing, malware, fraud, exploitation, and harmful content
+**Purpose:** Malicious or abusive web content — from phishing and malware to fraud, data exposure, brand abuse, and compromised sites
 
-**Valid Types:** `phishing`, `malware`, `fraud`, `spamvertised`, `csam`, `csem`, `defacement`, `illegal_advertisement`, `web_hack`, `exploit`, `violence`, `harassment`, `doxing`, `ncii`, `fake_shop`, `hate_speech`, `terrorism`, `self_harm`, `identity_theft`, `pharma_fraud`, `illicit_goods`, `online_predation`, `carding`, `gambling_scam`, `threat_to_life`, `disinformation`
+**Valid Types:** `phishing`, `malware`, `fraud`, `csam`, `csem`, `exposed_data`, `brand_infringement`, `suspicious_registration`, `remote_compromise`
 
-**Evidence Sources:** `crawler`, `user_report`, `automated_scan`, `spam_analysis`
+**Evidence Notes:**
+- Screenshot strongly recommended for most types; include HTML source alongside it when possible
+- For `csam` and `csem`, do not attach visual content — use hash values and reference IDs instead
 
-**Evidence Recommendations:**
-- **Screenshot strongly recommended** for most content types (except `csem` and `ncii` where screenshots may not be appropriate)
-- PNG format preferred for web content screenshots
-- Include both screenshot and HTML source when possible
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `url` | Required | all | uri | URL of the abusive content |
+| `infringement_type` | Required | `brand_infringement` | enum | e.g. `typosquatting`, `lookalike`, `counterfeit` |
+| `legitimate_site` | Required | `brand_infringement` | uri | URL of the legitimate brand website |
+| `classification` | Required | `csam` | enum | Legal classification: `baseline`, `A1`, `A2`, `B1`, `B2` |
+| `detection_method` | Required | `csam`, `csem` | enum | Different valid values per type |
+| `exploitation_type` | Required | `csem` | enum | e.g. `grooming`, `sextortion`, `trafficking` |
+| `data_types` | Required | `exposed_data` | array | Min 1 item; e.g. `credentials`, `financial`, `personal_information` |
+| `exposure_method` | Required | `exposed_data` | enum | e.g. `misconfigured_server`, `git_repository`, `paste_site` |
+| `fraud_type` | Required | `fraud` | enum | e.g. `investment`, `romance`, `tech_support`, `advance_fee` |
+| `compromise_type` | Required | `remote_compromise` | enum | e.g. `webshell`, `backdoor`, `defacement`, `malicious_redirect` |
+| `registration_date` | Required | `suspicious_registration` | datetime | When the domain was registered |
+| `suspicious_indicators` | Required | `suspicious_registration` | array | Min 1 item; e.g. `typosquatting`, `brand_keyword`, `fast_flux` |
+| `domain` | Recommended | all | string | FQDN of the abusive content |
+| `target_brand` | Recommended | all | string | Most relevant for `phishing` and `brand_infringement` |
+| `verification_method` | Recommended | all | enum | How content was verified: `manual`, `automated_crawler`, `user_report`, `honeypot`, `threat_intelligence` |
+| `verified_at` | Recommended | all | datetime | When content was last confirmed active |
+| `infringing_elements` | Recommended | `brand_infringement` | array | e.g. `logo`, `brand_name`, `color_scheme`, `domain_name` |
+| `similarity_score` | Recommended | `brand_infringement` | number | 0.0–1.0 visual/textual similarity to legitimate site |
+| `content_removed` | Recommended | `csam` | boolean | Whether the content has been removed |
+| `hash_values` | Recommended | `csam` | object | Sub-fields: `sha256` (recommended), `photodna` (recommended), `md5`, `sha1` |
+| `media_type` | Recommended | `csam` | enum | `image`, `video`, `audio`, `text`, `mixed` |
+| `ncmec_report_id` | Recommended | `csam` | string | NCMEC CyberTipline report ID |
+| `evidence_type` | Recommended | `csem` | array | e.g. `chat_logs`, `images`, `user_profile` |
+| `platform` | Recommended | `csem` | enum | e.g. `social_media`, `messaging_app`, `gaming_platform` |
+| `reporting_obligations` | Recommended | `csem` | array | e.g. `NCMEC`, `IWF`, `local_law_enforcement` |
+| `victim_age_range` | Recommended | `csem` | enum | `infant`, `toddler`, `prepubescent`, `pubescent`, `unknown` |
+| `affected_organization` | Recommended | `exposed_data` | string | Organization whose data was exposed |
+| `encryption_status` | Recommended | `exposed_data` | enum | `unencrypted`, `encrypted`, `partially_encrypted`, `hashed`, `unknown` |
+| `record_count` | Recommended | `exposed_data` | integer | Number of records exposed |
+| `sensitive_fields` | Recommended | `exposed_data` | array | Specific data fields exposed (e.g. `ssn`, `credit_card`) |
+| `claimed_entity` | Recommended | `fraud` | string | Organization or person the fraudster claims to represent |
+| `payment_methods` | Recommended | `fraud` | array | e.g. `cryptocurrency`, `wire_transfer`, `gift_cards` |
+| `distribution_method` | Recommended | `malware` | enum | e.g. `drive_by_download`, `email_attachment`, `exploit_kit` |
+| `file_hashes` | Recommended | `malware` | object | Sub-fields: `md5`, `sha1`, `sha256` (recommended), `ssdeep` |
+| `malware_family` | Recommended | `malware` | string | e.g. `Emotet`, `TrickBot` |
+| `malware_type` | Recommended | `malware` | enum | e.g. `trojan`, `ransomware`, `infostealer`, `rat` |
+| `cloned_site` | Recommended | `phishing` | uri | Legitimate site being impersonated |
+| `credential_fields` | Recommended | `phishing` | array | Form fields present on the phishing page (e.g. `username`, `password`) |
+| `lure_type` | Recommended | `phishing` | enum | e.g. `account_suspension`, `security_alert`, `shipping_notification` |
+| `submission_url` | Recommended | `phishing` | uri | Where credentials are submitted |
+| `affected_cms` | Recommended | `remote_compromise` | enum | e.g. `wordpress`, `joomla`, `drupal` |
+| `compromise_indicators` | Recommended | `remote_compromise` | array | Structured IoCs: each item has `type` and `value` |
+| `malicious_activities` | Recommended | `remote_compromise` | array | e.g. `spam_sending`, `hosting_phishing`, `data_exfiltration` |
+| `persistence_mechanisms` | Recommended | `remote_compromise` | array | e.g. `cron_job`, `modified_core_files`, `htaccess_modification` |
+| `webshell_details` | Recommended | `remote_compromise` | object | Sub-fields: `family`, `capabilities`, `password_protected` |
+| `days_since_registration` | Recommended | `suspicious_registration` | integer | |
+| `predicted_usage` | Recommended | `suspicious_registration` | array | e.g. `phishing`, `spam`, `botnet_c2` |
+| `registrant_details` | Recommended | `suspicious_registration` | object | Sub-fields: `email_domain`, `country`, `privacy_protected`, `bulk_registrations` |
+| `risk_score` | Recommended | `suspicious_registration` | number | 0.0–1.0 |
+| `targeted_brands` | Recommended | `suspicious_registration` | array | Brands potentially targeted |
+| `asn` | Optional | all | integer | Autonomous System Number |
+| `attack_vector` | Optional | all | enum | e.g. `phishing`, `malware`, `data_leak`, `remote_compromise` |
+| `country_code` | Optional | all | string | ISO 3166-1 alpha-2 |
+| `dns_records` | Optional | all | object | Key DNS records (A, AAAA, MX, TXT) |
+| `dns_response` | Optional | all | object | DNS query metadata |
+| `hosting_provider` | Optional | all | string | e.g. `AWS`, `Cloudflare`, `DigitalOcean` |
+| `nameservers` | Optional | all | array | DNS nameservers |
+| `registrar` | Optional | all | string | Domain registrar |
+| `screenshot_url` | Optional | all | uri | Reference URL to screenshot evidence |
+| `ssl_certificate` | Optional | all | object | Sub-fields: `issuer`, `subject`, `valid_from`, `valid_to`, `fingerprint` |
+| `whois` | Optional | all | object | Sub-fields: `registrant`, `created_date`, `expiry_date`, `registrar_abuse_contact` |
+| `previous_enforcement` | Optional | `brand_infringement` | array | Past actions: each item has `date`, `action`, `result` |
+| `products_offered` | Optional | `brand_infringement` | array | Products or services offered on the infringing site |
+| `trademark_details` | Optional | `brand_infringement` | object | Sub-fields: `registration_number`, `jurisdiction`, `category` (Nice classes) |
+| `account_suspended` | Optional | `csam` | boolean | Whether associated accounts were suspended |
+| `perpetrator_indicators` | Optional | `csem` | object | Sub-fields: `account_id`, `ip_addresses`, `pattern_of_behavior` |
+| `accessibility` | Optional | `exposed_data` | enum | `public`, `requires_authentication`, `dark_web`, `removed` |
+| `data_format` | Optional | `exposed_data` | enum | e.g. `csv`, `sql`, `json` |
+| `discovery_source` | Optional | `exposed_data` | enum | e.g. `security_researcher`, `breach_monitoring` |
+| `sample_records` | Optional | `exposed_data` | array | Redacted samples for verification; max 5 items |
+| `cryptocurrency_addresses` | Optional | `fraud` | array | Each item requires `currency` and `address` |
+| `loss_amount` | Optional | `fraud` | object | Sub-fields: `currency` (ISO 4217), `amount` |
+| `c2_servers` | Optional | `malware` | array | Each item: `address`, `port`, `protocol` |
+| `exploit_cve` | Optional | `malware` | array | CVEs exploited; format: `CVE-YYYY-NNNNN` |
+| `file_metadata` | Optional | `malware` | object | Sub-fields: `filename`, `file_size`, `file_type`, `mime_type` |
+| `persistence_mechanism` | Optional | `malware` | array | e.g. `registry`, `scheduled_task`, `dll_hijacking` |
+| `sandbox_analysis` | Optional | `malware` | object | Sub-fields: `sandbox_name`, `analysis_url`, `verdict`, `score` |
+| `targeted_platforms` | Optional | `malware` | array | e.g. `windows`, `linux`, `android` |
+| `detection_evasion` | Optional | `phishing` | array | e.g. `geo_blocking`, `captcha`, `user_agent_filtering` |
+| `phishing_kit` | Optional | `phishing` | string | Known kit identifier e.g. `16Shop`, `LogoKit` |
+| `redirect_chain` | Optional | `phishing` | array | URL redirect sequence leading to phishing page |
+| `cleanup_status` | Optional | `remote_compromise` | enum | `not_cleaned`, `partially_cleaned`, `cleaned`, `reinfected`, `unknown` |
+| `vulnerability_exploited` | Optional | `remote_compromise` | object | Sub-fields: `cve`, `description`, `component` |
+| `activation_behavior` | Optional | `suspicious_registration` | object | Sub-fields: `time_to_activation`, `initial_content` |
+| `related_domains` | Optional | `suspicious_registration` | array | Other domains linked by registrant, nameserver, IP, or pattern |
+| `ssl_certificate_details` | Optional | `suspicious_registration` | object | Sub-fields: `issued_immediately`, `free_certificate`, `wildcard` |
 
-| Field | Category | Type | Description | Use Case |
-|-------|----------|------|-------------|----------|
-| `url` | **Required** | uri | URL of malicious content | Always |
-| `target_brand` | **Recommended** | string | Brand being impersonated | Phishing, fake shops |
-| `file_hash` | **Recommended** | string | Hash of malicious file | Malware detection |
-| `malware_family` | **Recommended** | string | Malware family name | When type=malware |
-| `file_size` | **Optional** | integer | Size of file in bytes | File tracking |
-| `redirect_chain` | **Optional** | array | URL redirect sequence | Advanced tracking |
-| `hosting_provider` | **Optional** | string | Hosting service identifier | Takedown routing |
-| `victim_count` | **Optional** | integer | Number of known victims | CSAM, NCII cases |
-| `takedown_urgency` | **Optional** | string | Urgency level (critical/high/medium/low) | CSAM, NCII, terrorism |
-| `target_demographic` | **Optional** | string | Targeted group/community | Hate speech, harassment |
-| `extremist_group` | **Optional** | string | Associated extremist organization | Terrorism content |
-| `payment_methods` | **Optional** | array | Accepted payment types | Fake shops, fraud |
-| `substance_type` | **Optional** | string | Type of controlled substance | Illicit goods |
-| `card_bin` | **Optional** | string | Bank identification number | Carding markets |
-| `stolen_credentials_count` | **Optional** | integer | Number of compromised credentials | Identity theft |
-| `pharmaceutical_type` | **Optional** | string | Type of unregulated medicine | Pharma fraud |
-| `victim_age_range` | **Optional** | string | Age range of victims | Online predation, CSAM |
-| `threat_level` | **Optional** | string | Assessed threat severity | Threat to life, violence |
-| `disinformation_campaign` | **Optional** | string | Campaign identifier | Disinformation |
-| `coordination_indicators` | **Optional** | array | Evidence of coordinated activity | Disinformation |
-| `geolocation` | **Optional** | string | Geographic location where content was accessible or accessed from (ISO country code or lat/long) | Market-specific phishing, geo-restricted content |
-| `device` | **Optional** | string | Device type used to access content (mobile, desktop, tablet) | Device-specific phishing/malware |
-| `user_agent` | **Optional** | string | User-Agent string used when accessing content | Browser/client fingerprinting |
-| `referrer` | **Optional** | string | HTTP Referrer header value | Track content access patterns |
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`content-base.json`](../schemas/v4/types/content-base.json), [`content-phishing.json`](../schemas/v4/types/content-phishing.json), [`content-malware.json`](../schemas/v4/types/content-malware.json), [`content-fraud.json`](../schemas/v4/types/content-fraud.json), [`content-csam.json`](../schemas/v4/types/content-csam.json), [`content-csem.json`](../schemas/v4/types/content-csem.json), [`content-exposed-data.json`](../schemas/v4/types/content-exposed-data.json), [`content-brand_infringement.json`](../schemas/v4/types/content-brand_infringement.json), [`content-suspicious_registration.json`](../schemas/v4/types/content-suspicious_registration.json), [`content-remote_compromise.json`](../schemas/v4/types/content-remote_compromise.json)
 
 ### 3. Copyright Category
 
-**Purpose:** Intellectual property infringement including DMCA and trademark violations
+**Purpose:** Intellectual property infringement across file hosting, link sites, P2P networks, Usenet, UGC platforms, and direct web hosting
 
-**Valid Types:** `copyright`, `trademark`
+**Valid Types:** `copyright`, `cyberlocker`, `link_site`, `p2p`, `usenet`, `ugc_platform`
 
-**Evidence Sources:** `automated_scan`, `rights_holder_report`, `crawler`
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `infringing_url` | Required | `copyright`, `cyberlocker`, `link_site`, `ugc_platform` | uri | URL of the infringing content |
+| `hosting_service` | Required | `cyberlocker` | string | Name of the file hosting service |
+| `site_name` | Required | `link_site` | string | Name of the link aggregation site |
+| `p2p_protocol` | Required | `p2p` | enum | `bittorrent`, `edonkey`, `gnutella`, `kademlia`, `other`; `swarm_info` with `info_hash` or `magnet_uri` also required (via anyOf) |
+| `platform_name` | Required | `ugc_platform` | string | Name of the UGC platform (e.g. YouTube, TikTok) |
+| `newsgroup` | Required | `usenet` | string | Newsgroup name; `message_info.message_id` also required (via anyOf) |
+| `rights_holder` | Recommended | all | string | Organization or person holding the copyright |
+| `work_title` | Recommended | all | string | Title of the copyrighted work |
+| `work_category` | Recommended | all except `copyright` | enum | e.g. `movie`, `tv_show`, `music`, `software`, `ebook`; values vary slightly per type |
+| `infringement_type` | Recommended | `copyright`, `ugc_platform` | enum | Different valid values per type |
+| `file_info` | Recommended | `cyberlocker` | object | Sub-fields: `filename`, `file_size`, `file_hash`, `upload_date`, `download_count` |
+| `uploader_info` | Recommended | `cyberlocker`, `ugc_platform` | object | Sub-fields vary per type |
+| `link_info` | Recommended | `link_site` | object | Sub-fields: `page_title`, `posting_date`, `uploader`, `download_count`, `link_count` |
+| `linked_content` | Recommended | `link_site` | array | Each item requires `target_url` and `link_type`; max 50 items |
+| `site_category` | Recommended | `link_site` | enum | e.g. `torrent_index`, `direct_download_links`, `streaming_links` |
+| `swarm_info` | Recommended | `p2p` | object | `info_hash` or `magnet_uri` required; also: `torrent_name`, `file_count`, `total_size` |
+| `content_info` | Recommended | `ugc_platform` | object | Sub-fields: `content_id`, `content_title`, `upload_date`, `content_duration`, `view_count` |
+| `match_details` | Recommended | `ugc_platform` | object | Sub-fields: `match_confidence`, `match_duration`, `match_percentage`, `reference_id` |
+| `message_info` | Recommended | `usenet` | object | `message_id` sub-field required within object |
+| `original_url` | Optional | `copyright` | uri | URL of the legitimate/original content |
+| `access_method` | Optional | `cyberlocker` | enum | `direct_link`, `password_protected`, `premium_only`, `time_limited`, `captcha_protected` |
+| `takedown_info` | Optional | `cyberlocker` | object | Sub-fields: `previous_requests`, `service_response_time`, `automated_removal` |
+| `search_terms` | Optional | `link_site` | array | Terms used to find the infringing links; max 10 items |
+| `site_ranking` | Optional | `link_site` | object | Sub-fields: `alexa_rank`, `popularity_score` (0.0–10.0) |
+| `peer_info` | Optional | `p2p` | object | Sub-fields: `peer_id`, `client_version`, `upload_amount`, `download_amount` |
+| `release_date` | Optional | `p2p` | date | Official release date of the work |
+| `detection_method` | Optional | `p2p`, `usenet` | enum | Different valid values per type |
+| `monetization_info` | Optional | `ugc_platform` | object | Sub-fields: `monetized`, `ad_revenue`, `premium_content` |
+| `encoding_info` | Optional | `usenet` | object | Sub-fields: `encoding_format`, `par2_recovery`, `rar_compression` |
+| `nzb_info` | Optional | `usenet` | object | Sub-fields: `nzb_name`, `nzb_url`, `indexer_site`, `completion_percentage` |
+| `server_info` | Optional | `usenet` | object | Sub-fields: `nntp_server`, `server_group`, `retention_days` |
 
-| Field | Category | Type | Description | Context |
-|-------|----------|------|-------------|---------|
-| `work_title` | **Required** | string | Title of copyrighted work | Always |
-| `rights_holder` | **Required** | string | Copyright/trademark holder | Always |
-| `infringing_url` | **Recommended** | uri | URL of infringing content | Web-based infringement |
-| `work_identifier` | **Recommended** | string | External ID (IMDB, ISBN) | Helps identification |
-| `torrent_hash` | **Recommended** | string | BitTorrent info hash | P2P sharing cases |
-| `file_list` | **Optional** | array | List of infringing files | Detailed evidence |
-| `swarm_size` | **Optional** | integer | Peers in torrent swarm | P2P metrics |
-| `tracker_urls` | **Optional** | array | BitTorrent tracker URLs | P2P infrastructure |
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`copyright-copyright.json`](../schemas/v4/types/copyright-copyright.json), [`copyright-cyberlocker.json`](../schemas/v4/types/copyright-cyberlocker.json), [`copyright-link-site.json`](../schemas/v4/types/copyright-link-site.json), [`copyright-p2p.json`](../schemas/v4/types/copyright-p2p.json), [`copyright-usenet.json`](../schemas/v4/types/copyright-usenet.json), [`copyright-ugc-platform.json`](../schemas/v4/types/copyright-ugc-platform.json)
 
 ### 4. Connection Category
 
-**Purpose:** Network-level attacks and unauthorized connection attempts
+**Purpose:** Network-level attacks, automated abuse, and unauthorized connection attempts
 
-**Valid Types:** `login_attack`, `port_scan`, `ddos`, `ddos_amplification`, `auth_failure`, `ip_spoof`
+**Valid Types:** `login_attack`, `port_scan`, `ddos`, `scraping`, `sql_injection`, `vulnerability_scan`, `infected_host`, `reconnaissance`
 
-**Evidence Sources:** `honeypot`, `firewall_logs`, `ids_detection`, `flow_analysis`
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `first_seen` | Required | all | datetime | When activity was first observed |
+| `protocol` | Required | all | enum | Valid values vary by type; `icmp` and `sctp` only available for some types |
+| `bot_type` | Required | `infected_host` | enum | e.g. `malicious`, `search_engine`, `ai_agent`, `unknown` |
+| `probed_resources` | Required | `reconnaissance` | array | Specific paths probed (e.g. `/.env`, `/.git/config`, `/.aws/credentials`) |
+| `total_requests` | Required | `scraping` | integer | Minimum 1 |
+| `scan_type` | Required | `vulnerability_scan` | enum | e.g. `port_scan`, `web_vuln_scan`, `os_fingerprinting`, `service_enumeration` |
+| `destination_ip` | Recommended | all | string | Target IPv4 or IPv6 address; `source_port` also required for `login_attack`, `port_scan`, `ddos` when `source_identifier` is an IP |
+| `destination_port` | Recommended | all except `vulnerability_scan` | integer | 1–65535 |
+| `attack_vector` | Recommended | `ddos` | string | e.g. `syn_flood`, `udp_flood`, `dns_amplification`, `memcached_amplification` |
+| `peak_bps` | Recommended | `ddos` | integer | Peak bits per second |
+| `peak_pps` | Recommended | `ddos` | integer | Peak packets per second |
+| `behavior_pattern` | Recommended | `infected_host` | enum | e.g. `aggressive_crawling`, `api_abuse`, `vulnerability_probing` |
+| `bot_name` | Recommended | `infected_host` | string | Known bot/tool name (e.g. `GPTBot`, `UptimeRobot`) |
+| `verification_status` | Recommended | `infected_host` | enum | `verified`, `unverified`, `spoofed`, `unknown` |
+| `user_agent` | Recommended | `infected_host`, `scraping` | string | User-Agent string of the bot or scraper |
+| `resource_categories` | Recommended | `reconnaissance` | array | e.g. `environment_files`, `credential_files`, `version_control`, `backup_files` |
+| `successful_probes` | Recommended | `reconnaissance` | array | Resources that returned success responses (200, 301, 302) |
+| `scraping_pattern` | Recommended | `scraping` | enum | e.g. `sequential`, `deep_crawling`, `api_harvesting`, `sitemap_following` |
+| `target_content` | Recommended | `scraping` | enum | e.g. `product_data`, `pricing_information`, `user_profiles`, `api_data` |
+| `attack_technique` | Recommended | `sql_injection` | enum | e.g. `union_based`, `boolean_blind`, `time_blind`, `stacked_queries` |
+| `http_method` | Recommended | `sql_injection` | enum | `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`, `OPTIONS` |
+| `injection_point` | Recommended | `sql_injection` | enum | `query_parameter`, `post_body`, `cookie`, `header`, `path`, `json_parameter` |
+| `target_url` | Recommended | `sql_injection` | uri | Full URL targeted by the injection attempt |
+| `scanner_signature` | Recommended | `vulnerability_scan` | string | Known tool name (e.g. `Nmap`, `Nikto`, `Nessus`, `Burp Scanner`) |
+| `targeted_ports` | Recommended | `vulnerability_scan` | array | List of scanned port numbers |
+| `last_seen` | Optional | all | datetime | When activity was last observed |
+| `amplification_factor` | Optional | `ddos` | number | Amplification factor for reflection/amplification attacks |
+| `duration_seconds` | Optional | `ddos` | integer | Attack duration in seconds |
+| `mitigation_applied` | Optional | `ddos` | boolean | Whether mitigation was applied during the attack |
+| `service_impact` | Optional | `ddos` | enum | `none`, `degraded`, `unavailable` |
+| `threshold_exceeded` | Optional | `ddos` | datetime | When the detection threshold was exceeded |
+| `accepts_cookies` | Optional | `infected_host` | boolean | |
+| `api_endpoints_accessed` | Optional | `infected_host` | array | |
+| `follows_crawl_delay` | Optional | `infected_host` | boolean | Whether bot honours crawl-delay directive |
+| `javascript_execution` | Optional | `infected_host` | boolean | Whether bot executes JavaScript |
+| `request_rate` | Optional | `infected_host`, `scraping` | number | Average requests per second |
+| `respects_robots_txt` | Optional | `infected_host`, `scraping` | boolean | |
+| `automated_tool` | Optional | `reconnaissance` | boolean | Whether activity appears to be from an automated tool |
+| `http_methods` | Optional | `reconnaissance` | array | HTTP methods used during probing |
+| `response_codes` | Optional | `reconnaissance` | array | HTTP response codes received |
+| `total_probes` | Optional | `reconnaissance` | integer | Total number of probe attempts |
+| `user_agent` | Optional | `reconnaissance`, `sql_injection`, `vulnerability_scan` | string | |
+| `bot_signature` | Optional | `scraping` | string | Known scraper identity (e.g. `Scrapy`, `AhrefsBot`, `SemrushBot`) |
+| `concurrent_connections` | Optional | `scraping` | integer | |
+| `data_volume` | Optional | `scraping` | integer | Total bytes transferred |
+| `session_duration` | Optional | `scraping` | integer | Duration of scraping session in seconds |
+| `unique_urls` | Optional | `scraping` | integer | Number of unique URLs accessed |
+| `attempts_count` | Optional | `sql_injection` | integer | Number of injection attempts observed |
+| `payload_sample` | Optional | `sql_injection` | string | Sanitized sample of injection payload; max 1000 chars |
+| `scan_rate` | Optional | `vulnerability_scan` | number | Requests per second |
+| `targeted_services` | Optional | `vulnerability_scan` | array | Services targeted (e.g. `http`, `ssh`, `mysql`, `mongodb`) |
+| `total_requests` | Optional | `vulnerability_scan` | integer | |
+| `vulnerabilities_probed` | Optional | `vulnerability_scan` | array | Specific CVEs or vulnerability identifiers probed |
 
-| Field | Category | Type | Description | Context |
-|-------|----------|------|-------------|---------|
-| `destination_ip` | **Required** | ip | Target IP address | Always |
-| `protocol` | **Required** | enum | Network protocol (tcp/udp/icmp) | Always |
-| `destination_port` | **Recommended** | integer | Target port number | TCP/UDP attacks |
-| `attempt_count` | **Recommended** | integer | Number of attempts | Brute force detection |
-| `service` | **Recommended** | string | Target service (ssh, rdp) | Service-specific |
-| `username` | **Optional** | string | Attempted username | Login attacks |
-| `threshold_exceeded` | **Optional** | string |
-      "format": "date-time",
-      "description": "When threshold was exceeded"
-    },
-    "attack_vector": {
-      "type": "string",
-      "description": "Specific attack method used"
-    },
-    "packet_count": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Number of packets sent"
-    },
-    "byte_count": {
-      "type": "integer", 
-      "minimum": 0,
-      "description": "Number of bytes transferred"
-    }
-  },
-  "required": ["destination_ip", "protocol"]
-}
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`connection-login-attack.json`](../schemas/v4/types/connection-login-attack.json), [`connection-port-scan.json`](../schemas/v4/types/connection-port-scan.json), [`connection-ddos.json`](../schemas/v4/types/connection-ddos.json), [`connection-scraping.json`](../schemas/v4/types/connection-scraping.json), [`connection-sql-injection.json`](../schemas/v4/types/connection-sql-injection.json), [`connection-vulnerability-scan.json`](../schemas/v4/types/connection-vulnerability-scan.json), [`connection-infected-host.json`](../schemas/v4/types/connection-infected-host.json), [`connection-reconnaissance.json`](../schemas/v4/types/connection-reconnaissance.json)
 
 ### 5. Vulnerability Category
 
-**Purpose:** Security vulnerabilities and misconfigurations requiring patching
+**Purpose:** Exposed services, known CVEs, and security misconfigurations that require remediation
 
-**Valid Types:** `open`, `cve`, `outdated_dnssec`, `ssl_freak`, `ssl_poodle`, `malicious_activity`
+**Valid Types:** `cve`, `misconfiguration`, `open_service`
 
-**Evidence Sources:** `vulnerability_scan`, `researcher_analysis`, `automated_discovery`
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `service` | Required | all | string | Vulnerable service or component name |
+| `cve_id` | Required | `cve` | string | CVE identifier; format: `CVE-YYYY-NNNNN` |
+| `service_port` | Required | `cve` | integer | Port where vulnerable service is running (1–65535) |
+| `cvss_score` | Recommended | `cve` | number | CVSS score 0.0–10.0 |
+| `evidence_source` | Recommended | `cve` | enum | `vulnerability_scan`, `researcher_analysis`, `automated_discovery`, `penetration_testing` |
+| `exploitability` | Recommended | `cve` | enum | `theoretical`, `poc_available`, `functional`, `weaponized` |
+| `patch_available` | Recommended | `cve` | boolean | Whether a patch is available |
+| `risk_level` | Recommended | `cve` | enum | `info`, `low`, `medium`, `high`, `critical` |
+| `service_version` | Recommended | `cve` | string | Version of the vulnerable service |
+| `severity` | Recommended | `cve` | enum | `informational`, `low`, `medium`, `high`, `critical` |
+| `cve_ids` | Optional | `cve` | array | Additional CVE identifiers; max 10 items |
+| `cvss_vector` | Optional | `cve` | string | CVSS v3 vector string (e.g. `CVSS:3.1/AV:N/...`) |
+| `cvss_version` | Optional | `cve` | enum | `2.0`, `3.0`, `3.1` |
+| `disclosure_date` | Optional | `cve` | datetime | When CVE was publicly disclosed |
+| `impact_assessment` | Optional | `cve` | object | Sub-fields: `confidentiality`, `integrity`, `availability` (each `none`/`low`/`high`) |
+| `patch_url` | Optional | `cve` | uri | URL to patch or fix information |
+| `patch_version` | Optional | `cve` | string | Version that fixes the vulnerability |
+| `remediation_priority` | Optional | `cve` | enum | `low`, `medium`, `high`, `critical`, `emergency` |
+| `vendor_advisory` | Optional | `cve` | uri | URL to vendor security advisory |
 
-| Field | Category | Type | Description | Context |
-|-------|----------|------|-------------|---------|
-| `service` | **Required** | string | Vulnerable service name | Always |
-| `service_version` | **Recommended** | string | Service version | Patch identification |
-| `cve_id` | **Recommended** | string | CVE identifier | When applicable |
-| `cvss_score` | **Recommended** | number | CVSS score (0-10) | Risk assessment |
-| `service_port` | **Optional** | integer | Service port | Service location |
-| `exploit_available` | **Optional** | boolean | Public exploit exists | Urgency indicator |
-| `patch_available` | **Optional** | boolean | Patch is available | Remediation info |
-    "cvss_vector": {
-      "type": "string",
-      "pattern": "^CVSS:3\\.[01]/.*",
-      "description": "CVSS vector string"
-    },
-    "risk_level": {
-      "type": "string",
-      "enum": ["low", "medium", "high", "critical"],
-      "description": "Risk assessment level"
-    },
-    "patch_available": {
-      "type": "boolean",
-      "description": "Whether patch is available"
-    }
-  },
-  "required": ["service"]
-}
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`vulnerability-cve.json`](../schemas/v4/types/vulnerability-cve.json), [`vulnerability-misconfiguration.json`](../schemas/v4/types/vulnerability-misconfiguration.json), [`vulnerability-open-service.json`](../schemas/v4/types/vulnerability-open-service.json)
 
 ### 6. Infrastructure Category
 
-**Purpose:** Compromised systems and malware infections
+**Purpose:** Botnet infections and compromised servers requiring remediation or takedown
 
-**Valid Types:** `bot`, `compromised_server`, `compromised_website`, `compromised_account`, `compromised_microsoft_exchange`, `cve`
+**Valid Types:** `botnet`, `compromised_server`
 
-**Evidence Sources:** `researcher_analysis`, `automated_discovery`, `traffic_analysis`
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `compromise_evidence` | Required | `botnet` | string | Evidence of how the compromise was detected (e.g. `C2 communication observed`) |
+| `compromise_method` | Required | `compromised_server` | string | Method used to compromise the server |
+| `bot_capabilities` | Recommended | `botnet` | array | Capabilities observed: `ddos`, `spam`, `proxy`, `keylogger`, `file_download`, `remote_shell`, `cryptocurrency_mining`, `data_theft` |
+| `c2_protocol` | Recommended | `botnet` | enum | Protocol used for C2 communications: `http`, `https`, `tcp`, `udp`, `dns`, `irc`, `p2p`, `custom` |
+| `c2_server` | Recommended | `botnet` | string | Command and control server domain or IP |
+| `malware_family` | Recommended | `botnet` | string | Malware family classification (e.g. `mirai`, `emotet`, `zeus`); max 200 chars |
 
-| Field | Category | Type | Description | Context |
-|-------|----------|------|-------------|---------|
-| `malware_family` | **Recommended** | string | Malware family name | Bot/malware cases |
-| `c2_server` | **Recommended** | string | Command & control server | Bot infections |
-| `first_seen` | **Recommended** | datetime | First observation | Tracking duration |
-| `last_seen` | **Recommended** | datetime | Last observation | Current activity |
-| `infection_vector` | **Optional** | string | How system was compromised | Root cause |
-| `bot_id` | **Optional** | string | Bot identifier | Bot tracking |
-| `compromised_service` | **Optional** | string | Affected service | Service-specific |
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`infrastructure-botnet.json`](../schemas/v4/types/infrastructure-botnet.json), [`infrastructure-compromised-server.json`](../schemas/v4/types/infrastructure-compromised-server.json)
 
 ### 7. Reputation Category
 
-**Purpose:** Threat intelligence and reputation-based blocking
+**Purpose:** IP/domain blocklist inclusion and threat intelligence reports
 
-**Valid Types:** `blocklist`, `ip_reclamation`, `trap`
+**Valid Types:** `blocklist`, `threat_intelligence`
 
-**Evidence Sources:** `threat_intelligence`, `automated_analysis`, `researcher_analysis`
+**Category-Specific Fields:**
 
-**Class-Specific Fields:**
+| Field | Requirement | Applies To | Type | Notes |
+|-------|-------------|------------|------|-------|
+| `threat_type` | Required | all | string | Type of threat for blocklist inclusion or intelligence report |
 
-| Field | Category | Type | Description | Context |
-|-------|----------|------|-------------|---------|
-| `threat_type` | **Required** | string | Category of threat | Always |
-| `confidence_score` | **Recommended** | number | Confidence (0-100) | Trust level |
-| `first_reported` | **Recommended** | datetime | First threat report | Historical context |
-| `sources` | **Recommended** | array | Information sources | Attribution |
-| `asn` | **Optional** | integer | Autonomous System Number | Network context |
-| `geographic_location` | **Optional** | string | ISO country code | Geo-location |
-| `threat_indicators` | **Optional** | array | Specific IoCs | Detailed evidence |
-```
+**Schema Definitions:**
+Examples and formal schema definition: [`reputation-blocklist.json`](../schemas/v4/types/reputation-blocklist.json), [`reputation-threat-intelligence.json`](../schemas/v4/types/reputation-threat-intelligence.json)
 
-## Field Definitions Reference
 
-### Field Categories
-
-#### Required Fields
-These fields MUST be present in all valid XARF v4 reports:
-
-| Field | Type | Format | Description |
-|-------|------|--------|-------------|
-| `xarf_version` | string | `^4\.[0-9]+\.[0-9]+$` | XARF schema version |
-| `report_id` | string | UUID v4 | Unique report identifier |
-| `timestamp` | string | ISO 8601 | When abuse occurred |
-| `source_identifier` | string | IP/domain | Abuse source identifier |
-| `category` | string | enum | Primary abuse category |
-| `type` | string | varies | Specific abuse type |
-| `reporter` | object | - | Reporting organization info |
-
-#### Recommended Fields
-These fields SHOULD be included when the information is available:
-
-| Field | Type | Format | Description | Rationale |
-|-------|------|--------|-------------|-----------|
-| `source_port` | integer | 1-65535 | Source port | Critical for CGNAT environments |
-| `evidence` | array | - | Structured evidence items | Enables automated validation |
-| `confidence` | number | 0.0-1.0 | Confidence score | Helps prioritize response |
-| `evidence_source` | string | varies | Evidence quality indicator | Improves trust assessment |
-
-#### Optional Fields
-These fields MAY be included for additional context:
-
-| Field | Type | Format | Description | Use Case |
-|-------|------|--------|-------------|----------|
-| `tags` | array | `namespace:value` | Categorization tags | Advanced filtering/routing |
-| `custom_fields` | object | - | Organization-specific data | Internal workflows |
-| `references` | array | URL | Related resources | Additional context |
-| `severity` | string | enum | Impact assessment | Priority handling |
-
-### Reporter Object
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `org` | string | Yes | Organization name |
-| `contact` | string | Yes | Email for follow-up |
-| `type` | string | Yes | `automated`, `manual`, `unknown` |
-| `reporter_reference_id` | string | No | Reporter's internal ticket/case ID for correlation |
-
-### Evidence Item Object
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `content_type` | string | Yes | MIME type |
-| `payload` | string | Yes | Base64-encoded data |
-| `description` | string | No | Human-readable description |
-| `hash` | string | No | Single integrity hash (deprecated - use hashes) |
-| `hashes` | array | No | Array of hashes with multiple algorithms (e.g., `["md5:abc123", "sha256:def456"]`) |
-| `size` | integer | No | Size in bytes |
-
-## Validation Rules
-
-### Core Validation Requirements
-
-1. **Required Field Validation**
-   - All base required fields must be present
-   - Category-specific required fields must be present based on category value
-   - Field types must match schema definitions
-
-2. **Format Validation**
-   - `report_id`: Valid UUID v4 format
-   - `timestamp`: ISO 8601 date-time format with timezone
-   - Email addresses: RFC 5322 compliant
-   - URLs: RFC 3986 compliant
-   - IP addresses: Valid IPv4 or IPv6 format
-
-3. **Conditional Validation**
-   - Evidence items must have valid MIME types
-   - Tags must follow `namespace:value` pattern using lowercase alphanumeric and underscore
-   - Hash values must match specified algorithm format (`algorithm:hexvalue`)
-   - Category-specific required fields validated based on category value
-
-4. **Size Constraints**
-   - Individual evidence items: ≤ 5MB
-   - Total evidence per report: ≤ 15MB
-   - String fields: reasonable length limits (typically 1000 characters)
-   - Array fields: reasonable item limits (typically 100 items)
-
-### Validation Levels
-
-**Strict Mode:**
-- Fail on any unknown fields
-- Require all **Required** and **Recommended** fields
-- Enforce strict format validation
-- Reject reports missing recommended fields
-
-**Standard Mode (Default):**
-- Require all **Required** fields
-- Warn when **Recommended** fields are missing
-- Allow **Optional** fields
-- Validate known fields, warn on unknown fields
-
-**Permissive Mode:**
-- Require only **Required** fields
-- No warnings for missing **Recommended** fields
-- Allow unknown fields for forward compatibility
-- Suitable for gradual adoption
-
-**Legacy Mode:**
-- Accept v3 format reports
-- Convert to v4 structure automatically
-- Generate warnings for deprecated patterns
-- Map v3 fields to appropriate v4 categories
-
-### Tag Namespace Validation
-
-**Standard Namespaces:**
-- `malware:family_name` - Malware family classification
-- `campaign:identifier` - Campaign tracking
-- `cve:CVE-YYYY-NNNN` - CVE references
-- `botnet:name` - Botnet identification
-- `severity:level` - Severity classification
-- `confidence:level` - Confidence assessment
-- `tool:name` - Reporting tool identification
-- `custom:value` - Organization-specific tags
 
 ## Evidence Specifications
 
-### Supported Content Types
+### Recommended Content Types
 
 **Text Evidence:**
 - `text/plain` - Log entries, configuration files, command output
@@ -735,7 +519,7 @@ These fields MAY be included for additional context:
 - Truncate log files to relevant portions
 - Consider external reference for very large evidence
 
-### Evidence Best Practices
+### Examples
 
 **For Messaging Class:**
 ```json
@@ -755,14 +539,14 @@ These fields MAY be included for additional context:
 {
   "evidence": [
     {
-      "content_type": "image/png", 
+      "content_type": "image/png",
       "description": "Screenshot of phishing page",
       "payload": "base64-encoded-screenshot",
       "hash": "sha256:abcd1234..."
     },
     {
       "content_type": "text/html",
-      "description": "HTML source of phishing page", 
+      "description": "HTML source of phishing page",
       "payload": "base64-encoded-html"
     }
   ]
@@ -805,7 +589,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
     "ReporterOrgEmail": "abuse@example.com"
   },
   "Report": {
-    "ReportClass": "Activity", 
+    "ReportClass": "Activity",
     "ReportType": "Spam",
     "SourceIp": "192.0.2.1",
     "SourcePort": 25,
@@ -817,7 +601,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
 
 // v4 Output (auto-converted)
 {
-  "xarf_version": "4.0.0",
+  "xarf_version": "4.2.0",
   "report_id": "generated-uuid-v4-here",
   "legacy_version": "3",
   "timestamp": "2024-01-01T12:00:00Z",
@@ -829,7 +613,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
   "source_identifier": "192.0.2.1",
   "source_port": 25,
   "category": "messaging",
-  "type": "spam", 
+  "type": "spam",
   "evidence_source": "unknown",
   "protocol": "smtp",
   "smtp_from": "spam@example.com",
@@ -842,7 +626,7 @@ XARF v4 parsers must support automatic conversion of v3 reports. The conversion 
 
 | v3 Field | v4 Field | Conversion Notes |
 |----------|----------|------------------|
-| `Version` | `xarf_version` | Set to "4.0.0", add `legacy_version: "3"` |
+| `Version` | `xarf_version` | Set to "4.x.x", add `legacy_version: "3"` |
 | `ReporterInfo.ReporterOrg` | `reporter.org` | Direct mapping |
 | `ReporterInfo.ReporterOrgEmail` | `reporter.contact` | Direct mapping |
 | N/A | `reporter.type` | Set to "unknown" for v3 |
@@ -874,366 +658,7 @@ Phase 4: v4-only processing
 
 ## Sample Reports
 
-Complete sample reports demonstrating proper format for each category:
-
-### Messaging Category -Spam Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "550e8400-e29b-41d4-a716-446655440000",
-  "timestamp": "2024-01-15T14:30:25Z",
-  "reporter": {
-    "org": "SpamCop",
-    "contact": "reports@spamcop.net",
-    "domain": "spamcop.net",
-    "type": "automated",
-    "reporter_reference_id": "SC-2024-789012"
-  },
-  "sender": {
-    "org": "SpamCop",
-    "contact": "reports@spamcop.net",
-    "domain": "spamcop.net"
-  },
-  "source_identifier": "192.0.2.123",
-  "source_port": 25,
-  "category": "messaging",
-  "type": "spam",
-  "protocol": "smtp",
-  "smtp_from": "fake@example.com",
-  "subject": "Urgent: Verify Your Account",
-  "evidence_source": "spamtrap",
-  "evidence": [
-    {
-      "content_type": "message/rfc822",
-      "description": "Complete spam email with headers",
-      "payload": "UmVjZWl2ZWQ6IGZyb20gW3NwYW1tZXIuZXhhbXBsZS5jb21dCkZyb206IGZha2VAZXhhbXBsZS5jb20KVG86IHRyYXBAc3BhbWNvcC5uZXQKU3ViamVjdDogVXJnZW50OiBWZXJpZnkgWW91ciBBY2NvdW50CgpDbGljayBoZXJlIHRvIHZlcmlmeSB5b3VyIGFjY291bnQ6IGh0dHA6Ly9ldmlsLmV4YW1wbGUuY29tL3BoaXNoaW5n",
-      "hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    }
-  ],
-  "tags": ["campaign:fake_bank_2024", "severity:medium"],
-  "confidence": 0.92
-}
-```
-
-### Content Category -Phishing Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "123e4567-e89b-12d3-a456-426614174000",
-  "timestamp": "2024-01-15T16:45:10Z",
-  "reporter": {
-    "org": "PhishTank",
-    "contact": "admin@phishtank.com",
-    "domain": "phishtank.com",
-    "type": "automated",
-    "reporter_reference_id": "PT-2024-456789"
-  },
-  "sender": {
-    "org": "PhishTank",
-    "contact": "admin@phishtank.com",
-    "domain": "phishtank.com"
-  },
-  "source_identifier": "203.0.113.45",
-  "category": "content",
-  "type": "phishing",
-  "url": "http://fake-bank.example.com/login.php",
-  "target_brand": "Example Bank",
-  "geolocation": "US",
-  "device": "mobile",
-  "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15",
-  "referrer": "https://search.example.com/q=bank+login",
-  "evidence_source": "crawler",
-  "evidence": [
-    {
-      "content_type": "image/png",
-      "description": "Screenshot of phishing page",
-      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
-      "hash": "sha256:a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
-    },
-    {
-      "content_type": "text/html",
-      "description": "HTML source of phishing page",
-      "payload": "PGh0bWw+PGhlYWQ+PHRpdGxlPkV4YW1wbGUgQmFuayBMb2dpbjwvdGl0bGU+PC9oZWFkPjxib2R5PjxoMT5TZWN1cmUgTG9naW48L2gxPjxmb3JtPjxpbnB1dCB0eXBlPSJ0ZXh0IiBwbGFjZWhvbGRlcj0iVXNlcm5hbWUiPjxpbnB1dCB0eXBlPSJwYXNzd29yZCIgcGxhY2Vob2xkZXI9IlBhc3N3b3JkIj48YnV0dG9uPkxvZ2luPC9idXR0b24+PC9mb3JtPjwvYm9keT48L2h0bWw+"
-    }
-  ],
-  "tags": ["phishing:banking", "target:example_bank"],
-  "confidence": 0.98
-}
-```
-
-### Connection Category -DDoS Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "987fcdeb-51a2-43d1-9f12-345678901234",
-  "timestamp": "2024-01-15T10:20:30Z",
-  "reporter": {
-    "org": "DDoS Protection Service",
-    "contact": "security@ddosprotect.com",
-    "domain": "ddosprotect.com",
-    "type": "automated",
-    "reporter_reference_id": "DDOS-INC-20240115-0001"
-  },
-  "sender": {
-    "org": "DDoS Protection Service",
-    "contact": "security@ddosprotect.com",
-    "domain": "ddosprotect.com"
-  },
-  "source_identifier": "198.51.100.75",
-  "category": "connection",
-  "type": "ddos",
-  "destination_ip": "203.0.113.100",
-  "destination_port": 80,
-  "protocol": "tcp",
-  "packet_count": 15000,
-  "byte_count": 2250000,
-  "evidence_source": "flow_analysis",
-  "evidence": [
-    {
-      "content_type": "text/plain",
-      "description": "Network flow analysis showing attack pattern",
-      "payload": "VGltZXN0YW1wLCBTcmNJUCwgRHN0SUAsIFNyY1BvcnQsIERzdFBvcnQsIFByb3RvY29sLCBQYWNrZXRzLCBCeXRlcwoyMDI0LTAxLTE1VDEwOjIwOjMwWiwgMTk4LjUxLjEwMC43NSwgMjAzLjAuMTEzLjEwMCwgMTIzNCwgODAsIFRDUCwgMTUwMDAsIDIyNTAwMDA="
-    }
-  ],
-  "tags": ["attack:volumetric", "severity:high"],
-  "confidence": 0.95
-}
-```
-
-### Infrastructure Category -Bot Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "456789ab-cdef-1234-5678-90abcdef1234",
-  "timestamp": "2024-01-15T08:15:45Z",
-  "reporter": {
-    "org": "Botnet Research Group",
-    "contact": "research@botnetwatch.org",
-    "domain": "botnetwatch.org",
-    "type": "automated",
-    "reporter_reference_id": "BRG-BOT-2024-00234"
-  },
-  "sender": {
-    "org": "Botnet Research Group",
-    "contact": "research@botnetwatch.org",
-    "domain": "botnetwatch.org"
-  },
-  "source_identifier": "192.0.2.200",
-  "category": "infrastructure",
-  "type": "bot",
-  "malware_family": "conficker",
-  "c2_server": "evil-c2.example.com",
-  "first_seen": "2024-01-10T12:30:00Z",
-  "last_seen": "2024-01-15T08:00:00Z",
-  "evidence_source": "traffic_analysis",
-  "evidence": [
-    {
-      "content_type": "text/plain",
-      "description": "C2 communication logs showing bot activity",
-      "payload": "MjAyNC0wMS0xNVQwODowMDowMFogQ29ubmVjdGlvbiB0byBldmlsLWMyLmV4YW1wbGUuY29tOjg0NDMKMjAyNC0wMS0xNVQwODowMToxNVogQm90IElEOiBib3QtMTIzNDU2CjIwMjQtMDEtMTVUMDg6MDE6MzBaIENvbW1hbmQgcmVjZWl2ZWQ6IFVQREFURV9DT05GSUcKMjAyNC0wMS0xNVQwODowMjo0NVogQ29tbWFuZCBleGVjdXRlZCBzdWNjZXNzZnVsbHk="
-    }
-  ],
-  "tags": ["botnet:conficker", "infection:active"],
-  "confidence": 0.88
-}
-```
-
-### Content Category - Malware Distribution Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "fedcba98-7654-3210-fedc-ba9876543210",
-  "timestamp": "2024-01-16T13:45:20Z",
-  "reporter": {
-    "org": "Malware Analysis Lab",
-    "contact": "samples@malware-lab.org",
-    "domain": "malware-lab.org",
-    "type": "automated",
-    "reporter_reference_id": "MAL-2024-9876"
-  },
-  "sender": {
-    "org": "Malware Analysis Lab",
-    "contact": "samples@malware-lab.org",
-    "domain": "malware-lab.org"
-  },
-  "source_identifier": "198.51.100.200",
-  "category": "content",
-  "type": "malware",
-  "url": "http://malicious-download.example.com/trojan.exe",
-  "malware_family": "emotet",
-  "file_hash": "sha256:5d41402abc4b2a76b9719d911017c592",
-  "file_size": 245760,
-  "evidence_source": "automated_scan",
-  "evidence": [
-    {
-      "content_type": "application/octet-stream",
-      "description": "Malware sample (password: infected)",
-      "payload": "UEsDBBQACQAIAA... [truncated base64] ...==",
-      "hashes": [
-        "md5:5d41402abc4b2a76b9719d911017c592",
-        "sha1:2fd4e1c67a2d28fced849ee1bb76e7391b93eb12",
-        "sha256:d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
-        "sha512:08f90c1a417155361a5e6b87c99a7c2c4d1f03f4d2b9f5a0c1a2e7f3b4d6a8c9e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0"
-      ],
-      "size": 245760
-    }
-  ],
-  "tags": ["malware:emotet", "severity:high"],
-  "confidence": 0.96
-}
-```
-
-### Content Category - Fake Shop Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "def12345-6789-abcd-ef01-234567890abc",
-  "timestamp": "2024-01-16T11:20:15Z",
-  "reporter": {
-    "org": "Consumer Protection Agency",
-    "contact": "fraud@consumer-protect.org",
-    "domain": "consumer-protect.org",
-    "type": "manual",
-    "reporter_reference_id": "CPA-FAKE-2024-0891"
-  },
-  "sender": {
-    "org": "Consumer Protection Agency",
-    "contact": "fraud@consumer-protect.org",
-    "domain": "consumer-protect.org"
-  },
-  "source_identifier": "198.51.100.88",
-  "category": "content",
-  "type": "fake_shop",
-  "url": "http://fake-deals-store.example.com",
-  "target_brand": "Major Retailer Brand",
-  "payment_methods": ["cryptocurrency", "wire_transfer"],
-  "evidence_source": "user_report",
-  "evidence": [
-    {
-      "content_type": "image/png",
-      "description": "Screenshot of fake e-commerce storefront",
-      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
-      "hash": "sha256:b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c"
-    }
-  ],
-  "tags": ["fraud:ecommerce", "severity:high"],
-  "confidence": 0.87
-}
-```
-
-### Content Category - Hate Speech Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "abc98765-4321-dcba-9876-543210fedcba",
-  "timestamp": "2024-01-16T14:55:30Z",
-  "reporter": {
-    "org": "Online Safety Monitor",
-    "contact": "reports@safety-monitor.org",
-    "domain": "safety-monitor.org",
-    "type": "automated",
-    "reporter_reference_id": "OSM-HS-2024-3456"
-  },
-  "sender": {
-    "org": "Online Safety Monitor",
-    "contact": "reports@safety-monitor.org",
-    "domain": "safety-monitor.org"
-  },
-  "source_identifier": "203.0.113.92",
-  "category": "content",
-  "type": "hate_speech",
-  "url": "http://extremist-forum.example.com/thread/12345",
-  "target_demographic": "religious minority",
-  "takedown_urgency": "high",
-  "evidence_source": "automated_scan",
-  "evidence": [
-    {
-      "content_type": "image/png",
-      "description": "Screenshot of hateful content",
-      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
-      "hash": "sha256:c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6c6b6"
-    }
-  ],
-  "tags": ["content:extremism", "severity:critical"],
-  "confidence": 0.91
-}
-```
-
-### Content Category - Carding Market Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "789fedcb-a456-7890-1234-567890abcdef",
-  "timestamp": "2024-01-16T09:12:45Z",
-  "reporter": {
-    "org": "Financial Crime Investigation Unit",
-    "contact": "cybercrimes@fciu.org",
-    "domain": "fciu.org",
-    "type": "manual",
-    "reporter_reference_id": "FCIU-CARD-2024-1122"
-  },
-  "sender": {
-    "org": "Financial Crime Investigation Unit",
-    "contact": "cybercrimes@fciu.org",
-    "domain": "fciu.org"
-  },
-  "source_identifier": "198.51.100.135",
-  "category": "content",
-  "type": "carding",
-  "url": "http://dark-market-cards.onion.example.com",
-  "card_bin": "411111",
-  "stolen_credentials_count": 2500,
-  "evidence_source": "researcher_analysis",
-  "evidence": [
-    {
-      "content_type": "image/png",
-      "description": "Screenshot of carding marketplace",
-      "payload": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
-      "hash": "sha256:d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5"
-    }
-  ],
-  "tags": ["fraud:financial", "severity:critical"],
-  "confidence": 0.95
-}
-```
-
-### Content Category - Disinformation Campaign Report
-```json
-{
-  "xarf_version": "4.0.0",
-  "report_id": "321fedcb-9876-5432-10fe-dcba98765432",
-  "timestamp": "2024-01-16T16:30:00Z",
-  "reporter": {
-    "org": "Digital Integrity Alliance",
-    "contact": "disinfo@digital-integrity.org",
-    "domain": "digital-integrity.org",
-    "type": "manual",
-    "reporter_reference_id": "DIA-DISINFO-2024-7890"
-  },
-  "sender": {
-    "org": "Digital Integrity Alliance",
-    "contact": "disinfo@digital-integrity.org",
-    "domain": "digital-integrity.org"
-  },
-  "source_identifier": "203.0.113.201",
-  "category": "content",
-  "type": "disinformation",
-  "url": "http://fake-news-network.example.com",
-  "disinformation_campaign": "election_2024_wave",
-  "coordination_indicators": ["identical_posting_times", "shared_imagery", "coordinated_hashtags"],
-  "evidence_source": "researcher_analysis",
-  "evidence": [
-    {
-      "content_type": "application/json",
-      "description": "Analysis of coordinated posting patterns",
-      "payload": "eyJwb3N0X3BhdHRlcm5zIjogWyJ1c2VyMTIzIiwgInVzZXI0NTYiXSwgInRpbWVzdGFtcHMiOiBbIjIwMjQtMDEtMTZUMTY6MDA6MDBaIiwgIjIwMjQtMDEtMTZUMTY6MDA6MDVaIl19",
-      "hash": "sha256:e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1"
-    }
-  ],
-  "tags": ["disinfo:election", "coordination:detected"],
-  "confidence": 0.83
-}
-```
+Complete sample reports for all 32 valid category/type combinations are in [`samples/v4/`](../samples/v4/). Each schema file also contains an inlined example.
 
 ## Internal Metadata Usage
 
@@ -1254,7 +679,7 @@ The `_internal` field provides a completely flexible container for operational m
 ```json
 {
   "_internal": {
-    "threat_id": "THR-2024-001234", 
+    "threat_id": "THR-2024-001234",
     "honeypot_source": "trap_bank_001",
     "campaign_cluster": "fake_bank_wave_2024",
     "ml_confidence": 0.94,
@@ -1294,7 +719,7 @@ The `_internal` field provides a completely flexible container for operational m
 Organizations typically use internal metadata for:
 
 - **Workflow tracking**: Status, assignments, deadlines, escalations
-- **Integration data**: Ticket IDs, case references, external system links  
+- **Integration data**: Ticket IDs, case references, external system links
 - **Quality metrics**: Confidence scores, validation flags, review requirements
 - **Business data**: Customer info, billing, SLA tracking, priority levels
 - **Technical metadata**: Processing times, system versions, batch IDs
@@ -1315,83 +740,4 @@ Organizations typically use internal metadata for:
 - Customer data in internal fields must follow privacy regulations
 - Access controls should apply to internal metadata viewing
 
-## Implementation Requirements
 
-### Parser Requirements
-
-XARF v4 parsers MUST implement:
-
-1. **Format Detection**
-   - Detect v3 vs v4 format automatically
-   - Handle malformed JSON gracefully
-   - Provide clear error messages for invalid input
-
-2. **Schema Validation**
-   - Validate against complete JSON schema
-   - Support all 22 types and their specific requirements
-   - Implement conditional validation based on category/type
-   - Handle unknown fields according to validation mode
-
-3. **Backwards Compatibility**
-   - Convert v3 reports to v4 format automatically
-   - Preserve original v3 data when possible
-   - Generate appropriate default values for missing v4 fields
-   - Add `legacy_version` metadata for tracking
-
-4. **Evidence Processing**
-   - Validate base64 encoding
-   - Enforce size limits (5MB per item, 15MB total)
-   - Verify content-type headers
-   - Support hash verification when provided
-
-5. **Error Handling**
-   - Provide detailed validation error messages
-   - Include field path information for errors
-   - Support multiple validation modes (strict/permissive/legacy)
-   - Return structured error responses
-
-### Generator Requirements
-
-XARF v4 generators MUST implement:
-
-1. **Report Construction**
-   - Generate valid UUID v4 for report_id
-   - Set appropriate timestamp in ISO 8601 format
-   - Validate all required fields for chosen category/type
-   - Support all evidence content types
-
-2. **Evidence Handling**
-   - Proper base64 encoding of all payloads
-   - Generate integrity hashes when requested
-   - Enforce size limits with clear error messages
-   - Support multiple evidence items per report
-
-3. **Validation**
-   - Self-validate generated reports
-   - Ensure compliance with category-specific schemas
-   - Check tag format and namespace compliance
-   - Verify all required fields are present
-
-### Performance Requirements
-
-**Parsing Performance:**
-- Sub-millisecond parsing for typical reports (< 1MB)
-- Sub-second parsing for maximum size reports (15MB)
-- Memory usage proportional to evidence size only
-- Support for streaming large evidence payloads
-
-**Memory Usage:**
-- Minimal memory overhead beyond evidence payload size
-- Efficient base64 decoding without intermediate copies
-- Configurable memory limits for protection
-- Garbage collection friendly object structures
-
-**Scalability:**
-- Thread-safe parsing operations
-- Support for concurrent processing
-- Stateless parser design for easy scaling
-- Minimal startup overhead for CLI tools
-
----
-
-This technical specification provides the complete reference for XARF v4 implementation. For project management and operational guidance, see the [Implementation Guide](./implementation-guide.md). For a high-level overview, see the [Introduction & Overview](./introduction.md).

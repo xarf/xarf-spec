@@ -267,7 +267,7 @@
 				"Version": "3",
 				"ReporterInfo": {
 					"ReporterOrg": "Honeypot Network",
-					"ReporterOrgEmail": "reports@honeypot.net"
+					"ReporterOrgEmail": "reports@honeypot.example"
 				},
 				"Report": {
 					"ReportClass": "Activity",

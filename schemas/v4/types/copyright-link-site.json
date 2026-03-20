@@ -205,13 +205,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "link-012c3456-d789-01e2-f345-678901234567",
+			"xarf_version": "4.2.0",
+			"report_id": "012c3456-d789-01e2-f345-678901234567",
 			"timestamp": "2024-01-15T20:10:30Z",
 			"reporter": {
 				"org": "Digital Rights Enforcement",
-				"contact": "enforcement@digitalrights.org",
-				"type": "automated"
+				"contact": "enforcement@digital-rights.example",
+				"domain": "digital-rights.example"
+			},
+			"sender": {
+				"org": "Digital Rights Enforcement",
+				"contact": "enforcement@digital-rights.example",
+				"domain": "digital-rights.example"
 			},
 			"source_identifier": "torrent-indexer.example",
 			"category": "copyright",

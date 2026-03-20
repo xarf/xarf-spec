@@ -1,16 +1,16 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "dbf79f17-f4f4-4c22-ae58-19991f52a1e8",
 	"timestamp": "2025-01-11T12:17:20Z",
 	"reporter": {
 		"org": "SSH Honeypot Network",
-		"contact": "honeypot@sshsecurity.org",
-		"domain": "sshsecurity.org"
+		"contact": "honeypot@ssh-monitor.example",
+		"domain": "ssh-monitor.example"
 	},
 	"sender": {
 		"org": "SSH Honeypot Network",
-		"contact": "honeypot@sshsecurity.org",
-		"domain": "sshsecurity.org"
+		"contact": "honeypot@ssh-monitor.example",
+		"domain": "ssh-monitor.example"
 	},
 	"source_identifier": "198.51.100.77",
 	"source_port": 45621,
@@ -50,5 +50,6 @@
 		"attack:brute_force",
 		"service:ssh",
 		"pattern:dictionary"
-	]
+	],
+	"first_seen": "2025-01-11T06:17:20Z"
 }

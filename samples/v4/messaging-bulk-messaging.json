@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "4d725a50-851c-4963-af88-91fbb9ced1ce",
 	"timestamp": "2025-01-11T14:02:29Z",
 	"reporter": {
@@ -32,5 +32,6 @@
 	"tags": [
 		"bulk:commercial",
 		"volume:high"
-	]
+	],
+	"source_port": 25
 }

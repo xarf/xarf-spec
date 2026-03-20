@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "b7c4e601-8f74-40fd-b007-c17773a4f61f",
 	"timestamp": "2025-01-11T14:12:10Z",
 	"reporter": {
@@ -15,7 +15,7 @@
 	"source_identifier": "links-aggregator.example.net",
 	"category": "copyright",
 	"type": "link_site",
-	"evidence_source": "crawler",
+	"evidence_source": "automated_crawl",
 	"infringing_url": "https://links-aggregator.example.net/movie/protected-film-2024",
 	"link_type": "aggregator",
 	"downstream_links": [
@@ -35,5 +35,6 @@
 	"tags": [
 		"copyright:links",
 		"type:aggregator"
-	]
+	],
+	"site_name": "Links Aggregator"
 }

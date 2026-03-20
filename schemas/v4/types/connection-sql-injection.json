@@ -122,13 +122,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "sql-2025-001",
+			"xarf_version": "4.2.0",
+			"report_id": "b3c4d5e6-f7a8-9012-bcde-f01234567890",
 			"timestamp": "2025-01-15T12:00:00Z",
 			"reporter": {
 				"org": "Web Application Firewall",
 				"contact": "security@example.com",
-				"type": "automated"
+				"domain": "example.com"
+			},
+			"sender": {
+				"org": "Web Application Firewall",
+				"contact": "security@example.com",
+				"domain": "example.com"
 			},
 			"source_identifier": "192.0.2.45",
 			"category": "connection",

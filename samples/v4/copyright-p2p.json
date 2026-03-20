@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "2acc5d8c-15ba-4432-8ee1-08c657711c63",
 	"timestamp": "2025-01-11T13:44:41Z",
 	"reporter": {
@@ -15,7 +15,7 @@
 	"source_identifier": "192.0.2.100",
 	"category": "copyright",
 	"type": "p2p",
-	"evidence_source": "automated_monitoring",
+	"evidence_source": "automated_crawl",
 	"p2p_protocol": "bittorrent",
 	"swarm_info": {
 		"info_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",

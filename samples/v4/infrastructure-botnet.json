@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "31cccdf0-e34b-47b7-b5a9-b8fb58b54c90",
 	"timestamp": "2025-01-11T15:00:52Z",
 	"reporter": {
@@ -33,5 +33,6 @@
 		"malware:conficker",
 		"botnet:active",
 		"infection:worm"
-	]
+	],
+	"compromise_evidence": "C2 communication detected via traffic analysis on Conficker channel"
 }

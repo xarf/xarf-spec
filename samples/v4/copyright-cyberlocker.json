@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "711c32e8-ed30-43f2-a519-a7098fe7cc9d",
 	"timestamp": "2025-01-11T14:16:41Z",
 	"reporter": {
@@ -15,7 +15,7 @@
 	"source_identifier": "file-sharing.example.com",
 	"category": "copyright",
 	"type": "cyberlocker",
-	"evidence_source": "crawler",
+	"evidence_source": "automated_crawl",
 	"infringing_url": "https://file-sharing.example.com/download/movie2024.mp4",
 	"file_size": 4294967296,
 	"work_title": "Protected Movie 2024",
@@ -31,5 +31,6 @@
 	"tags": [
 		"copyright:cyberlocker",
 		"filetype:video"
-	]
+	],
+	"hosting_service": "FileShare Example"
 }

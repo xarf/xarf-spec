@@ -1,5 +1,5 @@
 {
-	"xarf_version": "4.0.0",
+	"xarf_version": "4.2.0",
 	"report_id": "a345667c-bda6-48c5-a511-e345a0b50158",
 	"timestamp": "2025-01-11T08:00:36Z",
 	"reporter": {
@@ -15,7 +15,7 @@
 	"source_identifier": "video-platform.example.com",
 	"category": "copyright",
 	"type": "ugc_platform",
-	"evidence_source": "automated_monitoring",
+	"evidence_source": "automated_detection",
 	"infringing_url": "https://video-platform.example.com/watch?v=copyrighted_content",
 	"platform_name": "VideoShare Platform",
 	"uploader_id": "user123456",

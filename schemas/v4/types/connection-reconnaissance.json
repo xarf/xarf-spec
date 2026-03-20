@@ -150,13 +150,18 @@
 	],
 	"examples": [
 		{
-			"xarf_version": "4.0.0",
-			"report_id": "recon-2025-001",
+			"xarf_version": "4.2.0",
+			"report_id": "e6f7a8b9-c0d1-2345-efab-234567890123",
 			"timestamp": "2025-01-15T16:45:00Z",
 			"reporter": {
 				"org": "Web Security Service",
 				"contact": "security@webhost.example",
-				"type": "automated"
+				"domain": "webhost.example"
+			},
+			"sender": {
+				"org": "Web Security Service",
+				"contact": "security@webhost.example",
+				"domain": "webhost.example"
 			},
 			"source_identifier": "192.0.2.99",
 			"category": "connection",
