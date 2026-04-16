@@ -17,6 +17,7 @@ This directory contains individual JSON schemas for each XARF v4 event type, pro
 |------|-------------|-------------|
 | `spam` | `messaging-spam.json` | Unsolicited commercial messages and unwanted email |
 | `bulk_messaging` | `messaging-bulk-messaging.json` | Legitimate but unwanted bulk communications |
+| `phishing` | `messaging-phishing.json` | Malicious messages for revealing sensitive information or performing harmful actions |
 
 ### Connection Class  
 | Type | Schema File | Description |

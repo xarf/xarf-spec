@@ -19,7 +19,8 @@
 						"type": {
 							"enum": [
 								"spam",
-								"bulk_messaging"
+								"bulk_messaging",
+								"phishing"
 							]
 						}
 					}
@@ -150,6 +151,21 @@
 			},
 			"then": {
 				"$ref": "types/messaging-bulk-messaging.json"
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"category": {
+						"const": "messaging"
+					},
+					"type": {
+						"const": "phishing"
+					}
+				}
+			},
+			"then": {
+				"$ref": "types/messaging-phishing.json"
 			}
 		},
 		{
