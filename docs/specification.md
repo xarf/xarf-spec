@@ -168,7 +168,7 @@ Each specific `category` + `type` combination has its own schema that extends it
 
 **Purpose:** Communication-based abuse including spam and unwanted messaging
 
-**Valid Types:** `spam`, `bulk_messaging`
+**Valid Types:** `spam`, `bulk_messaging`, `phishing`
 
 **Evidence Sources:** `spamtrap`, `user_complaint`, `automated_filter`, `honeypot`
 

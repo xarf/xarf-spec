@@ -1,0 +1,38 @@
+{
+	"xarf_version": "4.2.0",
+	"report_id": "02eb480f-8172-431a-9276-c28ba90f677a",
+	"timestamp": "2025-01-11T10:59:45Z",
+	"reporter": {
+		"org": "Example Anti-Phishing Service",
+		"contact": "reports@antiphishing-service.example",
+		"domain": "antiphishing-service.example"
+	},
+	"sender": {
+		"org": "Example Anti-Phishing Service",
+		"contact": "reports@antiphishing-service.example",
+		"domain": "antiphishing-service.example"
+	},
+	"source_identifier": "192.168.1.100",
+	"source_port": 25,
+	"category": "messaging",
+	"type": "phishing",
+	"evidence_source": "user_complaint",
+	"protocol": "smtp",
+	"smtp_from": "marketing@example.com",
+	"subject": "Urgent: Claim Your Prize Now!",
+	"evidence": [
+		{
+			"content_type": "message/rfc822",
+			"description": "Complete phishing email with headers",
+			"payload": "UmVjZWl2ZWQ6IGZyb20gZXhhbXBsZS5jb20gKGV4YW1wbGUuY29tIFsxOTIuMTY4LjEuMTAwXSkKCVN1YmplY3Q6IFVyZ2VudDogQ2xhaW0gWW91ciBQcml6ZSBOb3chCglGcm9tOiBtYXJrZXRpbmdAZXhhbXBsZS5jb20=",
+			"hash": "sha256:cee5863cbfe009a2560168a939bbced8d16eebafa97eb34d7b3b9d90f7bf1a17"
+		}
+	],
+	"tags": [
+		"phishing:commercial",
+		"phishing:urgent",
+		"phishing:social_engineering",
+		"detection:automated",
+		"language:english"
+	]
+}

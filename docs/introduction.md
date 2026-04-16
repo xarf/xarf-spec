@@ -30,7 +30,7 @@ XARF v4 addresses these challenges with:
 
 | **v3 Approach** | **v4 Approach** | **Benefit** |
 |-----------------|-----------------|-------------|
-| Simple Types | Type-Specific Architecture (32 types) | Granular categorization |
+| Simple Types | Type-Specific Architecture (33 types) | Granular categorization |
 | Static Schema | Type-Specific Validation | Flexible yet structured |
 | Basic Fields | Rich Attribution & Tags | Better context and automation |
 | Email-Only | Multi-Transport (email, API, streaming) | Real-time processing |

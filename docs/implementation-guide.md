@@ -31,7 +31,7 @@ All 32 valid combinations:
 
 | Category | Types |
 |----------|-------|
-| `messaging` | `spam`, `bulk_messaging` |
+| `messaging` | `spam`, `bulk_messaging`, `phishing` |
 | `connection` | `login_attack`, `port_scan`, `ddos`, `scraping`, `sql_injection`, `vulnerability_scan`, `infected_host`, `reconnaissance` |
 | `content` | `phishing`, `malware`, `fraud`, `csam`, `csem`, `exposed_data`, `brand_infringement`, `suspicious_registration`, `remote_compromise` |
 | `copyright` | `copyright`, `cyberlocker`, `link_site`, `p2p`, `usenet`, `ugc_platform` |
