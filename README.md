@@ -114,7 +114,7 @@ print('✅ Valid!')
 
 ## 🔧 Parser Libraries
 
-- **Python**: [xarf-parser-python](https://github.com/xarf/xarf-parser-python) (Alpha)
+- **Python**: [xarf-python](https://github.com/xarf/xarf-python) (Alpha)
 - **JavaScript**: Coming soon
 - **Go**: Coming soon
 

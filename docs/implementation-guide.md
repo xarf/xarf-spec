@@ -236,7 +236,7 @@ xarf/
 **Multi-Language Support Priority:**
 
 1. **JavaScript/TypeScript** (Primary)
-   - **Distribution**: npm as `@xarf/parser`
+   - **Distribution**: npm as `@xarf/xarf`
    - **Features**: Node.js + Browser, CommonJS + ESM, TypeScript definitions
    - **Integration**: Web applications, serverless functions, browser tools
 

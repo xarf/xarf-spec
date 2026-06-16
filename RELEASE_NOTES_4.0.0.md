@@ -211,7 +211,7 @@ Improved evidence attachment with:
 
 ### Official Parsers
 - **Python**: https://github.com/xarf/xarf-python (v4.0.0)
-  - Install: `pip install xarf`
+  - Install: `pip install git+https://github.com/xarf/xarf-python.git` (not yet on PyPI — install from source)
   - Full v4 support + v3 backwards compatibility
   - Python 3.8-3.12 support
 

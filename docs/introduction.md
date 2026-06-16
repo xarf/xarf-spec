@@ -170,13 +170,13 @@ All samples available in the [Technical Specification](./specification.md#sample
 ### 3. Test Integration
 
 **For report receivers (ISPs, hosting providers):**
-1. Install parser library: `pip install xarf-parser` or `npm install @xarf/parser`
+1. Install parser library: `pip install git+https://github.com/xarf/xarf-python.git` (not yet on PyPI — install from source) or `npm install @xarf/xarf`
 2. Test with sample v4 reports
 3. Validate backwards compatibility with existing v3 reports
 4. Begin dual-format processing
 
 **For report senders (security tools, researchers):**
-1. Install generator library: `pip install xarf-parser` or `npm install @xarf/parser`
+1. Install generator library: `pip install git+https://github.com/xarf/xarf-python.git` (not yet on PyPI — install from source) or `npm install @xarf/xarf`
 2. Generate test reports for your abuse types
 3. Validate output with provided samples
 4. Implement delivery mechanisms (email, API, etc.)
