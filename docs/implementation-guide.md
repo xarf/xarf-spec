@@ -225,7 +225,7 @@ Examples:
 
 ## Tag Namespace Conventions
 
-Tags use the format `namespace:value`, where both the namespace and value consist of lowercase alphanumeric characters and underscores only.
+Tags use the format `namespace:value`. Both the namespace and value must start with a lowercase alphanumeric character. The namespace may then contain lowercase alphanumerics, `_`, `+`, and `-`; the value allows those plus `.` (so domains can be used as values, e.g. `malicious_link:example.com`). The full pattern is `^[a-z0-9][a-z0-9_+-]*:[a-z0-9][a-z0-9_+-.]*$`.
 
 Standard namespaces:
 
