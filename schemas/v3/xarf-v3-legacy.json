@@ -175,64 +175,6 @@
 		}
 	},
 	"additionalProperties": false,
-	"$defs": {
-		"v3_to_v4_mapping": {
-			"description": "Documentation of how v3 fields map to v4 structure",
-			"type": "object",
-			"properties": {
-				"field_mappings": {
-					"type": "object",
-					"properties": {
-						"Version": "xarf_version (converted to '4.0.0', legacy_version added)",
-						"ReporterInfo.ReporterOrg": "reporter.org",
-						"ReporterInfo.ReporterOrgEmail": "reporter.contact",
-						"Report.Date": "timestamp",
-						"Report.SourceIp": "source_identifier",
-						"Report.SourcePort": "source_port",
-						"Report.ReportType": "class + type (mapping required)",
-						"Report.Samples": "evidence (structure converted)"
-					}
-				},
-				"type_mappings": {
-					"type": "object",
-					"properties": {
-						"Spam": {
-							"class": "messaging",
-							"type": "spam"
-						},
-						"Login-Attack": {
-							"class": "connection",
-							"type": "login_attack"
-						},
-						"Port-Scan": {
-							"class": "connection",
-							"type": "port_scan"
-						},
-						"DDoS": {
-							"class": "connection",
-							"type": "ddos"
-						},
-						"Phishing": {
-							"class": "content",
-							"type": "phishing"
-						},
-						"Malware": {
-							"class": "content",
-							"type": "malware"
-						},
-						"Botnet": {
-							"class": "infrastructure",
-							"type": "bot"
-						},
-						"Copyright": {
-							"class": "copyright",
-							"type": "copyright"
-						}
-					}
-				}
-			}
-		}
-	},
 	"examples": [
 		{
 			"title": "XARF v3 Spam Report Example",

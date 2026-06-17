@@ -101,6 +101,48 @@ def validate_sample_against_schema(sample_data: Dict[str, Any], resolved_schema:
     except Exception as e:
         return False, [f"Unexpected validation error: {e}"]
 
+def meta_validate_schemas(schemas_root: Path) -> Tuple[bool, int]:
+    """Meta-validate every schema file against the JSON Schema draft 2020-12 meta-schema.
+
+    This catches malformed schemas (e.g. non-schema values under "properties")
+    that would otherwise only surface in downstream parser/validator implementations.
+    """
+    meta_validator = Draft202012Validator(Draft202012Validator.META_SCHEMA)
+    schema_files = sorted(schemas_root.rglob("*.json"))
+
+    print_status(Colors.BLUE, f"🧪 Meta-validating {len(schema_files)} schema files...")
+    print()
+
+    invalid = 0
+    for schema_path in schema_files:
+        rel = schema_path.relative_to(schemas_root.parent)
+        schema_data, load_error = load_json_file(schema_path)
+        if load_error:
+            print_status(Colors.RED, f"❌ {rel}: {load_error}")
+            invalid += 1
+            continue
+
+        errors = list(meta_validator.iter_errors(schema_data))
+        if errors:
+            invalid += 1
+            print_status(Colors.RED, f"❌ {rel}: {len(errors)} meta-validation error(s)")
+            for error in errors[:5]:
+                path = "/".join(str(p) for p in error.absolute_path) if error.absolute_path else "root"
+                print(f"  • /{path}: {error.message}")
+            if len(errors) > 5:
+                print(f"  • ... and {len(errors) - 5} more")
+        else:
+            print_status(Colors.GREEN, f"✅ {rel}")
+
+    print()
+    if invalid:
+        print_status(Colors.RED, f"❌ {invalid} schema file(s) are not valid JSON Schema")
+    else:
+        print_status(Colors.GREEN, "🎉 All schema files are valid JSON Schema!")
+    print()
+    return invalid == 0, invalid
+
+
 def get_sample_category_type(sample_data: Dict[str, Any]) -> Tuple[str, str]:
     """Extract category and type from sample data"""
     category = sample_data.get('category', '')
@@ -133,7 +175,14 @@ def main():
     if not master_schema_path.exists():
         print_status(Colors.RED, f"❌ Master schema not found: {master_schema_path}")
         return 1
-    
+
+    # Meta-validate all schema files (v3 and v4) before validating samples
+    all_schemas_dir = root_dir / "schemas"
+    schemas_valid, _ = meta_validate_schemas(all_schemas_dir)
+    if not schemas_valid:
+        print_status(Colors.RED, "❌ Schema files failed meta-validation; fix them before validating samples")
+        return 1
+
     # Get all sample files
     sample_files = list(samples_dir.glob("*.json"))
     if not sample_files:
