@@ -132,26 +132,7 @@
 			"required": [
 				"protocol",
 				"first_seen"
-			],
-			"if": {
-				"properties": {
-					"source_identifier": {
-						"anyOf": [
-							{
-								"format": "ipv4"
-							},
-							{
-								"format": "ipv6"
-							}
-						]
-					}
-				}
-			},
-			"then": {
-				"required": [
-					"source_port"
-				]
-			}
+			]
 		}
 	],
 	"examples": [
