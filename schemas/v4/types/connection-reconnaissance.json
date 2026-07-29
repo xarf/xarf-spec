@@ -124,7 +124,8 @@
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "REQUIRED: When reconnaissance activity was first observed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: When reconnaissance activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
@@ -143,8 +144,7 @@
 			},
 			"required": [
 				"protocol",
-				"probed_resources",
-				"first_seen"
+				"probed_resources"
 			]
 		}
 	],

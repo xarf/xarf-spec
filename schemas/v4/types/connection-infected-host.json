@@ -143,7 +143,8 @@
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "REQUIRED: When bot activity was first observed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: When bot activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
@@ -153,8 +154,7 @@
 			},
 			"required": [
 				"protocol",
-				"bot_type",
-				"first_seen"
+				"bot_type"
 			]
 		}
 	],
