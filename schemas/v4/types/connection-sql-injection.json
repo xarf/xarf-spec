@@ -101,7 +101,8 @@
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "REQUIRED: When attack activity was first observed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: When attack activity was first observed"
 				},
 				"last_seen": {
 					"type": "string",
@@ -115,8 +116,7 @@
 				}
 			},
 			"required": [
-				"protocol",
-				"first_seen"
+				"protocol"
 			]
 		}
 	],
