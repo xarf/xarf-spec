@@ -24,12 +24,13 @@
 				},
 				"domain": {
 					"type": "string",
-					"pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$",
+					"format": "hostname",
 					"x-recommended": true,
-					"description": "RECOMMENDED: Fully qualified domain name of the abusive content",
+					"description": "RECOMMENDED: Fully qualified domain name of the abusive content. Internationalized domain names must be supplied in A-label (Punycode, xn--) form.",
 					"examples": [
 						"phishing-site.example.com",
-						"malware.example.net"
+						"malware.example.net",
+						"xn--mnchen-3ya.example"
 					]
 				},
 				"registrar": {

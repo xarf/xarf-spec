@@ -17,6 +17,7 @@
 	"type": "phishing",
 	"evidence_source": "automated_scan",
 	"url": "http://secure-banking-login.example.com/auth",
+	"domain": "xn--acuaparquedelacaa-uxb.co",
 	"target_brand": "Major Bank Corp",
 	"file_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
 	"evidence": [
