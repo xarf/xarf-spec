@@ -16,7 +16,8 @@
 	"category": "content",
 	"type": "phishing",
 	"evidence_source": "automated_scan",
-	"url": "http://secure-banking-login.example.com/auth",
+	"url": "http://xn--secure-bnking-login-nwb.example/auth",
+	"domain": "xn--secure-bnking-login-nwb.example",
 	"target_brand": "Major Bank Corp",
 	"file_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
 	"evidence": [

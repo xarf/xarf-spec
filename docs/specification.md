@@ -219,7 +219,7 @@ Examples and formal schema definition: [`messaging-spam.json`](../schemas/v4/typ
 | `compromise_type` | Required | `remote_compromise` | enum | e.g. `webshell`, `backdoor`, `defacement`, `malicious_redirect` |
 | `registration_date` | Required | `suspicious_registration` | datetime | When the domain was registered |
 | `suspicious_indicators` | Required | `suspicious_registration` | array | Min 1 item; e.g. `typosquatting`, `brand_keyword`, `fast_flux` |
-| `domain` | Recommended | all | string | FQDN of the abusive content |
+| `domain` | Recommended | all | string | FQDN of the abusive content; lowercase, IDNs in A-label (`xn--`) form |
 | `target_brand` | Recommended | all | string | Most relevant for `phishing` and `brand_infringement` |
 | `verification_method` | Recommended | all | enum | How content was verified: `manual`, `automated_crawler`, `user_report`, `honeypot`, `threat_intelligence` |
 | `verified_at` | Recommended | all | datetime | When content was last confirmed active |

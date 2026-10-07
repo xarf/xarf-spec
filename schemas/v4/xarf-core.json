@@ -213,7 +213,7 @@
 					"description": "REQUIRED: Contact email address",
 					"examples": [
 						"abuse@example.com",
-						"reports@abusix.com"
+						"reports@abuse-desk.example"
 					]
 				},
 				"domain": {
@@ -222,8 +222,8 @@
 					"description": "REQUIRED: Organization domain for verification",
 					"examples": [
 						"example.com",
-						"abusix.com",
-						"security-lab.org"
+						"abuse-desk.example",
+						"security-lab.example"
 					]
 				}
 			},
