@@ -514,10 +514,12 @@ Examples and formal schema definition: [`reputation-blocklist.json`](../schemas/
 - Use standard base64 alphabet (RFC 4648)
 
 **Size Management:**
-- Compress large text evidence before encoding
+
+Evidence is a representative *sample*, not a bulk capture. Attach the minimum that demonstrates the abuse, and let the structured fields (e.g. `attempt_count`, `first_seen`/`last_seen`) convey volume:
 - Use screenshots instead of full webpage HTML when possible
-- Truncate log files to relevant portions
-- Consider external reference for very large evidence
+- Truncate log files to the relevant lines rather than attaching whole logs
+- Include one representative sample per incident type rather than every instance
+- Evidence payloads are inlined and base64-encoded; there is no external-reference or compression mechanism. If a report approaches the 5 MB per-item / 15 MB total limit, reduce the sample rather than working around the limit.
 
 ### Examples
 
