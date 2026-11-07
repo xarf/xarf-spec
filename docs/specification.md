@@ -49,7 +49,7 @@ XARF v4 organizes abuse reports into seven primary categories, each with specifi
 | Category | Purpose | Required Fields | Evidence Focus |
 |----------|---------|----------------|----------------|
 | `messaging` | Communication abuse | `protocol`, `smtp_from`, `subject` | Original messages, headers |
-| `connection` | Network attacks | `protocol`, `first_seen` | Attack logs, connection data |
+| `connection` | Network attacks | `protocol` | Attack logs, connection data |
 | `infrastructure` | Compromised systems | None beyond base | Traffic analysis, indicators |
 | `content` | Malicious web content | `url` | Screenshots, webpage samples |
 | `copyright` | IP infringement | `work_title`, `rights_holder` | DMCA notices, content samples |
@@ -352,12 +352,12 @@ Examples and formal schema definition: [`copyright-copyright.json`](../schemas/v
 
 | Field | Requirement | Applies To | Type | Notes |
 |-------|-------------|------------|------|-------|
-| `first_seen` | Required | all | datetime | When activity was first observed |
 | `protocol` | Required | all | enum | Valid values vary by type; `icmp` and `sctp` only available for some types |
 | `bot_type` | Required | `infected_host` | enum | e.g. `malicious`, `search_engine`, `ai_agent`, `unknown` |
 | `probed_resources` | Required | `reconnaissance` | array | Specific paths probed (e.g. `/.env`, `/.git/config`, `/.aws/credentials`) |
 | `total_requests` | Required | `scraping` | integer | Minimum 1 |
 | `scan_type` | Required | `vulnerability_scan` | enum | e.g. `port_scan`, `web_vuln_scan`, `os_fingerprinting`, `service_enumeration` |
+| `first_seen` | Recommended | all | datetime | When activity was first observed |
 | `destination_ip` | Recommended | all | string | Target IPv4 or IPv6 address; `source_port` also required for `login_attack`, `port_scan`, `ddos` when `source_identifier` is an IP |
 | `destination_port` | Recommended | all except `vulnerability_scan` | integer | 1–65535 |
 | `attack_vector` | Recommended | `ddos` | string | e.g. `syn_flood`, `udp_flood`, `dns_amplification`, `memcached_amplification` |
