@@ -103,7 +103,8 @@
 				"first_seen": {
 					"type": "string",
 					"format": "date-time",
-					"description": "REQUIRED: When DDoS attack was first observed"
+					"x-recommended": true,
+					"description": "RECOMMENDED: When DDoS attack was first observed"
 				},
 				"last_seen": {
 					"type": "string",
@@ -130,8 +131,7 @@
 				}
 			},
 			"required": [
-				"protocol",
-				"first_seen"
+				"protocol"
 			]
 		}
 	],
