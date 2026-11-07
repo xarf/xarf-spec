@@ -26,6 +26,7 @@ Thank you for your interest in contributing to the XARF v4 specification! This d
 
 ### Sample Contributions
 - **Anonymize** all real data (IPs, domains, emails, etc.)
+- **Use reserved domain names** for every domain, hostname, URL and email address in samples and in schema `examples`: `example.com`, `example.net`, `example.org`, or names under the `.example`, `.test` or `.invalid` top-level domains (RFC 2606, RFC 6761). Internationalized lookalikes stay under these names in A-label form, e.g. `xn--mnchen-3ya.example`.
 - **Validate** against the JSON schema
 - **Include** contextual comments explaining the abuse scenario
 - **Cover** edge cases and real-world variations

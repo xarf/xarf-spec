@@ -24,12 +24,14 @@
 				},
 				"domain": {
 					"type": "string",
-					"pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$",
+					"maxLength": 253,
+					"pattern": "^(([a-z0-9]([a-z0-9-]?[a-z0-9])?|[a-z0-9][a-z0-9-]([a-z0-9-][a-z0-9]|([a-z0-9][a-z0-9-]|-[a-z0-9])[a-z0-9-]{0,58}[a-z0-9])|xn--[a-z0-9-]{0,58}[a-z0-9])\\.)+([a-z]{2,63}|xn--[a-z0-9-]{0,58}[a-z0-9])$",
 					"x-recommended": true,
-					"description": "RECOMMENDED: Fully qualified domain name of the abusive content",
+					"description": "RECOMMENDED: Fully qualified domain name of the abusive content. Lowercase ASCII; internationalized domain names must be supplied in A-label (Punycode, xn--) form. IP addresses, single-label names and trailing dots are not accepted.",
 					"examples": [
 						"phishing-site.example.com",
-						"malware.example.net"
+						"malware.example.net",
+						"xn--mnchen-3ya.example"
 					]
 				},
 				"registrar": {
